@@ -1,0 +1,94 @@
+/* Edit schedule */
+
+.group input,
+.group select {
+    width: 100%;
+    height: 1.8rem;
+}
+/*
+.group select {
+    width: 100%;
+    height: 2rem;
+}*/
+
+.group {
+    margin: 0.5rem 0;
+    width: 20rem;
+    padding-bottom: 1em;
+}
+
+.group.card .row {
+    width: 100%;
+}
+
+.group .btn-close,
+.group .move-left,
+.group .move-right {
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 10%;
+    padding: 0 0.3rem 0.3rem 0.3rem;
+    width: 1.5rem;
+    height: 1.5em;
+}
+
+.group .label-group-name {
+    display: inline-block;
+}
+
+.group .close-day {
+    border-radius: 10%;
+
+    position: static;
+    padding: 0 0 0.2rem 0.3rem;
+    width: 1.2rem;
+}
+
+.group .add-day {
+    border-radius: 10%;
+
+    position: static;
+    padding: 0 0 0.2rem 0.3rem;
+    width: 1.2rem;
+}
+
+.group .btn-close:hover,
+.group .close-day:hover {
+    background-color: #ff4e00;
+    cursor: pointer;
+}
+
+.group .add-day:hover,
+.group .move-left:hover,
+.group .move-right:hover {
+    background-color: #10c010;
+    cursor: pointer;
+}
+
+.group .move-left {
+    left: 0rem;
+}
+
+.group .move-right {
+    left: 2rem;
+}
+
+.group .label {
+    font-size: 0.85rem;
+    color: gray;
+}
+
+/*.group .value-name {
+	margin-bottom: 0.5rem;
+}*/
+
+.group .col-1,
+.group .col-3,
+.group .col-4,
+.group .col {
+    padding: 0;
+}
+
+.group .value-name {
+    margin-bottom: 1rem;
+}
