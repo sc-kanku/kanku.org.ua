@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('fullScreenTopContent')
-<header class="dojo-filter">
+<header class="dojo-filter container">
     <div class="form-row">
         <h1>Бажаєте записатись на тренування?</h1>
     </div>
@@ -106,4 +106,9 @@
 
         <!--a href="/spisok-zaliv/">Загальний список наших залів</a-->
     </noscript>
+
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.13&sensor=false&language=uk&key=AIzaSyDcjZOr-j8BsLk34WNyqQihiIKTRvquU_Y"></script>
+    <script type="text/javascript" src="/js/DojosMap.js"></script>
+    <script type="text/javascript" src="/js/DojosFilter.js"></script>
+
 @endsection

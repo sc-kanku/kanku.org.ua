@@ -29,6 +29,8 @@ Route::get('/', function () {
 
 // TODO?: make templated vars to be editable for users
 Route::get('/', [GeneralController::class, 'landing'])->name('home');
+Route::get('/home', [GeneralController::class, 'landing']);
+
 Route::get('/articles/club/info/', [GeneralController::class, 'info']);
 Route::get('/articles/club/wko-recognition/', [GeneralController::class, 'recognition']);
 
@@ -208,8 +210,23 @@ http: //localhost:8000/gallery/competition/
 
 Route::view('/admin/{entity?}/{method?}/{param?}', 'layouts.admin')
     ->middleware('auth')
-    ->middleware('role:ROLE_ADMIN')
+    ->middleware('role:admin')
     ->name('admin');
+
+Route::get('/athlete/{entity?}/{method?}/{param?}', function () {
+    return 'role-athlete';
+})->middleware('auth')
+    ->middleware('role:athlete')
+    ->name('athlete');
+
+Route::get('/coach/{entity?}/{method?}/{param?}', function () {
+    return 'role-coach';
+})->middleware('auth')
+    ->middleware('role:coach')
+    ->name('coach');
+
+
+
 /*
     ->name('admin.dashboard')
     ->name('admin.instructors')

@@ -48,6 +48,12 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+        /*
+        'athlete' => [
+            'driver' => 'session',
+            'provider' => 'athletes',
+        ],
+        */
     ],
 
     /*
@@ -70,6 +76,13 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
+            /*           
+            'model' => App\Models\User::class,
+        ],
+
+        'athletes' => [
+            'driver' => 'eloquent',
+*/
             'model' => App\Models\Athlete::class,
         ],
 

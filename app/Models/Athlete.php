@@ -83,13 +83,6 @@ class Athlete extends Authenticatable
             ->withTimestamps();
     }
 
-    public function athletes()
-    {
-        return $this
-            ->belongsToMany(User::class)
-            ->withTimestamps();
-    }
-
     public function authorizeRoles($roles)
     {
         if ($this->hasAnyRole($roles)) {
@@ -120,6 +113,7 @@ class Athlete extends Authenticatable
         if ($this->roles()->where('name', $role)->first()) {
             return true;
         }
+
         return false;
     }
 

@@ -623,9 +623,9 @@ div#page_for_photo {
     width: 98%;
 }
 
-.card-deck .card,
-.card-group .card {
-    flex: 0 1 auto;
+.container .card-deck .card,
+.container .card-group .card {
+    flex: 0 1 auto !important;
 }
 
 /**********************************/

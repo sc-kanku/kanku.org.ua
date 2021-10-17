@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -20,13 +23,35 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
-
+    /*
+    protected function guard()
+    {
+        return Auth::guard('athletes');
+    }
+*/
     /**
      * Where to redirect users after login.
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    // protected $redirectTo = RouteServiceProvider::HOME;
+
+    public function redirectTo()
+    {
+        $user = auth()->user();
+
+        if ($user->hasRole('super-admin')) {
+            return '/super-admin';
+        } else if ($user->hasRole('admin')) {
+            return '/admin';
+        } else if ($user->hasRole('coach')) {
+            return '/coach';
+        } else if ($user->hasRole('athlete')) {
+            return '/athlete';
+        } else if ($user->hasRole('home')) {
+            return '/home';
+        }
+    }
 
     /**
      * Create a new controller instance.
