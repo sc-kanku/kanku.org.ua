@@ -200,22 +200,22 @@ http: //localhost:8000/gallery/competition/
 
 // Admin
 
-
-
-Route::get('/user/login', [LoginController::class, 'index'])->name('login');
-Route::post('/user/login', [LoginController::class, 'store']);
-Route::any('/user/logout', [LogoutController::class, 'logout'])->name('logout');
+// Using Laravel authentication instead
+// Route::get('/user/login', [LoginController::class, 'index'])->name('login');
+// Route::post('/user/login', [LoginController::class, 'store']);
+// Route::any('/user/logout', [LogoutController::class, 'logout'])->name('logout');
 
 
 Route::view('/admin/{entity?}/{method?}/{param?}', 'layouts.admin')
     ->middleware('auth')
+    ->middleware('role:ROLE_ADMIN')
     ->name('admin');
-    /*
+/*
     ->name('admin.dashboard')
     ->name('admin.instructors')
     ->name('admin.dojos')
     ->name('admin.news')*/
-    
+
 
 /*
 Route::any('/admin/dashboard', function () {
@@ -245,3 +245,7 @@ Route::any('/admin/site/refresh/', [RefreshSiteController::class, 'refresh'])
 // use App\Http\Controllers\ShinController;
 
 // Route::any('{path}', [ShinController::class, 'index'])->where('path', '.*');
+
+Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');

@@ -15,10 +15,15 @@ class CreateAthletesTable extends Migration
     {
         Schema::create('athletes', function (Blueprint $table) {
             $table->integer('id', true);
+            $table->string('email', 70)->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password', 16)->default('');
+            $table->rememberToken();
+            $table->timestamps();
             $table->tinyInteger('is_coach')->default(0);
             $table->tinyInteger('is_actual')->default(1);
             $table->tinyInteger('is_best')->default(0);
-            $table->tinyInteger('show_in_blacks')->default(1)->comment('if athlet is shown in black belts page');
+            $table->tinyInteger('show_in_blacks')->default(1)->comment('wheather athlet is shown in black belts page');
             $table->string('firstName', 25)->nullable();
             $table->string('lastName', 25)->nullable();
             $table->string('patronymic', 50)->default('');
@@ -30,8 +35,6 @@ class CreateAthletesTable extends Migration
             $table->text('full')->nullable();
             $table->string('phone', 25)->default('');
             $table->string('phone2', 25)->nullable();
-            $table->string('email', 70);
-            $table->string('password', 16)->default('');
             $table->string('twitter', 75)->nullable();
             $table->string('facebook', 75)->nullable();
             $table->string('vk', 50)->nullable()->default('');

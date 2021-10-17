@@ -25,8 +25,9 @@
                 <i class="fab fa-instagram"></i>
             </a>
 
-            @if(auth()->user())
+            
             <ul class="navbar-nav nav justify-content-end">
+                @if(auth()->user() && false)
                 <li class="nav-item dropdown" id="logged-in-nav-support">
                     <a class="nav-link dropdown-toggle nav-item dropdown dropdown-toggle" href="#" id="logged-in-nav-admin" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Адміністрація</a>
 
@@ -90,20 +91,24 @@
                             Розклад</a>
                     </nav>
                 </li>
-
+                @endif
+                @if(auth()->user())
                 <li class="nav-item" id="logged-in-nav-logout">
-                    <a id="logout-btn" class="nav-link" href="{{ route('logout')}}">
-                        Вихід
-                        <i class="fas fa-sign-out-alt"></i>
-                    </a>
+                    <form method="post" action='/logout' class="pt-2">
+                        <b class="text-light pl-3">{{ auth()->user()->firstName }}</b>
+                        <button type="submit" id="logout-btn" class="nav-link" href="{{ route('logout')}}" style="background-color: inherit;border: 0; display:inline; padding: 0 1em">
+                            Вихід
+                            <i class="fas fa-sign-out-alt"></i>
+                        </button>
+                    </form>
                 </li>
+                @endif
             </ul>
-            @else
+            @if(!auth()->user())
             <!--a class="nav-link" href="/lviv-open-cup/">Lviv Open Cup 2018</a-->
-            <a id="log-in-nav" class="nav-link" href="/user/login/" id="login-dialog-btn" data-bs-toggle="modal" data-bs-target="#login-dialog">
+            <a class="nav-link" href="/login/" data-bs-toggle="modal" data-bs-target="#login-dialog">
                 <i class="fas fa-sign-in-alt"></i>
             </a>
-
             @endif
         </nav>
     </div>

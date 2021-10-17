@@ -13,6 +13,8 @@ return [
     |
     */
 
+    // https://dev.to/kaperskyguru/password-brokers-reset-passwords-on-multiple-tables-in-laravel-551g
+
     'defaults' => [
         'guard' => 'web',
         'passwords' => 'athletes',
@@ -93,7 +95,7 @@ return [
     */
 
     'passwords' => [
-        'users' => [
+        'athletes' => [
             'provider' => 'users',
             'table' => 'password_resets',
             'expire' => 60,

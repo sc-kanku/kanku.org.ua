@@ -22,16 +22,14 @@ mix.js('resources/js/app.js', 'public/js/admin.js')
     .css('resources/css/admin.css', 'public/css/admin.css')
 
 
-/*
 // general part of app - no react needed
+/*
 mix.js('resources/js/app.js', 'public/js/app.js')
     .sass('resources/sass/app.scss', 'public/css')
     .postCss('resources/css/app.css', 'public/css/app.css', [
         // require('tailwindcss')
     ]);
-
 */
-
 /*
 // Original 8
 mix.js('resources/js/app.js', 'public/js')
