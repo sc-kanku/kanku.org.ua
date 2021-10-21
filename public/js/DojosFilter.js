@@ -3,8 +3,16 @@
  */
 var DojosFilter = (function(){
 	var initialize = function() {
-		$('#dojo-filter-region').on('change', onChange);
-		$('#dojo-filter-schedule').on('change', onChange);
+
+		if (typeof $ != 'undefined') {
+			// console.log("DojosFilter.initialize");
+
+			$('#dojo-filter-region').on('change', onChange);
+			$('#dojo-filter-schedule').on('change', onChange);
+		} else {
+			// console.log("postponing");
+			setTimeout(initialize, 1000);
+		}
 	};
 
 	var onChange = function() {
@@ -140,3 +148,5 @@ var DojosFilter = (function(){
 		initialize: initialize
 	}
 })();
+
+DojosFilter.initialize();

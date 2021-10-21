@@ -1,5 +1,6 @@
 <div class="row">
     <div class="col-md-9">
+        Район: <span class="district">{{ $dojo->district }}</span>
         {{-- 
         <?= Utils::getDojoAddressBarHtml($row, $config) ?>
         --}}

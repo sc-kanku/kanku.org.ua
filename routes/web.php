@@ -115,4 +115,4 @@ Route::get('/coach/{entity?}/{method?}/{param?}', function () {
 
 Auth::routes();
 
-Route::get('/prepare-build', [HelperController::class, 'artisan']);
+Route::get('/prepare-build', [HelperController::class, 'prepareBuild']);
