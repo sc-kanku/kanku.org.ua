@@ -8,7 +8,7 @@
 <hr class="featurette-divider" />
 
 @foreach($posts as $post)
-    @include('guest.posts.postListItem', ['post' => $post])
+    @include('guest.posts.postlistitem', ['post' => $post])
     <hr class="featurette-divider" />
 @endforeach
 

@@ -11,10 +11,10 @@
             <div class="modal-body">
                 Щоб записатись на тренування до вибраного інструктора, будь ласка зателефонуйте по вказаному номері:
                 <div style="padding-top: 2rem">
-                    <h5>@include('guest.instructors.template.fullName', ['athlete' => $athlete ] )</h5>
+                    <h5>@include('guest.instructors.template.fullname', ['athlete' => $athlete ] )</h5>
                 </div>
 
-                @include('guest.instructors.template.instructorPhone', ['phone' => $athlete->phone, 'phone2' => $athlete->phone2, 'inlinePhone' => false])
+                @include('guest.instructors.template.instructorphone', ['phone' => $athlete->phone, 'phone2' => $athlete->phone2, 'inlinePhone' => false])
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-sm btn-outline-primary" data-bs-dismiss="modal">Ок</button>

@@ -164,4 +164,15 @@ class Athlete extends Authenticatable
 
         return $photoExtension;
     }
+
+    /*
+    public static function boot()
+	{
+	    parent::boot();
+
+	    static::updated(function ($model) {
+	        Artisan::call("page-cache:clear $model->slug");
+	    });
+	}
+     */
 }

@@ -9,7 +9,7 @@
                     data-bs-parent="#accordion" aria-expanded="false" 
                     aria-controls='collapse-{{ $index }}'
                 >
-                    @include('guest.dojos.dojoAddress', ['dojo' => $dojo, 'index'=> $dojo->id, 'extendedInfo' => true])
+                    @include('guest.dojos.dojoaddress', ['dojo' => $dojo, 'index'=> $dojo->id, 'extendedInfo' => true])
                 </a>
 
                 <a class="btn-xsm" href="https://maps.google.com.ua/maps?q=' . {{ $dojo->coords }} . '&hl=uk&num=1&t=m&z=17"
@@ -33,16 +33,16 @@
 
 
         <div class="col-sm">
-            <span class="dojo-instructor">@include('guest.instructors.template.fullNameLink', ['athlete' => $dojo->athletes->first()])</span>
+            <span class="dojo-instructor">@include('guest.instructors.template.fullnamelink', ['athlete' => $dojo->athletes->first()])</span>
             <span class="dojo-instructor-phone">
-                @include('guest.instructors.template.instructorPhone', ['phone' => $dojo->athletes->first()->phone, 'phone2' => $dojo->athletes->first()->phone2, 'inlinePhone' => true])
+                @include('guest.instructors.template.instructorphone', ['phone' => $dojo->athletes->first()->phone, 'phone2' => $dojo->athletes->first()->phone2, 'inlinePhone' => true])
             </span>
         </div>
     </div>
 </li>
 
 <div id='collapse-{{ $index }}' class="dojo-details collapse show_" role="tabpanel" aria-labelledby="heading-{{ $index }}"
-    >@include('guest.dojos.dojoAndInstructor', ['showAddress' => false, 'showProfileIcon' => true,'showJoinButton' => true])
+    >@include('guest.dojos.dojoandinstructor', ['showAddress' => false, 'showProfileIcon' => true,'showJoinButton' => true])
 </div>
 
 

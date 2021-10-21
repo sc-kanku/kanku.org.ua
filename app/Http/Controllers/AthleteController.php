@@ -42,7 +42,7 @@ class AthleteController extends Controller
                 'athlete' => $athlete
             ]);
         } else {
-            return view('guest.instructors.template.instructorNotFound', [
+            return view('guest.instructors.template.instructornotfound', [
                 'athlete' => $athlete
             ]);
         }

@@ -5,7 +5,7 @@
 
 <div class="card-deck">
     @foreach($athletes as $athlete)
-        @include('guest.instructors.template.instructorListItem', ['athlete' => $athlete])
+        @include('guest.instructors.template.instructorlistitem', ['athlete' => $athlete])
     @endforeach
 </div>
 

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\AthleteController;
@@ -8,6 +9,7 @@ use App\Http\Controllers\DojosController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\GalleriesController;
 use App\Http\Controllers\GeneralController;
+use App\Http\Controllers\HelperController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,160 +47,45 @@ Route::get('/dojos/{dojo}', [DojosController::class, 'details']);
 Route::get('/blog', [PostController::class, 'index'])->name('guest.blog');
 Route::get('/blog/{post}', [PostController::class, 'details']);
 
-
-Route::get('/contacts/', function () {
-    return view('guest.contacts');
-})->name('guest.contacts');
+Route::view('/contacts/', 'guest.contacts');
 
 Route::get('/gallery/{gallery}', [GalleriesController::class, 'details']);
-Route::get('/gallery/', function () {
-    return view('raw-content.gallery.list');
-});
+
+Route::view('/gallery/', 'raw-content.gallery.list');
+
 
 // Articles
 
-Route::get('/articles/theory/style-history/', function () {
-    return view('raw-content.articles.theory.style-history');
-});
-Route::get('/articles/theory/philosophy/', function () {
-    return view('raw-content.articles.theory.philosophy');
-});
-Route::get('/articles/theory/masutatsu-oyama/', function () {
-    return view('raw-content.articles.theory.masutatsu-oyama');
-});
-Route::get('/articles/theory/oyama-bio/', function () {
-    return view('raw-content.articles.theory.oyama-bio');
-});
+Route::view('/articles/theory/style-history/', 'raw-content.articles.theory.style-history');
+Route::view('/articles/theory/philosophy/', 'raw-content.articles.theory.philosophy');
+Route::view('/articles/theory/masutatsu-oyama/', 'raw-content.articles.theory.masutatsu-oyama');
+Route::view('/articles/theory/oyama-bio/', 'raw-content.articles.theory.oyama-bio');
+Route::view('/articles/theory/dojo-kun/', 'raw-content.articles.theory.dojo-kun');
+Route::view('/articles/theory/mottos/', 'raw-content.articles.theory.mottos');
+Route::view('/articles/theory/shinkyokushinkai/', 'raw-content.articles.theory.shinkyokushinkai');
+Route::view('/articles/theory/kyokushinkai-in-ukraine/', 'raw-content.articles.theory.kyokushinkai-in-ukraine');
+Route::view('/articles/theory/kata-principles/', 'raw-content.articles.theory.kata-principles');
+Route::view('/articles/theory/kata/', 'raw-content.articles.theory.kata');
+Route::view('/articles/theory/kime-kiay/', 'raw-content.articles.theory.kime-kiay');
+Route::view('/articles/theory/kyokushinkai-kanku/', 'raw-content.articles.theory.kyokushinkai-kanku');
+Route::view('/articles/theory/tanden/', 'raw-content.articles.theory.tanden');
+Route::view('/articles/theory/warm-up/', 'raw-content.articles.theory.warm-up');
+Route::view('/articles/theory/skill-degrees/', 'raw-content.articles.theory.skill-degrees');
+Route::view('/articles/theory/ethics/', 'raw-content.articles.theory.ethics');
+Route::view('/articles/theory/dogi-obi/', 'raw-content.articles.theory.dogi-obi');
+Route::view('/articles/theory/dictionary/', 'raw-content.articles.theory.dictionary');
+Route::view('/articles/for-parents/why-karate/', 'raw-content.articles.for-parents.why-karate');
+Route::view('/articles/for-parents/how-to-start/', 'raw-content.articles.for-parents.how-to-start');
+Route::view('/articles/for-parents/teach-to-win/', 'raw-content.articles.for-parents.teach-to-win');
+Route::view('/articles/for-parents/doesnt-work/', 'raw-content.articles.for-parents.doesnt-work');
+Route::view('/articles/for-parents/advice/', 'raw-content.articles.for-parents.advice');
+Route::view('/articles/for-parents/faq/', 'raw-content.articles.for-parents.faq');
+Route::view('/articles/for-parents/review/', 'raw-content.articles.for-parents.review');
+Route::view('/service/karate-for-kids/', 'raw-content.articles.for-parents.why-karate');
+Route::view('/service/karate-for-adults/', 'raw-content.articles.service.karate-for-adults');
+Route::view('/service/karate-for-girls/', 'raw-content.articles.service.karate-for-girls');
+Route::view('/articles/club/kanku-history/', 'raw-content.articles.club.kanku-history');
 
-Route::get('/articles/theory/dojo-kun/', function () {
-    return view('raw-content.articles.theory.dojo-kun');
-});
-Route::get('/articles/theory/mottos/', function () {
-    return view('raw-content.articles.theory.mottos');
-});
-Route::get('/articles/theory/shinkyokushinkai/', function () {
-    return view('raw-content.articles.theory.shinkyokushinkai');
-});
-
-Route::get('/articles/theory/kyokushinkai-in-ukraine/', function () {
-    return view('raw-content.articles.theory.kyokushinkai-in-ukraine');
-});
-Route::get('/articles/theory/kata-principles/', function () {
-    return view('raw-content.articles.theory.kata-principles');
-});
-Route::get('/articles/theory/kata/', function () {
-    return view('raw-content.articles.theory.kata');
-});
-
-Route::get('/articles/theory/kime-kiay/', function () {
-    return view('raw-content.articles.theory.kime-kiay');
-});
-Route::get('/articles/theory/kyokushinkai-kanku/', function () {
-    return view('raw-content.articles.theory.kyokushinkai-kanku');
-});
-Route::get('/articles/theory/tanden/', function () {
-    return view('raw-content.articles.theory.tanden');
-});
-
-Route::get('/articles/theory/warm-up/', function () {
-    return view('raw-content.articles.theory.warm-up');
-});
-Route::get('/articles/theory/skill-degrees/', function () {
-    return view('raw-content.articles.theory.skill-degrees');
-});
-Route::get('/articles/theory/ethics/', function () {
-    return view('raw-content.articles.theory.ethics');
-});
-
-Route::get('/articles/theory/dogi-obi/', function () {
-    return view('raw-content.articles.theory.dogi-obi');
-});
-Route::get('/articles/theory/dictionary/', function () {
-    return view('raw-content.articles.theory.dictionary');
-});
-
-Route::get('/articles/for-parents/why-karate/', function () {
-    return view('raw-content.articles.for-parents.why-karate');
-});
-
-Route::get('/articles/for-parents/how-to-start/', function () {
-    return view('raw-content.articles.for-parents.how-to-start');
-});
-Route::get('/articles/for-parents/teach-to-win/', function () {
-    return view('raw-content.articles.for-parents.teach-to-win');
-});
-Route::get('/articles/for-parents/doesnt-work/', function () {
-    return view('raw-content.articles.for-parents.doesnt-work');
-});
-
-Route::get('/articles/for-parents/advice/', function () {
-    return view('raw-content.articles.for-parents.advice');
-});
-
-Route::get('/articles/for-parents/faq/', function () {
-    return view('raw-content.articles.for-parents.faq');
-});
-
-Route::get('/articles/for-parents/review/', function () {
-    return view('raw-content.articles.for-parents.review');
-});
-
-
-
-
-Route::get('/service/karate-for-kids/', function () {
-    return view('raw-content.articles.for-parents.why-karate');
-});
-
-Route::get('/service/karate-for-adults/', function () {
-    return view('raw-content.articles.service.karate-for-adults');
-});
-
-Route::get('/service/karate-for-girls/', function () {
-    return view('raw-content.articles.service.karate-for-girls');
-});
-
-
-Route::get('/articles/club/kanku-history/', function () {
-    return view('raw-content.articles.club.kanku-history');
-});
-
-
-
-
-
-
-
-
-/*
-
-
-Route::get('/gallery/competition/', function () {
-    return view('raw-content.gallery.list');
-});
-
-Route::get('/gallery/', function () {
-    return view('raw-content.gallery.list');
-});
-Route::get('/gallery/', function () {
-    return view('raw-content.gallery.list');
-});
-Route::get('/gallery/', function () {
-    return view('raw-content.gallery.list');
-});
-
-http: //localhost:8000/gallery/competition/
-*/
-
-// Other raw content
-
-/**
-
-<a class="nav-link" href="/athletes/best/">Найкращі спортсмени</a>
-<a class="nav-link" href="/athletes/black-belts/">Чорні пояси</a>
-
-
- */
 
 // Admin
 
@@ -212,7 +99,7 @@ Route::view('/admin/{entity?}/{method?}/{param?}', 'layouts.admin')
     ->middleware('auth')
     ->middleware('role:admin')
     ->name('admin');
-
+/*
 Route::get('/athlete/{entity?}/{method?}/{param?}', function () {
     return 'role-athlete';
 })->middleware('auth')
@@ -224,45 +111,8 @@ Route::get('/coach/{entity?}/{method?}/{param?}', function () {
 })->middleware('auth')
     ->middleware('role:coach')
     ->name('coach');
-
-
-
-/*
-    ->name('admin.dashboard')
-    ->name('admin.instructors')
-    ->name('admin.dojos')
-    ->name('admin.news')*/
-
-
-/*
-Route::any('/admin/dashboard', function () {
-    return view('admin.dashboard');
-})->middleware('auth')->name('admin.dashboard');
-
-Route::get('/admin/instructors/', function () {
-    return view('admin.instructors');
-})->middleware('auth')->name('admin.instructors');
-
-Route::get('/admin/dojos/', function () {
-    return view('admin.dojos');
-})->middleware('auth')->name('admin.dojos');
-
-Route::get('/admin/news/', function () {
-    return view('admin.news');
-})->middleware('auth')->name('admin.news');
-
-Route::any('/admin/site/refresh/', [RefreshSiteController::class, 'refresh'])
-    ->middleware('auth')->name('admin.refresh');
-
 */
-
-
-// Route::get('/', [ShinController::class, 'index'])->where('path', '.*');
-
-// use App\Http\Controllers\ShinController;
-
-// Route::any('{path}', [ShinController::class, 'index'])->where('path', '.*');
 
 Auth::routes();
 
-// Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/prepare-build', [HelperController::class, 'artisan']);

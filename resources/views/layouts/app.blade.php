@@ -3,7 +3,7 @@
 
 <head>
     
-    @include('layouts/section/headerIncludes')
+    @include('layouts.section.headerincludes')
     <link href="/css/app.css" rel="stylesheet" />
     
     @yield('header-includes')
@@ -14,11 +14,11 @@
         <!--div id="top-nav-title" class="navbar navbar-expand-md navbar-dark fixed-top navbar-brand">
 				<h1>Спортивний клуб кіокушинкай карате «КАНКУ»</h1>
 			</div-->
-        @include('layouts/section/headerNav')
+        @include('layouts.section.headernav')
         @if(Illuminate\Support\Facades\Route::is('home'))
-        @include('layouts/section/headerBigLogo')
+        @include('layouts.section.headerbiglogo')
         @else
-        @include('layouts/section/headerSmallLogo')
+        @include('layouts.section.headersmalllogo')
         @endif
     </header>
 
@@ -28,8 +28,8 @@
         @yield('content')
     </main>
 
-    @include('layouts/section/footerNav')
-    @include('layouts/section/footerIncludes')
+    @include('layouts.section.footernav')
+    @include('layouts.section.footerincludes')
     <script src="/js/app.js"></script>
 </body>
 

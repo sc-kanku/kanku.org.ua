@@ -62,7 +62,7 @@
     <ol id="dojos-lviv">
         <div id="accordion" class="dojos" role="tablist" aria-multiselectable="true">
             @foreach($lvivDojos as $dojo)
-                @include('guest.dojos.dojoListItem', ['dojo' => $dojo, 'index'=> $dojo->id, 'extendedInfo' => false])
+                @include('guest.dojos.dojolistitem', ['dojo' => $dojo, 'index'=> $dojo->id, 'extendedInfo' => false])
             @endforeach
         </div>
     </ol>
@@ -74,7 +74,7 @@
     <ol id="dojos-region">
         <div id="accordion-obl" class="dojos" role="tablist" aria-multiselectable="true">
             @foreach($regionDojos as $dojo)
-                @include('guest.dojos.dojoListItem', ['dojo' => $dojo, 'index'=> $dojo->id, 'extendedInfo' => false])
+                @include('guest.dojos.dojolistitem', ['dojo' => $dojo, 'index'=> $dojo->id, 'extendedInfo' => false])
             @endforeach
         </div>
     </ol>
@@ -107,8 +107,9 @@
         <!--a href="/spisok-zaliv/">Загальний список наших залів</a-->
     </noscript>
 
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.13&sensor=false&language=uk&key=AIzaSyDcjZOr-j8BsLk34WNyqQihiIKTRvquU_Y"></script>
     <script type="text/javascript" src="/js/DojosMap.js"></script>
+    <script async   src="https://maps.googleapis.com/maps/api/js?language=uk&key=AIzaSyDcjZOr-j8BsLk34WNyqQihiIKTRvquU_Y&callback=DojosMap.initialize"></script>
+    
     <script type="text/javascript" src="/js/DojosFilter.js"></script>
 
 @endsection

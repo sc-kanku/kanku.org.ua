@@ -1,0 +1,41 @@
+User-agent: *
+Disallow: /arhive/
+Disallow: /vendor/
+Disallow: /resources/
+Disallow: /config/
+Disallow: /app/
+Disallow: /node_modules/
+Disallow: /routes/
+Disallow: /school/
+Disallow: /content-static/
+Disallow: /content/
+Disallow: /content-partials/
+Disallow: /video/
+Disallow: /storage/
+Disallow: /database/
+Disallow: /bootstrap/
+Disallow: /images/
+Disallow: /javascript/
+Disallow: /pictures/
+Disallow: /styles/
+Disallow: /tiny_mce/
+Disallow: /templates/
+Disallow: /room/
+Disallow: /inc/
+Disallow: /admin/
+
+
+
+Disallow: /arhive/
+Disallow: /old/
+Disallow: /admin/
+Disallow: /templates/template*/index.html
+Disallow: /tiny_mce/
+Disallow: /inc/
+Disallow: /redirect_gym/
+Disallow: /missing.php
+Disallow: /email.php
+Disallow: /room/
+
+Allow: /
+Host: kanku.org.ua

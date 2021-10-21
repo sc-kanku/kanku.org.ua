@@ -38,7 +38,8 @@ Route::post('/post/save/{id}', [PostController::class, 'apiSavePost']);
 Route::post('/site/refresh/', [RefreshSiteController::class, 'refresh']);
 // ->middleware('auth')->name('admin.refresh');
 
-
+/*
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+*/

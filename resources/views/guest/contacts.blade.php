@@ -12,7 +12,7 @@
     </li>
 
     <li>Виконавчий директор -
-        <a href="/instructors/dolinovsky-taras/">Доліновський Тарас Степанович</a>
+        <a href="/instructors/dolinovskyy-taras/">Доліновський Тарас Степанович</a>
     </li>
 
     <li>Головний тренер дитячо-юнацької збірної -

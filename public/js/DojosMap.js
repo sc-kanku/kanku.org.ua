@@ -13,7 +13,8 @@ var DojosMap = (function() {
 			var coordsEnd = "&hl=";
 
 			var coordsString = mapUrl.substring(
-				mapUrl.indexOf(coordsStart) + coordsStart.length,
+				// TODO:
+				mapUrl.indexOf(coordsStart) + coordsStart.length + 4,
 				mapUrl.indexOf(coordsEnd)
 			);
 
@@ -46,10 +47,12 @@ var DojosMap = (function() {
 
         var map = new google.maps.Map(mapNode, {
           zoom: 12,
-          center: new google.maps.LatLng(lat,lng),
-          mapTypeId: google.maps.MapTypeId.ROADMAP
+		  center: {lat, lng},
+          // center: new google.maps.LatLng(lat,lng),
+		  mapTypeId: "terrain",
+          // mapTypeId: google.maps.MapTypeId.ROADMAP
         });
-	
+	 
 		for(var i = 0; i < dojos.length; i++) {
 			var dojo = dojos[i];
 

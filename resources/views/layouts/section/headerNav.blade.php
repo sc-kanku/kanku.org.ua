@@ -160,7 +160,7 @@
 
                 <div class="signin-form">
                     <div class="container">
-                        @include('layouts/section/loginForm')
+                        @include('layouts.section.loginform')
                     </div>
                 </div>
             </div>

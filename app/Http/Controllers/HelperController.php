@@ -3,15 +3,19 @@
 namespace App\Http\Controllers;
 
 use Exception;
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Http\Request;
 
-class RefreshSiteController extends Controller
+use Illuminate\Support\Facades\Artisan;
+
+
+class HelperController extends Controller
 {
-    public function refresh(Request $request)
+    public function prepareBuild()
     {
         try {
-            Artisan::call('page-cache:clear');
+            Artisan::call('optimize:clear');
+            Artisan::call('optimize');
+            Artisan::call('config:cache');
+            Artisan::call('route:cache');
 
             return ["status" => 'ok'];
         } catch (Exception $e) {

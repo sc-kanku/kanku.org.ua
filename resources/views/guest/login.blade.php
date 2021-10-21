@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.section.loginForm')
+@include('layouts.section.loginform')
 @endsection

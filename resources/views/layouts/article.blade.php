@@ -4,13 +4,13 @@
 
 <head>
 	<link href="/css/app.css" rel="stylesheet" />
-    @include('layouts/section/headerIncludes')
+    @include('layouts.section.headerincludes')
 </head>
 
 <body>
     <header>
-		@include('layouts/section/headerNav')
-        @include('layouts/section/headerSmallLogo')
+		@include('layouts.section.headernav')
+        @include('layouts.section.headersmalllogo')
     </header>
 
     @yield('fullScreenTopContent')
@@ -18,7 +18,7 @@
 	<div class="container">
 		<div class="row">
 			<aside class="col-sm-3">
-				@include('layouts/section/articlesNav')
+				@include('layouts.section.articlesnav')
 			</aside>
 
 			<main class="col-sm-9">
@@ -29,11 +29,11 @@
 		</div>
 	</div>
 
-    @include('layouts/section/footerNav')
+    @include('layouts.section.footernav')
 
 	<script src="/js/app.js"></script>
     
-	@include('layouts/section/footerIncludes')
+	@include('layouts.section.footerincludes')
 </body>
 
 </html>

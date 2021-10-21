@@ -6,7 +6,7 @@
     <div class="col-md-9">
 		<p>
 			<div>
-                @include('guest.dojos.dojoAddress', ['dojo' => $dojo, 'extendedInfo' => true])
+                @include('guest.dojos.dojoaddress', ['dojo' => $dojo, 'extendedInfo' => true])
 				{{--  Utils::getShowOnMapHtml($row) --}}
 			</div>
 		
@@ -26,13 +26,13 @@
 
     <div class="col-md-3 col-instructor-pane">
         <h3>Iнструктор</h3>
-        @include('guest.instructors.template.fullNameLink', ['athlete' => $dojo->athletes->first() ])
-        @include('guest.instructors.template.instructorPhoto', ['athlete' => $dojo->athletes->first()])
-        @include('guest.instructors.template.instructorDegree', ['athlete' => $dojo->athletes->first()])
-        @include('guest.instructors.template.instructorSocials', ['athlete' => $dojo->athletes->first()])
-        @include('guest.instructors.template.instructorPhone', ['phone' => $dojo->athletes->first()->phone, 'phone2' => $dojo->athletes->first()->phone2, 'inlinePhone' => false])
-        @include('guest.instructors.template.instructorMoreAbout', ['athlete' => $dojo->athletes->first()])
-        @include('guest.instructors.template.joinInstructor', ['athlete' => $dojo->athletes->first()])
+        @include('guest.instructors.template.fullnamelink', ['athlete' => $dojo->athletes->first() ])
+        @include('guest.instructors.template.instructorphoto', ['athlete' => $dojo->athletes->first()])
+        @include('guest.instructors.template.instructordegree', ['athlete' => $dojo->athletes->first()])
+        @include('guest.instructors.template.instructorsocials', ['athlete' => $dojo->athletes->first()])
+        @include('guest.instructors.template.instructorphone', ['phone' => $dojo->athletes->first()->phone, 'phone2' => $dojo->athletes->first()->phone2, 'inlinePhone' => false])
+        @include('guest.instructors.template.instructormoreabout', ['athlete' => $dojo->athletes->first()])
+        @include('guest.instructors.template.joininstructor', ['athlete' => $dojo->athletes->first()])
     </div>
 </div>
 @endsection

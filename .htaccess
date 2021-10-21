@@ -1,0 +1,248 @@
+AddDefaultCharset UTF-8
+ErrorDocument 404 /content-static/missing.php
+DirectoryIndex index.html index.php photo.jpg
+Options -indexes
+RewriteEngine On
+RewriteCond %{HTTP_HOST} kanku\.in\.ua
+RewriteRule ^(.*)$ http://kanku.org.ua/$1 [R=301]
+
+
+#RewriteCond %{REQUEST_URI} !^/public
+#RewriteRule ^(.*)$ /public/$1 [NC,L]
+
+#RewriteCond %{HTTP_HOST} kanku\.org\.ua
+#RewriteRule ^(.*)$ http://kanku.org.ua/public/$1 [L]
+
+
+#RewriteBase /
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteCond %{REQUEST_FILENAME} !-f     
+#RewriteRule ^(.*)$ public/$1           
+
+# Redirect Trailing Slashes If Not A Folder...
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} (.+)/$
+RewriteRule ^ %1 [L,R=301]
+
+#RewriteCond %{REQUEST_URI} !^/public/
+# Don't apply to URLs that go to existing files or folders
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-d
+# Rewrite all those to insert /production folder
+# RewriteRule ^(.*)$ /public/$1 [L]
+
+
+
+
+
+# Serve all requests from public cached
+RewriteCond %{REQUEST_URI} ^/?$
+RewriteCond %{DOCUMENT_ROOT}/public/page-cache/pc__index__pc.html -f
+RewriteRule .? public/page-cache/pc__index__pc.html [L]
+RewriteCond %{DOCUMENT_ROOT}/public/page-cache%{REQUEST_URI}.html -f
+RewriteRule . public/page-cache%{REQUEST_URI}.html [L]
+RewriteCond %{DOCUMENT_ROOT}/public/page-cache%{REQUEST_URI}.json -f
+RewriteRule . public/page-cache%{REQUEST_URI}.json [L]
+RewriteCond %{DOCUMENT_ROOT}/public/page-cache%{REQUEST_URI}.xml -f
+RewriteRule . public/page-cache%{REQUEST_URI}.xml [L]
+RewriteCond %{REQUEST_URI} !^/public/
+RewriteRule ^(.*)$ /public/$1 [L]
+
+
+
+
+
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-dojos
+#RewriteRule gymnasiums/([^/]+)/?$ /redirect_gym/gym.php?url=$1
+
+RewriteRule ^blog/page-(\d+)/?$ /content-static/blog/page.php?page=$1 [L]
+RewriteRule ^blog/?$ /content/blog/ [L]
+RewriteRule ^blog/archive/?$ /content-static/blog/page.php?page=2 [L]
+RewriteRule ^blog/([A-Za-z0-9-_]+)/?$ /content/blog/$1/ [L]
+
+RewriteRule ^page-(\d+)/?$ /content-static/blog/page.php?page=$1 [L]
+RewriteRule podii-ta-noviny/([A-Za-z0-9-_]+)/?$ /content/blog/$1 [L]
+RewriteRule podii-ta-noviny/?$ /content/blog/ [L]
+
+RewriteRule node/75/?$ /content/articles/theory/ethics/ [R=301,L]
+RewriteRule node/11/?$ /coaches/pigruh-oleg/ [R=301,L]
+RewriteRule node/1057/?$ /coaches/zagorbensky-lubomir/ [R=301,L]
+RewriteRule subscribe/?$ /karate-lviv/ [R=301,L]
+RewriteRule frontpage/?$ / [R=301,L]
+RewriteRule zaly-vo-lvove /karate-lviv/ [R=301,L]
+RewriteRule ^philosophy/?$ /articles/theory/philosophy/ [R=301,L]
+RewriteRule node/95/?$ /maisterni-stupenja/ [R=301,L]
+RewriteRule node/96/?$ /kimono-i-pojas/ [R=301,L]
+RewriteRule node/1/?$ /president-clubu/ [R=301,L]
+RewriteRule node/83/?$ /coaches/sensei-kochetkova-natalia/ [R=301,L]
+RewriteRule node/812/?$ /coaches/zhukov-ruslan/ [R=301,L]
+RewriteRule node/811/?$ /coaches/ilenko-andrew/ [R=301,L]
+RewriteRule node/94/?$ /coaches/sensei-gavrilets-taras/ [R=301,L]
+RewriteRule node/23/?$ /philosophy/ [R=301,L]
+RewriteRule node/79/?$ /naikrashi-sportsmeni/ [R=301,L]
+RewriteRule node/29/?$ /info/ [R=301,L]
+RewriteRule spisok/?$ /spisok-zaliv/ [R=301,L]
+RewriteRule Мутин /president-clubu/index.html 
+RewriteRule мутин /president-clubu/index.html
+RewriteRule Мутін /president-clubu/index.html
+RewriteRule мутін /president-clubu/index.html
+RewriteRule node/79/?$ /naikrashi-sportsmeni/ [R=301,L]
+RewriteRule karate-svitlyni/?$ /karate-girls/ [R=301,L]
+#RewriteCond %{HTTP_ACCEPT} "text/vnd.wap.wml¦application/vnd.wap.xhtml+xml" [NC,OR]
+#RewriteCond %{HTTP_USER_AGENT} "acs|alav|alca|amoi|audi|aste|benq|blac|blaz|brew|cell|cldc|cmd-" [NC,OR]
+#RewriteCond %{HTTP_USER_AGENT} "dang|doco|erics|hipt|inno|ipaq|java|jigs|kddi|keji|leno|lg-c|lg-d|lg-g|lge-" [NC,OR]
+#RewriteCond %{HTTP_USER_AGENT} "maui|maxo|midp|mits|mmef|mobi|mot-|moto|mwbp|nec-|newt|noki|opwv" [NC,OR]
+#RewriteCond %{HTTP_USER_AGENT} "palm|pana|pant|pdxg|phil|pluc|port|prox|qtek|qwap|sage|sams|sany" [NC,OR]
+#RewriteCond %{HTTP_USER_AGENT} "sch-|sec-|send|seri|sgh-|shar|sie-|siem|smal|smar|sony|sph-|symb|t-mo" [NC,OR]
+#RewriteCond %{HTTP_USER_AGENT} "teli|tim-|tsm-|upg1|upsi|vk-v|voda|w3cs|wap-|wapa|wapi" [NC,OR]
+#RewriteCond %{HTTP_USER_AGENT} "wapp|wapr|webc|winw|winw|xda|xda-" [NC,OR]
+#RewriteCond %{HTTP_USER_AGENT} "up.browser|up.link|windowssce|iemobile|mini|mmp" [NC,OR]
+#RewriteCond %{HTTP_USER_AGENT} "symbian|midp|wap|phone|pocket|android|mobile|pda|psp" [NC]
+#RewriteCond %{QUERY_STRING} !nomobile
+#RewriteRule ^(.*)$ http://m.kanku.org.ua/$1 [NC,L]
+###########################################
+#old links <=> new links mapping
+RewriteRule ^karate-lviv/? /dojos/ [R=301,L]
+RewriteRule ^zaly-v-lvivskoi-oblast/? /dojos/ [R=301,L]
+RewriteRule ^spisok-zaliv/? /dojos/ [R=301,L]
+RewriteRule instruktori/? /instructors/ [R=301,L]
+RewriteRule istoria-klubu/? /articles/club/kanku-history/ [R=301,L]
+RewriteRule viznannja/? /articles/club/wko-recognition/ [R=301,L]
+RewriteRule ^info/? /articles/club/info/ [R=301,L]
+RewriteRule naikrashi-sportsmeni/? /athletes/best/ [R=301,L]
+RewriteRule president/? /instructors/mutin-sergiy/ [R=301,L]
+RewriteRule vikonavchi-director/? /instructors/dolinovsky-taras/ [R=301,L]
+RewriteRule golovnoi-trener-detsko-junatskoj-sbirnoj/? /instructors/gavrylets-taras/ [R=301,L]
+RewriteRule pr-manager/? /instructors/kuts-oleksandr/ [R=301,L]
+RewriteRule zaproshuemo-doroslih/? /service/karate-for-adults/ [R=301,L]
+RewriteRule karate-dlja-divchat/? /service/karate-for-girls/ [R=301,L]
+RewriteRule ^karate-girls/? /gallery/karate-girls/ [R=301,L]
+RewriteRule trenuvannja-v-dodjo/? /gallery/traning/ [R=301,L]
+RewriteRule photo-zmagannja/? /gallery/competition/ [R=301,L]
+RewriteRule pokazovy-vystupy/? /gallery/demo/ [R=301,L]
+RewriteRule sportivni-rodyny/? /gallery/family/ [R=301,L]
+RewriteRule vidpochinok-na-prirodi/? /gallery/rest/ [R=301,L]
+RewriteRule mista-nashih-zmagan/? /gallery/travel/ [R=301,L]
+RewriteRule zbori-seminari/? /gallery/seminar/ [R=301,L]
+RewriteRule ^video/? /gallery/video/ [R=301,L]
+RewriteRule ^Masutatsu-Oyama/? /articles/theory/masutatsu-oyama/ [R=301,L]
+RewriteRule shin-kiokushin/? /articles/theory/shinkyokushinkai/ [R=301,L]
+RewriteRule philosophy-kiokusinkai-karate/? /articles/theory/philosophy/ [R=301,L]
+RewriteRule dodze-kun/? /articles/theory/dojo-kun/ [R=301,L]
+RewriteRule ufkk/? /articles/theory/kyokushinkai-in-ukraine/ [R=301,L]
+RewriteRule etiket/? /articles/theory/ethics/ [R=301,L]
+RewriteRule ^kata/? /articles/theory/kata/ [R=301,L]
+RewriteRule maisterni-stupenja/? /articles/theory/skill-degrees/ [R=301,L]
+RewriteRule slovnik/? /articles/theory/dictionary/ [R=301,L]
+RewriteRule 8-kuy/? /articles/theory/kata-principles/ [R=301,L]
+RewriteRule 11-devizov-Masutatsy-Oyami/? /articles/theory/mottos/ [R=301,L]
+RewriteRule kimono-i-pojas/? /articles/theory/dogi-obi/ [R=301,L]
+RewriteRule nazva-ta-emblema/? /articles/theory/kyokushinkai-kanku/ [R=301,L]
+RewriteRule Sosai-Oyama/? /articles/theory/oyama-bio/ [R=301,L]
+RewriteRule ^history-of-karate/? /articles/theory/style-history/ [R=301,L]
+RewriteRule rozminka/? /articles/theory/warm-up/ [R=301,L]
+RewriteRule ^kime/? /articles/theory/kime-kiay/ [R=301,L]
+RewriteRule ^tanden/? /articles/theory/tanden/ [R=301,L]
+RewriteRule chomy-karate/? /articles/for-parents/why-karate/ [R=301,L]
+RewriteRule jak-rozpochaty/? /articles/for-parents/how-to-start/ [R=301,L]
+RewriteRule ne-vihodyt/? /articles/for-parents/doesnt-work/ [R=301,L]
+RewriteRule navchimo-peremagati/? /articles/for-parents/teach-to-win/ [R=301,L]
+RewriteRule pytannja-ta-vidpovidi/? /articles/for-parents/faq/ [R=301,L]
+RewriteRule vidguki/? /articles/for-parents/review/ [R=301,L]
+RewriteRule poradi-batkam/? /articles/for-parents/advice/ [R=301,L]
+
+RewriteRule gymnasiums/shkola-1-santa-barbara/? /dojos/school-1/ [R=301,L]
+RewriteRule gymnasiums/shkola-37/? /dojos/school-37/ [R=301,L]
+RewriteRule gymnasiums/molodsha-shkola-svitanok/? /dojos/svitanok/ [R=301,L]
+RewriteRule gymnasiums/shkola-20/? /dojos/school-20/ [R=301,L]
+RewriteRule gymnasiums/shkola-77/? /dojos/school-77/ [R=301,L]
+RewriteRule gymnasiums/shkola-28/? /dojos/school-28/ [R=301,L]
+RewriteRule gymnasiums/shkola-sadok-sofia-80/? /dojos/school-80/ [R=301,L]
+RewriteRule gymnasiums/shkola-69-novy-lviv/? /dojos/school-69/ [R=301,L]
+RewriteRule gymnasiums/shkola-13-santa-barbara/? /dojos/school-13/ [R=301,L]
+RewriteRule gymnasiums/shkola-95-syhiv/? /dojos/school-95/ [R=301,L]
+RewriteRule gymnasiums/shkola-90-syhiv/? /dojos/school-90/ [R=301,L]
+RewriteRule gymnasiums/shkola-sadok-odin-dva-tri/? /dojos/odyn-dva-try/ [R=301,L]
+RewriteRule gymnasiums/pochatkova-shkola-jereltse/? /dojos/dzherelce/ [R=301,L]
+RewriteRule gymnasiums/shkola-70/? /dojos/school-70/ [R=301,L]
+RewriteRule gymnasiums/shkola-2/? /dojos/school-2/ [R=301,L]
+RewriteRule gymnasiums/shkola-sadok-provesin/? /dojos/provesin/ [R=301,L]
+RewriteRule gymnasiums/shkola-67-levandivka/? /dojos/school-67/ [R=301,L]
+RewriteRule gymnasiums/school-67/? /dojos/school-67/ [R=301,L]
+RewriteRule gymnasiums/knvk-94-rjasne/?  /dojos/ryasne-94/ [R=301,L]
+RewriteRule gymnasiums/shkola-33/? /dojos/school-33/ [R=301,L]
+RewriteRule gymnasiums/shkola-gimnasia-vidrodgennja/? /dojos/vidrodzhennya/ [R=301,L]
+RewriteRule gymnasiums/shkola-gimnasia/? /dojos/school-1-degree-gimnasium/ [R=301,L]
+RewriteRule gymnasiums/shkola-22-stefanika/? /dojos/school-22/ [R=301,L]
+RewriteRule gymnasiums/shkola-16-lider/? /dojos/school-16/ [R=301,L]
+RewriteRule gymnasiums/shkola-radosti/? /dojos/school-1-2-degree-radosti/ [R=301,L]
+RewriteRule gymnasiums/bibrka-shkola/? /dojos/bibrka-school/ [R=301,L]
+RewriteRule gymnasiums/lapaivka-shkola/? /dojos/lapaivka-school/ [R=301,L]
+RewriteRule gymnasiums/zubra-shkola/? /dojos/zubra-school/ [R=301,L]
+RewriteRule gymnasiums/sokilniki-shkola/? /dojos/sokilnyky-school/ [R=301,L]
+RewriteRule gymnasiums/peremyshljany-zal/? /dojos/peremyshljany/ [R=301,L]
+RewriteRule gymnasiums/murovane-shkola/? /dojos/murovane-school/ [R=301,L]
+RewriteRule gymnasiums/kamjanko-buzk-shkola-3/? /dojos/kamjanko-buzk-school-3/ [R=301,L]
+RewriteRule gymnasiums/solonka-narodny-dim/? /dojos/solonka-narodny-dim/ [R=301,L]
+RewriteRule gymnasiums/?$ /dojos/ [R=301,L]
+
+RewriteRule coaches/sensei-mutin-serge/? /instructors/mutin-sergiy/ [R=301,L]
+RewriteRule coaches/volodumurovuch-oleg/? /instructors/pigruh-oleg/ [R=301,L]
+RewriteRule coaches/pigruh-oleg/? /instructors/pigruh-oleg/ [R=301,L]
+RewriteRule coaches/3/? /instructors/pigruh-oleg/ [R=301,L]
+RewriteRule coaches/kuts-aleksander/? /instructors/kuts-oleksandr [R=301,L]
+RewriteRule coaches/zagorbensky-lubomir/? /instructors/zagorbensky-lubomyr/ [R=301,L]
+RewriteRule coaches/kravchenko/? /instructors/kravchenko-vadym/ [R=301,L]
+RewriteRule coaches/sensei-gavrilets-taras/? /instructors/gavrylets-taras/ [R=301,L]
+RewriteRule coaches/sensei-kochetkova-natalia/? /instructors/mutina-natalia/ [R=301,L]
+RewriteRule coaches/dolinovsky-taras/? /instructors/dolinovsky-taras/ [R=301,L]
+RewriteRule coaches/ilenko-andrew/? /instructors/ilenko-andrew/ [R=301,L]
+RewriteRule coaches/veselsky-yuriy/? /instructors/veselsky-yuriy/ [R=301,L]
+RewriteRule coaches/lebid/? /instructors/lebid-arsen/ [R=301,L]
+RewriteRule coaches/popandopulo-anastas/? /instructors/popandopulos-anastas/ [R=301,L]
+RewriteRule coaches/filyak-michailo/? /instructors/filyak-mychailo/ [R=301,L]
+RewriteRule coaches/gabchak-yuriy/? /instructors/gabchak-yuriy/ [R=301,L]
+RewriteRule coaches/23/? /instructors/gabchak-yuriy/ [R=301,L]
+RewriteRule coaches/krasnokutsky-danilo/? /instructors/krasnokutsky-danylo/ [R=301,L]
+RewriteRule coaches/malendevich/? /instructors/malendevych-mykyta/ [R=301,L]
+RewriteRule coaches/slinko_maks/? /instructors/slynko-maksym/ [R=301,L]
+RewriteRule coaches/kovalchuk-yaroslav/? /instructors/kovalchuk-yaroslav/ [R=301,L]
+RewriteRule coaches/zhukov-ruslan/? /instructors/zhukov-ruslan/ [R=301,L]
+RewriteRule coaches/shur/? /instructors/shchur-bogdan/ [R=301,L]
+RewriteRule coaches/djas_vasa/? /instructors/dzhas-vasyl/ [R=301,L]
+RewriteRule coaches/palii-severin/? /instructors/paliy-severyn/ [R=301,L]
+RewriteRule coaches/lemishko/? /instructors/lemishko-bogdan/ [R=301,L]
+RewriteRule coaches/([^/]+)/?$ /content-static/missing-instructor.php [L]
+#RewriteRule coaches/?$ /instructors/ [R=301,L]
+###########################################
+RewriteRule ^$ /content-static/landing/ [L]
+RewriteRule ^athletes/best/?$ /content/athletes/best/ [L]
+RewriteRule ^athletes/best/([A-Za-z0-9-_]+)/?$ /content/athletes/best/$1/ [L]
+RewriteRule ^athletes/black-belts/?$ /content/athletes/black-belts/ [L]
+#RewriteRule ^athletes/black-belts/?$ /content-static/black-belts/ [L]
+RewriteRule ^contacts/?$ /content/contacts/ [L]
+RewriteRule ^email/feedback/?$ /content-static/email.php [L]
+RewriteRule ^email/(\d+)/?$ /content-static/email.php?id=$1 [L]
+#RewriteRule ^email.php\?id=(\d+) /content-static/email.php?id=$1 [L]
+RewriteRule ^service/karate-for-kids/?$ /content/articles/for-parents/why-karate/ [L]
+RewriteRule ^service/karate-for-adults/?$ /content/service/karate-for-adults/ [L]
+RewriteRule ^service/karate-for-girls/?$ /content/service/karate-for-girls/ [L]
+RewriteRule ^instructors/?$ /content/instructors/ [L]
+RewriteRule ^instructors/([A-Za-z0-9-_]+)/?$ /content/instructors/$1/ [L]
+RewriteRule ^dojos/?$ /content/dojos/ [L]
+RewriteRule ^dojos/([^/]+)/?$ /content-static/redirect_gym/gym.php?url=$1  [L]
+RewriteRule ^articles/for-parents/([^/]+)/?$ /content/articles/for-parents/$1/ [L]
+RewriteRule ^articles/theory/([^/]+)/?$ /content/articles/theory/$1/ [L]
+RewriteRule ^articles/club/([^/]+)/?$ /content/articles/club/$1/ [L]
+RewriteRule ^gallery/?$ /content-static/gallery/ [L]
+RewriteRule ^gallery/([^/]+)/?$ /content/gallery/$1/ [L]
+
+RewriteRule ^zaproshuemo-2017/?$ /content/dojos/ [L]
+RewriteRule ^zaproshuemo-2018/?$ /content/dojos/ [L]
+RewriteRule ^invite/?$ /content-static/invite.php [L]
+
+RewriteRule ^invite/?$ /content-static/invite.php [L]
+
+
+RewriteRule ^lviv-open-cup(.*)$ /content-static/calendar/lviv-open-cup$1 [L]
