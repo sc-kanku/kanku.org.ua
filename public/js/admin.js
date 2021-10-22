@@ -2954,7 +2954,7 @@ window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 
 try {
   window.Popper = __webpack_require__(/*! popper.js */ "./node_modules/popper.js/dist/esm/popper.js")["default"];
-  window.$ = window.jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js"); // Dublicate?
+  window.$ = window.jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js"); // Duplicate?
   // require('bootstrap');
 } catch (e) {}
 /**
@@ -6382,7 +6382,7 @@ function SiteRefresh() {
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (updatingState == 'beforeUpdate') {
       setUpdatingState('updating');
-      fetch('/api/site/refresh/', {
+      fetch('/api/site/refresh', {
         method: 'POST'
       }).then(function (response) {
         return response.json();
@@ -26221,133 +26221,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
      *
      * @private
      * @param {*} value The value to query.
-     * @returns {string} Returns the `toStringTag`.
-     */
-    function baseGetTag(value) {
-      if (value == null) {
-        return value === undefined ? undefinedTag : nullTag;
-      }
-      return (symToStringTag && symToStringTag in Object(value))
-        ? getRawTag(value)
-        : objectToString(value);
-    }
-
-    /**
-     * The base implementation of `_.gt` which doesn't coerce arguments.
-     *
-     * @private
-     * @param {*} value The value to compare.
-     * @param {*} other The other value to compare.
-     * @returns {boolean} Returns `true` if `value` is greater than `other`,
-     *  else `false`.
-     */
-    function baseGt(value, other) {
-      return value > other;
-    }
-
-    /**
-     * The base implementation of `_.has` without support for deep paths.
-     *
-     * @private
-     * @param {Object} [object] The object to query.
-     * @param {Array|string} key The key to check.
-     * @returns {boolean} Returns `true` if `key` exists, else `false`.
-     */
-    function baseHas(object, key) {
-      return object != null && hasOwnProperty.call(object, key);
-    }
-
-    /**
-     * The base implementation of `_.hasIn` without support for deep paths.
-     *
-     * @private
-     * @param {Object} [object] The object to query.
-     * @param {Array|string} key The key to check.
-     * @returns {boolean} Returns `true` if `key` exists, else `false`.
-     */
-    function baseHasIn(object, key) {
-      return object != null && key in Object(object);
-    }
-
-    /**
-     * The base implementation of `_.inRange` which doesn't coerce arguments.
-     *
-     * @private
-     * @param {number} number The number to check.
-     * @param {number} start The start of the range.
-     * @param {number} end The end of the range.
-     * @returns {boolean} Returns `true` if `number` is in the range, else `false`.
-     */
-    function baseInRange(number, start, end) {
-      return number >= nativeMin(start, end) && number < nativeMax(start, end);
-    }
-
-    /**
-     * The base implementation of methods like `_.intersection`, without support
-     * for iteratee shorthands, that accepts an array of arrays to inspect.
-     *
-     * @private
-     * @param {Array} arrays The arrays to inspect.
-     * @param {Function} [iteratee] The iteratee invoked per element.
-     * @param {Function} [comparator] The comparator invoked per element.
-     * @returns {Array} Returns the new array of shared values.
-     */
-    function baseIntersection(arrays, iteratee, comparator) {
-      var includes = comparator ? arrayIncludesWith : arrayIncludes,
-          length = arrays[0].length,
-          othLength = arrays.length,
-          othIndex = othLength,
-          caches = Array(othLength),
-          maxLength = Infinity,
-          result = [];
-
-      while (othIndex--) {
-        var array = arrays[othIndex];
-        if (othIndex && iteratee) {
-          array = arrayMap(array, baseUnary(iteratee));
-        }
-        maxLength = nativeMin(array.length, maxLength);
-        caches[othIndex] = !comparator && (iteratee || (length >= 120 && array.length >= 120))
-          ? new SetCache(othIndex && array)
-          : undefined;
-      }
-      array = arrays[0];
-
-      var index = -1,
-          seen = caches[0];
-
-      outer:
-      while (++index < length && result.length < maxLength) {
-        var value = array[index],
-            computed = iteratee ? iteratee(value) : value;
-
-        value = (comparator || value !== 0) ? value : 0;
-        if (!(seen
-              ? cacheHas(seen, computed)
-              : includes(result, computed, comparator)
-            )) {
-          othIndex = othLength;
-          while (--othIndex) {
-            var cache = caches[othIndex];
-            if (!(cache
-                  ? cacheHas(cache, computed)
-                  : includes(arrays[othIndex], computed, comparator))
-                ) {
-              continue outer;
-            }
-          }
-          if (seen) {
-            seen.push(computed);
-          }
-          result.push(value);
-        }
-      }
-      return result;
-    }
-
-    /**
-     * The base implementation of `_.invert` and `_.invertBy` which inverts
-     * `object` with values transformed by `iteratee` and set by `setter`.
+     * @returns {string} Returns the `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     * `object` with values transformed by `iteratee` and set by `setter`.
      *
      * @private
      * @param {Object} object The object to iterate over.

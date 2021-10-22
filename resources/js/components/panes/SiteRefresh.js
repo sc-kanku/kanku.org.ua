@@ -8,7 +8,7 @@ export default function SiteRefresh () {
         if (updatingState == 'beforeUpdate') {
             setUpdatingState('updating');
 
-            fetch('/api/site/refresh/', {
+            fetch('/api/site/refresh', {
                 method: 'POST'
             })
             .then(response => response.json())

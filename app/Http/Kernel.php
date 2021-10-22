@@ -29,7 +29,7 @@ class Kernel extends HttpKernel
      */
     protected $middlewareGroups = [
         'web' => [
-            \Silber\PageCache\Middleware\CacheResponse::class,
+            // \Silber\PageCache\Middleware\CacheResponse::class,
             \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
@@ -57,13 +57,14 @@ class Kernel extends HttpKernel
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
+        'cache.static.pages' => \Silber\PageCache\Middleware\CacheResponse::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'password.confirm' => \Illuminate\Auth\Middleware\RequirePassword::class,
+        // https://www.codecheef.org/article/laravel-7-role-based-authentication-tutorial?ref=morioh.com&utm_source=morioh.com
+        'role' => \App\Http\Middleware\CheckRole::class,
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        // https://www.codecheef.org/article/laravel-7-role-based-authentication-tutorial?ref=morioh.com&utm_source=morioh.com
-        'role' => \App\Http\Middleware\CheckRole::class,
     ];
 }

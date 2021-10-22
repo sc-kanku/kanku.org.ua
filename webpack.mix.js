@@ -13,23 +13,23 @@ const mix = require('laravel-mix');
 
 
 // admin part of app - with react
-/*
+
 mix.js('resources/js/app.js', 'public/js/admin.js')
     .js('resources/js/admin.js', 'public/js/admin.js')
     .react()
     .sass('resources/sass/app.scss', 'public/css/admin.css')
     .css('resources/css/app.css', 'public/css/admin.css')
     .css('resources/css/admin.css', 'public/css/admin.css')
-*/
+
 
 // general part of app - no react needed
-
+/*
 mix.js('resources/js/app.js', 'public/js/app.js')
-    .sass('resources/sass/app.scss', 'public/css')
+    .sass('resources/sass/app.scss', 'public/css/app.css')
     .postCss('resources/css/app.css', 'public/css/app.css', [
         // require('tailwindcss')
     ]);
-
+*/
 /*
 // Original 8
 mix.js('resources/js/app.js', 'public/js')
