@@ -12,13 +12,10 @@ class GuestCacheResponse extends BaseCacheResponse
 {
     protected function shouldCache(Request $request, Response $response)
     {
-        // In this example, we don't ever want to cache pages if the
-        // URL contains a query string. So we first check for it,
-        // then defer back up to the parent's default checks.
-        if ($request->getQueryString() || Auth::user()) {
-            return false;
-        }
-
-        return parent::shouldCache($request, $response);
+        // Disabled caching for now
+        // TODO: implement Ajax admin menu
+        return false
+            && parent::shouldCache($request, $response)
+            && !($request->getQueryString() || Auth::user());
     }
 }
