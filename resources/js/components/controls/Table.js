@@ -7,7 +7,7 @@ import TableSearch from './TableSearch';
 export default function Table({ columns, data, inlineUpdateUrl }) {
   const [skipPageReset, setSkipPageReset] = React.useState(false);
 
-  const updateMyData = (index, id, value) => {
+  const updateMyData = (index, id, value, onSuccess, onFailure) => {
     let inlineEditData = {
       'id': + index + 1,
       'field': id,
@@ -20,6 +20,7 @@ export default function Table({ columns, data, inlineUpdateUrl }) {
       body: JSON.stringify(inlineEditData)
     }).then(responseSavedSuccess => {
       synchronizeDataOnUpdateSuccess(index, id, value);
+      onSuccess();
   
         // Show toasted message
         // https://getbootstrap.com/docs/5.1/components/toasts/
@@ -27,6 +28,7 @@ export default function Table({ columns, data, inlineUpdateUrl }) {
       })
       .catch((error) => {
         // console.error('Error:', JSON.stringify(error));
+        onFailure()
       });
   }
 
@@ -65,7 +67,7 @@ const EditableDegree = ({
     let newValue = e.target.value;
     setValue(newValue);
 
-    updateMyData(index, id, newValue);
+    updateMyData(index, id, newValue, ()=>{}, ()=>{});
   }
 
   return <Degree value={value} editable="true" onChange={onChange} />
@@ -83,7 +85,8 @@ const EditablePostCategory = ({
     let newValue = e.target.value;
     setValue(newValue);
 
-    updateMyData(index, id, newValue);
+    // TODO: Promises instead callbacks
+    updateMyData(index, id, newValue, ()=>{}, ()=>{});
   }
 
   return <PostCategory value={value} editable="true" onChange={onChange} />
@@ -102,6 +105,8 @@ const EditableCell = ({
 
   const [value, setValue] = React.useState(initialValue);
   const [previousValue, setPreviousValue] = React.useState(initialValue);
+  const [successfullyUpdated, setSuccessfullyUpdated] = React.useState(false);
+  const [updatedWithFailure, setUpdatedWithFailure] = React.useState(false);
 
   const onChange = e => {
     setValue(e.target.value)
@@ -110,9 +115,25 @@ const EditableCell = ({
   // We'll only update the external data when the input is blurred
   const onBlur = () => {
       if (previousValue != value) {
-        updateMyData(index, id, value);
-  
-        setPreviousValue(value);
+        updateMyData(index, id, value, 
+          () => {
+            setSuccessfullyUpdated(true);
+            setPreviousValue(value);
+
+            setTimeout(() => {
+              setSuccessfullyUpdated(false)
+            }, 3000);
+          },
+
+          () => {
+            setUpdatedWithFailure(true);
+            
+            setTimeout(() => {
+              setUpdatedWithFailure(false);
+              setValue(previousValue);
+            }, 3000);
+          }
+        );
       }
   }
 
@@ -120,19 +141,28 @@ const EditableCell = ({
   React.useEffect(() => {
     setValue(initialValue)
   }, [initialValue])
-
-  return <input value={value} onChange={onChange} onBlur={onBlur} />
+// 
+  return <>
+   <div style={{position: "relative"}}> 
+      <input value={value} onChange={onChange} onBlur={onBlur} />
+      { successfullyUpdated && <span class="position-absolute top-50 end-0 translate-middle bg-success border border-light rounded-circle"><i class="fas fa-check" style={{color: 'white', padding: '0.2em', fontSize: '0.7em', display: 'block'}}></i></span> }
+      { updatedWithFailure  && <span class="position-absolute top-50 end-0 translate-middle bg-danger border border-light rounded-circle"><i class="fas fa-exclamation" style={{color: 'white', padding: '0.2em 0.5em', fontSize: '0.7em', display: 'block'}}></i></span> }
+    </div>
+  </>
 }
 
 // Set our editable cell renderer as the default Cell renderer
 const defaultColumn = {
   Cell: info => {
+    // let attributes = {...info, onSuccess, onFailure};
+    let attributes = info;
+
     if (info.column.id == "degree") {
-      return (<EditableDegree {...info} />)
+      return (<EditableDegree {...attributes} />)
     } if (info.column.id == "category") {
-      return (<EditablePostCategory {...info} />)
+      return (<EditablePostCategory {...attributes} />)
     } else {
-      return <EditableCell {...info} />
+      return <EditableCell {...attributes}  />
     }
 
     

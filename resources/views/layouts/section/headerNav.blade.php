@@ -9,7 +9,7 @@
     </div>
 
     <div class="collapse navbar-collapse" id="navbarCollapse">
-        <nav class="nav mr-auto">
+        <nav class="navbar-nav mr-auto">
             <a class="nav-link" href="/dojos/">Зали</a>
             <a class="nav-link" href="/instructors/">Інструктори</a>
 
@@ -26,7 +26,7 @@
             </a>
 
             
-            <ul class="navbar-nav nav justify-content-end">
+            <ul class="navbar-nav navbar-nav justify-content-end">
                 @if(auth()->user() && false)
                 <li class="nav-item dropdown" id="logged-in-nav-support">
                     <a class="nav-link dropdown-toggle nav-item dropdown dropdown-toggle" href="#" id="logged-in-nav-admin" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Адміністрація</a>
@@ -93,6 +93,12 @@
                 </li>
                 @endif
                 @if(auth()->user())
+                    @if(auth()->user()->hasRole('admin'))
+                    <li class="nav-item pl-2" id="logged-in-nav-support">
+                        <a class="nav-link" href="\admin">Адміністрація</a>
+                    </li>
+                    @endif
+
                 <li class="nav-item" id="logged-in-nav-logout">
                     <form method="post" action='/logout' class="pt-2">
                         <b class="text-light pl-3">{{ auth()->user()->firstName }}</b>

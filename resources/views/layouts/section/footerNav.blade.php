@@ -6,7 +6,7 @@
             <div class="col-sm-3">
                 <h6>Для Вас</h6>
 
-                <nav class="nav flex-column">
+                <nav class="navbar-nav flex-column">
                     <a class="nav-link" href="/dojos/">Зали</a>
                     <a class="nav-link" href="/instructors/">Інструктори</a>
                     <a class="nav-link" href="/service/karate-for-kids">Запрошуєм дітей</a>
@@ -31,7 +31,7 @@
             <div class="col-sm-3">
                 <h6>Допомога Батькам</h6>
 
-                <nav class="nav flex-column">
+                <nav class="navbar-nav flex-column">
                     <a class="nav-link" href="/articles/for-parents/why-karate/">Чому карате?</a>
                     <a class="nav-link" href="/articles/for-parents/how-to-start/">Як розпочати</a>
                     <a class="nav-link" href="/articles/for-parents/teach-to-win/">Навчимо перемагати</a>
@@ -45,7 +45,7 @@
             <div class="col-sm-3">
                 <h6>Матеріали</h6>
 
-                <nav class="nav flex-column">
+                <nav class="navbar-nav flex-column">
                     <a class="nav-link" href="/articles/theory/style-history/">Статті</a>
                     <!--a class="nav-link" href="/articles/theory/requirements/">Атестаційні вимоги</a-->
                     <a class="nav-link" href="/articles/theory/dictionary/">Словник Термінів</a>
@@ -59,7 +59,7 @@
             <div class="col-sm-3">
                 <h6>Клуб</h6>
 
-                <nav class="nav flex-column">
+                <nav class="navbar-nav flex-column">
                     <a class="nav-link" href="/articles/club/kanku-history/">Історія</a>
                     <a class="nav-link" href="/articles/club/wko-recognition/">Визнання WKO</a>
                     <a class="nav-link" href="/articles/club/info/">КАНКУ сьогодні</a>

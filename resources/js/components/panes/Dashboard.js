@@ -13,16 +13,22 @@ function Dashboard() {
     <Route path='/admin/dashboard' render={() => (
     */
         <>
+          <div class="btn-group" role="group" style={{margin: '1em 0.3em 0 0'}}>
             <ListButton hrefPrefix='/admin/athlete'>Cпортсмени</ListButton>
-            <AddButton hrefPrefix='/admin/athlete'>Створити нового спортсмена</AddButton>
+            <AddButton hrefPrefix='/admin/athlete'></AddButton>
+          </div>
 
+          <div class="btn-group" role="group" style={{margin: '1em 0.3em 0 0'}}>
             <ListButton hrefPrefix='/admin/dojo'>Зали</ListButton>
-            <AddButton hrefPrefix='/admin/dojo'>Створити новий зал</AddButton>
+            <AddButton hrefPrefix='/admin/dojo'></AddButton>
+          </div>
 
+          <div class="btn-group" role="group" style={{margin: '1em 0.3em 0 0'}}>
             <ListButton hrefPrefix='/admin/post'>Пости</ListButton>
-            <AddButton hrefPrefix='/admin/post'>Створити новий пост</AddButton>
+            <AddButton hrefPrefix='/admin/post'></AddButton>
+          </div>
 
-            <Link to='/admin/site/refresh' type="button" className="btn btn-outline-success">
+            <Link to='/admin/site/refresh' type="button" className="btn btn-outline-success" style={{margin: '1em 0.3em 0 0'}}>
                 <i className="fas fa-refresh"></i>Оновити сайт
             </Link>
           </>

@@ -3,18 +3,11 @@ import styled from 'styled-components';
 const TableStyles = styled.div`
   table {
     border-spacing: 0;
-    border: 1px solid #999999;
 
     tr {
       :last-child {
         td {
           border-bottom: 0;
-        }
-      }
-
-      :hover {
-        input {
-          color: red;
         }
       }
     }
@@ -44,7 +37,6 @@ const TableStyles = styled.div`
       .fa-sort-up,
       .fa-sort-down,
       .fa-sort {
-
           color: red;
       }
     }
@@ -55,11 +47,31 @@ const TableStyles = styled.div`
     padding: 0;
     margin: 0;
     border: 0;
+    background-color: inherit;
   }
 
-  .table-striped > tbody > tr:nth-of-type(2n+1) input {
-      --bs-table-accent-bg: var(--bs-table-striped-bg);
-      background-color: #eeeeee ;
+  select {
+    background-color: inherit;
+    border: 1px solid gray;
+  }
+
+  .table th, table td {
+    border-bottom: 1px solid #0ba9e7;
+    border-right: 1px solid #0ba9e7;
+  }
+
+  .table {
+    border: 1px solid #0ba9e7;
+    border-top-width: 2px;
+  }
+
+  .table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(26, 135, 200, 0.09);
+  }
+  
+  .table-hover tbody tr:hover {
+    color: #0ba9e7;
+    background-color: rgba(26, 135, 200, 0.2);
   }
 `;
 

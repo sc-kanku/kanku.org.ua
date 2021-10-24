@@ -5,7 +5,7 @@ export default function EditButton({hrefPrefix, value, children}) {
 
     return(
         <>
-            <Link to={href} type="button" className="btn btn-outline-success">
+            <Link to={href} type="button" className="btn-sm btn-outline-success">
                 <i className="fas fa-user-edit"></i> {children}
             </Link>
         </>

@@ -40,7 +40,7 @@ export default function EditableTable ({
 
     return (
         <>        
-        <div className="card table-responsive">
+        <div className="card_ table-responsive">
 
         <Styles>
             <Switch>
