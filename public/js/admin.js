@@ -7053,11 +7053,18 @@ function Table(_ref) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(inlineEditData)
-    }).then(function (responseSavedSuccess) {
-      synchronizeDataOnUpdateSuccess(index, id, value);
-      onSuccess(); // Show toasted message
-      // https://getbootstrap.com/docs/5.1/components/toasts/
-      // console.log('saved ' + id + ' to ' + value + ' - ' + JSON.stringify(responseSavedSuccess));
+    }) // .then(response => response.json())
+    .then(function (response) {
+      if (typeof response["Not success"] !== "undefined") {
+        // Failure
+        onFailure();
+      } else {
+        // Success
+        synchronizeDataOnUpdateSuccess(index, id, value);
+        onSuccess(); // Show toasted message
+        // https://getbootstrap.com/docs/5.1/components/toasts/
+        // console.log('saved ' + id + ' to ' + value + ' - ' + JSON.stringify(responseSavedSuccess));
+      }
     })["catch"](function (error) {
       // console.error('Error:', JSON.stringify(error));
       onFailure();
@@ -7132,12 +7139,12 @@ function Table(_ref) {
           editable: "true",
           onChange: onChange
         }), successfullyUpdated && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-          "class": "position-absolute top-50 end-0 translate-middle bg-success border border-light rounded-circle",
+          className: "position-absolute top-50 end-0 translate-middle bg-success border border-light rounded-circle",
           style: {
             marginRight: '-0.4em'
           },
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
-            "class": "fas fa-check",
+            className: "fas fa-check",
             style: {
               color: 'white',
               padding: '0.2em',
@@ -7146,12 +7153,12 @@ function Table(_ref) {
             }
           })
         }), updatedWithFailure && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-          "class": "position-absolute top-50 end-0 translate-middle bg-danger border border-light rounded-circle",
+          className: "position-absolute top-50 end-0 translate-middle bg-danger border border-light rounded-circle",
           style: {
             marginRight: '-0.4em'
           },
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
-            "class": "fas fa-exclamation",
+            className: "fas fa-exclamation",
             style: {
               color: 'white',
               padding: '0.2em 0.5em',
@@ -7214,12 +7221,12 @@ function Table(_ref) {
           editable: "true",
           onChange: onChange
         }), successfullyUpdated && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-          "class": "position-absolute top-50 end-0 translate-middle bg-success border border-light rounded-circle",
+          className: "position-absolute top-50 end-0 translate-middle bg-success border border-light rounded-circle",
           style: {
             marginRight: '-0.4em'
           },
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
-            "class": "fas fa-check",
+            className: "fas fa-check",
             style: {
               color: 'white',
               padding: '0.2em',
@@ -7228,12 +7235,12 @@ function Table(_ref) {
             }
           })
         }), updatedWithFailure && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-          "class": "position-absolute top-50 end-0 translate-middle bg-danger border border-light rounded-circle",
+          className: "position-absolute top-50 end-0 translate-middle bg-danger border border-light rounded-circle",
           style: {
             marginRight: '-0.4em'
           },
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
-            "class": "fas fa-exclamation",
+            className: "fas fa-exclamation",
             style: {
               color: 'white',
               padding: '0.2em 0.5em',
@@ -7247,7 +7254,7 @@ function Table(_ref) {
   }; // Create an editable cell renderer
 
 
-  var EditableCell = function EditableCell(_ref4) {
+  var EditableDateCell = function EditableDateCell(_ref4) {
     var initialValue = _ref4.value,
         index = _ref4.row.index,
         id = _ref4.column.id,
@@ -7309,13 +7316,14 @@ function Table(_ref) {
           position: "relative"
         },
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
+          type: "date",
           value: value,
           onChange: onChange,
           onBlur: onBlur
         }), successfullyUpdated && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-          "class": "position-absolute top-50 end-0 translate-middle bg-success border border-light rounded-circle",
+          className: "position-absolute top-50 end-0 translate-middle bg-success border border-light rounded-circle",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
-            "class": "fas fa-check",
+            className: "fas fa-check",
             style: {
               color: 'white',
               padding: '0.2em',
@@ -7324,9 +7332,102 @@ function Table(_ref) {
             }
           })
         }), updatedWithFailure && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-          "class": "position-absolute top-50 end-0 translate-middle bg-danger border border-light rounded-circle",
+          className: "position-absolute top-50 end-0 translate-middle bg-danger border border-light rounded-circle",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
-            "class": "fas fa-exclamation",
+            className: "fas fa-exclamation",
+            style: {
+              color: 'white',
+              padding: '0.2em 0.5em',
+              fontSize: '0.7em',
+              display: 'block'
+            }
+          })
+        })]
+      })
+    });
+  }; // Create an editable cell renderer
+
+
+  var EditableCell = function EditableCell(_ref5) {
+    var initialValue = _ref5.value,
+        index = _ref5.row.index,
+        id = _ref5.column.id,
+        updateMyData = _ref5.updateMyData;
+    // We need to keep and update the state of the cell normally
+    initialValue = initialValue != null ? initialValue : '';
+
+    var _React$useState23 = react__WEBPACK_IMPORTED_MODULE_0__.useState(initialValue),
+        _React$useState24 = _slicedToArray(_React$useState23, 2),
+        value = _React$useState24[0],
+        setValue = _React$useState24[1];
+
+    var _React$useState25 = react__WEBPACK_IMPORTED_MODULE_0__.useState(initialValue),
+        _React$useState26 = _slicedToArray(_React$useState25, 2),
+        previousValue = _React$useState26[0],
+        setPreviousValue = _React$useState26[1];
+
+    var _React$useState27 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
+        _React$useState28 = _slicedToArray(_React$useState27, 2),
+        successfullyUpdated = _React$useState28[0],
+        setSuccessfullyUpdated = _React$useState28[1];
+
+    var _React$useState29 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
+        _React$useState30 = _slicedToArray(_React$useState29, 2),
+        updatedWithFailure = _React$useState30[0],
+        setUpdatedWithFailure = _React$useState30[1];
+
+    var onChange = function onChange(e) {
+      setValue(e.target.value);
+    }; // We'll only update the external data when the input is blurred
+
+
+    var onBlur = function onBlur() {
+      if (previousValue != value) {
+        updateMyData(index, id, value, function () {
+          setSuccessfullyUpdated(true);
+          setPreviousValue(value);
+          setTimeout(function () {
+            setSuccessfullyUpdated(false);
+          }, 2000);
+        }, function () {
+          setUpdatedWithFailure(true);
+          setTimeout(function () {
+            setUpdatedWithFailure(false);
+            setValue(previousValue);
+          }, 2000);
+        });
+      }
+    }; // If the initialValue is changed external, sync it up with our state
+
+
+    react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
+      setValue(initialValue);
+    }, [initialValue]); // 
+
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+        style: {
+          position: "relative"
+        },
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
+          value: value,
+          onChange: onChange,
+          onBlur: onBlur
+        }), successfullyUpdated && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+          className: "position-absolute top-50 end-0 translate-middle bg-success border border-light rounded-circle",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
+            className: "fas fa-check",
+            style: {
+              color: 'white',
+              padding: '0.2em',
+              fontSize: '0.7em',
+              display: 'block'
+            }
+          })
+        }), updatedWithFailure && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+          className: "position-absolute top-50 end-0 translate-middle bg-danger border border-light rounded-circle",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
+            className: "fas fa-exclamation",
             style: {
               color: 'white',
               padding: '0.2em 0.5em',
@@ -7347,10 +7448,10 @@ function Table(_ref) {
 
       if (info.column.id == "degree") {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(EditableDegree, _objectSpread({}, attributes));
-      }
-
-      if (info.column.id == "category") {
+      } else if (info.column.id == "category") {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(EditablePostCategory, _objectSpread({}, attributes));
+      } else if (info.column.id == "dateAt") {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(EditableDateCell, _objectSpread({}, attributes));
       } else {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(EditableCell, _objectSpread({}, attributes));
       }
@@ -8424,7 +8525,7 @@ function Dashboard() {
     */
     (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-        "class": "btn-group",
+        className: "btn-group",
         role: "group",
         style: {
           margin: '1em 0.3em 0 0'
@@ -8436,7 +8537,7 @@ function Dashboard() {
           hrefPrefix: "/admin/athlete"
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-        "class": "btn-group",
+        className: "btn-group",
         role: "group",
         style: {
           margin: '1em 0.3em 0 0'
@@ -8448,7 +8549,7 @@ function Dashboard() {
           hrefPrefix: "/admin/dojo"
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-        "class": "btn-group",
+        className: "btn-group",
         role: "group",
         style: {
           margin: '1em 0.3em 0 0'

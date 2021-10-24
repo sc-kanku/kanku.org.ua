@@ -17,14 +17,22 @@ export default function Table({ columns, data, inlineUpdateUrl }) {
     fetch(inlineUpdateUrl, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(inlineEditData)
-    }).then(responseSavedSuccess => {
-      synchronizeDataOnUpdateSuccess(index, id, value);
-      onSuccess();
+      body: JSON.stringify(inlineEditData)  
+    })
+    // .then(response => response.json())
+    .then(response => {
+      if (typeof (response["Not success"]) !== "undefined" ) {
+        // Failure
+        onFailure()
+      } else {
+        // Success
+        synchronizeDataOnUpdateSuccess(index, id, value);
+        onSuccess();
   
         // Show toasted message
         // https://getbootstrap.com/docs/5.1/components/toasts/
         // console.log('saved ' + id + ' to ' + value + ' - ' + JSON.stringify(responseSavedSuccess));
+      }
       })
       .catch((error) => {
         // console.error('Error:', JSON.stringify(error));
@@ -90,8 +98,8 @@ const EditableDegree = ({
   return <>
    <div style={{position: "relative"}}> 
       <Degree value={value} editable="true" onChange={onChange} />
-      { successfullyUpdated && <span class="position-absolute top-50 end-0 translate-middle bg-success border border-light rounded-circle" style={{marginRight: '-0.4em'}}><i class="fas fa-check" style={{color: 'white', padding: '0.2em', fontSize: '0.7em', display: 'block'}}></i></span> }
-      { updatedWithFailure  && <span class="position-absolute top-50 end-0 translate-middle bg-danger border border-light rounded-circle" style={{marginRight: '-0.4em'}}><i class="fas fa-exclamation" style={{color: 'white', padding: '0.2em 0.5em', fontSize: '0.7em', display: 'block'}}></i></span> }
+      { successfullyUpdated && <span className="position-absolute top-50 end-0 translate-middle bg-success border border-light rounded-circle" style={{marginRight: '-0.4em'}}><i className="fas fa-check" style={{color: 'white', padding: '0.2em', fontSize: '0.7em', display: 'block'}}></i></span> }
+      { updatedWithFailure  && <span className="position-absolute top-50 end-0 translate-middle bg-danger border border-light rounded-circle" style={{marginRight: '-0.4em'}}><i className="fas fa-exclamation" style={{color: 'white', padding: '0.2em 0.5em', fontSize: '0.7em', display: 'block'}}></i></span> }
     </div>
   </>
 };
@@ -132,12 +140,69 @@ const EditablePostCategory = ({
   return <>
    <div style={{position: "relative"}}> 
     <PostCategory value={value} editable="true" onChange={onChange} />
-    { successfullyUpdated && <span class="position-absolute top-50 end-0 translate-middle bg-success border border-light rounded-circle" style={{marginRight: '-0.4em'}}><i class="fas fa-check" style={{color: 'white', padding: '0.2em', fontSize: '0.7em', display: 'block'}}></i></span> }
-    { updatedWithFailure  && <span class="position-absolute top-50 end-0 translate-middle bg-danger border border-light rounded-circle" style={{marginRight: '-0.4em'}}><i class="fas fa-exclamation" style={{color: 'white', padding: '0.2em 0.5em', fontSize: '0.7em', display: 'block'}}></i></span> }
+    { successfullyUpdated && <span className="position-absolute top-50 end-0 translate-middle bg-success border border-light rounded-circle" style={{marginRight: '-0.4em'}}><i className="fas fa-check" style={{color: 'white', padding: '0.2em', fontSize: '0.7em', display: 'block'}}></i></span> }
+    { updatedWithFailure  && <span className="position-absolute top-50 end-0 translate-middle bg-danger border border-light rounded-circle" style={{marginRight: '-0.4em'}}><i className="fas fa-exclamation" style={{color: 'white', padding: '0.2em 0.5em', fontSize: '0.7em', display: 'block'}}></i></span> }
     </div>
   </>
 
-};
+}; 
+
+// Create an editable cell renderer
+const EditableDateCell = ({
+  value: initialValue,
+  row: { index },
+  column: { id },
+  updateMyData, // This is a custom function that we supplied to our table instance
+}) => {
+  // We need to keep and update the state of the cell normally
+  initialValue = initialValue != null ? initialValue : '';
+
+  const [value, setValue] = React.useState(initialValue);
+  const [previousValue, setPreviousValue] = React.useState(initialValue);
+  const [successfullyUpdated, setSuccessfullyUpdated] = React.useState(false);
+  const [updatedWithFailure, setUpdatedWithFailure] = React.useState(false);
+
+  const onChange = e => {
+    setValue(e.target.value)
+  }
+
+  // We'll only update the external data when the input is blurred
+  const onBlur = () => {
+      if (previousValue != value) {
+        updateMyData(index, id, value, 
+          () => {
+            setSuccessfullyUpdated(true);
+            setPreviousValue(value);
+
+            setTimeout(() => {
+              setSuccessfullyUpdated(false)
+            }, 2000);
+          },
+          () => {
+            setUpdatedWithFailure(true);
+            
+            setTimeout(() => {
+              setUpdatedWithFailure(false);
+              setValue(previousValue);
+            }, 2000);
+          }
+        );
+      }
+  }
+
+  // If the initialValue is changed external, sync it up with our state
+  React.useEffect(() => {
+    setValue(initialValue)
+  }, [initialValue])
+// 
+  return <>
+   <div style={{position: "relative"}}> 
+      <input type="date" value={value} onChange={onChange} onBlur={onBlur} />
+      { successfullyUpdated && <span className="position-absolute top-50 end-0 translate-middle bg-success border border-light rounded-circle"><i className="fas fa-check" style={{color: 'white', padding: '0.2em', fontSize: '0.7em', display: 'block'}}></i></span> }
+      { updatedWithFailure  && <span className="position-absolute top-50 end-0 translate-middle bg-danger border border-light rounded-circle"><i className="fas fa-exclamation" style={{color: 'white', padding: '0.2em 0.5em', fontSize: '0.7em', display: 'block'}}></i></span> }
+    </div>
+  </>
+}
 
 
 // Create an editable cell renderer
@@ -191,8 +256,8 @@ const EditableCell = ({
   return <>
    <div style={{position: "relative"}}> 
       <input value={value} onChange={onChange} onBlur={onBlur} />
-      { successfullyUpdated && <span class="position-absolute top-50 end-0 translate-middle bg-success border border-light rounded-circle"><i class="fas fa-check" style={{color: 'white', padding: '0.2em', fontSize: '0.7em', display: 'block'}}></i></span> }
-      { updatedWithFailure  && <span class="position-absolute top-50 end-0 translate-middle bg-danger border border-light rounded-circle"><i class="fas fa-exclamation" style={{color: 'white', padding: '0.2em 0.5em', fontSize: '0.7em', display: 'block'}}></i></span> }
+      { successfullyUpdated && <span className="position-absolute top-50 end-0 translate-middle bg-success border border-light rounded-circle"><i className="fas fa-check" style={{color: 'white', padding: '0.2em', fontSize: '0.7em', display: 'block'}}></i></span> }
+      { updatedWithFailure  && <span className="position-absolute top-50 end-0 translate-middle bg-danger border border-light rounded-circle"><i className="fas fa-exclamation" style={{color: 'white', padding: '0.2em 0.5em', fontSize: '0.7em', display: 'block'}}></i></span> }
     </div>
   </>
 }
@@ -205,8 +270,10 @@ const defaultColumn = {
 
     if (info.column.id == "degree") {
       return (<EditableDegree {...attributes} />)
-    } if (info.column.id == "category") {
+    } else if (info.column.id == "category") {
       return (<EditablePostCategory {...attributes} />)
+    } else if (info.column.id == "dateAt") {
+      return (<EditableDateCell {...attributes} />)
     } else {
       return <EditableCell {...attributes}  />
     }
