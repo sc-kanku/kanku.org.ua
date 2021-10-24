@@ -62,15 +62,38 @@ const EditableDegree = ({
   updateMyData, // This is a custom function that we supplied to our table instance
 }) => {
   const [value, setValue] = React.useState(initialValue);
+  const [successfullyUpdated, setSuccessfullyUpdated] = React.useState(false);
+  const [updatedWithFailure, setUpdatedWithFailure] = React.useState(false);
 
   const onChange = e => {
     let newValue = e.target.value;
-    setValue(newValue);
 
-    updateMyData(index, id, newValue, ()=>{}, ()=>{});
+    updateMyData(index, id, newValue, 
+      () => {
+        setSuccessfullyUpdated(true);
+        setValue(newValue);    
+
+        setTimeout(() => {
+          setSuccessfullyUpdated(false)
+        }, 2000);
+      },
+      () => {
+        setUpdatedWithFailure(true);
+        
+        setTimeout(() => {
+          setUpdatedWithFailure(false);
+        }, 2000);
+      }
+    );
   }
 
-  return <Degree value={value} editable="true" onChange={onChange} />
+  return <>
+   <div style={{position: "relative"}}> 
+      <Degree value={value} editable="true" onChange={onChange} />
+      { successfullyUpdated && <span class="position-absolute top-50 end-0 translate-middle bg-success border border-light rounded-circle" style={{marginRight: '-0.4em'}}><i class="fas fa-check" style={{color: 'white', padding: '0.2em', fontSize: '0.7em', display: 'block'}}></i></span> }
+      { updatedWithFailure  && <span class="position-absolute top-50 end-0 translate-middle bg-danger border border-light rounded-circle" style={{marginRight: '-0.4em'}}><i class="fas fa-exclamation" style={{color: 'white', padding: '0.2em 0.5em', fontSize: '0.7em', display: 'block'}}></i></span> }
+    </div>
+  </>
 };
 
 const EditablePostCategory = ({
@@ -80,16 +103,40 @@ const EditablePostCategory = ({
   updateMyData, // This is a custom function that we supplied to our table instance
 }) => {
   const [value, setValue] = React.useState(initialValue);
+  // const [previousValue, setPreviousValue] = React.useState(initialValue);
+  const [successfullyUpdated, setSuccessfullyUpdated] = React.useState(false);
+  const [updatedWithFailure, setUpdatedWithFailure] = React.useState(false);
 
   const onChange = e => {
     let newValue = e.target.value;
-    setValue(newValue);
 
     // TODO: Promises instead callbacks
-    updateMyData(index, id, newValue, ()=>{}, ()=>{});
+    updateMyData(index, id, newValue, () => {
+      setSuccessfullyUpdated(true);
+      // setPreviousValue(value);
+      setValue(newValue);
+
+      setTimeout(() => {
+        setSuccessfullyUpdated(false)
+      }, 2000);
+    },
+    () => {
+      setUpdatedWithFailure(true);
+      
+      setTimeout(() => {
+        setUpdatedWithFailure(false);
+      }, 2000);
+    });
   }
 
-  return <PostCategory value={value} editable="true" onChange={onChange} />
+  return <>
+   <div style={{position: "relative"}}> 
+    <PostCategory value={value} editable="true" onChange={onChange} />
+    { successfullyUpdated && <span class="position-absolute top-50 end-0 translate-middle bg-success border border-light rounded-circle" style={{marginRight: '-0.4em'}}><i class="fas fa-check" style={{color: 'white', padding: '0.2em', fontSize: '0.7em', display: 'block'}}></i></span> }
+    { updatedWithFailure  && <span class="position-absolute top-50 end-0 translate-middle bg-danger border border-light rounded-circle" style={{marginRight: '-0.4em'}}><i class="fas fa-exclamation" style={{color: 'white', padding: '0.2em 0.5em', fontSize: '0.7em', display: 'block'}}></i></span> }
+    </div>
+  </>
+
 };
 
 
@@ -122,16 +169,15 @@ const EditableCell = ({
 
             setTimeout(() => {
               setSuccessfullyUpdated(false)
-            }, 3000);
+            }, 2000);
           },
-
           () => {
             setUpdatedWithFailure(true);
             
             setTimeout(() => {
               setUpdatedWithFailure(false);
               setValue(previousValue);
-            }, 3000);
+            }, 2000);
           }
         );
       }

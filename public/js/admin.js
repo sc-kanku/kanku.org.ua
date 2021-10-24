@@ -7096,16 +7096,71 @@ function Table(_ref) {
         value = _React$useState4[0],
         setValue = _React$useState4[1];
 
+    var _React$useState5 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
+        _React$useState6 = _slicedToArray(_React$useState5, 2),
+        successfullyUpdated = _React$useState6[0],
+        setSuccessfullyUpdated = _React$useState6[1];
+
+    var _React$useState7 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
+        _React$useState8 = _slicedToArray(_React$useState7, 2),
+        updatedWithFailure = _React$useState8[0],
+        setUpdatedWithFailure = _React$useState8[1];
+
     var onChange = function onChange(e) {
       var newValue = e.target.value;
-      setValue(newValue);
-      updateMyData(index, id, newValue, function () {}, function () {});
+      updateMyData(index, id, newValue, function () {
+        setSuccessfullyUpdated(true);
+        setValue(newValue);
+        setTimeout(function () {
+          setSuccessfullyUpdated(false);
+        }, 2000);
+      }, function () {
+        setUpdatedWithFailure(true);
+        setTimeout(function () {
+          setUpdatedWithFailure(false);
+        }, 2000);
+      });
     };
 
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Degree__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      value: value,
-      editable: "true",
-      onChange: onChange
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+        style: {
+          position: "relative"
+        },
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Degree__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          value: value,
+          editable: "true",
+          onChange: onChange
+        }), successfullyUpdated && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+          "class": "position-absolute top-50 end-0 translate-middle bg-success border border-light rounded-circle",
+          style: {
+            marginRight: '-0.4em'
+          },
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
+            "class": "fas fa-check",
+            style: {
+              color: 'white',
+              padding: '0.2em',
+              fontSize: '0.7em',
+              display: 'block'
+            }
+          })
+        }), updatedWithFailure && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+          "class": "position-absolute top-50 end-0 translate-middle bg-danger border border-light rounded-circle",
+          style: {
+            marginRight: '-0.4em'
+          },
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
+            "class": "fas fa-exclamation",
+            style: {
+              color: 'white',
+              padding: '0.2em 0.5em',
+              fontSize: '0.7em',
+              display: 'block'
+            }
+          })
+        })]
+      })
     });
   };
 
@@ -7115,22 +7170,79 @@ function Table(_ref) {
         id = _ref3.column.id,
         updateMyData = _ref3.updateMyData;
 
-    var _React$useState5 = react__WEBPACK_IMPORTED_MODULE_0__.useState(initialValue),
-        _React$useState6 = _slicedToArray(_React$useState5, 2),
-        value = _React$useState6[0],
-        setValue = _React$useState6[1];
+    var _React$useState9 = react__WEBPACK_IMPORTED_MODULE_0__.useState(initialValue),
+        _React$useState10 = _slicedToArray(_React$useState9, 2),
+        value = _React$useState10[0],
+        setValue = _React$useState10[1]; // const [previousValue, setPreviousValue] = React.useState(initialValue);
+
+
+    var _React$useState11 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
+        _React$useState12 = _slicedToArray(_React$useState11, 2),
+        successfullyUpdated = _React$useState12[0],
+        setSuccessfullyUpdated = _React$useState12[1];
+
+    var _React$useState13 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
+        _React$useState14 = _slicedToArray(_React$useState13, 2),
+        updatedWithFailure = _React$useState14[0],
+        setUpdatedWithFailure = _React$useState14[1];
 
     var onChange = function onChange(e) {
-      var newValue = e.target.value;
-      setValue(newValue); // TODO: Promises instead callbacks
+      var newValue = e.target.value; // TODO: Promises instead callbacks
 
-      updateMyData(index, id, newValue, function () {}, function () {});
+      updateMyData(index, id, newValue, function () {
+        setSuccessfullyUpdated(true); // setPreviousValue(value);
+
+        setValue(newValue);
+        setTimeout(function () {
+          setSuccessfullyUpdated(false);
+        }, 2000);
+      }, function () {
+        setUpdatedWithFailure(true);
+        setTimeout(function () {
+          setUpdatedWithFailure(false);
+        }, 2000);
+      });
     };
 
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_PostCategory__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      value: value,
-      editable: "true",
-      onChange: onChange
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+        style: {
+          position: "relative"
+        },
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_PostCategory__WEBPACK_IMPORTED_MODULE_3__["default"], {
+          value: value,
+          editable: "true",
+          onChange: onChange
+        }), successfullyUpdated && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+          "class": "position-absolute top-50 end-0 translate-middle bg-success border border-light rounded-circle",
+          style: {
+            marginRight: '-0.4em'
+          },
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
+            "class": "fas fa-check",
+            style: {
+              color: 'white',
+              padding: '0.2em',
+              fontSize: '0.7em',
+              display: 'block'
+            }
+          })
+        }), updatedWithFailure && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+          "class": "position-absolute top-50 end-0 translate-middle bg-danger border border-light rounded-circle",
+          style: {
+            marginRight: '-0.4em'
+          },
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
+            "class": "fas fa-exclamation",
+            style: {
+              color: 'white',
+              padding: '0.2em 0.5em',
+              fontSize: '0.7em',
+              display: 'block'
+            }
+          })
+        })]
+      })
     });
   }; // Create an editable cell renderer
 
@@ -7143,25 +7255,25 @@ function Table(_ref) {
     // We need to keep and update the state of the cell normally
     initialValue = initialValue != null ? initialValue : '';
 
-    var _React$useState7 = react__WEBPACK_IMPORTED_MODULE_0__.useState(initialValue),
-        _React$useState8 = _slicedToArray(_React$useState7, 2),
-        value = _React$useState8[0],
-        setValue = _React$useState8[1];
+    var _React$useState15 = react__WEBPACK_IMPORTED_MODULE_0__.useState(initialValue),
+        _React$useState16 = _slicedToArray(_React$useState15, 2),
+        value = _React$useState16[0],
+        setValue = _React$useState16[1];
 
-    var _React$useState9 = react__WEBPACK_IMPORTED_MODULE_0__.useState(initialValue),
-        _React$useState10 = _slicedToArray(_React$useState9, 2),
-        previousValue = _React$useState10[0],
-        setPreviousValue = _React$useState10[1];
+    var _React$useState17 = react__WEBPACK_IMPORTED_MODULE_0__.useState(initialValue),
+        _React$useState18 = _slicedToArray(_React$useState17, 2),
+        previousValue = _React$useState18[0],
+        setPreviousValue = _React$useState18[1];
 
-    var _React$useState11 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
-        _React$useState12 = _slicedToArray(_React$useState11, 2),
-        successfullyUpdated = _React$useState12[0],
-        setSuccessfullyUpdated = _React$useState12[1];
+    var _React$useState19 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
+        _React$useState20 = _slicedToArray(_React$useState19, 2),
+        successfullyUpdated = _React$useState20[0],
+        setSuccessfullyUpdated = _React$useState20[1];
 
-    var _React$useState13 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
-        _React$useState14 = _slicedToArray(_React$useState13, 2),
-        updatedWithFailure = _React$useState14[0],
-        setUpdatedWithFailure = _React$useState14[1];
+    var _React$useState21 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
+        _React$useState22 = _slicedToArray(_React$useState21, 2),
+        updatedWithFailure = _React$useState22[0],
+        setUpdatedWithFailure = _React$useState22[1];
 
     var onChange = function onChange(e) {
       setValue(e.target.value);
@@ -7175,13 +7287,13 @@ function Table(_ref) {
           setPreviousValue(value);
           setTimeout(function () {
             setSuccessfullyUpdated(false);
-          }, 3000);
+          }, 2000);
         }, function () {
           setUpdatedWithFailure(true);
           setTimeout(function () {
             setUpdatedWithFailure(false);
             setValue(previousValue);
-          }, 3000);
+          }, 2000);
         });
       }
     }; // If the initialValue is changed external, sync it up with our state
