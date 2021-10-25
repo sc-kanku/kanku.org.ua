@@ -1,6 +1,6 @@
 @extends('layouts.article')
 
-@section('content')
+@section('article-content')
 
 
 <h1>Карате кіокушинкай: етикет додзьо</h1>

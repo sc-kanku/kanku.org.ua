@@ -2,6 +2,7 @@ import React, {useMemo, useState, useEffect} from 'react';
 import EditButton from '../controls/buttons/EditButton';
 import EditableTable from './../controls/EditableTable';
 
+// TODO remove jquery
 // {athletes.length ? <AthletesTable athletes={athletes} /> : <p>No Athletes</p>}
 function DojosTable() {
     const columns = useMemo(() => [{
@@ -13,18 +14,18 @@ function DojosTable() {
             Cell: ({ value }) => <EditButton hrefPrefix='/admin/dojo' value={value} />
           },
           {
-            Header: "name",
+            Header: "Ім'я",
             accessor: "name"
           },
           {
-            Header: "point",
+            Header: "Львів / Область",
             accessor: "point"
           },
         ]},{
           Header: "Add",
           columns: [
             {
-                Header: "address",
+                Header: "Адреса",
                 accessor: "address"
             },
           ]
@@ -33,7 +34,7 @@ function DojosTable() {
         Header: "Details",
         columns: [
             {
-                Header: "district",
+                Header: "Район",
                 accessor: "district"
               },
           {
@@ -41,7 +42,7 @@ function DojosTable() {
             accessor: "url"
           },
           {
-            Header: "is_actual",
+            Header: "Проводяться тренування",
             accessor: "is_actual"
           },
           /*
@@ -51,7 +52,7 @@ function DojosTable() {
           },
 */
           {
-            Header: "coords",
+            Header: "Координати на гугл-мапах",
             accessor: "coords"
           },
           /*

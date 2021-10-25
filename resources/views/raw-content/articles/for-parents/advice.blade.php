@@ -1,6 +1,6 @@
 @extends('layouts.article')
 
-@section('content')
+@section('article-content')
 
 <h1>Поради батькам спортсменів нашого клубу</h1>
 <p>Дорогі батьки наших спортсменів!</p>

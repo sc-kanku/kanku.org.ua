@@ -1,6 +1,6 @@
 @extends('layouts.article')
 
-@section('content')
+@section('article-content')
 
 <h1>ЧОМУ КАРАТЕ? Про переваги карате як одного з найкращих видів спорту для дітей</h1>
 

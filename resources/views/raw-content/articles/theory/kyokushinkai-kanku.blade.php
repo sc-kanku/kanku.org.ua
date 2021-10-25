@@ -1,8 +1,6 @@
 @extends('layouts.article')
 
-@section('content')
-
-
+@section('article-content')
 <h1>Значення назви &laquo;Кіокушинкай&raquo; та емблеми &laquo;Канку&raquo;</h1>
 <p>Назва &laquo;Кіокушинкай&raquo; в перекладі з японської означає: &laquo;пошук істини на шляху бойового
     мистецтва&raquo; (<strong>Кіоку</strong> &mdash; означає межу, кінцевість. <strong>Шин</strong> &mdash; означає

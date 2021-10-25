@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('fullScreenTopContent')
+@section('full-screen-top-content')
 @include('guest.landing.carousel')
 @endsection
 

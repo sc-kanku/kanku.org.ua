@@ -1,8 +1,6 @@
 @extends('layouts.article')
 
-@section('content')
-
-
+@section('article-content')
 <h1>Атестаційні вимоги з теорії</h1>
 
 <ul>

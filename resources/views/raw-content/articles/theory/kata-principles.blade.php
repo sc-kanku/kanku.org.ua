@@ -1,6 +1,6 @@
 @extends('layouts.article')
 
-@section('content')
+@section('article-content')
 
 
 <h1>Значення й принципи ката</h1>

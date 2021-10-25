@@ -162,13 +162,15 @@ const EditableDateCell = ({
   const [successfullyUpdated, setSuccessfullyUpdated] = React.useState(false);
   const [updatedWithFailure, setUpdatedWithFailure] = React.useState(false);
 
-  const onChange = e => {
-    setValue(e.target.value)
+  const onBlur = e => {
+    // setValue(e.target.value)
   }
 
   // We'll only update the external data when the input is blurred
-  const onBlur = () => {
-      if (previousValue != value) {
+  const onChange = (e) => {
+      setValue(e.target.value);
+
+      // if (previousValue != value) {
         updateMyData(index, id, value, 
           () => {
             setSuccessfullyUpdated(true);
@@ -187,7 +189,7 @@ const EditableDateCell = ({
             }, 2000);
           }
         );
-      }
+      // }
   }
 
   // If the initialValue is changed external, sync it up with our state

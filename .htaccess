@@ -35,7 +35,7 @@ RewriteRule ^ %1 [L,R=301]
 
 
 
-# Serve all requests from public cached
+# Serve all requests from public cached (disabled for now, TODO: ajax menu for admin)
 RewriteCond %{REQUEST_URI} ^/?$
 RewriteCond %{DOCUMENT_ROOT}/public/page-cache/pc__index__pc.html -f
 RewriteRule .? public/page-cache/pc__index__pc.html [L]

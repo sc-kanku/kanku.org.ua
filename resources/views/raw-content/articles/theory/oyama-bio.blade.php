@@ -1,8 +1,6 @@
 @extends('layouts.article')
 
-@section('content')
-
-
+@section('article-content')
 <h1>Засновник кіокушинкай карате: сосай Масутацу Ояма.</h1>
 
 <p>Ознайомтеся і з <a href="/articles/theory/masutatsu-oyama/">коротким нарисом</a> про Ояму</p>

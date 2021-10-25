@@ -1,6 +1,6 @@
 @extends('layouts.article')
 
-@section('content')
+@section('article-content')
 
 <h1>Навчимо перемагати свою дитину!</h1>
 

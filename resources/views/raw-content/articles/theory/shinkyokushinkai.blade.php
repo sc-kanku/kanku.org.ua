@@ -1,8 +1,6 @@
 @extends('layouts.article')
 
-@section('content')
-
-
+@section('article-content')
 <h1>ШинКіокушинкай</h1>
 
 <p>У 1994 році Сосай <a href="../masutatsu-oyama/">Масутацу Ояма</a> покинув нас. І сталося те, що часто відбувається в

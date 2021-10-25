@@ -7282,27 +7282,26 @@ function Table(_ref) {
         updatedWithFailure = _React$useState22[0],
         setUpdatedWithFailure = _React$useState22[1];
 
-    var onChange = function onChange(e) {
-      setValue(e.target.value);
+    var onBlur = function onBlur(e) {// setValue(e.target.value)
     }; // We'll only update the external data when the input is blurred
 
 
-    var onBlur = function onBlur() {
-      if (previousValue != value) {
-        updateMyData(index, id, value, function () {
-          setSuccessfullyUpdated(true);
-          setPreviousValue(value);
-          setTimeout(function () {
-            setSuccessfullyUpdated(false);
-          }, 2000);
-        }, function () {
-          setUpdatedWithFailure(true);
-          setTimeout(function () {
-            setUpdatedWithFailure(false);
-            setValue(previousValue);
-          }, 2000);
-        });
-      }
+    var onChange = function onChange(e) {
+      setValue(e.target.value); // if (previousValue != value) {
+
+      updateMyData(index, id, value, function () {
+        setSuccessfullyUpdated(true);
+        setPreviousValue(value);
+        setTimeout(function () {
+          setSuccessfullyUpdated(false);
+        }, 2000);
+      }, function () {
+        setUpdatedWithFailure(true);
+        setTimeout(function () {
+          setUpdatedWithFailure(false);
+          setValue(previousValue);
+        }, 2000);
+      }); // }
     }; // If the initialValue is changed external, sync it up with our state
 
 
@@ -8439,40 +8438,40 @@ function AthletesTable() {
           });
         }
       }, {
-        Header: "lastName",
+        Header: "Прізвище",
         accessor: "lastName"
       }, {
-        Header: "firstName",
+        Header: "Ім'я",
         accessor: "firstName"
       }]
     }, {
       Header: "Add",
       columns: [{
-        Header: "patronymic",
+        Header: "Побатькові",
         accessor: "patronymic"
       }]
     }, {
       Header: "Details",
       columns: [{
-        Header: "degree",
+        Header: "Ступінь",
         accessor: "degree"
       }, {
         Header: "email",
         accessor: "email"
       }, {
-        Header: "is_coach",
+        Header: "Інструктор",
         accessor: "is_coach"
       }, {
-        Header: "is_best",
+        Header: "В найкращих спортсменах",
         accessor: "is_best"
       }, {
-        Header: "is_actual",
+        Header: "Проводить тренування",
         accessor: "is_actual"
       }, {
-        Header: "phone",
+        Header: "Номер телефону",
         accessor: "phone"
       }, {
-        Header: "phone2",
+        Header: "Додатковий номер телефону",
         accessor: "phone2",
         headerClassName: 'col-3'
       }]
@@ -8601,7 +8600,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
- // {athletes.length ? <AthletesTable athletes={athletes} /> : <p>No Athletes</p>}
+ // TODO remove jquery
+// {athletes.length ? <AthletesTable athletes={athletes} /> : <p>No Athletes</p>}
 
 
 
@@ -8622,28 +8622,28 @@ function DojosTable() {
           });
         }
       }, {
-        Header: "name",
+        Header: "Ім'я",
         accessor: "name"
       }, {
-        Header: "point",
+        Header: "Львів / Область",
         accessor: "point"
       }]
     }, {
       Header: "Add",
       columns: [{
-        Header: "address",
+        Header: "Адреса",
         accessor: "address"
       }]
     }, {
       Header: "Details",
       columns: [{
-        Header: "district",
+        Header: "Район",
         accessor: "district"
       }, {
         Header: "url",
         accessor: "url"
       }, {
-        Header: "is_actual",
+        Header: "Проводяться тренування",
         accessor: "is_actual"
       },
       /*
@@ -8653,7 +8653,7 @@ function DojosTable() {
       },
       */
       {
-        Header: "coords",
+        Header: "Координати на гугл-мапах",
         accessor: "coords"
       }
       /*
@@ -9742,28 +9742,28 @@ function PostsTable() {
           });
         }
       }, {
-        Header: "title",
+        Header: "Заголовок",
         accessor: "title"
       }, {
-        Header: "dateAt",
+        Header: "Дата",
         accessor: "dateAt"
       }]
     }, {
       Header: "Add",
       columns: [{
-        Header: "keywords",
+        Header: "Ключові слова",
         accessor: "keywords"
       }]
     }, {
       Header: "Details",
       columns: [{
-        Header: "category",
+        Header: "Категорія",
         accessor: "category"
       }, {
-        Header: "full",
+        Header: "Повний текст новини",
         accessor: "full"
       }, {
-        Header: "brief",
+        Header: "Скорочений текст новини",
         accessor: "brief"
       }]
     }];

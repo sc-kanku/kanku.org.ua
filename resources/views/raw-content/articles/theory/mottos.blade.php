@@ -1,8 +1,6 @@
 @extends('layouts.article')
 
-@section('content')
-
-
+@section('article-content')
 <h2>Одинадцать девізів Масутацу Оями</h2>
 <p><a href="/articles/theory/masutatsu-oyama/">Ояма</a> підсумував основні принципи філософії бойового мистецтва в
     одинадцятьох девізах, відомих як Zayu no Meі Juіchі Kajo, що є найважливішими в його навчанні:</p>

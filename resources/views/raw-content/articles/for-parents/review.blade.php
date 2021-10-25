@@ -1,6 +1,6 @@
 @extends('layouts.article')
 
-@section('content')
+@section('article-content')
 
 <h1>Відгуки батьків юних спортсменів клубу «Канку»</h1>
 

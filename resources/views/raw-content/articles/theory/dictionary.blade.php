@@ -1,6 +1,6 @@
 @extends('layouts.article')
 
-@section('content')
+@section('article-content')
 
 <h1>Короткий термінологічний словник</h1>
 

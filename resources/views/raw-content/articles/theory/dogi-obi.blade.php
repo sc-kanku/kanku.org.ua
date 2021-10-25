@@ -1,6 +1,6 @@
 @extends('layouts.article')
 
-@section('content')
+@section('article-content')
 
 
 <h1>Складання кімоно й зав'язування поясу</h1>

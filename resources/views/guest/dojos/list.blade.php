@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('fullScreenTopContent')
+@section('full-screen-top-content')
 <header class="dojo-filter container">
     <div class="form-row">
         <h1>Бажаєте записатись на тренування?</h1>

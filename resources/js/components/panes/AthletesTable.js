@@ -19,18 +19,18 @@ function AthletesTable() {
             Cell: ({ value }) => <EditButton hrefPrefix='/admin/athlete' value={value} />
           },
           {
-            Header: "lastName",
+            Header: "Прізвище",
             accessor: "lastName"
           },
           {
-            Header: "firstName",
+            Header: "Ім'я",
             accessor: "firstName"
           }
         ]},{
           Header: "Add",
           columns: [
             {
-              Header: "patronymic",
+              Header: "Побатькові",
               accessor: "patronymic"
             }
           ]
@@ -39,7 +39,7 @@ function AthletesTable() {
         Header: "Details",
         columns: [
           {
-            Header: "degree",
+            Header: "Ступінь",
             accessor: "degree"
           },
           {
@@ -47,23 +47,23 @@ function AthletesTable() {
             accessor: "email"
           },
           {
-            Header: "is_coach",
+            Header: "Інструктор",
             accessor: "is_coach"
           },
           {
-            Header: "is_best",
+            Header: "В найкращих спортсменах",
             accessor: "is_best"
           },
           {
-            Header: "is_actual",
+            Header: "Проводить тренування",
             accessor: "is_actual"
           },
           {
-            Header: "phone",
+            Header: "Номер телефону",
             accessor: "phone"
           },
           {
-            Header: "phone2",
+            Header: "Додатковий номер телефону",
             accessor: "phone2",
             headerClassName: 'col-3'
           }]}

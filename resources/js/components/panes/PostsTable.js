@@ -13,18 +13,18 @@ function PostsTable() {
             Cell: ({ value }) => <EditButton hrefPrefix='/admin/post' value={value} />
           },
           {
-            Header: "title",
+            Header: "Заголовок",
             accessor: "title"
           },
           {
-            Header: "dateAt",
+            Header: "Дата",
             accessor: "dateAt"
           },
         ]},{
           Header: "Add",
           columns: [
             {
-                Header: "keywords",
+                Header: "Ключові слова",
                 accessor: "keywords"
             },
           ]
@@ -33,15 +33,15 @@ function PostsTable() {
         Header: "Details",
         columns: [
             {
-                Header: "category",
+                Header: "Категорія",
                 accessor: "category"
               },
           {
-            Header: "full",
+            Header: "Повний текст новини",
             accessor: "full"
           },
           {
-            Header: "brief",
+            Header: "Скорочений текст новини",
             accessor: "brief"
           }
         ]}

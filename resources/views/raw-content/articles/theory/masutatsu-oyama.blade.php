@@ -1,8 +1,6 @@
 @extends('layouts.article')
 
-@section('content')
-
-
+@section('article-content')
 <h1>Масутацу Ояма — засновник стилю Кіокушинкай</h1>
 
 <img class="rounded ilustration" src="/images/articles/ojama.jpg" alt="Масутацу Ояма - засновник стилю кіокушинкай" />

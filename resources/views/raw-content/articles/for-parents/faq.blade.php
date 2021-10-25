@@ -1,6 +1,6 @@
 @extends('layouts.article')
 
-@section('content')
+@section('article-content')
 
 <h1>Кіокушинкай-карате для дітей: Питання та відповіді</h1>
 

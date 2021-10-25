@@ -1,8 +1,6 @@
 @extends('layouts.article')
 
-@section('content')
-
-
+@section('article-content')
 <h1>Філософія кіокушинкай-карате</h1>
 <h2>Історія та сучасність</h2>
 

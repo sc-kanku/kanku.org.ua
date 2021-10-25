@@ -163,10 +163,9 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-
                 <div class="signin-form">
                     <div class="container">
-                        @include('layouts.section.loginform')
+                        @include('auth.login-form')
                     </div>
                 </div>
             </div>
