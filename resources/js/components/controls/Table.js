@@ -252,12 +252,11 @@ const EditableSwitchCell = ({
     setValue(initialValue)
   }, [initialValue])
 // 
-  let switchMarkup = <input className="form-check-input" type="checkbox" role="switch" onChange={onChange} checked={value == 1} />
-    
-
   return <>
    <div style={{position: "relative"}}> 
-    <div className="form-check form-switch">{ switchMarkup }</div>
+    <div className="form-check form-switch">
+      <input className="form-check-input mx-auto" type="checkbox" role="switch" onChange={onChange} checked={value == 1} />
+    </div>
       { successfullyUpdated && <span className="position-absolute top-50 end-0 translate-middle bg-success border border-light rounded-circle"><i className="fas fa-check" style={{color: 'white', padding: '0.2em', fontSize: '0.7em', display: 'block'}}></i></span> }
       { updatedWithFailure  && <span className="position-absolute top-50 end-0 translate-middle bg-danger border border-light rounded-circle"><i className="fas fa-exclamation" style={{color: 'white', padding: '0.2em 0.5em', fontSize: '0.7em', display: 'block'}}></i></span> }
     </div>

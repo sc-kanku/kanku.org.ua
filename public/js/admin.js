@@ -7388,14 +7388,6 @@ function Table(_ref) {
       setValue(initialValue);
     }, [initialValue]); // 
 
-    var switchMarkup = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
-      className: "form-check-input",
-      type: "checkbox",
-      role: "switch",
-      onChange: onChange,
-      checked: value == 1
-    });
-
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         style: {
@@ -7403,7 +7395,13 @@ function Table(_ref) {
         },
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
           className: "form-check form-switch",
-          children: switchMarkup
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
+            className: "form-check-input mx-auto",
+            type: "checkbox",
+            role: "switch",
+            onChange: onChange,
+            checked: value == 1
+          })
         }), successfullyUpdated && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
           className: "position-absolute top-50 end-0 translate-middle bg-success border border-light rounded-circle",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
@@ -7709,7 +7707,7 @@ var _templateObject;
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 
-var TableStyles = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  table {\n    border-spacing: 0;\n\n    tr {\n      :last-child {\n        td {\n          border-bottom: 0;\n        }\n      }\n    }\n\n    th,\n    td {\n      white-space: nowrap;\n      margin: 0;\n      padding: 0.1rem 0.5rem;\n      border-bottom: 1px solid #999999;\n      border-right: 1px solid #999999;\n\n      :last-child {\n        border-right: 0;\n      }\n    }\n  }\n\n  .fa-sort-up,\n  .fa-sort-down,\n  .fa-sort {\n    color: #999999;\n  }\n\n  th {\n    :hover {\n      .fa-sort-up,\n      .fa-sort-down,\n      .fa-sort {\n          color: red;\n      }\n    }\n  }\n\n  \n  input:not([role='switch']) {\n    font-size: 1rem;\n    padding: 0;\n    margin: 0;\n    border: 0;\n    background-color: inherit;\n  }\n\n  input[role=switch] {\n    border: 2px solid #999999;\n  }\n\n  select {\n    background-color: inherit;\n    border: 1px solid gray;\n  }\n\n  .table th, table td {\n    border-bottom: 1px solid #0ba9e7;\n    border-right: 1px solid #0ba9e7;\n  }\n\n  .table {\n    border: 1px solid #0ba9e7;\n    border-top-width: 2px;\n  }\n\n  .table-striped tbody tr:nth-of-type(odd) {\n    background-color: rgba(26, 135, 200, 0.09);\n  }\n  \n  .table-hover tbody tr:hover {\n    color: #0ba9e7;\n    background-color: rgba(26, 135, 200, 0.2);\n  }\n"])));
+var TableStyles = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  table {\n    border-spacing: 0;\n\n    tr {\n      :last-child {\n        td {\n          border-bottom: 0;\n        }\n      }\n    }\n\n    th,\n    td {\n      white-space: nowrap;\n      margin: 0;\n      padding: 0.1rem 0.5rem;\n      border-bottom: 1px solid #999999;\n      border-right: 1px solid #999999;\n\n      :last-child {\n        border-right: 0;\n      }\n    }\n  }\n\n  .fa-sort-up,\n  .fa-sort-down,\n  .fa-sort {\n    color: #999999;\n  }\n\n  th {\n    :hover {\n      .fa-sort-up,\n      .fa-sort-down,\n      .fa-sort {\n          color: red;\n      }\n    }\n  }\n\n  input:not([role='switch']) {\n    font-size: 1rem;\n    padding: 0;\n    margin: 0;\n    border: 0;\n    background-color: inherit;\n  }\n  .form-check-input:checked {\n    background-color: #0cc80f;\n  }\n\n  input[role=switch] {\n    border: 2px solid #999999;\n  }\n\n  select {\n    background-color: inherit;\n    border: 1px solid gray;\n  }\n\n  .table th, table td {\n    border-bottom: 1px solid #0ba9e7;\n    border-right: 1px solid #0ba9e7;\n  }\n\n  .table {\n    border: 1px solid #0ba9e7;\n    border-top-width: 2px;\n  }\n\n  .table-striped tbody tr:nth-of-type(odd) {\n    background-color: rgba(26, 135, 200, 0.09);\n  }\n  \n  .table-hover tbody tr:hover {\n    color: #0ba9e7;\n    background-color: rgba(26, 135, 200, 0.2);\n  }\n"])));
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TableStyles);
 
 /***/ }),

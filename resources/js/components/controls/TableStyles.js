@@ -42,13 +42,15 @@ const TableStyles = styled.div`
     }
   }
 
-  
   input:not([role='switch']) {
     font-size: 1rem;
     padding: 0;
     margin: 0;
     border: 0;
     background-color: inherit;
+  }
+  .form-check-input:checked {
+    background-color: #0cc80f;
   }
 
   input[role=switch] {
