@@ -22,12 +22,12 @@ export default function SiteRefresh () {
     return (
         <>
             <br />
-            <div class="alert alert-success" role="alert">
+            <div className="alert alert-success" role="alert">
                 {(updatingState == 'updating') && '...Оновлення...'}
                 {(updatingState == 'updated') && 'Оновлено!'}
             </div>
 
-            <div class="alert alert-info" role="alert">
+            <div className="alert alert-info" role="alert">
                 <p>Серверний кеш рівня аплікації тимчасово відключено.</p>
                 <p> Всі зміни в даних атлетів, залів та новин 
                 автоматично відображаються всюди на сайті і без його оновлення</p>

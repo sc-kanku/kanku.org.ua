@@ -31,7 +31,7 @@ export default function Degree({value, editable, onChange}) {
         );
 
         markup = 
-            <select defaultValue={key} className="form-select-sm" aria-label="Select degree" onChange={onChange}>
+            <select value={key} className="form-select-sm" aria-label="Select degree" onChange={onChange}>
                 {options}
             </select>
     } else {

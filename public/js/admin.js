@@ -6508,7 +6508,7 @@ function Degree(_ref) {
       }, key);
     });
     markup = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("select", {
-      defaultValue: key,
+      value: key,
       className: "form-select-sm",
       "aria-label": "Select degree",
       onChange: onChange,
@@ -6969,7 +6969,7 @@ function PostCategory(_ref) {
       }, key);
     });
     markup = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("select", {
-      defaultValue: key,
+      value: key,
       className: "form-select-sm",
       "aria-label": "Select Category",
       onChange: onChange,
@@ -7090,7 +7090,7 @@ function Table(_ref) {
 
   react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
     setSkipPageReset(false);
-  }, [data]);
+  }, [data]); // TODO: Remove code duplications in EditableXXX components.
 
   var EditableDegree = function EditableDegree(_ref2) {
     var initialValue = _ref2.value,
@@ -7180,8 +7180,7 @@ function Table(_ref) {
     var _React$useState9 = react__WEBPACK_IMPORTED_MODULE_0__.useState(initialValue),
         _React$useState10 = _slicedToArray(_React$useState9, 2),
         value = _React$useState10[0],
-        setValue = _React$useState10[1]; // const [previousValue, setPreviousValue] = React.useState(initialValue);
-
+        setValue = _React$useState10[1];
 
     var _React$useState11 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
         _React$useState12 = _slicedToArray(_React$useState11, 2),
@@ -7197,8 +7196,7 @@ function Table(_ref) {
       var newValue = e.target.value; // TODO: Promises instead callbacks
 
       updateMyData(index, id, newValue, function () {
-        setSuccessfullyUpdated(true); // setPreviousValue(value);
-
+        setSuccessfullyUpdated(true);
         setValue(newValue);
         setTimeout(function () {
           setSuccessfullyUpdated(false);
@@ -7267,31 +7265,26 @@ function Table(_ref) {
         value = _React$useState16[0],
         setValue = _React$useState16[1];
 
-    var _React$useState17 = react__WEBPACK_IMPORTED_MODULE_0__.useState(initialValue),
+    var _React$useState17 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
         _React$useState18 = _slicedToArray(_React$useState17, 2),
-        previousValue = _React$useState18[0],
-        setPreviousValue = _React$useState18[1];
+        successfullyUpdated = _React$useState18[0],
+        setSuccessfullyUpdated = _React$useState18[1];
 
     var _React$useState19 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
         _React$useState20 = _slicedToArray(_React$useState19, 2),
-        successfullyUpdated = _React$useState20[0],
-        setSuccessfullyUpdated = _React$useState20[1];
-
-    var _React$useState21 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
-        _React$useState22 = _slicedToArray(_React$useState21, 2),
-        updatedWithFailure = _React$useState22[0],
-        setUpdatedWithFailure = _React$useState22[1];
+        updatedWithFailure = _React$useState20[0],
+        setUpdatedWithFailure = _React$useState20[1];
 
     var onBlur = function onBlur(e) {// setValue(e.target.value)
     }; // We'll only update the external data when the input is blurred
 
 
     var onChange = function onChange(e) {
-      setValue(e.target.value); // if (previousValue != value) {
+      var newValue = e.target.value; // if (previousValue != value) {
 
-      updateMyData(index, id, value, function () {
+      updateMyData(index, id, newValue, function () {
         setSuccessfullyUpdated(true);
-        setPreviousValue(value);
+        setValue(newValue);
         setTimeout(function () {
           setSuccessfullyUpdated(false);
         }, 2000);
@@ -7299,7 +7292,6 @@ function Table(_ref) {
         setUpdatedWithFailure(true);
         setTimeout(function () {
           setUpdatedWithFailure(false);
-          setValue(previousValue);
         }, 2000);
       }); // }
     }; // If the initialValue is changed external, sync it up with our state
@@ -7347,7 +7339,7 @@ function Table(_ref) {
   }; // Create an editable cell renderer
 
 
-  var EditableCell = function EditableCell(_ref5) {
+  var EditableSwitchCell = function EditableSwitchCell(_ref5) {
     var initialValue = _ref5.value,
         index = _ref5.row.index,
         id = _ref5.column.id,
@@ -7355,25 +7347,118 @@ function Table(_ref) {
     // We need to keep and update the state of the cell normally
     initialValue = initialValue != null ? initialValue : '';
 
-    var _React$useState23 = react__WEBPACK_IMPORTED_MODULE_0__.useState(initialValue),
+    var _React$useState21 = react__WEBPACK_IMPORTED_MODULE_0__.useState(initialValue),
+        _React$useState22 = _slicedToArray(_React$useState21, 2),
+        value = _React$useState22[0],
+        setValue = _React$useState22[1];
+
+    var _React$useState23 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
         _React$useState24 = _slicedToArray(_React$useState23, 2),
-        value = _React$useState24[0],
-        setValue = _React$useState24[1];
+        successfullyUpdated = _React$useState24[0],
+        setSuccessfullyUpdated = _React$useState24[1];
 
-    var _React$useState25 = react__WEBPACK_IMPORTED_MODULE_0__.useState(initialValue),
+    var _React$useState25 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
         _React$useState26 = _slicedToArray(_React$useState25, 2),
-        previousValue = _React$useState26[0],
-        setPreviousValue = _React$useState26[1];
+        updatedWithFailure = _React$useState26[0],
+        setUpdatedWithFailure = _React$useState26[1];
 
-    var _React$useState27 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
+    var onBlur = function onBlur(e) {// setValue(e.target.value)
+    }; // We'll only update the external data when the input is blurred
+
+
+    var onChange = function onChange(e) {
+      var newValue = 1 - value; // if (previousValue != value) {
+
+      updateMyData(index, id, newValue, function () {
+        setSuccessfullyUpdated(true);
+        setValue(newValue);
+        setTimeout(function () {
+          setSuccessfullyUpdated(false);
+        }, 2000);
+      }, function () {
+        setUpdatedWithFailure(true);
+        setTimeout(function () {
+          setUpdatedWithFailure(false);
+        }, 2000);
+      }); // }
+    }; // If the initialValue is changed external, sync it up with our state
+
+
+    react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
+      setValue(initialValue);
+    }, [initialValue]); // 
+
+    var switchMarkup = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
+      className: "form-check-input",
+      type: "checkbox",
+      role: "switch",
+      onChange: onChange,
+      checked: value == 1
+    });
+
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+        style: {
+          position: "relative"
+        },
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+          className: "form-check form-switch",
+          children: switchMarkup
+        }), successfullyUpdated && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+          className: "position-absolute top-50 end-0 translate-middle bg-success border border-light rounded-circle",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
+            className: "fas fa-check",
+            style: {
+              color: 'white',
+              padding: '0.2em',
+              fontSize: '0.7em',
+              display: 'block'
+            }
+          })
+        }), updatedWithFailure && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+          className: "position-absolute top-50 end-0 translate-middle bg-danger border border-light rounded-circle",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
+            className: "fas fa-exclamation",
+            style: {
+              color: 'white',
+              padding: '0.2em 0.5em',
+              fontSize: '0.7em',
+              display: 'block'
+            }
+          })
+        })]
+      })
+    });
+  }; // Create an editable cell renderer
+
+
+  var EditableCell = function EditableCell(_ref6) {
+    var initialValue = _ref6.value,
+        index = _ref6.row.index,
+        id = _ref6.column.id,
+        updateMyData = _ref6.updateMyData;
+    // We need to keep and update the state of the cell normally
+    initialValue = initialValue != null ? initialValue : '';
+
+    var _React$useState27 = react__WEBPACK_IMPORTED_MODULE_0__.useState(initialValue),
         _React$useState28 = _slicedToArray(_React$useState27, 2),
-        successfullyUpdated = _React$useState28[0],
-        setSuccessfullyUpdated = _React$useState28[1];
+        value = _React$useState28[0],
+        setValue = _React$useState28[1];
 
-    var _React$useState29 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
+    var _React$useState29 = react__WEBPACK_IMPORTED_MODULE_0__.useState(initialValue),
         _React$useState30 = _slicedToArray(_React$useState29, 2),
-        updatedWithFailure = _React$useState30[0],
-        setUpdatedWithFailure = _React$useState30[1];
+        previousValue = _React$useState30[0],
+        setPreviousValue = _React$useState30[1];
+
+    var _React$useState31 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
+        _React$useState32 = _slicedToArray(_React$useState31, 2),
+        successfullyUpdated = _React$useState32[0],
+        setSuccessfullyUpdated = _React$useState32[1];
+
+    var _React$useState33 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
+        _React$useState34 = _slicedToArray(_React$useState33, 2),
+        updatedWithFailure = _React$useState34[0],
+        setUpdatedWithFailure = _React$useState34[1];
 
     var onChange = function onChange(e) {
       setValue(e.target.value);
@@ -7449,6 +7534,8 @@ function Table(_ref) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(EditableDegree, _objectSpread({}, attributes));
       } else if (info.column.id == "category") {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(EditablePostCategory, _objectSpread({}, attributes));
+      } else if (info.column.id == "is_coach" || info.column.id == "is_best" || info.column.id == "is_actual") {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(EditableSwitchCell, _objectSpread({}, attributes));
       } else if (info.column.id == "dateAt") {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(EditableDateCell, _objectSpread({}, attributes));
       } else {
@@ -7622,7 +7709,7 @@ var _templateObject;
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 
-var TableStyles = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  table {\n    border-spacing: 0;\n\n    tr {\n      :last-child {\n        td {\n          border-bottom: 0;\n        }\n      }\n    }\n\n    th,\n    td {\n      white-space: nowrap;\n      margin: 0;\n      padding: 0.1rem 0.5rem;\n      border-bottom: 1px solid #999999;\n      border-right: 1px solid #999999;\n\n      :last-child {\n        border-right: 0;\n      }\n    }\n  }\n\n  .fa-sort-up,\n  .fa-sort-down,\n  .fa-sort {\n    color: #999999;\n  }\n\n  th {\n    :hover {\n      .fa-sort-up,\n      .fa-sort-down,\n      .fa-sort {\n          color: red;\n      }\n    }\n  }\n\n  input {\n    font-size: 1rem;\n    padding: 0;\n    margin: 0;\n    border: 0;\n    background-color: inherit;\n  }\n\n  select {\n    background-color: inherit;\n    border: 1px solid gray;\n  }\n\n  .table th, table td {\n    border-bottom: 1px solid #0ba9e7;\n    border-right: 1px solid #0ba9e7;\n  }\n\n  .table {\n    border: 1px solid #0ba9e7;\n    border-top-width: 2px;\n  }\n\n  .table-striped tbody tr:nth-of-type(odd) {\n    background-color: rgba(26, 135, 200, 0.09);\n  }\n  \n  .table-hover tbody tr:hover {\n    color: #0ba9e7;\n    background-color: rgba(26, 135, 200, 0.2);\n  }\n"])));
+var TableStyles = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  table {\n    border-spacing: 0;\n\n    tr {\n      :last-child {\n        td {\n          border-bottom: 0;\n        }\n      }\n    }\n\n    th,\n    td {\n      white-space: nowrap;\n      margin: 0;\n      padding: 0.1rem 0.5rem;\n      border-bottom: 1px solid #999999;\n      border-right: 1px solid #999999;\n\n      :last-child {\n        border-right: 0;\n      }\n    }\n  }\n\n  .fa-sort-up,\n  .fa-sort-down,\n  .fa-sort {\n    color: #999999;\n  }\n\n  th {\n    :hover {\n      .fa-sort-up,\n      .fa-sort-down,\n      .fa-sort {\n          color: red;\n      }\n    }\n  }\n\n  \n  input:not([role='switch']) {\n    font-size: 1rem;\n    padding: 0;\n    margin: 0;\n    border: 0;\n    background-color: inherit;\n  }\n\n  input[role=switch] {\n    border: 2px solid #999999;\n  }\n\n  select {\n    background-color: inherit;\n    border: 1px solid gray;\n  }\n\n  .table th, table td {\n    border-bottom: 1px solid #0ba9e7;\n    border-right: 1px solid #0ba9e7;\n  }\n\n  .table {\n    border: 1px solid #0ba9e7;\n    border-top-width: 2px;\n  }\n\n  .table-striped tbody tr:nth-of-type(odd) {\n    background-color: rgba(26, 135, 200, 0.09);\n  }\n  \n  .table-hover tbody tr:hover {\n    color: #0ba9e7;\n    background-color: rgba(26, 135, 200, 0.2);\n  }\n"])));
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TableStyles);
 
 /***/ }),
@@ -9833,11 +9920,11 @@ function SiteRefresh() {
   });
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-      "class": "alert alert-success",
+      className: "alert alert-success",
       role: "alert",
       children: [updatingState == 'updating' && '...Оновлення...', updatingState == 'updated' && 'Оновлено!']
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-      "class": "alert alert-info",
+      className: "alert alert-info",
       role: "alert",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
         children: "\u0421\u0435\u0440\u0432\u0435\u0440\u043D\u0438\u0439 \u043A\u0435\u0448 \u0440\u0456\u0432\u043D\u044F \u0430\u043F\u043B\u0456\u043A\u0430\u0446\u0456\u0457 \u0442\u0438\u043C\u0447\u0430\u0441\u043E\u0432\u043E \u0432\u0456\u0434\u043A\u043B\u044E\u0447\u0435\u043D\u043E."

@@ -42,12 +42,17 @@ const TableStyles = styled.div`
     }
   }
 
-  input {
+  
+  input:not([role='switch']) {
     font-size: 1rem;
     padding: 0;
     margin: 0;
     border: 0;
     background-color: inherit;
+  }
+
+  input[role=switch] {
+    border: 2px solid #999999;
   }
 
   select {

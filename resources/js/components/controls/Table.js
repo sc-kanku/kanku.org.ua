@@ -63,6 +63,8 @@ export default function Table({ columns, data, inlineUpdateUrl }) {
     setSkipPageReset(false)
   }, [data])
 
+
+// TODO: Remove code duplications in EditableXXX components.
 const EditableDegree = ({
   value: initialValue,
   row: { index },
@@ -111,7 +113,6 @@ const EditablePostCategory = ({
   updateMyData, // This is a custom function that we supplied to our table instance
 }) => {
   const [value, setValue] = React.useState(initialValue);
-  // const [previousValue, setPreviousValue] = React.useState(initialValue);
   const [successfullyUpdated, setSuccessfullyUpdated] = React.useState(false);
   const [updatedWithFailure, setUpdatedWithFailure] = React.useState(false);
 
@@ -121,7 +122,6 @@ const EditablePostCategory = ({
     // TODO: Promises instead callbacks
     updateMyData(index, id, newValue, () => {
       setSuccessfullyUpdated(true);
-      // setPreviousValue(value);
       setValue(newValue);
 
       setTimeout(() => {
@@ -130,7 +130,7 @@ const EditablePostCategory = ({
     },
     () => {
       setUpdatedWithFailure(true);
-      
+
       setTimeout(() => {
         setUpdatedWithFailure(false);
       }, 2000);
@@ -158,7 +158,6 @@ const EditableDateCell = ({
   initialValue = initialValue != null ? initialValue : '';
 
   const [value, setValue] = React.useState(initialValue);
-  const [previousValue, setPreviousValue] = React.useState(initialValue);
   const [successfullyUpdated, setSuccessfullyUpdated] = React.useState(false);
   const [updatedWithFailure, setUpdatedWithFailure] = React.useState(false);
 
@@ -168,13 +167,13 @@ const EditableDateCell = ({
 
   // We'll only update the external data when the input is blurred
   const onChange = (e) => {
-      setValue(e.target.value);
+      let newValue = e.target.value;
 
       // if (previousValue != value) {
-        updateMyData(index, id, value, 
+        updateMyData(index, id, newValue, 
           () => {
             setSuccessfullyUpdated(true);
-            setPreviousValue(value);
+            setValue(newValue);
 
             setTimeout(() => {
               setSuccessfullyUpdated(false)
@@ -185,7 +184,6 @@ const EditableDateCell = ({
             
             setTimeout(() => {
               setUpdatedWithFailure(false);
-              setValue(previousValue);
             }, 2000);
           }
         );
@@ -205,6 +203,67 @@ const EditableDateCell = ({
     </div>
   </>
 }
+
+// Create an editable cell renderer
+const EditableSwitchCell = ({
+  value: initialValue,
+  row: { index },
+  column: { id },
+  updateMyData, // This is a custom function that we supplied to our table instance
+}) => {
+  // We need to keep and update the state of the cell normally
+  initialValue = initialValue != null ? initialValue : '';
+
+  const [value, setValue] = React.useState(initialValue);
+  const [successfullyUpdated, setSuccessfullyUpdated] = React.useState(false);
+  const [updatedWithFailure, setUpdatedWithFailure] = React.useState(false);
+
+  const onBlur = e => {
+    // setValue(e.target.value)
+  }
+
+  // We'll only update the external data when the input is blurred
+  const onChange = (e) => {
+      let newValue = 1 - value;
+
+      // if (previousValue != value) {
+        updateMyData(index, id, newValue, 
+          () => {
+            setSuccessfullyUpdated(true);
+            setValue(newValue);
+
+            setTimeout(() => {
+              setSuccessfullyUpdated(false)
+            }, 2000);
+          },
+          () => {
+            setUpdatedWithFailure(true);
+            
+            setTimeout(() => {
+              setUpdatedWithFailure(false);
+            }, 2000);
+          }
+        );
+      // }
+  }
+
+  // If the initialValue is changed external, sync it up with our state
+  React.useEffect(() => {
+    setValue(initialValue)
+  }, [initialValue])
+// 
+  let switchMarkup = <input className="form-check-input" type="checkbox" role="switch" onChange={onChange} checked={value == 1} />
+    
+
+  return <>
+   <div style={{position: "relative"}}> 
+    <div className="form-check form-switch">{ switchMarkup }</div>
+      { successfullyUpdated && <span className="position-absolute top-50 end-0 translate-middle bg-success border border-light rounded-circle"><i className="fas fa-check" style={{color: 'white', padding: '0.2em', fontSize: '0.7em', display: 'block'}}></i></span> }
+      { updatedWithFailure  && <span className="position-absolute top-50 end-0 translate-middle bg-danger border border-light rounded-circle"><i className="fas fa-exclamation" style={{color: 'white', padding: '0.2em 0.5em', fontSize: '0.7em', display: 'block'}}></i></span> }
+    </div>
+  </>
+}
+
 
 
 // Create an editable cell renderer
@@ -274,6 +333,10 @@ const defaultColumn = {
       return (<EditableDegree {...attributes} />)
     } else if (info.column.id == "category") {
       return (<EditablePostCategory {...attributes} />)
+    } else if (info.column.id == "is_coach" 
+            || info.column.id == "is_best" 
+            || info.column.id == "is_actual") {
+      return (<EditableSwitchCell {...attributes} />)
     } else if (info.column.id == "dateAt") {
       return (<EditableDateCell {...attributes} />)
     } else {

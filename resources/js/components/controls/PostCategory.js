@@ -23,7 +23,7 @@ export default function PostCategory({value, editable, onChange}) {
         );
 
         markup = 
-            <select defaultValue={key} className="form-select-sm" aria-label="Select Category" onChange={onChange}>
+            <select value={key} className="form-select-sm" aria-label="Select Category" onChange={onChange}>
                 {options}
             </select>
     } else {
