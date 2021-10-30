@@ -1,39 +1,56 @@
-import React from "react";
+import React, {useRef, useMemo} from "react";
 
-export default function useStatus({ id, index, getNewValue, setValue, updateMyData }) {
+const STATUS_DURATION = 2000;
+
+export default function useStatus({ id, index, initialValue, setValue, getNewValue, updateMyData }) {
+    const [previousValue, setPreviousValue] = React.useState(initialValue);
     const [successfullyUpdated, setSuccessfullyUpdated] = React.useState(false);
     const [updatedWithFailure, setUpdatedWithFailure] = React.useState(false);
 
-    const onChange = e => {
+    if (typeof getNewValue === 'undefined') {
+      getNewValue = useRef((e) => e.target.value).current;
+    }
+
+    const onChange = // useRef(
+      e => {
         let newValue = getNewValue(e);
-    
-        updateMyData(index, id, newValue, 
-          () => {
-            setSuccessfullyUpdated(true);
-            setValue(newValue);    
-    
-            setTimeout(() => {
-              setSuccessfullyUpdated(false)
-            }, 2000);
-          },
-          () => {
-            setUpdatedWithFailure(true);
-            
-            setTimeout(() => {
-              setUpdatedWithFailure(false);
-            }, 2000);
-          }
+
+        if (previousValue != newValue) {
+          setValue(newValue);
+
+          updateMyData(index, id, newValue, 
+            () => {
+              setSuccessfullyUpdated(true);
+              setPreviousValue(newValue);
+
+              setTimeout(() => {
+                setSuccessfullyUpdated(false)
+              }, STATUS_DURATION);
+            },
+            () => {
+              setUpdatedWithFailure(true);
+              setValue(previousValue);
+
+              setTimeout(() => {
+                setUpdatedWithFailure(false);
+              }, STATUS_DURATION);
+            }
         );
       }
+    }
+    // ).current;
 
-      // <div style={{position: "relative"}}>
-    let StatusMarkup = ({ children }) => (<>
+    let classes = 'position-absolute top-50 end-0 translate-middle_ border border-light rounded-circle';
+    
+    let StatusMarkup = // useMemo(
+      ({ children }) => (<>
         <div style={{position: "relative"}}>
             { children }
-            { successfullyUpdated && <span className="position-absolute top-50 end-0 translate-middle bg-success border border-light rounded-circle" style={{marginRight: '-0.4em'}}><i className="fas fa-check" style={{color: 'white', padding: '0.2em', fontSize: '0.7em', display: 'block'}}></i></span> }
-            { updatedWithFailure  && <span className="position-absolute top-50 end-0 translate-middle bg-danger border border-light rounded-circle" style={{marginRight: '-0.4em'}}><i className="fas fa-exclamation" style={{color: 'white', padding: '0.2em 0.5em', fontSize: '0.7em', display: 'block'}}></i></span> }
+            { successfullyUpdated && <span className={`${classes} bg-success`} style={{margin: '0.2em'}}><i className="fas fa-check" style={{color: 'white', padding: '0.2em', fontSize: '0.7em', display: 'block'}}></i></span> }
+            { updatedWithFailure  && <span className={`${classes} bg-danger`} style={{margin: '0.2em'}}><i className="fas fa-exclamation" style={{color: 'white', padding: '0.2em 0.5em', fontSize: '0.7em', display: 'block'}}></i></span> }
         </div>
-    </>);
+    </>)
+    // , []);
     
     return [StatusMarkup, onChange]
 }

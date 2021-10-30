@@ -77,14 +77,15 @@ const EditableDegree = ({
   const [Status, onChange] = useStatus({
     id,
     index,
-    getNewValue: (e) => e.target.value,
+    initialValue,
     setValue,
     updateMyData
   });
 
-  return <Status>
+  return <>
+      <Status />
       <Degree value={value} editable="true" onChange={onChange} />
-    </Status>
+    </>
 };
 
 const EditablePostCategory = ({
@@ -94,38 +95,19 @@ const EditablePostCategory = ({
   updateMyData, // This is a custom function that we supplied to our table instance
 }) => {
   const [value, setValue] = React.useState(initialValue);
-  const [successfullyUpdated, setSuccessfullyUpdated] = React.useState(false);
-  const [updatedWithFailure, setUpdatedWithFailure] = React.useState(false);
 
-  const onChange = e => {
-    let newValue = e.target.value;
-
-    // TODO: Promises instead callbacks
-    updateMyData(index, id, newValue, () => {
-      setSuccessfullyUpdated(true);
-      setValue(newValue);
-
-      setTimeout(() => {
-        setSuccessfullyUpdated(false)
-      }, 2000);
-    },
-    () => {
-      setUpdatedWithFailure(true);
-
-      setTimeout(() => {
-        setUpdatedWithFailure(false);
-      }, 2000);
-    });
-  }
+  const [Status, onChange] = useStatus({
+    id,
+    index,
+    initialValue,
+    setValue,
+    updateMyData
+  });
 
   return <>
-   <div style={{position: "relative"}}> 
+    <Status />
     <PostCategory value={value} editable="true" onChange={onChange} />
-    { successfullyUpdated && <span className="position-absolute top-50 end-0 translate-middle bg-success border border-light rounded-circle" style={{marginRight: '-0.4em'}}><i className="fas fa-check" style={{color: 'white', padding: '0.2em', fontSize: '0.7em', display: 'block'}}></i></span> }
-    { updatedWithFailure  && <span className="position-absolute top-50 end-0 translate-middle bg-danger border border-light rounded-circle" style={{marginRight: '-0.4em'}}><i className="fas fa-exclamation" style={{color: 'white', padding: '0.2em 0.5em', fontSize: '0.7em', display: 'block'}}></i></span> }
-    </div>
   </>
-
 }; 
 
 // Create an editable cell renderer
@@ -139,37 +121,13 @@ const EditableDateCell = ({
   initialValue = initialValue != null ? initialValue : '';
 
   const [value, setValue] = React.useState(initialValue);
-  const [successfullyUpdated, setSuccessfullyUpdated] = React.useState(false);
-  const [updatedWithFailure, setUpdatedWithFailure] = React.useState(false);
-
-  const onBlur = e => {
-    // setValue(e.target.value)
-  }
-
-  // We'll only update the external data when the input is blurred
-  const onChange = (e) => {
-      let newValue = e.target.value;
-
-      // if (previousValue != value) {
-        updateMyData(index, id, newValue, 
-          () => {
-            setSuccessfullyUpdated(true);
-            setValue(newValue);
-
-            setTimeout(() => {
-              setSuccessfullyUpdated(false)
-            }, 2000);
-          },
-          () => {
-            setUpdatedWithFailure(true);
-            
-            setTimeout(() => {
-              setUpdatedWithFailure(false);
-            }, 2000);
-          }
-        );
-      // }
-  }
+  const [Status, onChange] = useStatus({
+    id,
+    index,
+    initialValue,
+    setValue,
+    updateMyData
+  });
 
   // If the initialValue is changed external, sync it up with our state
   React.useEffect(() => {
@@ -177,12 +135,9 @@ const EditableDateCell = ({
   }, [initialValue])
 // 
   return <>
-   <div style={{position: "relative"}}> 
-      <input type="date" value={value} onChange={onChange} onBlur={onBlur} />
-      { successfullyUpdated && <span className="position-absolute top-50 end-0 translate-middle bg-success border border-light rounded-circle"><i className="fas fa-check" style={{color: 'white', padding: '0.2em', fontSize: '0.7em', display: 'block'}}></i></span> }
-      { updatedWithFailure  && <span className="position-absolute top-50 end-0 translate-middle bg-danger border border-light rounded-circle"><i className="fas fa-exclamation" style={{color: 'white', padding: '0.2em 0.5em', fontSize: '0.7em', display: 'block'}}></i></span> }
-    </div>
-  </>
+      <Status />
+      <input type="date" value={value} onChange={onChange} />
+    </>
 }
 
 // Create an editable cell renderer
@@ -196,50 +151,25 @@ const EditableSwitchCell = ({
   initialValue = initialValue != null ? initialValue : '';
 
   const [value, setValue] = React.useState(initialValue);
-  const [successfullyUpdated, setSuccessfullyUpdated] = React.useState(false);
-  const [updatedWithFailure, setUpdatedWithFailure] = React.useState(false);
 
-  const onBlur = e => {
-    // setValue(e.target.value)
-  }
-
-  // We'll only update the external data when the input is blurred
-  const onChange = (e) => {
-      let newValue = 1 - value;
-
-      // if (previousValue != value) {
-        updateMyData(index, id, newValue, 
-          () => {
-            setSuccessfullyUpdated(true);
-            setValue(newValue);
-
-            setTimeout(() => {
-              setSuccessfullyUpdated(false)
-            }, 2000);
-          },
-          () => {
-            setUpdatedWithFailure(true);
-            
-            setTimeout(() => {
-              setUpdatedWithFailure(false);
-            }, 2000);
-          }
-        );
-      // }
-  }
+  const [Status, onChange] = useStatus({
+    id,
+    index,
+    initialValue,
+    setValue,
+    getNewValue : (e) => 1 - value,
+    updateMyData
+  });
 
   // If the initialValue is changed external, sync it up with our state
   React.useEffect(() => {
     setValue(initialValue)
   }, [initialValue])
-// 
+
   return <>
-   <div style={{position: "relative"}}> 
+    <Status />
     <div className="form-check form-switch">
       <input className="form-check-input mx-auto" type="checkbox" role="switch" onChange={onChange} checked={value == 1} />
-    </div>
-      { successfullyUpdated && <span className="position-absolute top-50 end-0 translate-middle bg-success border border-light rounded-circle"><i className="fas fa-check" style={{color: 'white', padding: '0.2em', fontSize: '0.7em', display: 'block'}}></i></span> }
-      { updatedWithFailure  && <span className="position-absolute top-50 end-0 translate-middle bg-danger border border-light rounded-circle"><i className="fas fa-exclamation" style={{color: 'white', padding: '0.2em 0.5em', fontSize: '0.7em', display: 'block'}}></i></span> }
     </div>
   </>
 }
@@ -255,52 +185,33 @@ const EditableCell = ({
 }) => {
   // We need to keep and update the state of the cell normally
   initialValue = initialValue != null ? initialValue : '';
-
+  
   const [value, setValue] = React.useState(initialValue);
-  const [previousValue, setPreviousValue] = React.useState(initialValue);
-  const [successfullyUpdated, setSuccessfullyUpdated] = React.useState(false);
-  const [updatedWithFailure, setUpdatedWithFailure] = React.useState(false);
 
-  const onChange = e => {
+  const onTypingChange = e => {
+    // console.log("onTypingChange", value, e.target.value);
+
     setValue(e.target.value)
   }
 
-  // We'll only update the external data when the input is blurred
-  const onBlur = () => {
-      if (previousValue != value) {
-        updateMyData(index, id, value, 
-          () => {
-            setSuccessfullyUpdated(true);
-            setPreviousValue(value);
-
-            setTimeout(() => {
-              setSuccessfullyUpdated(false)
-            }, 2000);
-          },
-          () => {
-            setUpdatedWithFailure(true);
-            
-            setTimeout(() => {
-              setUpdatedWithFailure(false);
-              setValue(previousValue);
-            }, 2000);
-          }
-        );
-      }
-  }
+  const [Status, onChange] = useStatus({
+    id,
+    index,
+    initialValue,
+    setValue,
+    getNewValue : (e) => value,
+    updateMyData
+  });
 
   // If the initialValue is changed external, sync it up with our state
   React.useEffect(() => {
     setValue(initialValue)
   }, [initialValue])
-// 
   return <>
-   <div style={{position: "relative"}}> 
-      <input value={value} onChange={onChange} onBlur={onBlur} />
-      { successfullyUpdated && <span className="position-absolute top-50 end-0 translate-middle bg-success border border-light rounded-circle"><i className="fas fa-check" style={{color: 'white', padding: '0.2em', fontSize: '0.7em', display: 'block'}}></i></span> }
-      { updatedWithFailure  && <span className="position-absolute top-50 end-0 translate-middle bg-danger border border-light rounded-circle"><i className="fas fa-exclamation" style={{color: 'white', padding: '0.2em 0.5em', fontSize: '0.7em', display: 'block'}}></i></span> }
-    </div>
-  </>
+      <Status />
+      <input value={value} onChange={onTypingChange} onBlur={onChange} />
+    </>
+  
 }
 
 // Set our editable cell renderer as the default Cell renderer

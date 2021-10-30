@@ -7177,9 +7177,7 @@ function Table(_ref) {
     var _useStatus = (0,_utils_useStatus__WEBPACK_IMPORTED_MODULE_5__["default"])({
       id: id,
       index: index,
-      getNewValue: function getNewValue(e) {
-        return e.target.value;
-      },
+      initialValue: initialValue,
       setValue: setValue,
       updateMyData: updateMyData
     }),
@@ -7187,12 +7185,12 @@ function Table(_ref) {
         Status = _useStatus2[0],
         onChange = _useStatus2[1];
 
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(Status, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Degree__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(Status, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Degree__WEBPACK_IMPORTED_MODULE_2__["default"], {
         value: value,
         editable: "true",
         onChange: onChange
-      })
+      })]
     });
   };
 
@@ -7207,72 +7205,23 @@ function Table(_ref) {
         value = _React$useState6[0],
         setValue = _React$useState6[1];
 
-    var _React$useState7 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
-        _React$useState8 = _slicedToArray(_React$useState7, 2),
-        successfullyUpdated = _React$useState8[0],
-        setSuccessfullyUpdated = _React$useState8[1];
+    var _useStatus3 = (0,_utils_useStatus__WEBPACK_IMPORTED_MODULE_5__["default"])({
+      id: id,
+      index: index,
+      initialValue: initialValue,
+      setValue: setValue,
+      updateMyData: updateMyData
+    }),
+        _useStatus4 = _slicedToArray(_useStatus3, 2),
+        Status = _useStatus4[0],
+        onChange = _useStatus4[1];
 
-    var _React$useState9 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
-        _React$useState10 = _slicedToArray(_React$useState9, 2),
-        updatedWithFailure = _React$useState10[0],
-        setUpdatedWithFailure = _React$useState10[1];
-
-    var onChange = function onChange(e) {
-      var newValue = e.target.value; // TODO: Promises instead callbacks
-
-      updateMyData(index, id, newValue, function () {
-        setSuccessfullyUpdated(true);
-        setValue(newValue);
-        setTimeout(function () {
-          setSuccessfullyUpdated(false);
-        }, 2000);
-      }, function () {
-        setUpdatedWithFailure(true);
-        setTimeout(function () {
-          setUpdatedWithFailure(false);
-        }, 2000);
-      });
-    };
-
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-        style: {
-          position: "relative"
-        },
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_PostCategory__WEBPACK_IMPORTED_MODULE_3__["default"], {
-          value: value,
-          editable: "true",
-          onChange: onChange
-        }), successfullyUpdated && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
-          className: "position-absolute top-50 end-0 translate-middle bg-success border border-light rounded-circle",
-          style: {
-            marginRight: '-0.4em'
-          },
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
-            className: "fas fa-check",
-            style: {
-              color: 'white',
-              padding: '0.2em',
-              fontSize: '0.7em',
-              display: 'block'
-            }
-          })
-        }), updatedWithFailure && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
-          className: "position-absolute top-50 end-0 translate-middle bg-danger border border-light rounded-circle",
-          style: {
-            marginRight: '-0.4em'
-          },
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
-            className: "fas fa-exclamation",
-            style: {
-              color: 'white',
-              padding: '0.2em 0.5em',
-              fontSize: '0.7em',
-              display: 'block'
-            }
-          })
-        })]
-      })
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(Status, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_PostCategory__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        value: value,
+        editable: "true",
+        onChange: onChange
+      })]
     });
   }; // Create an editable cell renderer
 
@@ -7285,81 +7234,33 @@ function Table(_ref) {
     // We need to keep and update the state of the cell normally
     initialValue = initialValue != null ? initialValue : '';
 
-    var _React$useState11 = react__WEBPACK_IMPORTED_MODULE_0__.useState(initialValue),
-        _React$useState12 = _slicedToArray(_React$useState11, 2),
-        value = _React$useState12[0],
-        setValue = _React$useState12[1];
+    var _React$useState7 = react__WEBPACK_IMPORTED_MODULE_0__.useState(initialValue),
+        _React$useState8 = _slicedToArray(_React$useState7, 2),
+        value = _React$useState8[0],
+        setValue = _React$useState8[1];
 
-    var _React$useState13 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
-        _React$useState14 = _slicedToArray(_React$useState13, 2),
-        successfullyUpdated = _React$useState14[0],
-        setSuccessfullyUpdated = _React$useState14[1];
-
-    var _React$useState15 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
-        _React$useState16 = _slicedToArray(_React$useState15, 2),
-        updatedWithFailure = _React$useState16[0],
-        setUpdatedWithFailure = _React$useState16[1];
-
-    var onBlur = function onBlur(e) {// setValue(e.target.value)
-    }; // We'll only update the external data when the input is blurred
-
-
-    var onChange = function onChange(e) {
-      var newValue = e.target.value; // if (previousValue != value) {
-
-      updateMyData(index, id, newValue, function () {
-        setSuccessfullyUpdated(true);
-        setValue(newValue);
-        setTimeout(function () {
-          setSuccessfullyUpdated(false);
-        }, 2000);
-      }, function () {
-        setUpdatedWithFailure(true);
-        setTimeout(function () {
-          setUpdatedWithFailure(false);
-        }, 2000);
-      }); // }
-    }; // If the initialValue is changed external, sync it up with our state
+    var _useStatus5 = (0,_utils_useStatus__WEBPACK_IMPORTED_MODULE_5__["default"])({
+      id: id,
+      index: index,
+      initialValue: initialValue,
+      setValue: setValue,
+      updateMyData: updateMyData
+    }),
+        _useStatus6 = _slicedToArray(_useStatus5, 2),
+        Status = _useStatus6[0],
+        onChange = _useStatus6[1]; // If the initialValue is changed external, sync it up with our state
 
 
     react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
       setValue(initialValue);
     }, [initialValue]); // 
 
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-        style: {
-          position: "relative"
-        },
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
-          type: "date",
-          value: value,
-          onChange: onChange,
-          onBlur: onBlur
-        }), successfullyUpdated && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
-          className: "position-absolute top-50 end-0 translate-middle bg-success border border-light rounded-circle",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
-            className: "fas fa-check",
-            style: {
-              color: 'white',
-              padding: '0.2em',
-              fontSize: '0.7em',
-              display: 'block'
-            }
-          })
-        }), updatedWithFailure && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
-          className: "position-absolute top-50 end-0 translate-middle bg-danger border border-light rounded-circle",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
-            className: "fas fa-exclamation",
-            style: {
-              color: 'white',
-              padding: '0.2em 0.5em',
-              fontSize: '0.7em',
-              display: 'block'
-            }
-          })
-        })]
-      })
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(Status, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
+        type: "date",
+        value: value,
+        onChange: onChange
+      })]
     });
   }; // Create an editable cell renderer
 
@@ -7372,85 +7273,40 @@ function Table(_ref) {
     // We need to keep and update the state of the cell normally
     initialValue = initialValue != null ? initialValue : '';
 
-    var _React$useState17 = react__WEBPACK_IMPORTED_MODULE_0__.useState(initialValue),
-        _React$useState18 = _slicedToArray(_React$useState17, 2),
-        value = _React$useState18[0],
-        setValue = _React$useState18[1];
+    var _React$useState9 = react__WEBPACK_IMPORTED_MODULE_0__.useState(initialValue),
+        _React$useState10 = _slicedToArray(_React$useState9, 2),
+        value = _React$useState10[0],
+        setValue = _React$useState10[1];
 
-    var _React$useState19 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
-        _React$useState20 = _slicedToArray(_React$useState19, 2),
-        successfullyUpdated = _React$useState20[0],
-        setSuccessfullyUpdated = _React$useState20[1];
-
-    var _React$useState21 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
-        _React$useState22 = _slicedToArray(_React$useState21, 2),
-        updatedWithFailure = _React$useState22[0],
-        setUpdatedWithFailure = _React$useState22[1];
-
-    var onBlur = function onBlur(e) {// setValue(e.target.value)
-    }; // We'll only update the external data when the input is blurred
-
-
-    var onChange = function onChange(e) {
-      var newValue = 1 - value; // if (previousValue != value) {
-
-      updateMyData(index, id, newValue, function () {
-        setSuccessfullyUpdated(true);
-        setValue(newValue);
-        setTimeout(function () {
-          setSuccessfullyUpdated(false);
-        }, 2000);
-      }, function () {
-        setUpdatedWithFailure(true);
-        setTimeout(function () {
-          setUpdatedWithFailure(false);
-        }, 2000);
-      }); // }
-    }; // If the initialValue is changed external, sync it up with our state
+    var _useStatus7 = (0,_utils_useStatus__WEBPACK_IMPORTED_MODULE_5__["default"])({
+      id: id,
+      index: index,
+      initialValue: initialValue,
+      setValue: setValue,
+      getNewValue: function getNewValue(e) {
+        return 1 - value;
+      },
+      updateMyData: updateMyData
+    }),
+        _useStatus8 = _slicedToArray(_useStatus7, 2),
+        Status = _useStatus8[0],
+        onChange = _useStatus8[1]; // If the initialValue is changed external, sync it up with our state
 
 
     react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
       setValue(initialValue);
-    }, [initialValue]); // 
-
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-        style: {
-          position: "relative"
-        },
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-          className: "form-check form-switch",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
-            className: "form-check-input mx-auto",
-            type: "checkbox",
-            role: "switch",
-            onChange: onChange,
-            checked: value == 1
-          })
-        }), successfullyUpdated && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
-          className: "position-absolute top-50 end-0 translate-middle bg-success border border-light rounded-circle",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
-            className: "fas fa-check",
-            style: {
-              color: 'white',
-              padding: '0.2em',
-              fontSize: '0.7em',
-              display: 'block'
-            }
-          })
-        }), updatedWithFailure && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
-          className: "position-absolute top-50 end-0 translate-middle bg-danger border border-light rounded-circle",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
-            className: "fas fa-exclamation",
-            style: {
-              color: 'white',
-              padding: '0.2em 0.5em',
-              fontSize: '0.7em',
-              display: 'block'
-            }
-          })
-        })]
-      })
+    }, [initialValue]);
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(Status, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+        className: "form-check form-switch",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
+          className: "form-check-input mx-auto",
+          type: "checkbox",
+          role: "switch",
+          onChange: onChange,
+          checked: value == 1
+        })
+      })]
     });
   }; // Create an editable cell renderer
 
@@ -7463,87 +7319,40 @@ function Table(_ref) {
     // We need to keep and update the state of the cell normally
     initialValue = initialValue != null ? initialValue : '';
 
-    var _React$useState23 = react__WEBPACK_IMPORTED_MODULE_0__.useState(initialValue),
-        _React$useState24 = _slicedToArray(_React$useState23, 2),
-        value = _React$useState24[0],
-        setValue = _React$useState24[1];
+    var _React$useState11 = react__WEBPACK_IMPORTED_MODULE_0__.useState(initialValue),
+        _React$useState12 = _slicedToArray(_React$useState11, 2),
+        value = _React$useState12[0],
+        setValue = _React$useState12[1];
 
-    var _React$useState25 = react__WEBPACK_IMPORTED_MODULE_0__.useState(initialValue),
-        _React$useState26 = _slicedToArray(_React$useState25, 2),
-        previousValue = _React$useState26[0],
-        setPreviousValue = _React$useState26[1];
-
-    var _React$useState27 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
-        _React$useState28 = _slicedToArray(_React$useState27, 2),
-        successfullyUpdated = _React$useState28[0],
-        setSuccessfullyUpdated = _React$useState28[1];
-
-    var _React$useState29 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
-        _React$useState30 = _slicedToArray(_React$useState29, 2),
-        updatedWithFailure = _React$useState30[0],
-        setUpdatedWithFailure = _React$useState30[1];
-
-    var onChange = function onChange(e) {
+    var onTypingChange = function onTypingChange(e) {
+      // console.log("onTypingChange", value, e.target.value);
       setValue(e.target.value);
-    }; // We'll only update the external data when the input is blurred
+    };
 
-
-    var onBlur = function onBlur() {
-      if (previousValue != value) {
-        updateMyData(index, id, value, function () {
-          setSuccessfullyUpdated(true);
-          setPreviousValue(value);
-          setTimeout(function () {
-            setSuccessfullyUpdated(false);
-          }, 2000);
-        }, function () {
-          setUpdatedWithFailure(true);
-          setTimeout(function () {
-            setUpdatedWithFailure(false);
-            setValue(previousValue);
-          }, 2000);
-        });
-      }
-    }; // If the initialValue is changed external, sync it up with our state
+    var _useStatus9 = (0,_utils_useStatus__WEBPACK_IMPORTED_MODULE_5__["default"])({
+      id: id,
+      index: index,
+      initialValue: initialValue,
+      setValue: setValue,
+      getNewValue: function getNewValue(e) {
+        return value;
+      },
+      updateMyData: updateMyData
+    }),
+        _useStatus10 = _slicedToArray(_useStatus9, 2),
+        Status = _useStatus10[0],
+        onChange = _useStatus10[1]; // If the initialValue is changed external, sync it up with our state
 
 
     react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
       setValue(initialValue);
-    }, [initialValue]); // 
-
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-        style: {
-          position: "relative"
-        },
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
-          value: value,
-          onChange: onChange,
-          onBlur: onBlur
-        }), successfullyUpdated && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
-          className: "position-absolute top-50 end-0 translate-middle bg-success border border-light rounded-circle",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
-            className: "fas fa-check",
-            style: {
-              color: 'white',
-              padding: '0.2em',
-              fontSize: '0.7em',
-              display: 'block'
-            }
-          })
-        }), updatedWithFailure && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
-          className: "position-absolute top-50 end-0 translate-middle bg-danger border border-light rounded-circle",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
-            className: "fas fa-exclamation",
-            style: {
-              color: 'white',
-              padding: '0.2em 0.5em',
-              fontSize: '0.7em',
-              display: 'block'
-            }
-          })
-        })]
-      })
+    }, [initialValue]);
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(Status, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
+        value: value,
+        onChange: onTypingChange,
+        onBlur: onChange
+      })]
     });
   }; // Set our editable cell renderer as the default Cell renderer
 
@@ -10034,41 +9843,63 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+var STATUS_DURATION = 2000;
 function useStatus(_ref) {
   var id = _ref.id,
       index = _ref.index,
-      getNewValue = _ref.getNewValue,
+      initialValue = _ref.initialValue,
       setValue = _ref.setValue,
+      getNewValue = _ref.getNewValue,
       updateMyData = _ref.updateMyData;
 
-  var _React$useState = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_0__.useState(initialValue),
       _React$useState2 = _slicedToArray(_React$useState, 2),
-      successfullyUpdated = _React$useState2[0],
-      setSuccessfullyUpdated = _React$useState2[1];
+      previousValue = _React$useState2[0],
+      setPreviousValue = _React$useState2[1];
 
   var _React$useState3 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
       _React$useState4 = _slicedToArray(_React$useState3, 2),
-      updatedWithFailure = _React$useState4[0],
-      setUpdatedWithFailure = _React$useState4[1];
+      successfullyUpdated = _React$useState4[0],
+      setSuccessfullyUpdated = _React$useState4[1];
 
-  var onChange = function onChange(e) {
+  var _React$useState5 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
+      _React$useState6 = _slicedToArray(_React$useState5, 2),
+      updatedWithFailure = _React$useState6[0],
+      setUpdatedWithFailure = _React$useState6[1];
+
+  if (typeof getNewValue === 'undefined') {
+    getNewValue = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(function (e) {
+      return e.target.value;
+    }).current;
+  }
+
+  var onChange = // useRef(
+  function onChange(e) {
     var newValue = getNewValue(e);
-    updateMyData(index, id, newValue, function () {
-      setSuccessfullyUpdated(true);
+
+    if (previousValue != newValue) {
       setValue(newValue);
-      setTimeout(function () {
-        setSuccessfullyUpdated(false);
-      }, 2000);
-    }, function () {
-      setUpdatedWithFailure(true);
-      setTimeout(function () {
-        setUpdatedWithFailure(false);
-      }, 2000);
-    });
-  }; // <div style={{position: "relative"}}>
+      updateMyData(index, id, newValue, function () {
+        setSuccessfullyUpdated(true);
+        setPreviousValue(newValue);
+        setTimeout(function () {
+          setSuccessfullyUpdated(false);
+        }, STATUS_DURATION);
+      }, function () {
+        setUpdatedWithFailure(true);
+        setValue(previousValue);
+        setTimeout(function () {
+          setUpdatedWithFailure(false);
+        }, STATUS_DURATION);
+      });
+    }
+  }; // ).current;
 
 
-  var StatusMarkup = function StatusMarkup(_ref2) {
+  var classes = 'position-absolute top-50 end-0 translate-middle_ border border-light rounded-circle';
+
+  var StatusMarkup = // useMemo(
+  function StatusMarkup(_ref2) {
     var children = _ref2.children;
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
@@ -10076,9 +9907,9 @@ function useStatus(_ref) {
           position: "relative"
         },
         children: [children, successfullyUpdated && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
-          className: "position-absolute top-50 end-0 translate-middle bg-success border border-light rounded-circle",
+          className: "".concat(classes, " bg-success"),
           style: {
-            marginRight: '-0.4em'
+            margin: '0.2em'
           },
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("i", {
             className: "fas fa-check",
@@ -10090,9 +9921,9 @@ function useStatus(_ref) {
             }
           })
         }), updatedWithFailure && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
-          className: "position-absolute top-50 end-0 translate-middle bg-danger border border-light rounded-circle",
+          className: "".concat(classes, " bg-danger"),
           style: {
-            marginRight: '-0.4em'
+            margin: '0.2em'
           },
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("i", {
             className: "fas fa-exclamation",
@@ -10106,7 +9937,8 @@ function useStatus(_ref) {
         })]
       })
     });
-  };
+  }; // , []);
+
 
   return [StatusMarkup, onChange];
 }
