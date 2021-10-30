@@ -1,10 +1,9 @@
-import React, { useMemo, useState, useEffect } from 'react';
+import React from 'react';
 import { useTable, useGlobalFilter, useSortBy } from 'react-table';
 import Degree from './Degree';
 import PostCategory from './PostCategory';
 import TableSearch from './TableSearch';
 import useEditable from '../utils/useEditable';
-
 
 const EditableDegree = ({ id, field, initialValue, inlineUpdateUrl, onBeforeSuccess }) => {
   const [Editable, value, onChange] = useEditable({ id, field, initialValue, inlineUpdateUrl, onBeforeSuccess,
@@ -29,7 +28,7 @@ const EditablePostCategory = ({ id, field, initialValue, inlineUpdateUrl, onBefo
 }; 
 
 // Create an editable cell renderer
-const EditableDateCell = ({ id, field, initialValue, inlineUpdateUrl, onBeforeSuccess }) => {
+const EditableDate = ({ id, field, initialValue, inlineUpdateUrl, onBeforeSuccess }) => {
   // We need to keep and update the state of the cell normally
   initialValue = initialValue != null ? initialValue : '';
 
@@ -44,7 +43,7 @@ const EditableDateCell = ({ id, field, initialValue, inlineUpdateUrl, onBeforeSu
 }
 
 // Create an editable cell renderer
-const EditableSwitchCell = ({ id, field, initialValue, inlineUpdateUrl, onBeforeSuccess }) => {
+const EditableSwitch = ({ id, field, initialValue, inlineUpdateUrl, onBeforeSuccess }) => {
     // We need to keep and update the state of the cell normally
     initialValue = initialValue != null ? initialValue : '';
 
@@ -61,22 +60,31 @@ const EditableSwitchCell = ({ id, field, initialValue, inlineUpdateUrl, onBefore
 }
 
 // Create an editable cell renderer
-const EditableTextCell = ({ id, field, initialValue, inlineUpdateUrl, onBeforeSuccess }) => {
+export const EditableText = ({ id, field, initialValue, inlineUpdateUrl, onBeforeSuccess, type, className }) => {
   // We need to keep and update the state of the cell normally
   initialValue = initialValue != null ? initialValue : '';
+  onBeforeSuccess = typeof onBeforeSuccess == 'function' ? onBeforeSuccess : () => {};
+  className = typeof className == 'undefined' ? '' : className;
+  type = typeof className == 'undefined' ? 'text' : type;
 
   const [Editable, value, onChange, setValue] = useEditable({ id, field, initialValue, inlineUpdateUrl, onBeforeSuccess, 
-      getNewValue : (e) => value
-    });
+    getNewValue : (e) => value
+  });
 
-    const onTypingChange = e => setValue(e.target.value)
-    
-    return <>
-      <Editable />
-      <input value={value} onChange={onTypingChange} onBlur={onChange} />
-    </>
+  const onTypingChange = e => setValue(e.target.value)
+
+  return <>
+    <Editable />
+    <input 
+      id={field} 
+      name={field} 
+      className={className}
+      type={type} 
+      defaultValue={initialValue} 
+      onChange={onTypingChange} 
+      onBlur={onChange} />
+  </>
 }
-
 
 export default function Table({ columns, data, inlineUpdateUrl }) {
   const [skipPageReset, setSkipPageReset] = React.useState(false);
@@ -125,11 +133,11 @@ const defaultColumn = {
     } else if (info.column.id == "is_coach" 
             || info.column.id == "is_best" 
             || info.column.id == "is_actual") {
-      return (<EditableSwitchCell {...attributes} />)
+      return (<EditableSwitch {...attributes} />)
     } else if (info.column.id == "dateAt") {
-      return (<EditableDateCell {...attributes} />)
+      return (<EditableDate {...attributes} />)
     } else {
-      return <EditableTextCell {...attributes} />
+      return <EditableText {...attributes} />
     } 
   }
 }

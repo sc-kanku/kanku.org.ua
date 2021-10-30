@@ -2,6 +2,7 @@ import React, {useMemo, useState, useEffect} from 'react';
 import { useParams, Redirect} from 'react-router-dom';
 import Degree from '../controls/Degree';
 import Photo from '../controls/Photo';
+import { EditableText } from '../controls/Table';
 
 import AthleteEditDojos from '../controls/AthleteEditDojos';
 
@@ -93,28 +94,31 @@ const EditAthlete = ({getUrl, updateUrl, photoFileName}) => {
              <div className="col-sm-5 d-grid gap-3">
                 <div>
                     <label htmlFor="lastName" className="form-label">Прізвище</label>
-                    <input id="lastName" name="lastName" className="form-control"  
-                        type="text"
-                        placeholder="" 
-                        defaultValue={isEdit && editedData.lastName} 
+
+                    <EditableText field="lastName" className="form-control"
+                        id={isEdit && editedData.id} 
+                        initialValue={isEdit && editedData.lastName} 
+                        inlineUpdateUrl='/api/athlete/update'
                     />
                 </div>
 
                 <div>
                     <label htmlFor="firstName" className="form-label">Ім'я</label>
-                    <input id="firstName" name="firstName" className="form-control"  
-                        type="text"
-                        placeholder="" 
-                        defaultValue={isEdit && editedData.firstName}
+
+                    <EditableText field="firstName" className="form-control"
+                        id={isEdit && editedData.id} 
+                        initialValue={isEdit && editedData.firstName} 
+                        inlineUpdateUrl='/api/athlete/update'
                     />
                 </div>
 
                 <div>
                     <label htmlFor="patronymic" className="form-label">По батькові</label>
-                    <input id="patronymic" name="patronymic" className="form-control"  
-                        type="text"
-                        placeholder="" 
-                        defaultValue={isEdit && editedData.patronymic}
+
+                    <EditableText field="patronymic" className="form-control"
+                        id={isEdit && editedData.id} 
+                        initialValue={isEdit && editedData.patronymic} 
+                        inlineUpdateUrl='/api/athlete/update'
                     />
                 </div>
 
@@ -152,28 +156,31 @@ const EditAthlete = ({getUrl, updateUrl, photoFileName}) => {
              
                 <div>
                     <label htmlFor="phone" className="form-label">Телефон</label>
-                    <input id="phone" name="phone" className="form-control"  
-                        type="text"
-                        placeholder="" 
-                        defaultValue={isEdit && editedData.phone}
+                    <EditableText field="phone" className="form-control"
+                        id={isEdit && editedData.id} 
+                        initialValue={isEdit && editedData.phone} 
+                        inlineUpdateUrl='/api/athlete/update'
                     />
                 </div>
 
                 <div>
                     <label htmlFor="phone2" className="form-label">Додатковий телефон</label>
-                    <input id="phone2" name="phone2" className="form-control"  
-                        type="text"
-                        placeholder="" 
-                        defaultValue={isEdit && editedData.phone2}
+                    
+                    <EditableText field="phone2" className="form-control"
+                        id={isEdit && editedData.id} 
+                        initialValue={isEdit && editedData.phone2} 
+                        inlineUpdateUrl='/api/athlete/update'
                     />
                 </div>
 
                 <div>
                     <label htmlFor="email" className="form-label">E-mail</label>
-                    <input id="email" name="email" className="form-control"  
+                    
+                    <EditableText field="email" className="form-control"
+                        id={isEdit && editedData.id} 
                         type="email"
-                        placeholder="" 
-                        defaultValue={isEdit && editedData.email}
+                        initialValue={isEdit && editedData.email} 
+                        inlineUpdateUrl='/api/athlete/update'
                     />
                 </div>
             </div>
@@ -243,33 +250,41 @@ const EditAthlete = ({getUrl, updateUrl, photoFileName}) => {
                 
                 <div>                
                     <label htmlFor="facebook" className="form-label">Facebook</label>
-                    <input id="facebook" name="facebook" className="form-control" 
-                        type="text"
-                        defaultValue={isEdit && editedData.facebook}
+
+                    <EditableText field="facebook" className="form-control"
+                        id={isEdit && editedData.id} 
+                        initialValue={isEdit && editedData.facebook} 
+                        inlineUpdateUrl='/api/athlete/update'
                     />
                 </div>
 
                 <div>                
                     <label htmlFor="instagram" className="form-label">Instagram</label>
-                    <input id="instagram" name="instagram" className="form-control" 
-                        type="text"
-                        defaultValue={isEdit && editedData.instagram}
+                    
+                    <EditableText field="instagram" className="form-control"
+                        id={isEdit && editedData.id} 
+                        initialValue={isEdit && editedData.instagram} 
+                        inlineUpdateUrl='/api/athlete/update'
                     />
                 </div>
 
                 <div>                
                     <label htmlFor="youtube" className="form-label">Youtube</label>
-                    <input id="youtube" name="youtube" className="form-control" 
-                        type="text"
-                        defaultValue={isEdit && editedData.youtube}
+
+                    <EditableText field="youtube" className="form-control"
+                        id={isEdit && editedData.id} 
+                        initialValue={isEdit && editedData.youtube} 
+                        inlineUpdateUrl='/api/athlete/update'
                     />
                 </div>
 
                 <div>                
                     <label htmlFor="twitter" className="form-label">Twitter</label>
-                    <input id="twitter" name="twitter" className="form-control" 
-                        type="text"
-                        defaultValue={isEdit && editedData.twitter}
+
+                    <EditableText field="twitter" className="form-control"
+                        id={isEdit && editedData.id} 
+                        initialValue={isEdit && editedData.twitter} 
+                        inlineUpdateUrl='/api/athlete/update'
                     />
                 </div>
             </div>
