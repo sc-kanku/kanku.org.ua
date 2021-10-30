@@ -5,6 +5,79 @@ import PostCategory from './PostCategory';
 import TableSearch from './TableSearch';
 import useEditable from '../utils/useEditable';
 
+
+const EditableDegree = ({ id, field, initialValue, inlineUpdateUrl, onBeforeSuccess }) => {
+  const [Editable, value, onChange] = useEditable({ id, field, initialValue, inlineUpdateUrl, onBeforeSuccess,
+    getNewValue: (e) => e.target.value
+   });
+
+  return <>
+      <Editable />
+      <Degree value={value} editable="true" onChange={onChange} />
+  </>
+};
+
+const EditablePostCategory = ({ id, field, initialValue, inlineUpdateUrl, onBeforeSuccess }) => {
+  const [Editable, value, onChange] = useEditable({ id, field, initialValue, inlineUpdateUrl, onBeforeSuccess,
+    getNewValue: (e) => e.target.value
+  });
+
+  return <>
+      <Editable />
+      <PostCategory value={value} editable="true" onChange={onChange} />
+  </>
+}; 
+
+// Create an editable cell renderer
+const EditableDateCell = ({ id, field, initialValue, inlineUpdateUrl, onBeforeSuccess }) => {
+  // We need to keep and update the state of the cell normally
+  initialValue = initialValue != null ? initialValue : '';
+
+  const [Editable, value, onChange] = useEditable({ id, field, initialValue, inlineUpdateUrl, onBeforeSuccess,
+    getNewValue: (e) => e.target.value
+  });
+
+  return <>
+    <Editable />
+    <input type="date" value={value} onChange={onChange} />
+  </>
+}
+
+// Create an editable cell renderer
+const EditableSwitchCell = ({ id, field, initialValue, inlineUpdateUrl, onBeforeSuccess }) => {
+    // We need to keep and update the state of the cell normally
+    initialValue = initialValue != null ? initialValue : '';
+
+    const [Editable, value, onChange] = useEditable({ id, field, initialValue, inlineUpdateUrl, onBeforeSuccess, 
+        getNewValue : (e) => 1 - value
+      });
+  
+    return <>
+      <Editable />
+      <div className="form-check form-switch">
+        <input className="form-check-input mx-auto" type="checkbox" role="switch" onChange={onChange} checked={value == 1} />
+      </div>
+    </>
+}
+
+// Create an editable cell renderer
+const EditableTextCell = ({ id, field, initialValue, inlineUpdateUrl, onBeforeSuccess }) => {
+  // We need to keep and update the state of the cell normally
+  initialValue = initialValue != null ? initialValue : '';
+
+  const [Editable, value, onChange, setValue] = useEditable({ id, field, initialValue, inlineUpdateUrl, onBeforeSuccess, 
+      getNewValue : (e) => value
+    });
+
+    const onTypingChange = e => setValue(e.target.value)
+    
+    return <>
+      <Editable />
+      <input value={value} onChange={onTypingChange} onBlur={onChange} />
+    </>
+}
+
+
 export default function Table({ columns, data, inlineUpdateUrl }) {
   const [skipPageReset, setSkipPageReset] = React.useState(false);
 
@@ -33,82 +106,6 @@ export default function Table({ columns, data, inlineUpdateUrl }) {
     setSkipPageReset(false)
   }, [data])
 
-const EditableDegree = ({ id, field, initialValue }) => {
-  const [Editable, value, onChange] = useEditable({ id, field, initialValue, inlineUpdateUrl, 
-    onBeforeSuccess: synchronizeDataOnUpdateSuccess,
-    getNewValue: (e) => e.target.value
-   });
-
-  return <>
-      <Editable />
-      <Degree value={value} editable="true" onChange={onChange} />
-  </>
-};
-
-const EditablePostCategory = ({ id, field, initialValue }) => {
-  const [Editable, value, onChange] = useEditable({ id, field, initialValue, inlineUpdateUrl, 
-    onBeforeSuccess: synchronizeDataOnUpdateSuccess,
-    getNewValue: (e) => e.target.value
-  });
-
-  return <>
-      <Editable />
-      <PostCategory value={value} editable="true" onChange={onChange} />
-  </>
-}; 
-
-// Create an editable cell renderer
-const EditableDateCell = ({ id, field, initialValue }) => {
-  // We need to keep and update the state of the cell normally
-  initialValue = initialValue != null ? initialValue : '';
-
-  const [Editable, value, onChange] = useEditable({ id, field, initialValue, inlineUpdateUrl, 
-    onBeforeSuccess: synchronizeDataOnUpdateSuccess,
-    getNewValue: (e) => e.target.value
-  });
-
-  return <>
-    <Editable />
-    <input type="date" value={value} onChange={onChange} />
-  </>
-}
-
-// Create an editable cell renderer
-const EditableSwitchCell = ({ id, field, initialValue }) => {
-    // We need to keep and update the state of the cell normally
-    initialValue = initialValue != null ? initialValue : '';
-
-    const [Editable, value, onChange] = useEditable({ id, field, initialValue, inlineUpdateUrl, 
-        onBeforeSuccess: synchronizeDataOnUpdateSuccess, 
-        getNewValue : (e) => 1 - value
-      });
-  
-    return <>
-      <Editable />
-      <div className="form-check form-switch">
-        <input className="form-check-input mx-auto" type="checkbox" role="switch" onChange={onChange} checked={value == 1} />
-      </div>
-    </>
-}
-
-// Create an editable cell renderer
-const EditableCell = ({ id, field, initialValue }) => {
-  // We need to keep and update the state of the cell normally
-  initialValue = initialValue != null ? initialValue : '';
-
-  const [Editable, value, onChange, setValue] = useEditable({ id, field, initialValue, inlineUpdateUrl, 
-      onBeforeSuccess: synchronizeDataOnUpdateSuccess, 
-      getNewValue : (e) => value
-    });
-
-    const onTypingChange = e => setValue(e.target.value)
-    
-    return <>
-      <Editable />
-      <input value={value} onChange={onTypingChange} onBlur={onChange} />
-    </>
-}
-
 // Set our editable cell renderer as the default Cell renderer
 const defaultColumn = {
   Cell: info => {
@@ -116,6 +113,8 @@ const defaultColumn = {
       id: info.row.index + 1,
       field: info.column.id,
       initialValue: info.value,
+      onBeforeSuccess: synchronizeDataOnUpdateSuccess,
+      inlineUpdateUrl: inlineUpdateUrl
 //      save: info.save
     }
 
@@ -130,7 +129,7 @@ const defaultColumn = {
     } else if (info.column.id == "dateAt") {
       return (<EditableDateCell {...attributes} />)
     } else {
-      return <EditableCell {...attributes}  />
+      return <EditableTextCell {...attributes} />
     } 
   }
 }

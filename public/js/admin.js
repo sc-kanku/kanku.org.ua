@@ -7102,10 +7102,185 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-function Table(_ref) {
-  var columns = _ref.columns,
-      data = _ref.data,
-      inlineUpdateUrl = _ref.inlineUpdateUrl;
+
+var EditableDegree = function EditableDegree(_ref) {
+  var id = _ref.id,
+      field = _ref.field,
+      initialValue = _ref.initialValue,
+      inlineUpdateUrl = _ref.inlineUpdateUrl,
+      onBeforeSuccess = _ref.onBeforeSuccess;
+
+  var _useEditable = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_5__["default"])({
+    id: id,
+    field: field,
+    initialValue: initialValue,
+    inlineUpdateUrl: inlineUpdateUrl,
+    onBeforeSuccess: onBeforeSuccess,
+    getNewValue: function getNewValue(e) {
+      return e.target.value;
+    }
+  }),
+      _useEditable2 = _slicedToArray(_useEditable, 3),
+      Editable = _useEditable2[0],
+      value = _useEditable2[1],
+      onChange = _useEditable2[2];
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(Editable, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Degree__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      value: value,
+      editable: "true",
+      onChange: onChange
+    })]
+  });
+};
+
+var EditablePostCategory = function EditablePostCategory(_ref2) {
+  var id = _ref2.id,
+      field = _ref2.field,
+      initialValue = _ref2.initialValue,
+      inlineUpdateUrl = _ref2.inlineUpdateUrl,
+      onBeforeSuccess = _ref2.onBeforeSuccess;
+
+  var _useEditable3 = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_5__["default"])({
+    id: id,
+    field: field,
+    initialValue: initialValue,
+    inlineUpdateUrl: inlineUpdateUrl,
+    onBeforeSuccess: onBeforeSuccess,
+    getNewValue: function getNewValue(e) {
+      return e.target.value;
+    }
+  }),
+      _useEditable4 = _slicedToArray(_useEditable3, 3),
+      Editable = _useEditable4[0],
+      value = _useEditable4[1],
+      onChange = _useEditable4[2];
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(Editable, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_PostCategory__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      value: value,
+      editable: "true",
+      onChange: onChange
+    })]
+  });
+}; // Create an editable cell renderer
+
+
+var EditableDateCell = function EditableDateCell(_ref3) {
+  var id = _ref3.id,
+      field = _ref3.field,
+      initialValue = _ref3.initialValue,
+      inlineUpdateUrl = _ref3.inlineUpdateUrl,
+      onBeforeSuccess = _ref3.onBeforeSuccess;
+  // We need to keep and update the state of the cell normally
+  initialValue = initialValue != null ? initialValue : '';
+
+  var _useEditable5 = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_5__["default"])({
+    id: id,
+    field: field,
+    initialValue: initialValue,
+    inlineUpdateUrl: inlineUpdateUrl,
+    onBeforeSuccess: onBeforeSuccess,
+    getNewValue: function getNewValue(e) {
+      return e.target.value;
+    }
+  }),
+      _useEditable6 = _slicedToArray(_useEditable5, 3),
+      Editable = _useEditable6[0],
+      value = _useEditable6[1],
+      onChange = _useEditable6[2];
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(Editable, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
+      type: "date",
+      value: value,
+      onChange: onChange
+    })]
+  });
+}; // Create an editable cell renderer
+
+
+var EditableSwitchCell = function EditableSwitchCell(_ref4) {
+  var id = _ref4.id,
+      field = _ref4.field,
+      initialValue = _ref4.initialValue,
+      inlineUpdateUrl = _ref4.inlineUpdateUrl,
+      onBeforeSuccess = _ref4.onBeforeSuccess;
+  // We need to keep and update the state of the cell normally
+  initialValue = initialValue != null ? initialValue : '';
+
+  var _useEditable7 = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_5__["default"])({
+    id: id,
+    field: field,
+    initialValue: initialValue,
+    inlineUpdateUrl: inlineUpdateUrl,
+    onBeforeSuccess: onBeforeSuccess,
+    getNewValue: function getNewValue(e) {
+      return 1 - value;
+    }
+  }),
+      _useEditable8 = _slicedToArray(_useEditable7, 3),
+      Editable = _useEditable8[0],
+      value = _useEditable8[1],
+      onChange = _useEditable8[2];
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(Editable, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+      className: "form-check form-switch",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
+        className: "form-check-input mx-auto",
+        type: "checkbox",
+        role: "switch",
+        onChange: onChange,
+        checked: value == 1
+      })
+    })]
+  });
+}; // Create an editable cell renderer
+
+
+var EditableTextCell = function EditableTextCell(_ref5) {
+  var id = _ref5.id,
+      field = _ref5.field,
+      initialValue = _ref5.initialValue,
+      inlineUpdateUrl = _ref5.inlineUpdateUrl,
+      onBeforeSuccess = _ref5.onBeforeSuccess;
+  // We need to keep and update the state of the cell normally
+  initialValue = initialValue != null ? initialValue : '';
+
+  var _useEditable9 = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_5__["default"])({
+    id: id,
+    field: field,
+    initialValue: initialValue,
+    inlineUpdateUrl: inlineUpdateUrl,
+    onBeforeSuccess: onBeforeSuccess,
+    getNewValue: function getNewValue(e) {
+      return value;
+    }
+  }),
+      _useEditable10 = _slicedToArray(_useEditable9, 4),
+      Editable = _useEditable10[0],
+      value = _useEditable10[1],
+      onChange = _useEditable10[2],
+      setValue = _useEditable10[3];
+
+  var onTypingChange = function onTypingChange(e) {
+    return setValue(e.target.value);
+  };
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(Editable, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
+      value: value,
+      onChange: onTypingChange,
+      onBlur: onChange
+    })]
+  });
+};
+
+function Table(_ref6) {
+  var columns = _ref6.columns,
+      data = _ref6.data,
+      inlineUpdateUrl = _ref6.inlineUpdateUrl;
 
   var _React$useState = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
       _React$useState2 = _slicedToArray(_React$useState, 2),
@@ -7132,179 +7307,16 @@ function Table(_ref) {
 
   react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
     setSkipPageReset(false);
-  }, [data]);
-
-  var EditableDegree = function EditableDegree(_ref2) {
-    var id = _ref2.id,
-        field = _ref2.field,
-        initialValue = _ref2.initialValue;
-
-    var _useEditable = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_5__["default"])({
-      id: id,
-      field: field,
-      initialValue: initialValue,
-      inlineUpdateUrl: inlineUpdateUrl,
-      onBeforeSuccess: synchronizeDataOnUpdateSuccess,
-      getNewValue: function getNewValue(e) {
-        return e.target.value;
-      }
-    }),
-        _useEditable2 = _slicedToArray(_useEditable, 3),
-        Editable = _useEditable2[0],
-        value = _useEditable2[1],
-        onChange = _useEditable2[2];
-
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(Editable, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Degree__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        value: value,
-        editable: "true",
-        onChange: onChange
-      })]
-    });
-  };
-
-  var EditablePostCategory = function EditablePostCategory(_ref3) {
-    var id = _ref3.id,
-        field = _ref3.field,
-        initialValue = _ref3.initialValue;
-
-    var _useEditable3 = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_5__["default"])({
-      id: id,
-      field: field,
-      initialValue: initialValue,
-      inlineUpdateUrl: inlineUpdateUrl,
-      onBeforeSuccess: synchronizeDataOnUpdateSuccess,
-      getNewValue: function getNewValue(e) {
-        return e.target.value;
-      }
-    }),
-        _useEditable4 = _slicedToArray(_useEditable3, 3),
-        Editable = _useEditable4[0],
-        value = _useEditable4[1],
-        onChange = _useEditable4[2];
-
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(Editable, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_PostCategory__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        value: value,
-        editable: "true",
-        onChange: onChange
-      })]
-    });
-  }; // Create an editable cell renderer
-
-
-  var EditableDateCell = function EditableDateCell(_ref4) {
-    var id = _ref4.id,
-        field = _ref4.field,
-        initialValue = _ref4.initialValue;
-    // We need to keep and update the state of the cell normally
-    initialValue = initialValue != null ? initialValue : '';
-
-    var _useEditable5 = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_5__["default"])({
-      id: id,
-      field: field,
-      initialValue: initialValue,
-      inlineUpdateUrl: inlineUpdateUrl,
-      onBeforeSuccess: synchronizeDataOnUpdateSuccess,
-      getNewValue: function getNewValue(e) {
-        return e.target.value;
-      }
-    }),
-        _useEditable6 = _slicedToArray(_useEditable5, 3),
-        Editable = _useEditable6[0],
-        value = _useEditable6[1],
-        onChange = _useEditable6[2];
-
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(Editable, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
-        type: "date",
-        value: value,
-        onChange: onChange
-      })]
-    });
-  }; // Create an editable cell renderer
-
-
-  var EditableSwitchCell = function EditableSwitchCell(_ref5) {
-    var id = _ref5.id,
-        field = _ref5.field,
-        initialValue = _ref5.initialValue;
-    // We need to keep and update the state of the cell normally
-    initialValue = initialValue != null ? initialValue : '';
-
-    var _useEditable7 = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_5__["default"])({
-      id: id,
-      field: field,
-      initialValue: initialValue,
-      inlineUpdateUrl: inlineUpdateUrl,
-      onBeforeSuccess: synchronizeDataOnUpdateSuccess,
-      getNewValue: function getNewValue(e) {
-        return 1 - value;
-      }
-    }),
-        _useEditable8 = _slicedToArray(_useEditable7, 3),
-        Editable = _useEditable8[0],
-        value = _useEditable8[1],
-        onChange = _useEditable8[2];
-
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(Editable, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-        className: "form-check form-switch",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
-          className: "form-check-input mx-auto",
-          type: "checkbox",
-          role: "switch",
-          onChange: onChange,
-          checked: value == 1
-        })
-      })]
-    });
-  }; // Create an editable cell renderer
-
-
-  var EditableCell = function EditableCell(_ref6) {
-    var id = _ref6.id,
-        field = _ref6.field,
-        initialValue = _ref6.initialValue;
-    // We need to keep and update the state of the cell normally
-    initialValue = initialValue != null ? initialValue : '';
-
-    var _useEditable9 = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_5__["default"])({
-      id: id,
-      field: field,
-      initialValue: initialValue,
-      inlineUpdateUrl: inlineUpdateUrl,
-      onBeforeSuccess: synchronizeDataOnUpdateSuccess,
-      getNewValue: function getNewValue(e) {
-        return value;
-      }
-    }),
-        _useEditable10 = _slicedToArray(_useEditable9, 4),
-        Editable = _useEditable10[0],
-        value = _useEditable10[1],
-        onChange = _useEditable10[2],
-        setValue = _useEditable10[3];
-
-    var onTypingChange = function onTypingChange(e) {
-      return setValue(e.target.value);
-    };
-
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(Editable, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
-        value: value,
-        onChange: onTypingChange,
-        onBlur: onChange
-      })]
-    });
-  }; // Set our editable cell renderer as the default Cell renderer
-
+  }, [data]); // Set our editable cell renderer as the default Cell renderer
 
   var defaultColumn = {
     Cell: function Cell(info) {
       var attributes = {
         id: info.row.index + 1,
         field: info.column.id,
-        initialValue: info.value //      save: info.save
+        initialValue: info.value,
+        onBeforeSuccess: synchronizeDataOnUpdateSuccess,
+        inlineUpdateUrl: inlineUpdateUrl //      save: info.save
 
       };
 
@@ -7317,7 +7329,7 @@ function Table(_ref) {
       } else if (info.column.id == "dateAt") {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(EditableDateCell, _objectSpread({}, attributes));
       } else {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(EditableCell, _objectSpread({}, attributes));
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(EditableTextCell, _objectSpread({}, attributes));
       }
     }
   }; // Use the useTable Hook to send the columns and data to build the table
