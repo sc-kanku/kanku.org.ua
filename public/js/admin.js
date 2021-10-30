@@ -6835,37 +6835,34 @@ function EditableTable(_ref) {
     }).then(setTableData);
   }, []);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-      className: "card_ table-responsive",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_TableStyles__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Switch, {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
-            path: [urls.editEntityWebUrl, urls.newEntityWebUrl],
-            render: function render() {
-              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_EditEntity__WEBPACK_IMPORTED_MODULE_3__["default"], {
-                  name: entity,
-                  getUrl: urls.getUrl,
-                  updateUrl: urls.updateEditedItemUrl
-                })
-              });
-            }
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
-            path: urls.listEntityWebUrl,
-            exact: true,
-            render: function render() {
-              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("h2", {
-                  children: ["\u0412\u0441\u0456 ", entity]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Table__WEBPACK_IMPORTED_MODULE_2__["default"], {
-                  columns: columns,
-                  data: tableData,
-                  inlineUpdateUrl: urls.inlineUpdateUrl
-                })]
-              });
-            }
-          })]
-        })
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_TableStyles__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Switch, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
+          path: [urls.editEntityWebUrl, urls.newEntityWebUrl],
+          render: function render() {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_EditEntity__WEBPACK_IMPORTED_MODULE_3__["default"], {
+                name: entity,
+                getUrl: urls.getUrl,
+                updateUrl: urls.updateEditedItemUrl
+              })
+            });
+          }
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
+          path: urls.listEntityWebUrl,
+          exact: true,
+          render: function render() {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("h2", {
+                children: ["\u0412\u0441\u0456 ", entity]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Table__WEBPACK_IMPORTED_MODULE_2__["default"], {
+                columns: columns,
+                data: tableData,
+                inlineUpdateUrl: urls.inlineUpdateUrl
+              })]
+            });
+          }
+        })]
       })
     })
   });
@@ -6985,7 +6982,7 @@ function Photo(_ref) {
       "class": "mt-3",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
         htmlFor: id,
-        "class": "custom-file-upload btn-sm btn-outline-success",
+        "class": "custom-file-upload btn-sm btn-outline-success ms-1",
         children: "\u0417\u043C\u0456\u043D\u0438\u0442\u0438"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
         id: id,
@@ -7639,62 +7636,65 @@ function Table(_ref) {
 
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("table", _objectSpread(_objectSpread({}, getTableProps()), {}, {
-      className: "table table-striped table-hover table-sm",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("thead", {
-        children: headerGroups.map(function (headerGroup) {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("tr", _objectSpread(_objectSpread({}, headerGroup.getHeaderGroupProps()), {}, {
-            children: headerGroup.headers.map(function (column) {
-              function getColumnStyle(column) {
-                var customStyle = {};
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+      className: "table-responsive",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("table", _objectSpread(_objectSpread({}, getTableProps()), {}, {
+        className: "table table-striped table-hover table-sm",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("thead", {
+          children: headerGroups.map(function (headerGroup) {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("tr", _objectSpread(_objectSpread({}, headerGroup.getHeaderGroupProps()), {}, {
+              children: headerGroup.headers.map(function (column) {
+                function getColumnStyle(column) {
+                  var customStyle = {};
 
-                if (column.id == 'phone' || column.id == 'phone2') {
-                  customStyle = {
-                    style: {
-                      minWidth: '12rem'
-                    }
-                  };
-                } else if (column.id == 'id') {
-                  customStyle = {
-                    style: {
-                      maxWidth: '2em'
-                    }
-                  };
-                }
+                  if (column.id == 'phone' || column.id == 'phone2') {
+                    customStyle = {
+                      style: {
+                        minWidth: '12rem'
+                      }
+                    };
+                  } else if (column.id == 'id') {
+                    customStyle = {
+                      style: {
+                        maxWidth: '2em'
+                      }
+                    };
+                  }
 
-                return customStyle;
-              } // {...column.getHeaderProps(column.getSortByToggleProps())} 
-              // {...column.getHeaderProps(getColumnStyle(column))} 
+                  return customStyle;
+                } // {...column.getHeaderProps(column.getSortByToggleProps())} 
+                // {...column.getHeaderProps(getColumnStyle(column))} 
 
 
-              var content = column.originalId == "Search" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_TableSearch__WEBPACK_IMPORTED_MODULE_4__["default"], {
-                  setGlobalFilter: setGlobalFilter
-                }), " ", rows.length != data.length ? rows.length + ' / ' + data.length : data.length]
-              }) : column.render("Header");
-              var sortingIcon = column.columns ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
-                className: column.isSorted ? column.isSortedDesc ? "fas fa-sort-up" : "fas fa-sort-down" : "fas fa-sort"
-              });
-              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("th", _objectSpread(_objectSpread({}, column.getHeaderProps(column.getSortByToggleProps())), {}, {
-                scope: "col",
-                children: [sortingIcon, " ", content]
-              }));
-            })
-          }));
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("tbody", _objectSpread(_objectSpread({}, getTableBodyProps()), {}, {
-        children: rows.map(function (row, i) {
-          prepareRow(row);
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("tr", _objectSpread(_objectSpread({}, row.getRowProps()), {}, {
-            children: row.cells.map(function (cell) {
-              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("td", _objectSpread(_objectSpread({}, cell.getCellProps()), {}, {
-                children: cell.render("Cell")
-              }));
-            })
-          }));
-        })
-      }))]
-    }))
+                var content = column.originalId == "Search" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_TableSearch__WEBPACK_IMPORTED_MODULE_4__["default"], {
+                    setGlobalFilter: setGlobalFilter
+                  }), " ", rows.length != data.length ? rows.length + ' / ' + data.length : data.length]
+                }) : column.render("Header");
+                var sortingIcon = column.columns ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
+                  className: column.isSorted ? column.isSortedDesc ? "fas fa-sort-up" : "fas fa-sort-down" : "fas fa-sort"
+                });
+                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("th", _objectSpread(_objectSpread({}, column.getHeaderProps(column.getSortByToggleProps())), {}, {
+                  scope: "col",
+                  children: [sortingIcon, " ", content]
+                }));
+              })
+            }));
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("tbody", _objectSpread(_objectSpread({}, getTableBodyProps()), {}, {
+          children: rows.map(function (row, i) {
+            prepareRow(row);
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("tr", _objectSpread(_objectSpread({}, row.getRowProps()), {}, {
+              children: row.cells.map(function (cell) {
+                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("td", _objectSpread(_objectSpread({}, cell.getCellProps()), {}, {
+                  children: cell.render("Cell")
+                }));
+              })
+            }));
+          })
+        }))]
+      }))
+    })
   });
 }
 

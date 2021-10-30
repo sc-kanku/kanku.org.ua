@@ -373,6 +373,7 @@ const {
   */
  // Input element
   return (<>
+  <div className="table-responsive">
     <table {...getTableProps()} className="table table-striped table-hover table-sm">
       <thead>
         {headerGroups.map(headerGroup => (
@@ -437,6 +438,7 @@ const {
         })}
       </tbody>
     </table>
+    </div>
     </>
   );
 }

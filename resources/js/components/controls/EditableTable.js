@@ -40,7 +40,6 @@ export default function EditableTable ({
 
     return (
         <>        
-        <div className="card_ table-responsive">
 
         <Styles>
             <Switch>
@@ -71,12 +70,12 @@ export default function EditableTable ({
                             data={tableData} 
                             inlineUpdateUrl={urls.inlineUpdateUrl}
                         />
+                        
                     </>
                 )}>
                 </Route>
             </Switch>
         </Styles>
-        </div>
         </>
     );
 }
