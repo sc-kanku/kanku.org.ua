@@ -1,6 +1,8 @@
 import React, {useMemo, useState, useEffect} from 'react';
 import { useParams, Redirect} from 'react-router-dom';
 import Degree from '../controls/Degree';
+import Photo from '../controls/Photo';
+
 import AthleteEditDojos from '../controls/AthleteEditDojos';
 
 const EditAthlete = ({getUrl, updateUrl, photoFileName}) => {
@@ -32,27 +34,26 @@ const EditAthlete = ({getUrl, updateUrl, photoFileName}) => {
     }
 
     let isEdit = editedData && editedData.id != null;
-    let editHeader = isEdit  ?  "Відредагувати " + editedData.lastName + ' ' + editedData.firstName + ' ' + editedData.patronymic : "Ввести нового спортсмена";
+    let editHeader = isEdit  ?  "" + editedData.lastName + ' ' + editedData.firstName + ' ' + editedData.patronymic : "Ввести нового спортсмена";
     let editathleteHiddenInputId = isEdit && <input type="hidden" name="id" value={editedData.id} />
     let photoUrl = editedData && ("/images/athletes/" + editedData.id + "/photo.png");
-    let degree = isEdit && <Degree value={editedData.degree} editable={true}/>;
+    
 
     let coachChecked = isEdit && (editedData.is_coach == 1) 
-        ? <input type="checkbox" name="is_best" value="1" defaultChecked="checked" />
-        : <input type="checkbox" name="is_best" value="1"/>
+        ? <input id="is_coach" className="form-check-input" type="checkbox" role="switch" name="is_coach" value="1" defaultChecked="checked" />
+        : <input id="is_coach" className="form-check-input" type="checkbox" role="switch" name="is_coach" value="1"/>
 
     let actualChecked = isEdit && (editedData.is_actual == 1)
-        ? <input type="checkbox" name="is_actual" value="1"defaultChecked="checked" />
-        : <input type="checkbox" name="is_actual" value="1"/>
-
+        ? <input id="is_actual" className="form-check-input" type="checkbox" role="switch" name="is_actual" value="1" defaultChecked="checked" />
+        : <input id="is_actual" className="form-check-input" type="checkbox" role="switch" name="is_actual" value="1"/>
 
     let bestChecked = isEdit && (editedData.is_best == 1)
-        ? <input type="checkbox" name="is_best" value="1"defaultChecked="checked" />
-        : <input type="checkbox" name="is_best" value="1"/>
+        ? <input id="is_best" className="form-check-input" type="checkbox" role="switch" name="is_best" value="1" defaultChecked="checked" />
+        : <input id="is_best" className="form-check-input" type="checkbox" role="switch" name="is_best" value="1"/>
 
     let blackChecked = isEdit && (editedData.show_in_blacks == 1)
-        ? <input type="checkbox" name="show_in_blacks" value="1"defaultChecked="checked" />
-        : <input type="checkbox" name="show_in_blacks" value="1"/>
+        ? <input id="show_in_blacks" className="form-check-input" type="checkbox" role="switch" name="show_in_blacks" value="1" defaultChecked="checked" />
+        : <input id="show_in_blacks" className="form-check-input" type="checkbox" role="switch" name="show_in_blacks" value="1"/>
 
 
     let full = isEdit ? editedData.full : '';
@@ -85,140 +86,202 @@ const EditAthlete = ({getUrl, updateUrl, photoFileName}) => {
     return (
         <>
             <h2>{editHeader}</h2>
-
-            <form id="edit-athlete" method="post" action={updateUrl} encType="multipart/form-data">
+            
+            <form id="edit-athlete" class="row" method="post" action={updateUrl} encType="multipart/form-data">
              {editathleteHiddenInputId}
 
-                <table className="usual" cellSpacing="0">
-                    <tbody>
-                    <tr>
-                        <td>Прізвище</td>
-                        <td> <input type="text" name="lastName" size="50" defaultValue={isEdit && editedData.lastName} /> </td>
-                    </tr>
-                    <tr>
-                        <td>Ім'я</td>
-                        <td><input type="text" name="firstName" size="20" defaultValue={isEdit && editedData.firstName} /> </td>
-                    </tr>
-                    <tr>
-                        <td>По батькові</td>
-                        <td><input type="text" name="patronymic" size="30" defaultValue={isEdit && editedData.patronymic} /></td>
-                    </tr>
+             <div className="col-sm-5 d-grid gap-3">
+                <div>
+                    <label htmlFor="lastName" className="form-label">Прізвище</label>
+                    <input id="lastName" name="lastName" className="form-control"  
+                        type="text"
+                        placeholder="" 
+                        defaultValue={isEdit && editedData.lastName} 
+                    />
+                </div>
+
+                <div>
+                    <label htmlFor="firstName" className="form-label">Ім'я</label>
+                    <input id="firstName" name="firstName" className="form-control"  
+                        type="text"
+                        placeholder="" 
+                        defaultValue={isEdit && editedData.firstName}
+                    />
+                </div>
+
+                <div>
+                    <label htmlFor="patronymic" className="form-label">По батькові</label>
+                    <input id="patronymic" name="patronymic" className="form-control"  
+                        type="text"
+                        placeholder="" 
+                        defaultValue={isEdit && editedData.patronymic}
+                    />
+                </div>
+
+                <div>
+                    <label htmlFor="birthday" className="form-label">Дата народження</label>
+                    <input id="birthday" name="birthday" className="form-control"  
+                        type="date"
+                        placeholder="" 
+                        defaultValue={isEdit && editedData.birthday}
+                    />
+                </div>
+
+                <div> 
+                    <label htmlFor="degree" className="form-label">Ступінь</label>
+                    <Degree id="degree" name="degree" className="form-control"
+                        value={isEdit && editedData.degree} 
+                        editable={true}
+                    />
+                </div>
+            </div>
+
+            <div className="mb-3 col-sm-1 mb-3"></div>
+
+            <div className="form-floating_ mb-3 col-sm-6">
+                <label htmlFor="photo" className="form-label">Фото</label>
+                <Photo id="photo" name="photo" className="form-control"
+                    url={photoUrl}
+                    alt={editHeader}
+                    editable={true}
+                />
+            </div>
+
+            <div class="col-md-5 d-grid gap-3 mb-3">
+                <p style={{'backgroundColor': 'yellow'}}>Контактна інформація</p>
+             
+                <div>
+                    <label htmlFor="phone" className="form-label">Телефон</label>
+                    <input id="phone" name="phone" className="form-control"  
+                        type="text"
+                        placeholder="" 
+                        defaultValue={isEdit && editedData.phone}
+                    />
+                </div>
+
+                <div>
+                    <label htmlFor="phone2" className="form-label">Додатковий телефон</label>
+                    <input id="phone2" name="phone2" className="form-control"  
+                        type="text"
+                        placeholder="" 
+                        defaultValue={isEdit && editedData.phone2}
+                    />
+                </div>
+
+                <div>
+                    <label htmlFor="email" className="form-label">E-mail</label>
+                    <input id="email" name="email" className="form-control"  
+                        type="email"
+                        placeholder="" 
+                        defaultValue={isEdit && editedData.email}
+                    />
+                </div>
+            </div>
+
+            <div className="col-md-1"></div>
+
+            <div class="col-md-6 mb-3">
+                <p style={{'backgroundColor': 'yellow'}}>Клубна інформація</p>
+
+                <div className="form-check form-switch mb-3">
+                    {actualChecked}
+                    <label htmlFor="is_actual" className="form-label">Належить до нашого клубу?</label>
+                </div>
+
+                <div className="form-check form-switch mb-3">
+                    {blackChecked}
+                    <label htmlFor="show_in_blacks" className="form-label">Показувати на сторінці чорних поясів нашого клубу (якщо досягнуто відповідного ступеню)?</label>
+                </div>
+            </div>
+
+            <div className="mb-3 col-md-12 d-grid gap-3">                
+                <p style={{'backgroundColor': 'yellow'}}>Про спортсмена</p>
+            
+                <div>                
+                    <label htmlFor="full" className="form-label">Повна інформація для сторінки спортсмена</label>
                     
-                    <tr>
-                        <td>День народження</td>
-                        <td>{isEdit && editedData.birthday}</td>
-                    </tr>
-                    <tr>
-                        <td>Ступінь</td>
-                        <td>{degree}</td>
-                    </tr>
-                    <tr>
-                        <td>Фото</td>
-                        <td>
-                            <div className="col-2" style={{width:'10%'}}>
-                                <img className="instructor-photo" src={photoUrl} alt={editHeader} />
-                            </div>
-                            <br/>Змінити
-                            <br/><input type="file" name="photo" />
-                            <br/>Співвідношення висоти до ширини фото<br />має бути 3:2
-                        </td>
-                    </tr>
+                    <textarea id="full" name="full" className="form-control" rows="10"
+                        defaultValue={full}
+                    ></textarea>
+                    
+                </div>
 
-                    <tr  style={{'backgroundColor': 'yellow'}}>
-                        <td colSpan="2">Клубна інформація</td>
-                    </tr>
+                <div className="form-check form-switch">
+                    {coachChecked}
+                    <label htmlFor="is_coach" className="form-label">Інструктор?</label>
+                </div>
 
-                    <tr>
-                        <td style={{textAlign:'right'}}>{actualChecked}</td>
-                        <td>Належить до нашого клубу?</td>
-                    </tr>
+                <div className="mb-2">                
+                    <label htmlFor="brief" className="form-label">Коротка інформація для сторінки зі списком всіх інструкторів</label>
 
-                    <tr>
-                        <td style={{textAlign:'right'}}>{coachChecked}</td>
-                        <td>Інструктор?</td>
-                    </tr>
+                    <textarea id="brief" name="brief" className="form-control" rows="5"
+                        defaultValue={brief}
+                    ></textarea>
+                </div>
 
-                    <tr>
-                        <td style={{textAlign:'right'}}>{bestChecked}</td>
-                        <td>Показувати в кращих спортсменах?</td>
-                    </tr>
+                <div className="form-check form-switch">
+                    {bestChecked}
+                    <label htmlFor="is_best" className="form-label">Показувати в кращих спортсменах?</label>
+                </div>
 
-                    <tr>
-                        <td style={{textAlign:'right'}}>{blackChecked}</td>
-                        <td>Показувати на сторінці чорних поясів нашого клубу<br />(якщо досягнуто відповідного ступеню)?</td>
-                    </tr>
-                    <tr>
-                        <td>Повна інформація</td>
-                        <td><textarea name="full" rows="10" cols="50" defaultValue={full}></textarea> </td>
-                    </tr>
-                    <tr>
-                        <td>Коротка інформація для сторінки зі списком всіх інструкторів</td>
-                        <td> <textarea name="brief" rows="5" cols="50" defaultValue={brief}></textarea> </td>
-                    </tr>
-                    <tr>
-                        <td>Коротка інформація для сторінки найкращих спортсменів</td>
-                        <td> <textarea name="briefBest" rows="5" cols="50" defaultValue={briefBest}></textarea> </td>
-                    </tr>
+                <div className="mb-2">                
+                    <label htmlFor="briefBest" className="form-label">Коротка інформація для сторінки найкращих спортсменів</label>
 
-                    <tr>                    
-                        <td>Зали</td>
-                        <td><AthleteEditDojos dojos={dojos} updateUrl={updateUrl + '/' + id} /></td>
-                    </tr>
-{/* 
-                    <tr>
-                        <td>Фотогалерея</td>
-                        <td>{garrerySnippet}</td>
-                    </tr>
-*/}
+                    <textarea id="briefBest" name="briefBest" className="form-control" rows="5"
+                        defaultValue={briefBest}
+                    ></textarea>
+                </div>
+            </div>
 
-        <tr  style={{'backgroundColor': 'yellow'}}>
-            <td colSpan="2">Контактна інформація</td>
-        </tr>
+            <div className="mb-3 col-md-12">                
+                <p style={{'backgroundColor': 'yellow'}}>Зали</p>
+                <AthleteEditDojos dojos={dojos} updateUrl={updateUrl + '/' + id} />
+            </div>
 
-        <tr>
-            <td>Телефон</td>
-            <td> <input type="text" name="phone" size="25" defaultValue={isEdit && editedData.phone} /> </td>
-        </tr>
+            <div className="mb-3 col-md-12 d-grid gap-3">                
+                <p style={{'backgroundColor': 'yellow'}}>Соціальні мережі</p>
+                
+                <div>                
+                    <label htmlFor="facebook" className="form-label">Facebook</label>
+                    <input id="facebook" name="facebook" className="form-control" 
+                        type="text"
+                        defaultValue={isEdit && editedData.facebook}
+                    />
+                </div>
 
-        <tr>
-            <td>Телефон 2</td>
-            <td> <input type="text" name="phone2" size="25" defaultValue={isEdit && editedData.phone2 } /> </td>
-        </tr>
-        <tr>
-            <td>E-mail</td>
-            <td> <input type="text" name="email" size="50" defaultValue={isEdit && editedData.email} /> </td>
-        </tr>
+                <div>                
+                    <label htmlFor="instagram" className="form-label">Instagram</label>
+                    <input id="instagram" name="instagram" className="form-control" 
+                        type="text"
+                        defaultValue={isEdit && editedData.instagram}
+                    />
+                </div>
 
-        <tr  style={{'backgroundColor': 'yellow'}}>
-            <td colSpan="2">Соціальні мережі</td>
-        </tr>
+                <div>                
+                    <label htmlFor="youtube" className="form-label">Youtube</label>
+                    <input id="youtube" name="youtube" className="form-control" 
+                        type="text"
+                        defaultValue={isEdit && editedData.youtube}
+                    />
+                </div>
 
-        <tr>
-            <td>Facebook </td>
-            <td> <input type="text" name="facebook" size="50" defaultValue={isEdit && editedData.facebook} /> </td>
-        </tr>
-
-        <tr>
-            <td>Instagram</td>
-            <td> <input type="text" name="instagram" size="50" defaultValue={isEdit && editedData.instagram} /> </td>
-        </tr>
-
-        <tr>
-            <td>Youtube</td>
-            <td> <input type="text" name="youtube" size="50" defaultValue={isEdit && editedData.youtube} /></td>
-        </tr>
-
-        <tr>
-            <td>Twitter</td>
-            <td> <input type="text" name="twitter" size="50" defaultValue={isEdit && editedData.twitter} /> </td>
-        </tr>
-
+                <div>                
+                    <label htmlFor="twitter" className="form-label">Twitter</label>
+                    <input id="twitter" name="twitter" className="form-control" 
+                        type="text"
+                        defaultValue={isEdit && editedData.twitter}
+                    />
+                </div>
+            </div>
+        </form>
         {/*
+
+
         <tr>
             <td>VK</td>
             <td> <input type="text" name="vk" size="50" defaultValue={isEdit && editedData.vk} /></td>
         </tr>
-        */}
+        
 
         <tr>
             <td>LiveJournal</td>
@@ -229,17 +292,10 @@ const EditAthlete = ({getUrl, updateUrl, photoFileName}) => {
             <td><input type="text" name="ok" size="50" defaultValue={isEdit && editedData.ok} /></td>
         </tr>
         
+        <button type="submit" class="btn btn-success mb-3" onSubmit={saveAthlete}>Зберегти</button>
+        */}
         
-
-        <tr>
-            <td colSpan="2">
-                <input type="button" name="save" value="зберегти" onClick={saveAthlete} />
-            </td>
-        </tr>
-                    </tbody>
-                </table>
-            </form>
-        </>
+       </>
     )
 };
 

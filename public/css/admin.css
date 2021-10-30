@@ -11530,6 +11530,7 @@ nav > .active {
 .consultations {
     width: 15em;
     display: inline-block;
+    flex-direction: row !important;
 }
 
 .consultations .phone-us,
@@ -12069,6 +12070,7 @@ nav.theory {
 .card {
     /* width: 49%; */
     width: 98%;
+    display: inline-block !important;
 }
 
 .card-wide {
@@ -12480,7 +12482,7 @@ a:focused {
     width: 100%;
 }
 
-.group .btn-close,
+.group .btn-delete,
 .group .move-left,
 .group .move-right {
     display: inline-block;
@@ -12489,6 +12491,7 @@ a:focused {
     padding: 0 0.3rem 0.3rem 0.3rem;
     width: 1.5rem;
     height: 1.5em;
+    float: right;
 }
 
 .group .label-group-name {
@@ -12497,10 +12500,13 @@ a:focused {
 
 .group .close-day {
     border-radius: 10%;
-
     position: static;
     padding: 0 0 0.2rem 0.3rem;
-    width: 1.2rem;
+    width: 1.5rem;
+}
+
+.group i {
+    vertical-align: middle;
 }
 
 .group .add-day {
@@ -12511,7 +12517,7 @@ a:focused {
     width: 1.2rem;
 }
 
-.group .btn-close:hover,
+.group .btn-delete:hover,
 .group .close-day:hover {
     background-color: #ff4e00;
     cursor: pointer;

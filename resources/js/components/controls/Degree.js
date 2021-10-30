@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Degree({value, editable, onChange}) {
+export default function Degree({id, name, className, value, editable, onChange}) {
     let key = value;
     let style = "url(/images/degrees/dan-" + key + ".gif)";
     let labels = {
@@ -31,7 +31,11 @@ export default function Degree({value, editable, onChange}) {
         );
 
         markup = 
-            <select value={key} className="form-select-sm" aria-label="Select degree" onChange={onChange}>
+            <select id={id} name={name} className="form-select-sm form-control"
+                value={key}
+                aria-label="Select degree" 
+                onChange={onChange}
+            >
                 {options}
             </select>
     } else {

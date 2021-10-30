@@ -11530,6 +11530,7 @@ nav > .active {
 .consultations {
     width: 15em;
     display: inline-block;
+    flex-direction: row !important;
 }
 
 .consultations .phone-us,
@@ -12069,6 +12070,7 @@ nav.theory {
 .card {
     /* width: 49%; */
     width: 98%;
+    display: inline-block !important;
 }
 
 .card-wide {

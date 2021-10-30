@@ -6237,7 +6237,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
 var AddEntitySelector = function AddEntitySelector(_ref) {
   var url = _ref.url,
       onSelect = _ref.onSelect,
@@ -6290,13 +6289,17 @@ var AddEntitySelector = function AddEntitySelector(_ref) {
     });
   }
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+    style: {
+      margin: '1em 2em'
+    },
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("a", {
       className: "btn btn-outline-success",
       onClick: selectEntity,
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
-        className: "fas fa-calendar-plus"
-      }), " \u0414\u043E\u0434\u0430\u0442\u0438"]
+        className: "fas fa-plus",
+        "aria-hidden": "true"
+      }), " \u0414\u043E\u0434\u0430\u0442\u0438 \u0437\u0430\u043B"]
     }), addingSnippet]
   });
 };
@@ -6409,25 +6412,31 @@ var AthleteEditDojos = function AthleteEditDojos(_ref) {
       var dojoUrl = "/admin/dojo/edit/" + dojo.id;
       var scheduleUrl = updateUrl + '/schedule/' + dojo.id;
       dojosArray.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("li", {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
-          href: dojoUrl,
-          children: dojo.name
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("a", {
-          className: "btn btn-outline-success",
-          onClick: function onClick() {
-            return editDojo(dojo.id);
-          },
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
-            className: "fas fa-edit"
-          }), " \u0420\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u0442\u0438 \u0437\u0430\u043B"]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("a", {
-          className: "btn btn-outline-success",
-          onClick: function onClick() {
-            return deleteDojo(dojo.id);
-          },
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
-            className: "fas fa-delete"
-          }), " \u0412\u0438\u0434\u0430\u043B\u0438\u0442\u0438 \u0437\u0430\u043B"]
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "input-group",
+          role: "group",
+          "aria-label": "Dojo actions",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
+            className: "input-group-text alert-success",
+            href: dojoUrl,
+            children: dojo.name
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("a", {
+            className: "btn btn-outline-success",
+            onClick: function onClick() {
+              return editDojo(dojo.id);
+            },
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
+              className: "fas fa-edit"
+            }), " \u0420\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u0442\u0438 \u0437\u0430\u043B"]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
+            className: "btn btn-outline-success",
+            onClick: function onClick() {
+              return deleteDojo(dojo.id);
+            },
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
+              "class": "far fa-trash-alt"
+            })
+          })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_schedule_Schedule__WEBPACK_IMPORTED_MODULE_1__["default"], {
           markup: (_dojo$pivot = dojo.pivot) === null || _dojo$pivot === void 0 ? void 0 : _dojo$pivot.schedule,
           editable: false,
@@ -6450,8 +6459,12 @@ var AthleteEditDojos = function AthleteEditDojos(_ref) {
   } // useEffect(showDojos, [dojosModel]);
 
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
-    children: dojosSnippet
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_AddEntitySelector__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      url: "/api/dojos",
+      onSelect: addDojo,
+      onAllDojosLoaded: onAllDojosLoaded
+    }), dojosSnippet]
   });
 };
 
@@ -6475,7 +6488,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function Degree(_ref) {
-  var value = _ref.value,
+  var id = _ref.id,
+      name = _ref.name,
+      className = _ref.className,
+      value = _ref.value,
       editable = _ref.editable,
       onChange = _ref.onChange;
   var key = value;
@@ -6508,8 +6524,10 @@ function Degree(_ref) {
       }, key);
     });
     markup = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("select", {
+      id: id,
+      name: name,
+      className: "form-select-sm form-control",
       value: key,
-      className: "form-select-sm",
       "aria-label": "Select degree",
       onChange: onChange,
       children: options
@@ -6926,6 +6944,60 @@ var EntitySelector = function EntitySelector(_ref) {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (EntitySelector);
+
+/***/ }),
+
+/***/ "./resources/js/components/controls/Photo.js":
+/*!***************************************************!*\
+  !*** ./resources/js/components/controls/Photo.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Photo)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+function Photo(_ref) {
+  var id = _ref.id,
+      name = _ref.name,
+      className = _ref.className,
+      url = _ref.url,
+      alt = _ref.alt,
+      editable = _ref.editable,
+      onChange = _ref.onChange;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
+        src: url,
+        alt: alt,
+        style: {
+          width: '180px'
+        }
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+      "class": "mt-3",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
+        htmlFor: id,
+        "class": "custom-file-upload btn-sm btn-outline-success",
+        children: "\u0417\u043C\u0456\u043D\u0438\u0442\u0438"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
+        id: id,
+        name: name,
+        type: "file"
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+      children: "\u0421\u043F\u0456\u0432\u0432\u0456\u0434\u043D\u043E\u0448\u0435\u043D\u043D\u044F \u0432\u0438\u0441\u043E\u0442\u0438 \u0434\u043E \u0448\u0438\u0440\u0438\u043D\u0438 \u0444\u043E\u0442\u043E \u043C\u0430\u0454 \u0431\u0443\u0442\u0438 3:2"
+    })]
+  });
+}
+;
 
 /***/ }),
 
@@ -7707,7 +7779,7 @@ var _templateObject;
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 
-var TableStyles = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  table {\n    border-spacing: 0;\n\n    tr {\n      :last-child {\n        td {\n          border-bottom: 0;\n        }\n      }\n    }\n\n    th,\n    td {\n      white-space: nowrap;\n      margin: 0;\n      padding: 0.1rem 0.5rem;\n      border-bottom: 1px solid #999999;\n      border-right: 1px solid #999999;\n\n      :last-child {\n        border-right: 0;\n      }\n    }\n  }\n\n  .fa-sort-up,\n  .fa-sort-down,\n  .fa-sort {\n    color: #999999;\n  }\n\n  th {\n    :hover {\n      .fa-sort-up,\n      .fa-sort-down,\n      .fa-sort {\n          color: red;\n      }\n    }\n  }\n\n  input:not([role='switch']) {\n    font-size: 1rem;\n    padding: 0;\n    margin: 0;\n    border: 0;\n    background-color: inherit;\n  }\n  .form-check-input:checked {\n    background-color: #0cc80f;\n  }\n\n  input[role=switch] {\n    border: 2px solid #999999;\n  }\n\n  select {\n    background-color: inherit;\n    border: 1px solid gray;\n  }\n\n  .table th, table td {\n    border-bottom: 1px solid #0ba9e7;\n    border-right: 1px solid #0ba9e7;\n  }\n\n  .table {\n    border: 1px solid #0ba9e7;\n    border-top-width: 2px;\n  }\n\n  .table-striped tbody tr:nth-of-type(odd) {\n    background-color: rgba(26, 135, 200, 0.09);\n  }\n  \n  .table-hover tbody tr:hover {\n    color: #0ba9e7;\n    background-color: rgba(26, 135, 200, 0.2);\n  }\n"])));
+var TableStyles = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  table {\n    border-spacing: 0;\n\n    tr {\n      :last-child {\n        td {\n          border-bottom: 0;\n        }\n      }\n    }\n\n    th,\n    td {\n      white-space: nowrap;\n      margin: 0;\n      padding: 0.1rem 0.5rem;\n      border-bottom: 1px solid #999999;\n      border-right: 1px solid #999999;\n\n      :last-child {\n        border-right: 0;\n      }\n    }\n  }\n\n  .fa-sort-up,\n  .fa-sort-down,\n  .fa-sort {\n    color: #999999;\n  }\n\n  th {\n    :hover {\n      .fa-sort-up,\n      .fa-sort-down,\n      .fa-sort {\n          color: red;\n      }\n    }\n  }\n\n  input:not([role='switch']) {\n    font-size: 1rem;\n    padding: 0 0 0 0.3em;\n    margin: 0;\n    border: 0;\n    background-color: inherit;\n  }\n  \n  .form-check-input:checked {\n    background-color: #0cc80f;\n  }\n\n  input[role=switch] {\n    border: 2px solid #999999;\n  }\n\n  form input:not([role='switch']) {\n    border: 1px solid #999999;\n  }\n\n  select {\n    background-color: inherit;\n    border: 1px solid gray;\n  }\n\n  .table th, table td {\n    border-bottom: 1px solid #0ba9e7;\n    border-right: 1px solid #0ba9e7;\n  }\n\n  .table {\n    border: 1px solid #0ba9e7;\n    border-top-width: 2px;\n  }\n\n  .table-striped tbody tr:nth-of-type(odd) {\n    background-color: rgba(26, 135, 200, 0.09);\n  }\n  \n  .table-hover tbody tr:hover {\n    color: #0ba9e7;\n    background-color: rgba(26, 135, 200, 0.2);\n  }\n\n  form #brief {\n    color: inherit;\n    font-weight: inherit;\n  }\n\n  .form-label {\n    margin-bottom: 0.3em;\n    color: #012372;\n    font-weight: 700;\n    font-size: 0.9em;\n  }\n\n  input[type='file'] {\n    border: 0 !important;\n    // display: none;\n  }\n\n  .custom-file-upload {/*\n    border: 1px solid #ccc;\n    display: inline-block;\n    padding: 6px 12px;\n    cursor: pointer;*/\n    position: absolute;\n    z-index: 1000;\n    background-color: white;\n    border: 1px solid;\n}\n\n.custom-file-upload:hover {\n  background-color: green;\n}\n\n"])));
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TableStyles);
 
 /***/ }),
@@ -7946,7 +8018,7 @@ var Day = function Day(_ref) {
           border: '1px solid gray'
         },
         className: "value-start",
-        type: "text",
+        type: "time",
         defaultValue: scheduleModel.start,
         onChange: changeStart
       })
@@ -7957,7 +8029,7 @@ var Day = function Day(_ref) {
           border: '1px solid gray'
         },
         className: "value-finish",
-        type: "text",
+        type: "time",
         defaultValue: scheduleModel.finish,
         onChange: changeFinish
       })
@@ -7969,7 +8041,10 @@ var Day = function Day(_ref) {
         onClick: function onClick() {
           return onRemove(scheduleModel);
         },
-        children: "x"
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
+          "class": "far fa-trash-alt",
+          "aria-hidden": "true"
+        })
       })
     })]
   });
@@ -8089,15 +8164,21 @@ var Group = function Group(_ref) {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
             className: "col",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-              className: "label-group-name col-9",
+              className: "label-group-name col-8 form-label",
               children: "\u041D\u0430\u0437\u0432\u0430 \u0433\u0440\u0443\u043F\u0438"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-              className: "move-left",
-              title: "\u041F\u0435\u0440\u0435\u043C\u0456\u0441\u0442\u0438\u0442\u0438 \u0446\u044E \u0433\u0440\u0443\u043F\u0443 \u043D\u0430\u0437\u0430\u0434",
-              onClick: function onClick() {
-                return onLeft(groupModel);
+              className: "btn-delete",
+              style: {
+                verticalAlign: 'middle'
               },
-              children: "<"
+              title: "\u0412\u0438\u0434\u0430\u043B\u0438\u0442\u0438 \u0446\u044E \u0433\u0440\u0443\u043F\u0443",
+              onClick: function onClick() {
+                return onRemove(groupModel);
+              },
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
+                "class": "far fa-trash-alt",
+                "aria-hidden": "true"
+              })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
               className: "move-right",
               title: "\u041F\u0435\u0440\u0435\u043C\u0456\u0441\u0442\u0438\u0442\u0438 \u0446\u044E \u0433\u0440\u0443\u043F\u0443 \u0432\u043F\u0435\u0440\u0435\u0434",
@@ -8106,11 +8187,12 @@ var Group = function Group(_ref) {
               },
               children: ">"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-              className: "btn-close",
-              title: "\u0412\u0438\u0434\u0430\u043B\u0438\u0442\u0438 \u0446\u044E \u0433\u0440\u0443\u043F\u0443",
+              className: "move-left",
+              title: "\u041F\u0435\u0440\u0435\u043C\u0456\u0441\u0442\u0438\u0442\u0438 \u0446\u044E \u0433\u0440\u0443\u043F\u0443 \u043D\u0430\u0437\u0430\u0434",
               onClick: function onClick() {
-                return onRemove(groupModel);
-              }
+                return onLeft(groupModel);
+              },
+              children: "<"
             })]
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
@@ -8132,13 +8214,13 @@ var Group = function Group(_ref) {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           className: "row",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-            className: "label col-3",
+            className: "form-label col-3",
             children: "\u0414\u0435\u043D\u044C"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-            className: "label col-4",
+            className: "form-label col-4",
             children: "\u041F\u043E\u0447\u0430\u0442\u043E\u043A"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-            className: "label col-4",
+            className: "form-label col-4",
             children: "\u0417\u0430\u043A\u0456\u043D\u0447\u0435\u043D\u043D\u044F"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
             className: "col-1",
@@ -8258,18 +8340,35 @@ var Schedule = function Schedule(_ref) {
     });
   };
 
+  var addGroup = function addGroup() {
+    var newGroup = _ScheduleHelper__WEBPACK_IMPORTED_MODULE_1__["default"].newGroupModel();
+    var resultingGroups = [newGroup].concat(groups);
+    setGroups(resultingGroups);
+  };
+
   var editControls = isEditable ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("a", {
       className: "btn btn-outline-success",
+      onClick: addGroup,
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
+        className: "fas fa-plus",
+        "aria-hidden": "true"
+      }), " \u0414\u043E\u0434\u0430\u0442\u0438 \u043D\u043E\u0432\u0443 \u0433\u0440\u0443\u043F\u0443"]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("a", {
+      className: "btn btn-success",
       onClick: save,
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
-        className: "fas fa-edit"
+        "class": "fas fa-check"
       }), " \u0417\u0431\u0435\u0440\u0435\u0433\u0442\u0438"]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("a", {
-      className: "btn btn-outline-success",
+      className: "btn btn-outline-secondary",
       onClick: cancel,
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
-        className: "fas fa-edit"
+        "aria-hidden": "true",
+        "class": "btn btn-close",
+        style: {
+          verticalAlign: 'bottom'
+        }
       }), " \u0412\u0438\u043C\u043A\u043D\u0443\u0442\u0438 \u0440\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u043D\u043D\u044F / \u043D\u0435 \u0437\u0431\u0435\u0440\u0456\u0433\u0430\u0442\u0438"]
     })]
   }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("a", {
@@ -8288,12 +8387,6 @@ var Schedule = function Schedule(_ref) {
       }
     });
   } else {
-    var addGroup = function addGroup() {
-      var newGroup = _ScheduleHelper__WEBPACK_IMPORTED_MODULE_1__["default"].newGroupModel();
-      var resultingGroups = [newGroup].concat(groups);
-      setGroups(resultingGroups);
-    };
-
     var removeGroup = function removeGroup(group) {
       // TODO: Array filter method!
       var position = _ScheduleHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getIndex(groups, group);
@@ -8334,14 +8427,8 @@ var Schedule = function Schedule(_ref) {
         onRight: moveRight
       }, _ScheduleHelper__WEBPACK_IMPORTED_MODULE_1__["default"].generateId()));
     });
-    editableOrNonEditableContent = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("a", {
-        className: "btn btn-outline-success",
-        onClick: addGroup,
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
-          className: "fas fa-calendar-plus"
-        }), " \u0414\u043E\u0434\u0430\u0442\u0438 \u043D\u043E\u0432\u0443 \u0433\u0440\u0443\u043F\u0443"]
-      }), groupsControls]
+    editableOrNonEditableContent = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
+      children: groupsControls
     });
   }
 
@@ -8358,7 +8445,13 @@ var Schedule = function Schedule(_ref) {
     value: {
       synchronizeGroups: synchronizeGroups
     },
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("br", {}), editControls, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("br", {}), editableOrNonEditableContent]
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      className: "input-group mt-3 mb-3",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+        className: "input-group-text",
+        children: "\u0420\u043E\u0437\u043A\u043B\u0430\u0434"
+      }), editControls]
+    }), editableOrNonEditableContent]
   });
 };
 
@@ -8778,10 +8871,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _controls_Degree__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../controls/Degree */ "./resources/js/components/controls/Degree.js");
-/* harmony import */ var _controls_AthleteEditDojos__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../controls/AthleteEditDojos */ "./resources/js/components/controls/AthleteEditDojos.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _controls_Photo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../controls/Photo */ "./resources/js/components/controls/Photo.js");
+/* harmony import */ var _controls_AthleteEditDojos__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../controls/AthleteEditDojos */ "./resources/js/components/controls/AthleteEditDojos.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -8802,12 +8896,13 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var EditAthlete = function EditAthlete(_ref) {
   var getUrl = _ref.getUrl,
       updateUrl = _ref.updateUrl,
       photoFileName = _ref.photoFileName;
 
-  var _useParams = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_4__.useParams)(),
+  var _useParams = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useParams)(),
       id = _useParams.id;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
@@ -8844,58 +8939,76 @@ var EditAthlete = function EditAthlete(_ref) {
   };
 
   var isEdit = editedData && editedData.id != null;
-  var editHeader = isEdit ? "Відредагувати " + editedData.lastName + ' ' + editedData.firstName + ' ' + editedData.patronymic : "Ввести нового спортсмена";
+  var editHeader = isEdit ? "" + editedData.lastName + ' ' + editedData.firstName + ' ' + editedData.patronymic : "Ввести нового спортсмена";
 
-  var editathleteHiddenInputId = isEdit && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+  var editathleteHiddenInputId = isEdit && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
     type: "hidden",
     name: "id",
     value: editedData.id
   });
 
   var photoUrl = editedData && "/images/athletes/" + editedData.id + "/photo.png";
-
-  var degree = isEdit && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_controls_Degree__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    value: editedData.degree,
-    editable: true
-  });
-
-  var coachChecked = isEdit && editedData.is_coach == 1 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+  var coachChecked = isEdit && editedData.is_coach == 1 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+    id: "is_coach",
+    className: "form-check-input",
     type: "checkbox",
-    name: "is_best",
+    role: "switch",
+    name: "is_coach",
     value: "1",
     defaultChecked: "checked"
-  }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+  }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+    id: "is_coach",
+    className: "form-check-input",
     type: "checkbox",
-    name: "is_best",
+    role: "switch",
+    name: "is_coach",
     value: "1"
   });
-  var actualChecked = isEdit && editedData.is_actual == 1 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+  var actualChecked = isEdit && editedData.is_actual == 1 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+    id: "is_actual",
+    className: "form-check-input",
     type: "checkbox",
+    role: "switch",
     name: "is_actual",
     value: "1",
     defaultChecked: "checked"
-  }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+  }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+    id: "is_actual",
+    className: "form-check-input",
     type: "checkbox",
+    role: "switch",
     name: "is_actual",
     value: "1"
   });
-  var bestChecked = isEdit && editedData.is_best == 1 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+  var bestChecked = isEdit && editedData.is_best == 1 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+    id: "is_best",
+    className: "form-check-input",
     type: "checkbox",
+    role: "switch",
     name: "is_best",
     value: "1",
     defaultChecked: "checked"
-  }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+  }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+    id: "is_best",
+    className: "form-check-input",
     type: "checkbox",
+    role: "switch",
     name: "is_best",
     value: "1"
   });
-  var blackChecked = isEdit && editedData.show_in_blacks == 1 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+  var blackChecked = isEdit && editedData.show_in_blacks == 1 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+    id: "show_in_blacks",
+    className: "form-check-input",
     type: "checkbox",
+    role: "switch",
     name: "show_in_blacks",
     value: "1",
     defaultChecked: "checked"
-  }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+  }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+    id: "show_in_blacks",
+    className: "form-check-input",
     type: "checkbox",
+    role: "switch",
     name: "show_in_blacks",
     value: "1"
   });
@@ -8907,9 +9020,9 @@ var EditAthlete = function EditAthlete(_ref) {
 
   if (isEdit && editedData.gallery) {
     var galleryUrl = "photo.php?galleryID=" + editedData.gallery['galleryID'];
-    garrerySnippet = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("ol", {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
+    garrerySnippet = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("ol", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
           href: galleryUrl,
           children: editedData.gallery['name']
         })
@@ -8917,315 +9030,316 @@ var EditAthlete = function EditAthlete(_ref) {
     });
   } else {
     if (isEdit) {
-      garrerySnippet = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
-        children: ["\u0424\u043E\u0442\u043E\u0433\u0430\u043B\u0435\u0440\u0435\u044F \u0435\u0449\u0435 \u043D\u0435 \u0432\u0432\u0435\u0434\u0435\u043D\u0430", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+      garrerySnippet = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
+        children: ["\u0424\u043E\u0442\u043E\u0433\u0430\u043B\u0435\u0440\u0435\u044F \u0435\u0449\u0435 \u043D\u0435 \u0432\u0432\u0435\u0434\u0435\u043D\u0430", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
           type: "button",
           value: "\u0412\u0432\u0435\u0441\u0442\u0438 \u0444\u043E\u0442\u043E\u0433\u0430\u043B\u0435\u0440\u0435\u044E",
           onclick: "location.href='new_a_gallery.php?id=<?= $athlet->id ?>'"
         })]
       });
     } else {
-      garrerySnippet = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+      garrerySnippet = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
         children: "\u0424\u043E\u0442\u043E\u0433\u0430\u043B\u0435\u0440\u0435\u044E \u0412\u0438 \u0437\u043C\u043E\u0436\u0435\u0442\u0435 \u0432\u0432\u0435\u0441\u0442\u0438 \u043F\u0456\u0441\u043B\u044F \u043F\u0435\u0440\u0448\u043E\u0433\u043E \u0437\u0431\u0435\u0440\u0435\u0436\u0435\u043D\u043D\u044F \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430"
       });
     }
   }
 
   if (isSavingDone) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Redirect, {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Redirect, {
       to: "/admin/athlete/list"
     });
   }
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
       children: editHeader
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("form", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("form", {
       id: "edit-athlete",
+      "class": "row",
       method: "post",
       action: updateUrl,
       encType: "multipart/form-data",
-      children: [editathleteHiddenInputId, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("table", {
-        className: "usual",
-        cellSpacing: "0",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tbody", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-              children: "\u041F\u0440\u0456\u0437\u0432\u0438\u0449\u0435"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("td", {
-              children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
-                type: "text",
-                name: "lastName",
-                size: "50",
-                defaultValue: isEdit && editedData.lastName
-              }), " "]
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-              children: "\u0406\u043C'\u044F"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("td", {
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
-                type: "text",
-                name: "firstName",
-                size: "20",
-                defaultValue: isEdit && editedData.firstName
-              }), " "]
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-              children: "\u041F\u043E \u0431\u0430\u0442\u044C\u043A\u043E\u0432\u0456"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
-                type: "text",
-                name: "patronymic",
-                size: "30",
-                defaultValue: isEdit && editedData.patronymic
-              })
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-              children: "\u0414\u0435\u043D\u044C \u043D\u0430\u0440\u043E\u0434\u0436\u0435\u043D\u043D\u044F"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-              children: isEdit && editedData.birthday
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-              children: "\u0421\u0442\u0443\u043F\u0456\u043D\u044C"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-              children: degree
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-              children: "\u0424\u043E\u0442\u043E"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("td", {
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                className: "col-2",
-                style: {
-                  width: '10%'
-                },
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
-                  className: "instructor-photo",
-                  src: photoUrl,
-                  alt: editHeader
-                })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("br", {}), "\u0417\u043C\u0456\u043D\u0438\u0442\u0438", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
-                type: "file",
-                name: "photo"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("br", {}), "\u0421\u043F\u0456\u0432\u0432\u0456\u0434\u043D\u043E\u0448\u0435\u043D\u043D\u044F \u0432\u0438\u0441\u043E\u0442\u0438 \u0434\u043E \u0448\u0438\u0440\u0438\u043D\u0438 \u0444\u043E\u0442\u043E", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("br", {}), "\u043C\u0430\u0454 \u0431\u0443\u0442\u0438 3:2"]
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("tr", {
-            style: {
-              'backgroundColor': 'yellow'
-            },
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-              colSpan: "2",
-              children: "\u041A\u043B\u0443\u0431\u043D\u0430 \u0456\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0456\u044F"
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-              style: {
-                textAlign: 'right'
-              },
-              children: actualChecked
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-              children: "\u041D\u0430\u043B\u0435\u0436\u0438\u0442\u044C \u0434\u043E \u043D\u0430\u0448\u043E\u0433\u043E \u043A\u043B\u0443\u0431\u0443?"
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-              style: {
-                textAlign: 'right'
-              },
-              children: coachChecked
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-              children: "\u0406\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440?"
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-              style: {
-                textAlign: 'right'
-              },
-              children: bestChecked
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-              children: "\u041F\u043E\u043A\u0430\u0437\u0443\u0432\u0430\u0442\u0438 \u0432 \u043A\u0440\u0430\u0449\u0438\u0445 \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430\u0445?"
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-              style: {
-                textAlign: 'right'
-              },
-              children: blackChecked
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("td", {
-              children: ["\u041F\u043E\u043A\u0430\u0437\u0443\u0432\u0430\u0442\u0438 \u043D\u0430 \u0441\u0442\u043E\u0440\u0456\u043D\u0446\u0456 \u0447\u043E\u0440\u043D\u0438\u0445 \u043F\u043E\u044F\u0441\u0456\u0432 \u043D\u0430\u0448\u043E\u0433\u043E \u043A\u043B\u0443\u0431\u0443", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("br", {}), "(\u044F\u043A\u0449\u043E \u0434\u043E\u0441\u044F\u0433\u043D\u0443\u0442\u043E \u0432\u0456\u0434\u043F\u043E\u0432\u0456\u0434\u043D\u043E\u0433\u043E \u0441\u0442\u0443\u043F\u0435\u043D\u044E)?"]
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-              children: "\u041F\u043E\u0432\u043D\u0430 \u0456\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0456\u044F"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("td", {
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("textarea", {
-                name: "full",
-                rows: "10",
-                cols: "50",
-                defaultValue: full
-              }), " "]
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-              children: "\u041A\u043E\u0440\u043E\u0442\u043A\u0430 \u0456\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0456\u044F \u0434\u043B\u044F \u0441\u0442\u043E\u0440\u0456\u043D\u043A\u0438 \u0437\u0456 \u0441\u043F\u0438\u0441\u043A\u043E\u043C \u0432\u0441\u0456\u0445 \u0456\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440\u0456\u0432"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("td", {
-              children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("textarea", {
-                name: "brief",
-                rows: "5",
-                cols: "50",
-                defaultValue: brief
-              }), " "]
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-              children: "\u041A\u043E\u0440\u043E\u0442\u043A\u0430 \u0456\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0456\u044F \u0434\u043B\u044F \u0441\u0442\u043E\u0440\u0456\u043D\u043A\u0438 \u043D\u0430\u0439\u043A\u0440\u0430\u0449\u0438\u0445 \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0456\u0432"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("td", {
-              children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("textarea", {
-                name: "briefBest",
-                rows: "5",
-                cols: "50",
-                defaultValue: briefBest
-              }), " "]
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-              children: "\u0417\u0430\u043B\u0438"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_controls_AthleteEditDojos__WEBPACK_IMPORTED_MODULE_2__["default"], {
-                dojos: dojos,
-                updateUrl: updateUrl + '/' + id
-              })
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("tr", {
-            style: {
-              'backgroundColor': 'yellow'
-            },
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-              colSpan: "2",
-              children: "\u041A\u043E\u043D\u0442\u0430\u043A\u0442\u043D\u0430 \u0456\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0456\u044F"
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-              children: "\u0422\u0435\u043B\u0435\u0444\u043E\u043D"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("td", {
-              children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
-                type: "text",
-                name: "phone",
-                size: "25",
-                defaultValue: isEdit && editedData.phone
-              }), " "]
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-              children: "\u0422\u0435\u043B\u0435\u0444\u043E\u043D 2"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("td", {
-              children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
-                type: "text",
-                name: "phone2",
-                size: "25",
-                defaultValue: isEdit && editedData.phone2
-              }), " "]
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-              children: "E-mail"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("td", {
-              children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
-                type: "text",
-                name: "email",
-                size: "50",
-                defaultValue: isEdit && editedData.email
-              }), " "]
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("tr", {
-            style: {
-              'backgroundColor': 'yellow'
-            },
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-              colSpan: "2",
-              children: "\u0421\u043E\u0446\u0456\u0430\u043B\u044C\u043D\u0456 \u043C\u0435\u0440\u0435\u0436\u0456"
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-              children: "Facebook "
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("td", {
-              children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
-                type: "text",
-                name: "facebook",
-                size: "50",
-                defaultValue: isEdit && editedData.facebook
-              }), " "]
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-              children: "Instagram"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("td", {
-              children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
-                type: "text",
-                name: "instagram",
-                size: "50",
-                defaultValue: isEdit && editedData.instagram
-              }), " "]
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-              children: "Youtube"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("td", {
-              children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
-                type: "text",
-                name: "youtube",
-                size: "50",
-                defaultValue: isEdit && editedData.youtube
-              })]
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-              children: "Twitter"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("td", {
-              children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
-                type: "text",
-                name: "twitter",
-                size: "50",
-                defaultValue: isEdit && editedData.twitter
-              }), " "]
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-              children: "LiveJournal"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("td", {
-              children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
-                type: "text",
-                name: "lj",
-                size: "50",
-                defaultValue: isEdit && editedData.lj
-              }), " "]
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-              children: "\u041E\u0434\u043D\u043E\u043A\u043B\u0430\u0441\u0441\u043D\u0438\u043A\u0438"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
-                type: "text",
-                name: "ok",
-                size: "50",
-                defaultValue: isEdit && editedData.ok
-              })
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("tr", {
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-              colSpan: "2",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
-                type: "button",
-                name: "save",
-                value: "\u0437\u0431\u0435\u0440\u0435\u0433\u0442\u0438",
-                onClick: saveAthlete
-              })
-            })
+      children: [editathleteHiddenInputId, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        className: "col-sm-5 d-grid gap-3",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+            htmlFor: "lastName",
+            className: "form-label",
+            children: "\u041F\u0440\u0456\u0437\u0432\u0438\u0449\u0435"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+            id: "lastName",
+            name: "lastName",
+            className: "form-control",
+            type: "text",
+            placeholder: "",
+            defaultValue: isEdit && editedData.lastName
           })]
-        })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+            htmlFor: "firstName",
+            className: "form-label",
+            children: "\u0406\u043C'\u044F"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+            id: "firstName",
+            name: "firstName",
+            className: "form-control",
+            type: "text",
+            placeholder: "",
+            defaultValue: isEdit && editedData.firstName
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+            htmlFor: "patronymic",
+            className: "form-label",
+            children: "\u041F\u043E \u0431\u0430\u0442\u044C\u043A\u043E\u0432\u0456"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+            id: "patronymic",
+            name: "patronymic",
+            className: "form-control",
+            type: "text",
+            placeholder: "",
+            defaultValue: isEdit && editedData.patronymic
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+            htmlFor: "birthday",
+            className: "form-label",
+            children: "\u0414\u0430\u0442\u0430 \u043D\u0430\u0440\u043E\u0434\u0436\u0435\u043D\u043D\u044F"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+            id: "birthday",
+            name: "birthday",
+            className: "form-control",
+            type: "date",
+            placeholder: "",
+            defaultValue: isEdit && editedData.birthday
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+            htmlFor: "degree",
+            className: "form-label",
+            children: "\u0421\u0442\u0443\u043F\u0456\u043D\u044C"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Degree__WEBPACK_IMPORTED_MODULE_1__["default"], {
+            id: "degree",
+            name: "degree",
+            className: "form-control",
+            value: isEdit && editedData.degree,
+            editable: true
+          })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        className: "mb-3 col-sm-1 mb-3"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        className: "form-floating_ mb-3 col-sm-6",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+          htmlFor: "photo",
+          className: "form-label",
+          children: "\u0424\u043E\u0442\u043E"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Photo__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          id: "photo",
+          name: "photo",
+          className: "form-control",
+          url: photoUrl,
+          alt: editHeader,
+          editable: true
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        "class": "col-md-5 d-grid gap-3 mb-3",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+          style: {
+            'backgroundColor': 'yellow'
+          },
+          children: "\u041A\u043E\u043D\u0442\u0430\u043A\u0442\u043D\u0430 \u0456\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0456\u044F"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+            htmlFor: "phone",
+            className: "form-label",
+            children: "\u0422\u0435\u043B\u0435\u0444\u043E\u043D"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+            id: "phone",
+            name: "phone",
+            className: "form-control",
+            type: "text",
+            placeholder: "",
+            defaultValue: isEdit && editedData.phone
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+            htmlFor: "phone2",
+            className: "form-label",
+            children: "\u0414\u043E\u0434\u0430\u0442\u043A\u043E\u0432\u0438\u0439 \u0442\u0435\u043B\u0435\u0444\u043E\u043D"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+            id: "phone2",
+            name: "phone2",
+            className: "form-control",
+            type: "text",
+            placeholder: "",
+            defaultValue: isEdit && editedData.phone2
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+            htmlFor: "email",
+            className: "form-label",
+            children: "E-mail"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+            id: "email",
+            name: "email",
+            className: "form-control",
+            type: "email",
+            placeholder: "",
+            defaultValue: isEdit && editedData.email
+          })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        className: "col-md-1"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        "class": "col-md-6 mb-3",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+          style: {
+            'backgroundColor': 'yellow'
+          },
+          children: "\u041A\u043B\u0443\u0431\u043D\u0430 \u0456\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0456\u044F"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          className: "form-check form-switch mb-3",
+          children: [actualChecked, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+            htmlFor: "is_actual",
+            className: "form-label",
+            children: "\u041D\u0430\u043B\u0435\u0436\u0438\u0442\u044C \u0434\u043E \u043D\u0430\u0448\u043E\u0433\u043E \u043A\u043B\u0443\u0431\u0443?"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          className: "form-check form-switch mb-3",
+          children: [blackChecked, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+            htmlFor: "show_in_blacks",
+            className: "form-label",
+            children: "\u041F\u043E\u043A\u0430\u0437\u0443\u0432\u0430\u0442\u0438 \u043D\u0430 \u0441\u0442\u043E\u0440\u0456\u043D\u0446\u0456 \u0447\u043E\u0440\u043D\u0438\u0445 \u043F\u043E\u044F\u0441\u0456\u0432 \u043D\u0430\u0448\u043E\u0433\u043E \u043A\u043B\u0443\u0431\u0443 (\u044F\u043A\u0449\u043E \u0434\u043E\u0441\u044F\u0433\u043D\u0443\u0442\u043E \u0432\u0456\u0434\u043F\u043E\u0432\u0456\u0434\u043D\u043E\u0433\u043E \u0441\u0442\u0443\u043F\u0435\u043D\u044E)?"
+          })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        className: "mb-3 col-md-12 d-grid gap-3",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+          style: {
+            'backgroundColor': 'yellow'
+          },
+          children: "\u041F\u0440\u043E \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+            htmlFor: "full",
+            className: "form-label",
+            children: "\u041F\u043E\u0432\u043D\u0430 \u0456\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0456\u044F \u0434\u043B\u044F \u0441\u0442\u043E\u0440\u0456\u043D\u043A\u0438 \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("textarea", {
+            id: "full",
+            name: "full",
+            className: "form-control",
+            rows: "10",
+            defaultValue: full
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          className: "form-check form-switch",
+          children: [coachChecked, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+            htmlFor: "is_coach",
+            className: "form-label",
+            children: "\u0406\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440?"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          className: "mb-2",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+            htmlFor: "brief",
+            className: "form-label",
+            children: "\u041A\u043E\u0440\u043E\u0442\u043A\u0430 \u0456\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0456\u044F \u0434\u043B\u044F \u0441\u0442\u043E\u0440\u0456\u043D\u043A\u0438 \u0437\u0456 \u0441\u043F\u0438\u0441\u043A\u043E\u043C \u0432\u0441\u0456\u0445 \u0456\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440\u0456\u0432"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("textarea", {
+            id: "brief",
+            name: "brief",
+            className: "form-control",
+            rows: "5",
+            defaultValue: brief
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          className: "form-check form-switch",
+          children: [bestChecked, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+            htmlFor: "is_best",
+            className: "form-label",
+            children: "\u041F\u043E\u043A\u0430\u0437\u0443\u0432\u0430\u0442\u0438 \u0432 \u043A\u0440\u0430\u0449\u0438\u0445 \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430\u0445?"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          className: "mb-2",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+            htmlFor: "briefBest",
+            className: "form-label",
+            children: "\u041A\u043E\u0440\u043E\u0442\u043A\u0430 \u0456\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0456\u044F \u0434\u043B\u044F \u0441\u0442\u043E\u0440\u0456\u043D\u043A\u0438 \u043D\u0430\u0439\u043A\u0440\u0430\u0449\u0438\u0445 \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0456\u0432"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("textarea", {
+            id: "briefBest",
+            name: "briefBest",
+            className: "form-control",
+            rows: "5",
+            defaultValue: briefBest
+          })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        className: "mb-3 col-md-12",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+          style: {
+            'backgroundColor': 'yellow'
+          },
+          children: "\u0417\u0430\u043B\u0438"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_AthleteEditDojos__WEBPACK_IMPORTED_MODULE_3__["default"], {
+          dojos: dojos,
+          updateUrl: updateUrl + '/' + id
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        className: "mb-3 col-md-12 d-grid gap-3",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+          style: {
+            'backgroundColor': 'yellow'
+          },
+          children: "\u0421\u043E\u0446\u0456\u0430\u043B\u044C\u043D\u0456 \u043C\u0435\u0440\u0435\u0436\u0456"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+            htmlFor: "facebook",
+            className: "form-label",
+            children: "Facebook"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+            id: "facebook",
+            name: "facebook",
+            className: "form-control",
+            type: "text",
+            defaultValue: isEdit && editedData.facebook
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+            htmlFor: "instagram",
+            className: "form-label",
+            children: "Instagram"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+            id: "instagram",
+            name: "instagram",
+            className: "form-control",
+            type: "text",
+            defaultValue: isEdit && editedData.instagram
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+            htmlFor: "youtube",
+            className: "form-label",
+            children: "Youtube"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+            id: "youtube",
+            name: "youtube",
+            className: "form-control",
+            type: "text",
+            defaultValue: isEdit && editedData.youtube
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+            htmlFor: "twitter",
+            className: "form-label",
+            children: "Twitter"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+            id: "twitter",
+            name: "twitter",
+            className: "form-control",
+            type: "text",
+            defaultValue: isEdit && editedData.twitter
+          })]
+        })]
       })]
     })]
   });

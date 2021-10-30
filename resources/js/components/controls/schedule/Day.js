@@ -57,15 +57,17 @@ const Day = function({schedule, onRemove}) {
                 </div>
 
                 <div className="col-4">
-                    <input style={{border: '1px solid gray'}} className="value-start" type="text" defaultValue={scheduleModel.start} onChange={changeStart} />
+                    <input style={{border: '1px solid gray'}} className="value-start" type="time" defaultValue={scheduleModel.start} onChange={changeStart} />
                 </div>
 
                 <div className="col-4">
-                    <input style={{border: '1px solid gray'}} className="value-finish" type="text" defaultValue={scheduleModel.finish} onChange={changeFinish} />
+                    <input style={{border: '1px solid gray'}} className="value-finish" type="time" defaultValue={scheduleModel.finish} onChange={changeFinish} />
                 </div>
 
                 <div className="col-1">
-                    <div className="close-day" title="Видалити цей день тижня" onClick={() => onRemove(scheduleModel)}>x</div>
+                    <div className="close-day" title="Видалити цей день тижня" onClick={() => onRemove(scheduleModel)}>
+                        <i class="far fa-trash-alt" aria-hidden="true"></i>
+                    </div>
                 </div>
             </div>
     );

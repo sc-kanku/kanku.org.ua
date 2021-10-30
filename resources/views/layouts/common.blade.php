@@ -42,8 +42,6 @@ Layouts (/resources/views/layouts) inheritance scheme.
 
     @include('layouts.section.footer-nav')
     @include('layouts.section.footer-includes')
+    @yield('footer-includes')
 </body>
-
-@yield('footer-includes')
-
 </html>

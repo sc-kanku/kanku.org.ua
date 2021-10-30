@@ -52,13 +52,13 @@ const AddEntitySelector = function({url, onSelect, onAllLoaded}) {
     }
 
     return (
-    <>
-        <a className="btn btn-outline-success" onClick={selectEntity}>
-            <i className="fas fa-calendar-plus"></i> Додати
-        </a>
+        <div style={{margin: '1em 2em'}}>
+            <a className="btn btn-outline-success" onClick={selectEntity}>
+                <i className="fas fa-plus" aria-hidden="true"></i> Додати зал
+            </a>
 
-        {addingSnippet}
-    </>
+            {addingSnippet}
+        </div>
     );
 }
 

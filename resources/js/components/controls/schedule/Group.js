@@ -64,10 +64,13 @@ const Group = function({group, onRemove, onLeft, onRight}) {
             <div className="card-header">
                 <div className="row">
                     <div className="col">
-                        <div className="label-group-name col-9">Назва групи</div>
-                        <div className="move-left" title="Перемістити цю групу назад" onClick={() => onLeft(groupModel)}>&lt;</div>
+                        <div className="label-group-name col-8 form-label">Назва групи</div>
+
+                        <div className="btn-delete" style={{verticalAlign: 'middle'}} title="Видалити цю групу" onClick={() => onRemove(groupModel)}>
+                            <i class="far fa-trash-alt" aria-hidden="true"></i>
+                        </div>
                         <div className="move-right" title="Перемістити цю групу вперед" onClick={() => onRight(groupModel)}>&gt;</div>
-                        <div className="btn-close" title="Видалити цю групу" onClick={() => onRemove(groupModel)}></div>
+                        <div className="move-left" title="Перемістити цю групу назад" onClick={() => onLeft(groupModel)}>&lt;</div>
                     </div>
                 </div>
                 <div className="row">
@@ -78,9 +81,9 @@ const Group = function({group, onRemove, onLeft, onRight}) {
             </div>
             <div className="card-body">
                 <div className="row">
-                    <div className="label col-3">День</div>
-                    <div className="label col-4">Початок</div>
-                    <div className="label col-4">Закінчення</div>
+                    <div className="form-label col-3">День</div>
+                    <div className="form-label col-4">Початок</div>
+                    <div className="form-label col-4">Закінчення</div>
                     <div className="col-1">
                         <div className="add-day" title="Додати ще один день тижня" onClick={addDay}>+</div>
                     </div>

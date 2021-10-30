@@ -41,13 +41,25 @@ const Schedule = ({markup, editable, saveUrl}) => {
         });
     }
 
+    const addGroup = function() {
+        let newGroup = ScheduleHelper.newGroupModel();
+        let resultingGroups = [newGroup].concat(groups);
+    
+        setGroups(resultingGroups);
+    };
+
     let editControls = isEditable ? (
         <>
-            <a className="btn btn-outline-success" onClick={save}>
-                <i className="fas fa-edit"></i> Зберегти
+            <a className="btn btn-outline-success" onClick={addGroup}>
+                <i className="fas fa-plus" aria-hidden="true"></i> Додати нову групу
             </a>
-            <a className="btn btn-outline-success" onClick={cancel}>
-                <i className="fas fa-edit"></i> Вимкнути редагування / не зберігати
+
+            <a className="btn btn-success" onClick={save}>
+                <i class="fas fa-check"></i> Зберегти
+            </a>
+
+            <a className="btn btn-outline-secondary" onClick={cancel}>
+                <i aria-hidden="true" class="btn btn-close" style={{verticalAlign: 'bottom'}}></i> Вимкнути редагування / не зберігати
             </a>
         </>
     ) : (
@@ -61,13 +73,6 @@ const Schedule = ({markup, editable, saveUrl}) => {
     if (!isEditable) {
         editableOrNonEditableContent = <div dangerouslySetInnerHTML={{ __html: ScheduleHelper.scheduleToString(groups) }} />
     } else {
-        const addGroup = function() {
-            let newGroup = ScheduleHelper.newGroupModel();
-            let resultingGroups = [newGroup].concat(groups);
-        
-            setGroups(resultingGroups);
-        };
-
         const removeGroup = function(group) {
             // TODO: Array filter method!
             let position = ScheduleHelper.getIndex(groups, group);
@@ -132,9 +137,7 @@ const Schedule = ({markup, editable, saveUrl}) => {
 
         editableOrNonEditableContent = 
             <>
-                <a className="btn btn-outline-success" onClick={addGroup}>
-                    <i className="fas fa-calendar-plus"></i> Додати нову групу
-                </a>
+                
 
                 {groupsControls}
             </>
@@ -151,9 +154,11 @@ const Schedule = ({markup, editable, saveUrl}) => {
 
     return (
         <Context.Provider value={{synchronizeGroups}}>
-            <br />
-            {editControls}
-            <br />
+            <div className="input-group mt-3 mb-3">
+                <span className="input-group-text">Розклад</span>
+                {editControls}
+            </div>
+            
             {editableOrNonEditableContent}
         </Context.Provider>
     );

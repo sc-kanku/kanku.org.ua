@@ -54,15 +54,17 @@ const AthleteEditDojos = function({dojos, updateUrl}) {
 
             dojosArray.push(
                 <li key={index}>
-                    <a href={dojoUrl}>{dojo.name}</a>
+                    <div className="input-group" role="group" aria-label="Dojo actions">
+                        <a className="input-group-text alert-success" href={dojoUrl}>{dojo.name}</a>
                     
-                    <a className="btn btn-outline-success" onClick={() => editDojo(dojo.id)}>
-                        <i className="fas fa-edit"></i> Редагувати зал
-                    </a>
+                        <a className="btn btn-outline-success" onClick={() => editDojo(dojo.id)}>
+                            <i className="fas fa-edit"></i> Редагувати зал
+                        </a>
 
-                    <a className="btn btn-outline-success" onClick={() => deleteDojo(dojo.id)}>
-                        <i className="fas fa-delete"></i> Видалити зал
-                    </a>
+                        <a className="btn btn-outline-success" onClick={() => deleteDojo(dojo.id)}>
+                            <i class="far fa-trash-alt"></i>
+                        </a>
+                    </div>
                     
                     <Schedule 
                         markup={dojo.pivot?.schedule } 
@@ -89,7 +91,8 @@ const AthleteEditDojos = function({dojos, updateUrl}) {
 
     return (
         <>
-        {dojosSnippet}
+            <AddEntitySelector url="/api/dojos" onSelect={addDojo} onAllDojosLoaded={onAllDojosLoaded} />
+            {dojosSnippet}
         </>
     );
 }

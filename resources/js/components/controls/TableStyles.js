@@ -44,17 +44,22 @@ const TableStyles = styled.div`
 
   input:not([role='switch']) {
     font-size: 1rem;
-    padding: 0;
+    padding: 0 0 0 0.3em;
     margin: 0;
     border: 0;
     background-color: inherit;
   }
+  
   .form-check-input:checked {
     background-color: #0cc80f;
   }
 
   input[role=switch] {
     border: 2px solid #999999;
+  }
+
+  form input:not([role='switch']) {
+    border: 1px solid #999999;
   }
 
   select {
@@ -80,6 +85,39 @@ const TableStyles = styled.div`
     color: #0ba9e7;
     background-color: rgba(26, 135, 200, 0.2);
   }
+
+  form #brief {
+    color: inherit;
+    font-weight: inherit;
+  }
+
+  .form-label {
+    margin-bottom: 0.3em;
+    color: #012372;
+    font-weight: 700;
+    font-size: 0.9em;
+  }
+
+  input[type='file'] {
+    border: 0 !important;
+    // display: none;
+  }
+
+  .custom-file-upload {/*
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;*/
+    position: absolute;
+    z-index: 1000;
+    background-color: white;
+    border: 1px solid;
+}
+
+.custom-file-upload:hover {
+  background-color: green;
+}
+
 `;
 
 
