@@ -3,8 +3,7 @@ import { useTable, useGlobalFilter, useSortBy } from 'react-table';
 import Degree from './Degree';
 import PostCategory from './PostCategory';
 import TableSearch from './TableSearch';
-import useStatus from '../utils/useStatus';
-import useSave from '../utils/useSave';
+import useEditable from '../utils/useEditable';
 
 export default function Table({ columns, data, inlineUpdateUrl }) {
   const [skipPageReset, setSkipPageReset] = React.useState(false);
@@ -28,167 +27,97 @@ export default function Table({ columns, data, inlineUpdateUrl }) {
     )*/
   }
 
-  const [save] = useSave(inlineUpdateUrl, synchronizeDataOnUpdateSuccess);
+  // const [save] = useSave(inlineUpdateUrl, synchronizeDataOnUpdateSuccess);
 
   React.useEffect(() => {
     setSkipPageReset(false)
   }, [data])
 
-
-// TODO: Remove code duplications in EditableXXX components.
-const EditableDegree = ({
-  value: initialValue,
-  row: { index },
-  column: { id },
-  save, // This is a custom function that we supplied to our table instance
-}) => {
-  const [value, setValue] = React.useState(initialValue);
-
-  const [Status, onChange] = useStatus({
-    id,
-    index,
-    initialValue,
-    setValue,
-    save
-  });
+const EditableDegree = ({ id, field, initialValue }) => {
+  const [Editable, value, onChange] = useEditable({ id, field, initialValue, inlineUpdateUrl, 
+    onBeforeSuccess: synchronizeDataOnUpdateSuccess,
+    getNewValue: (e) => e.target.value
+   });
 
   return <>
-      <Status />
+      <Editable />
       <Degree value={value} editable="true" onChange={onChange} />
-    </>
+  </>
 };
 
-const EditablePostCategory = ({
-  value: initialValue,
-  row: { index },
-  column: { id },
-  save, // This is a custom function that we supplied to our table instance
-}) => {
-  const [value, setValue] = React.useState(initialValue);
-
-  const [Status, onChange] = useStatus({
-    id,
-    index,
-    initialValue,
-    setValue,
-    save
+const EditablePostCategory = ({ id, field, initialValue }) => {
+  const [Editable, value, onChange] = useEditable({ id, field, initialValue, inlineUpdateUrl, 
+    onBeforeSuccess: synchronizeDataOnUpdateSuccess,
+    getNewValue: (e) => e.target.value
   });
 
   return <>
-    <Status />
-    <PostCategory value={value} editable="true" onChange={onChange} />
+      <Editable />
+      <PostCategory value={value} editable="true" onChange={onChange} />
   </>
 }; 
 
 // Create an editable cell renderer
-const EditableDateCell = ({
-  value: initialValue,
-  row: { index },
-  column: { id },
-  save, // This is a custom function that we supplied to our table instance
-}) => {
+const EditableDateCell = ({ id, field, initialValue }) => {
   // We need to keep and update the state of the cell normally
   initialValue = initialValue != null ? initialValue : '';
 
-  const [value, setValue] = React.useState(initialValue);
-  const [Status, onChange] = useStatus({
-    id,
-    index,
-    initialValue,
-    setValue,
-    save
+  const [Editable, value, onChange] = useEditable({ id, field, initialValue, inlineUpdateUrl, 
+    onBeforeSuccess: synchronizeDataOnUpdateSuccess,
+    getNewValue: (e) => e.target.value
   });
 
-  // If the initialValue is changed external, sync it up with our state
-  React.useEffect(() => {
-    setValue(initialValue)
-  }, [initialValue])
-// 
   return <>
-      <Status />
-      <input type="date" value={value} onChange={onChange} />
-    </>
-}
-
-// Create an editable cell renderer
-const EditableSwitchCell = ({
-  value: initialValue,
-  row: { index },
-  column: { id },
-  save, // This is a custom function that we supplied to our table instance
-}) => {
-  // We need to keep and update the state of the cell normally
-  initialValue = initialValue != null ? initialValue : '';
-
-  const [value, setValue] = React.useState(initialValue);
-
-  const [Status, onChange] = useStatus({
-    id,
-    index,
-    initialValue,
-    setValue,
-    getNewValue : (e) => 1 - value,
-    save
-  });
-
-  // If the initialValue is changed external, sync it up with our state
-  React.useEffect(() => {
-    setValue(initialValue)
-  }, [initialValue])
-
-  return <>
-    <Status />
-    <div className="form-check form-switch">
-      <input className="form-check-input mx-auto" type="checkbox" role="switch" onChange={onChange} checked={value == 1} />
-    </div>
+    <Editable />
+    <input type="date" value={value} onChange={onChange} />
   </>
 }
 
+// Create an editable cell renderer
+const EditableSwitchCell = ({ id, field, initialValue }) => {
+    // We need to keep and update the state of the cell normally
+    initialValue = initialValue != null ? initialValue : '';
 
+    const [Editable, value, onChange] = useEditable({ id, field, initialValue, inlineUpdateUrl, 
+        onBeforeSuccess: synchronizeDataOnUpdateSuccess, 
+        getNewValue : (e) => 1 - value
+      });
+  
+    return <>
+      <Editable />
+      <div className="form-check form-switch">
+        <input className="form-check-input mx-auto" type="checkbox" role="switch" onChange={onChange} checked={value == 1} />
+      </div>
+    </>
+}
 
 // Create an editable cell renderer
-const EditableCell = ({
-  value: initialValue,
-  row: { index },
-  column: { id },
-  save, // This is a custom function that we supplied to our table instance
-}) => {
+const EditableCell = ({ id, field, initialValue }) => {
   // We need to keep and update the state of the cell normally
   initialValue = initialValue != null ? initialValue : '';
-  
-  const [value, setValue] = React.useState(initialValue);
 
-  const onTypingChange = e => {
-    // console.log("onTypingChange", value, e.target.value);
+  const [Editable, value, onChange, setValue] = useEditable({ id, field, initialValue, inlineUpdateUrl, 
+      onBeforeSuccess: synchronizeDataOnUpdateSuccess, 
+      getNewValue : (e) => value
+    });
 
-    setValue(e.target.value)
-  }
-
-  const [Status, onChange] = useStatus({
-    id,
-    index,
-    initialValue,
-    setValue,
-    getNewValue : (e) => value,
-    save
-  });
-
-  // If the initialValue is changed external, sync it up with our state
-  React.useEffect(() => {
-    setValue(initialValue)
-  }, [initialValue])
-  return <>
-      <Status />
+    const onTypingChange = e => setValue(e.target.value)
+    
+    return <>
+      <Editable />
       <input value={value} onChange={onTypingChange} onBlur={onChange} />
     </>
-  
 }
 
 // Set our editable cell renderer as the default Cell renderer
 const defaultColumn = {
   Cell: info => {
-    // let attributes = {...info, onSuccess, onFailure};
-    let attributes = info;
+    let attributes = {
+      id: info.row.index + 1,
+      field: info.column.id,
+      initialValue: info.value,
+//      save: info.save
+    }
 
     if (info.column.id == "degree") {
       return (<EditableDegree {...attributes} />)
@@ -202,9 +131,7 @@ const defaultColumn = {
       return (<EditableDateCell {...attributes} />)
     } else {
       return <EditableCell {...attributes}  />
-    }
-
-    
+    } 
   }
 }
 
@@ -222,7 +149,7 @@ const {
       defaultColumn,
       // use the skipPageReset option to disable page resetting temporarily
       autoResetPage: !skipPageReset,
-      save
+      // save
     },
     useGlobalFilter, // Adding the useFilters Hook to the table
       // You can add as many Hooks as you want. Check the documentation for details. You can even add custom Hooks for react-table here

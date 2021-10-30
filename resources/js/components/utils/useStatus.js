@@ -2,14 +2,10 @@ import React, {useRef, useMemo} from "react";
 
 const STATUS_DURATION = 2000;
 
-export default function useStatus({ id, index, initialValue, setValue, getNewValue, save }) {
+export default function useStatus({ id, field, initialValue, save, setValue, getNewValue }) {
     const [previousValue, setPreviousValue] = React.useState(initialValue);
     const [successfullyUpdated, setSuccessfullyUpdated] = React.useState(false);
     const [updatedWithFailure, setUpdatedWithFailure] = React.useState(false);
-
-    if (typeof getNewValue === 'undefined') {
-      getNewValue = useRef((e) => e.target.value).current;
-    }
 
     const onChange = // useRef(
       e => {
@@ -18,8 +14,9 @@ export default function useStatus({ id, index, initialValue, setValue, getNewVal
         if (previousValue != newValue) {
           setValue(newValue);
 
-          save(index, id, newValue, 
-            () => {
+          save({id, field, 
+            value: newValue, 
+            onSuccess: () => {
               setSuccessfullyUpdated(true);
               setPreviousValue(newValue);
 
@@ -27,14 +24,14 @@ export default function useStatus({ id, index, initialValue, setValue, getNewVal
                 setSuccessfullyUpdated(false)
               }, STATUS_DURATION);
             },
-            () => {
+            onFailure: () => {
               setUpdatedWithFailure(true);
               setValue(previousValue);
 
               setTimeout(() => {
                 setUpdatedWithFailure(false);
               }, STATUS_DURATION);
-            }
+            }}
         );
       }
     }

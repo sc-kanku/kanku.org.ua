@@ -6982,7 +6982,7 @@ function Photo(_ref) {
       "class": "mt-3",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
         htmlFor: id,
-        "class": "custom-file-upload btn-sm btn-outline-success ms-1",
+        className: "custom-file-upload btn-sm btn-outline-success ms-1",
         children: "\u0417\u043C\u0456\u043D\u0438\u0442\u0438"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
         id: id,
@@ -7073,9 +7073,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Degree__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Degree */ "./resources/js/components/controls/Degree.js");
 /* harmony import */ var _PostCategory__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./PostCategory */ "./resources/js/components/controls/PostCategory.js");
 /* harmony import */ var _TableSearch__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./TableSearch */ "./resources/js/components/controls/TableSearch.js");
-/* harmony import */ var _utils_useStatus__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../utils/useStatus */ "./resources/js/components/utils/useStatus.js");
-/* harmony import */ var _utils_useSave__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utils/useSave */ "./resources/js/components/utils/useSave.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _utils_useEditable__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../utils/useEditable */ "./resources/js/components/utils/useEditable.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -7093,7 +7092,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 
 
 
@@ -7129,40 +7127,35 @@ function Table(_ref) {
          return row
       })
     )*/
-  };
+  }; // const [save] = useSave(inlineUpdateUrl, synchronizeDataOnUpdateSuccess);
 
-  var _useSave = (0,_utils_useSave__WEBPACK_IMPORTED_MODULE_6__["default"])(inlineUpdateUrl, synchronizeDataOnUpdateSuccess),
-      _useSave2 = _slicedToArray(_useSave, 1),
-      save = _useSave2[0];
 
   react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
     setSkipPageReset(false);
-  }, [data]); // TODO: Remove code duplications in EditableXXX components.
+  }, [data]);
 
   var EditableDegree = function EditableDegree(_ref2) {
-    var initialValue = _ref2.value,
-        index = _ref2.row.index,
-        id = _ref2.column.id,
-        save = _ref2.save;
+    var id = _ref2.id,
+        field = _ref2.field,
+        initialValue = _ref2.initialValue;
 
-    var _React$useState3 = react__WEBPACK_IMPORTED_MODULE_0__.useState(initialValue),
-        _React$useState4 = _slicedToArray(_React$useState3, 2),
-        value = _React$useState4[0],
-        setValue = _React$useState4[1];
-
-    var _useStatus = (0,_utils_useStatus__WEBPACK_IMPORTED_MODULE_5__["default"])({
+    var _useEditable = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_5__["default"])({
       id: id,
-      index: index,
+      field: field,
       initialValue: initialValue,
-      setValue: setValue,
-      save: save
+      inlineUpdateUrl: inlineUpdateUrl,
+      onBeforeSuccess: synchronizeDataOnUpdateSuccess,
+      getNewValue: function getNewValue(e) {
+        return e.target.value;
+      }
     }),
-        _useStatus2 = _slicedToArray(_useStatus, 2),
-        Status = _useStatus2[0],
-        onChange = _useStatus2[1];
+        _useEditable2 = _slicedToArray(_useEditable, 3),
+        Editable = _useEditable2[0],
+        value = _useEditable2[1],
+        onChange = _useEditable2[2];
 
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.Fragment, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(Status, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Degree__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(Editable, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Degree__WEBPACK_IMPORTED_MODULE_2__["default"], {
         value: value,
         editable: "true",
         onChange: onChange
@@ -7171,29 +7164,27 @@ function Table(_ref) {
   };
 
   var EditablePostCategory = function EditablePostCategory(_ref3) {
-    var initialValue = _ref3.value,
-        index = _ref3.row.index,
-        id = _ref3.column.id,
-        save = _ref3.save;
+    var id = _ref3.id,
+        field = _ref3.field,
+        initialValue = _ref3.initialValue;
 
-    var _React$useState5 = react__WEBPACK_IMPORTED_MODULE_0__.useState(initialValue),
-        _React$useState6 = _slicedToArray(_React$useState5, 2),
-        value = _React$useState6[0],
-        setValue = _React$useState6[1];
-
-    var _useStatus3 = (0,_utils_useStatus__WEBPACK_IMPORTED_MODULE_5__["default"])({
+    var _useEditable3 = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_5__["default"])({
       id: id,
-      index: index,
+      field: field,
       initialValue: initialValue,
-      setValue: setValue,
-      save: save
+      inlineUpdateUrl: inlineUpdateUrl,
+      onBeforeSuccess: synchronizeDataOnUpdateSuccess,
+      getNewValue: function getNewValue(e) {
+        return e.target.value;
+      }
     }),
-        _useStatus4 = _slicedToArray(_useStatus3, 2),
-        Status = _useStatus4[0],
-        onChange = _useStatus4[1];
+        _useEditable4 = _slicedToArray(_useEditable3, 3),
+        Editable = _useEditable4[0],
+        value = _useEditable4[1],
+        onChange = _useEditable4[2];
 
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.Fragment, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(Status, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_PostCategory__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(Editable, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_PostCategory__WEBPACK_IMPORTED_MODULE_3__["default"], {
         value: value,
         editable: "true",
         onChange: onChange
@@ -7203,36 +7194,29 @@ function Table(_ref) {
 
 
   var EditableDateCell = function EditableDateCell(_ref4) {
-    var initialValue = _ref4.value,
-        index = _ref4.row.index,
-        id = _ref4.column.id,
-        save = _ref4.save;
+    var id = _ref4.id,
+        field = _ref4.field,
+        initialValue = _ref4.initialValue;
     // We need to keep and update the state of the cell normally
     initialValue = initialValue != null ? initialValue : '';
 
-    var _React$useState7 = react__WEBPACK_IMPORTED_MODULE_0__.useState(initialValue),
-        _React$useState8 = _slicedToArray(_React$useState7, 2),
-        value = _React$useState8[0],
-        setValue = _React$useState8[1];
-
-    var _useStatus5 = (0,_utils_useStatus__WEBPACK_IMPORTED_MODULE_5__["default"])({
+    var _useEditable5 = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_5__["default"])({
       id: id,
-      index: index,
+      field: field,
       initialValue: initialValue,
-      setValue: setValue,
-      save: save
+      inlineUpdateUrl: inlineUpdateUrl,
+      onBeforeSuccess: synchronizeDataOnUpdateSuccess,
+      getNewValue: function getNewValue(e) {
+        return e.target.value;
+      }
     }),
-        _useStatus6 = _slicedToArray(_useStatus5, 2),
-        Status = _useStatus6[0],
-        onChange = _useStatus6[1]; // If the initialValue is changed external, sync it up with our state
+        _useEditable6 = _slicedToArray(_useEditable5, 3),
+        Editable = _useEditable6[0],
+        value = _useEditable6[1],
+        onChange = _useEditable6[2];
 
-
-    react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
-      setValue(initialValue);
-    }, [initialValue]); // 
-
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.Fragment, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(Status, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(Editable, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
         type: "date",
         value: value,
         onChange: onChange
@@ -7242,40 +7226,31 @@ function Table(_ref) {
 
 
   var EditableSwitchCell = function EditableSwitchCell(_ref5) {
-    var initialValue = _ref5.value,
-        index = _ref5.row.index,
-        id = _ref5.column.id,
-        save = _ref5.save;
+    var id = _ref5.id,
+        field = _ref5.field,
+        initialValue = _ref5.initialValue;
     // We need to keep and update the state of the cell normally
     initialValue = initialValue != null ? initialValue : '';
 
-    var _React$useState9 = react__WEBPACK_IMPORTED_MODULE_0__.useState(initialValue),
-        _React$useState10 = _slicedToArray(_React$useState9, 2),
-        value = _React$useState10[0],
-        setValue = _React$useState10[1];
-
-    var _useStatus7 = (0,_utils_useStatus__WEBPACK_IMPORTED_MODULE_5__["default"])({
+    var _useEditable7 = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_5__["default"])({
       id: id,
-      index: index,
+      field: field,
       initialValue: initialValue,
-      setValue: setValue,
+      inlineUpdateUrl: inlineUpdateUrl,
+      onBeforeSuccess: synchronizeDataOnUpdateSuccess,
       getNewValue: function getNewValue(e) {
         return 1 - value;
-      },
-      save: save
+      }
     }),
-        _useStatus8 = _slicedToArray(_useStatus7, 2),
-        Status = _useStatus8[0],
-        onChange = _useStatus8[1]; // If the initialValue is changed external, sync it up with our state
+        _useEditable8 = _slicedToArray(_useEditable7, 3),
+        Editable = _useEditable8[0],
+        value = _useEditable8[1],
+        onChange = _useEditable8[2];
 
-
-    react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
-      setValue(initialValue);
-    }, [initialValue]);
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.Fragment, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(Status, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(Editable, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
         className: "form-check form-switch",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
           className: "form-check-input mx-auto",
           type: "checkbox",
           role: "switch",
@@ -7288,43 +7263,34 @@ function Table(_ref) {
 
 
   var EditableCell = function EditableCell(_ref6) {
-    var initialValue = _ref6.value,
-        index = _ref6.row.index,
-        id = _ref6.column.id,
-        save = _ref6.save;
+    var id = _ref6.id,
+        field = _ref6.field,
+        initialValue = _ref6.initialValue;
     // We need to keep and update the state of the cell normally
     initialValue = initialValue != null ? initialValue : '';
 
-    var _React$useState11 = react__WEBPACK_IMPORTED_MODULE_0__.useState(initialValue),
-        _React$useState12 = _slicedToArray(_React$useState11, 2),
-        value = _React$useState12[0],
-        setValue = _React$useState12[1];
-
-    var onTypingChange = function onTypingChange(e) {
-      // console.log("onTypingChange", value, e.target.value);
-      setValue(e.target.value);
-    };
-
-    var _useStatus9 = (0,_utils_useStatus__WEBPACK_IMPORTED_MODULE_5__["default"])({
+    var _useEditable9 = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_5__["default"])({
       id: id,
-      index: index,
+      field: field,
       initialValue: initialValue,
-      setValue: setValue,
+      inlineUpdateUrl: inlineUpdateUrl,
+      onBeforeSuccess: synchronizeDataOnUpdateSuccess,
       getNewValue: function getNewValue(e) {
         return value;
-      },
-      save: save
+      }
     }),
-        _useStatus10 = _slicedToArray(_useStatus9, 2),
-        Status = _useStatus10[0],
-        onChange = _useStatus10[1]; // If the initialValue is changed external, sync it up with our state
+        _useEditable10 = _slicedToArray(_useEditable9, 4),
+        Editable = _useEditable10[0],
+        value = _useEditable10[1],
+        onChange = _useEditable10[2],
+        setValue = _useEditable10[3];
 
+    var onTypingChange = function onTypingChange(e) {
+      return setValue(e.target.value);
+    };
 
-    react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
-      setValue(initialValue);
-    }, [initialValue]);
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.Fragment, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(Status, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(Editable, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
         value: value,
         onChange: onTypingChange,
         onBlur: onChange
@@ -7335,19 +7301,23 @@ function Table(_ref) {
 
   var defaultColumn = {
     Cell: function Cell(info) {
-      // let attributes = {...info, onSuccess, onFailure};
-      var attributes = info;
+      var attributes = {
+        id: info.row.index + 1,
+        field: info.column.id,
+        initialValue: info.value //      save: info.save
+
+      };
 
       if (info.column.id == "degree") {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(EditableDegree, _objectSpread({}, attributes));
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(EditableDegree, _objectSpread({}, attributes));
       } else if (info.column.id == "category") {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(EditablePostCategory, _objectSpread({}, attributes));
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(EditablePostCategory, _objectSpread({}, attributes));
       } else if (info.column.id == "is_coach" || info.column.id == "is_best" || info.column.id == "is_actual") {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(EditableSwitchCell, _objectSpread({}, attributes));
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(EditableSwitchCell, _objectSpread({}, attributes));
       } else if (info.column.id == "dateAt") {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(EditableDateCell, _objectSpread({}, attributes));
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(EditableDateCell, _objectSpread({}, attributes));
       } else {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(EditableCell, _objectSpread({}, attributes));
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(EditableCell, _objectSpread({}, attributes));
       }
     }
   }; // Use the useTable Hook to send the columns and data to build the table
@@ -7357,8 +7327,8 @@ function Table(_ref) {
     data: data,
     defaultColumn: defaultColumn,
     // use the skipPageReset option to disable page resetting temporarily
-    autoResetPage: !skipPageReset,
-    save: save
+    autoResetPage: !skipPageReset // save
+
   }, react_table__WEBPACK_IMPORTED_MODULE_1__.useGlobalFilter, // Adding the useFilters Hook to the table
   // You can add as many Hooks as you want. Check the documentation for details. You can even add custom Hooks for react-table here
   react_table__WEBPACK_IMPORTED_MODULE_1__.useSortBy // This plugin Hook will help to sort our table columns
@@ -7376,14 +7346,14 @@ function Table(_ref) {
   // Input element
 
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.Fragment, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
       className: "table-responsive",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("table", _objectSpread(_objectSpread({}, getTableProps()), {}, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("table", _objectSpread(_objectSpread({}, getTableProps()), {}, {
         className: "table table-striped table-hover table-sm",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("thead", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("thead", {
           children: headerGroups.map(function (headerGroup) {
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("tr", _objectSpread(_objectSpread({}, headerGroup.getHeaderGroupProps()), {}, {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("tr", _objectSpread(_objectSpread({}, headerGroup.getHeaderGroupProps()), {}, {
               children: headerGroup.headers.map(function (column) {
                 function getColumnStyle(column) {
                   var customStyle = {};
@@ -7407,27 +7377,27 @@ function Table(_ref) {
                 // {...column.getHeaderProps(getColumnStyle(column))} 
 
 
-                var content = column.originalId == "Search" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.Fragment, {
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_TableSearch__WEBPACK_IMPORTED_MODULE_4__["default"], {
+                var content = column.originalId == "Search" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_TableSearch__WEBPACK_IMPORTED_MODULE_4__["default"], {
                     setGlobalFilter: setGlobalFilter
                   }), " ", rows.length != data.length ? rows.length + ' / ' + data.length : data.length]
                 }) : column.render("Header");
-                var sortingIcon = column.columns ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("i", {
+                var sortingIcon = column.columns ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
                   className: column.isSorted ? column.isSortedDesc ? "fas fa-sort-up" : "fas fa-sort-down" : "fas fa-sort"
                 });
-                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("th", _objectSpread(_objectSpread({}, column.getHeaderProps(column.getSortByToggleProps())), {}, {
+                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("th", _objectSpread(_objectSpread({}, column.getHeaderProps(column.getSortByToggleProps())), {}, {
                   scope: "col",
                   children: [sortingIcon, " ", content]
                 }));
               })
             }));
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("tbody", _objectSpread(_objectSpread({}, getTableBodyProps()), {}, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("tbody", _objectSpread(_objectSpread({}, getTableBodyProps()), {}, {
           children: rows.map(function (row, i) {
             prepareRow(row);
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("tr", _objectSpread(_objectSpread({}, row.getRowProps()), {}, {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("tr", _objectSpread(_objectSpread({}, row.getRowProps()), {}, {
               children: row.cells.map(function (cell) {
-                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", _objectSpread(_objectSpread({}, cell.getCellProps()), {}, {
+                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("td", _objectSpread(_objectSpread({}, cell.getCellProps()), {}, {
                   children: cell.render("Cell")
                 }));
               })
@@ -9790,6 +9760,85 @@ function SiteRefresh() {
 
 /***/ }),
 
+/***/ "./resources/js/components/utils/useEditable.js":
+/*!******************************************************!*\
+  !*** ./resources/js/components/utils/useEditable.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ useEditable)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _utils_useSave__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/useSave */ "./resources/js/components/utils/useSave.js");
+/* harmony import */ var _utils_useStatus__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/useStatus */ "./resources/js/components/utils/useStatus.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+function useEditable(_ref) {
+  var id = _ref.id,
+      field = _ref.field,
+      initialValue = _ref.initialValue,
+      getNewValue = _ref.getNewValue,
+      inlineUpdateUrl = _ref.inlineUpdateUrl,
+      onBeforeSuccess = _ref.onBeforeSuccess;
+
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_0__.useState(initialValue),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      value = _React$useState2[0],
+      setValue = _React$useState2[1];
+
+  var _useSave = (0,_utils_useSave__WEBPACK_IMPORTED_MODULE_1__["default"])(inlineUpdateUrl, onBeforeSuccess),
+      _useSave2 = _slicedToArray(_useSave, 1),
+      save = _useSave2[0];
+
+  var _useStatus = (0,_utils_useStatus__WEBPACK_IMPORTED_MODULE_2__["default"])({
+    id: id,
+    field: field,
+    initialValue: initialValue,
+    save: save,
+    setValue: setValue,
+    getNewValue: getNewValue
+  }),
+      _useStatus2 = _slicedToArray(_useStatus, 2),
+      Status = _useStatus2[0],
+      onChange = _useStatus2[1]; // If the initialValue is changed external, sync it up with our state
+
+
+  react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
+    setValue(initialValue);
+  }, [initialValue]);
+
+  var Editable = function Editable(_ref2) {
+    var children = _ref2.children;
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(Status, {}), children]
+    });
+  };
+
+  return [Editable, value, onChange, setValue];
+}
+
+/***/ }),
+
 /***/ "./resources/js/components/utils/useSave.js":
 /*!**************************************************!*\
   !*** ./resources/js/components/utils/useSave.js ***!
@@ -9804,11 +9853,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 function useSave(inlineUpdateUrl, onBeforeSuccess) {
-  var save = function save(index, id, value, onSuccess, onFailure) {
+  var save = function save(_ref) {
+    var id = _ref.id,
+        field = _ref.field,
+        value = _ref.value,
+        onSuccess = _ref.onSuccess,
+        onFailure = _ref.onFailure;
     var inlineEditData = {
-      'id': +index + 1,
-      'field': id,
-      'value': value
+      id: id,
+      field: field,
+      value: value
     };
     fetch(inlineUpdateUrl, {
       method: 'POST',
@@ -9823,14 +9877,13 @@ function useSave(inlineUpdateUrl, onBeforeSuccess) {
         onFailure();
       } else {
         // Success
-        onBeforeSuccess(index, id, value); // synchronizeDataOnUpdateSuccess(index, id, value);
+        onBeforeSuccess(id - 1, field, value); // synchronizeDataOnUpdateSuccess(index, id, value);
 
         onSuccess(); // Show toasted message
         // https://getbootstrap.com/docs/5.1/components/toasts/
         // console.log('saved ' + id + ' to ' + value + ' - ' + JSON.stringify(responseSavedSuccess));
       }
     })["catch"](function (error) {
-      // console.error('Error:', JSON.stringify(error));
       onFailure();
     });
   };
@@ -9872,11 +9925,11 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var STATUS_DURATION = 2000;
 function useStatus(_ref) {
   var id = _ref.id,
-      index = _ref.index,
+      field = _ref.field,
       initialValue = _ref.initialValue,
+      save = _ref.save,
       setValue = _ref.setValue,
-      getNewValue = _ref.getNewValue,
-      save = _ref.save;
+      getNewValue = _ref.getNewValue;
 
   var _React$useState = react__WEBPACK_IMPORTED_MODULE_0__.useState(initialValue),
       _React$useState2 = _slicedToArray(_React$useState, 2),
@@ -9893,30 +9946,30 @@ function useStatus(_ref) {
       updatedWithFailure = _React$useState6[0],
       setUpdatedWithFailure = _React$useState6[1];
 
-  if (typeof getNewValue === 'undefined') {
-    getNewValue = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(function (e) {
-      return e.target.value;
-    }).current;
-  }
-
   var onChange = // useRef(
   function onChange(e) {
     var newValue = getNewValue(e);
 
     if (previousValue != newValue) {
       setValue(newValue);
-      save(index, id, newValue, function () {
-        setSuccessfullyUpdated(true);
-        setPreviousValue(newValue);
-        setTimeout(function () {
-          setSuccessfullyUpdated(false);
-        }, STATUS_DURATION);
-      }, function () {
-        setUpdatedWithFailure(true);
-        setValue(previousValue);
-        setTimeout(function () {
-          setUpdatedWithFailure(false);
-        }, STATUS_DURATION);
+      save({
+        id: id,
+        field: field,
+        value: newValue,
+        onSuccess: function onSuccess() {
+          setSuccessfullyUpdated(true);
+          setPreviousValue(newValue);
+          setTimeout(function () {
+            setSuccessfullyUpdated(false);
+          }, STATUS_DURATION);
+        },
+        onFailure: function onFailure() {
+          setUpdatedWithFailure(true);
+          setValue(previousValue);
+          setTimeout(function () {
+            setUpdatedWithFailure(false);
+          }, STATUS_DURATION);
+        }
       });
     }
   }; // ).current;
