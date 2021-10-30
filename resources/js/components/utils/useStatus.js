@@ -2,7 +2,7 @@ import React, {useRef, useMemo} from "react";
 
 const STATUS_DURATION = 2000;
 
-export default function useStatus({ id, index, initialValue, setValue, getNewValue, updateMyData }) {
+export default function useStatus({ id, index, initialValue, setValue, getNewValue, save }) {
     const [previousValue, setPreviousValue] = React.useState(initialValue);
     const [successfullyUpdated, setSuccessfullyUpdated] = React.useState(false);
     const [updatedWithFailure, setUpdatedWithFailure] = React.useState(false);
@@ -18,7 +18,7 @@ export default function useStatus({ id, index, initialValue, setValue, getNewVal
         if (previousValue != newValue) {
           setValue(newValue);
 
-          updateMyData(index, id, newValue, 
+          save(index, id, newValue, 
             () => {
               setSuccessfullyUpdated(true);
               setPreviousValue(newValue);

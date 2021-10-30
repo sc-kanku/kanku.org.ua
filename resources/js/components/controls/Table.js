@@ -4,42 +4,10 @@ import Degree from './Degree';
 import PostCategory from './PostCategory';
 import TableSearch from './TableSearch';
 import useStatus from '../utils/useStatus';
+import useSave from '../utils/useSave';
 
 export default function Table({ columns, data, inlineUpdateUrl }) {
   const [skipPageReset, setSkipPageReset] = React.useState(false);
-
-  const updateMyData = (index, id, value, onSuccess, onFailure) => {
-    let inlineEditData = {
-      'id': + index + 1,
-      'field': id,
-      'value': value
-    };
-
-    fetch(inlineUpdateUrl, {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(inlineEditData)  
-    })
-    // .then(response => response.json())
-    .then(response => {
-      if (typeof (response["Not success"]) !== "undefined" ) {
-        // Failure
-        onFailure()
-      } else {
-        // Success
-        synchronizeDataOnUpdateSuccess(index, id, value);
-        onSuccess();
-  
-        // Show toasted message
-        // https://getbootstrap.com/docs/5.1/components/toasts/
-        // console.log('saved ' + id + ' to ' + value + ' - ' + JSON.stringify(responseSavedSuccess));
-      }
-      })
-      .catch((error) => {
-        // console.error('Error:', JSON.stringify(error));
-        onFailure()
-      });
-  }
 
   const synchronizeDataOnUpdateSuccess = (rowIndex, columnId, value) => {
     setSkipPageReset(true);
@@ -60,6 +28,8 @@ export default function Table({ columns, data, inlineUpdateUrl }) {
     )*/
   }
 
+  const [save] = useSave(inlineUpdateUrl, synchronizeDataOnUpdateSuccess);
+
   React.useEffect(() => {
     setSkipPageReset(false)
   }, [data])
@@ -70,7 +40,7 @@ const EditableDegree = ({
   value: initialValue,
   row: { index },
   column: { id },
-  updateMyData, // This is a custom function that we supplied to our table instance
+  save, // This is a custom function that we supplied to our table instance
 }) => {
   const [value, setValue] = React.useState(initialValue);
 
@@ -79,7 +49,7 @@ const EditableDegree = ({
     index,
     initialValue,
     setValue,
-    updateMyData
+    save
   });
 
   return <>
@@ -92,7 +62,7 @@ const EditablePostCategory = ({
   value: initialValue,
   row: { index },
   column: { id },
-  updateMyData, // This is a custom function that we supplied to our table instance
+  save, // This is a custom function that we supplied to our table instance
 }) => {
   const [value, setValue] = React.useState(initialValue);
 
@@ -101,7 +71,7 @@ const EditablePostCategory = ({
     index,
     initialValue,
     setValue,
-    updateMyData
+    save
   });
 
   return <>
@@ -115,7 +85,7 @@ const EditableDateCell = ({
   value: initialValue,
   row: { index },
   column: { id },
-  updateMyData, // This is a custom function that we supplied to our table instance
+  save, // This is a custom function that we supplied to our table instance
 }) => {
   // We need to keep and update the state of the cell normally
   initialValue = initialValue != null ? initialValue : '';
@@ -126,7 +96,7 @@ const EditableDateCell = ({
     index,
     initialValue,
     setValue,
-    updateMyData
+    save
   });
 
   // If the initialValue is changed external, sync it up with our state
@@ -145,7 +115,7 @@ const EditableSwitchCell = ({
   value: initialValue,
   row: { index },
   column: { id },
-  updateMyData, // This is a custom function that we supplied to our table instance
+  save, // This is a custom function that we supplied to our table instance
 }) => {
   // We need to keep and update the state of the cell normally
   initialValue = initialValue != null ? initialValue : '';
@@ -158,7 +128,7 @@ const EditableSwitchCell = ({
     initialValue,
     setValue,
     getNewValue : (e) => 1 - value,
-    updateMyData
+    save
   });
 
   // If the initialValue is changed external, sync it up with our state
@@ -181,7 +151,7 @@ const EditableCell = ({
   value: initialValue,
   row: { index },
   column: { id },
-  updateMyData, // This is a custom function that we supplied to our table instance
+  save, // This is a custom function that we supplied to our table instance
 }) => {
   // We need to keep and update the state of the cell normally
   initialValue = initialValue != null ? initialValue : '';
@@ -200,7 +170,7 @@ const EditableCell = ({
     initialValue,
     setValue,
     getNewValue : (e) => value,
-    updateMyData
+    save
   });
 
   // If the initialValue is changed external, sync it up with our state
@@ -252,7 +222,7 @@ const {
       defaultColumn,
       // use the skipPageReset option to disable page resetting temporarily
       autoResetPage: !skipPageReset,
-      updateMyData
+      save
     },
     useGlobalFilter, // Adding the useFilters Hook to the table
       // You can add as many Hooks as you want. Check the documentation for details. You can even add custom Hooks for react-table here

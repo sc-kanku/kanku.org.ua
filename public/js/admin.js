@@ -7074,7 +7074,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _PostCategory__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./PostCategory */ "./resources/js/components/controls/PostCategory.js");
 /* harmony import */ var _TableSearch__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./TableSearch */ "./resources/js/components/controls/TableSearch.js");
 /* harmony import */ var _utils_useStatus__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../utils/useStatus */ "./resources/js/components/utils/useStatus.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _utils_useSave__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utils/useSave */ "./resources/js/components/utils/useSave.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -7102,6 +7103,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 function Table(_ref) {
   var columns = _ref.columns,
       data = _ref.data,
@@ -7111,36 +7113,6 @@ function Table(_ref) {
       _React$useState2 = _slicedToArray(_React$useState, 2),
       skipPageReset = _React$useState2[0],
       setSkipPageReset = _React$useState2[1];
-
-  var updateMyData = function updateMyData(index, id, value, onSuccess, onFailure) {
-    var inlineEditData = {
-      'id': +index + 1,
-      'field': id,
-      'value': value
-    };
-    fetch(inlineUpdateUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(inlineEditData)
-    }) // .then(response => response.json())
-    .then(function (response) {
-      if (typeof response["Not success"] !== "undefined") {
-        // Failure
-        onFailure();
-      } else {
-        // Success
-        synchronizeDataOnUpdateSuccess(index, id, value);
-        onSuccess(); // Show toasted message
-        // https://getbootstrap.com/docs/5.1/components/toasts/
-        // console.log('saved ' + id + ' to ' + value + ' - ' + JSON.stringify(responseSavedSuccess));
-      }
-    })["catch"](function (error) {
-      // console.error('Error:', JSON.stringify(error));
-      onFailure();
-    });
-  };
 
   var synchronizeDataOnUpdateSuccess = function synchronizeDataOnUpdateSuccess(rowIndex, columnId, value) {
     setSkipPageReset(true); // TODO: via context access parent state data var
@@ -7159,6 +7131,10 @@ function Table(_ref) {
     )*/
   };
 
+  var _useSave = (0,_utils_useSave__WEBPACK_IMPORTED_MODULE_6__["default"])(inlineUpdateUrl, synchronizeDataOnUpdateSuccess),
+      _useSave2 = _slicedToArray(_useSave, 1),
+      save = _useSave2[0];
+
   react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
     setSkipPageReset(false);
   }, [data]); // TODO: Remove code duplications in EditableXXX components.
@@ -7167,7 +7143,7 @@ function Table(_ref) {
     var initialValue = _ref2.value,
         index = _ref2.row.index,
         id = _ref2.column.id,
-        updateMyData = _ref2.updateMyData;
+        save = _ref2.save;
 
     var _React$useState3 = react__WEBPACK_IMPORTED_MODULE_0__.useState(initialValue),
         _React$useState4 = _slicedToArray(_React$useState3, 2),
@@ -7179,14 +7155,14 @@ function Table(_ref) {
       index: index,
       initialValue: initialValue,
       setValue: setValue,
-      updateMyData: updateMyData
+      save: save
     }),
         _useStatus2 = _slicedToArray(_useStatus, 2),
         Status = _useStatus2[0],
         onChange = _useStatus2[1];
 
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(Status, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Degree__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.Fragment, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(Status, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Degree__WEBPACK_IMPORTED_MODULE_2__["default"], {
         value: value,
         editable: "true",
         onChange: onChange
@@ -7198,7 +7174,7 @@ function Table(_ref) {
     var initialValue = _ref3.value,
         index = _ref3.row.index,
         id = _ref3.column.id,
-        updateMyData = _ref3.updateMyData;
+        save = _ref3.save;
 
     var _React$useState5 = react__WEBPACK_IMPORTED_MODULE_0__.useState(initialValue),
         _React$useState6 = _slicedToArray(_React$useState5, 2),
@@ -7210,14 +7186,14 @@ function Table(_ref) {
       index: index,
       initialValue: initialValue,
       setValue: setValue,
-      updateMyData: updateMyData
+      save: save
     }),
         _useStatus4 = _slicedToArray(_useStatus3, 2),
         Status = _useStatus4[0],
         onChange = _useStatus4[1];
 
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(Status, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_PostCategory__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.Fragment, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(Status, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_PostCategory__WEBPACK_IMPORTED_MODULE_3__["default"], {
         value: value,
         editable: "true",
         onChange: onChange
@@ -7230,7 +7206,7 @@ function Table(_ref) {
     var initialValue = _ref4.value,
         index = _ref4.row.index,
         id = _ref4.column.id,
-        updateMyData = _ref4.updateMyData;
+        save = _ref4.save;
     // We need to keep and update the state of the cell normally
     initialValue = initialValue != null ? initialValue : '';
 
@@ -7244,7 +7220,7 @@ function Table(_ref) {
       index: index,
       initialValue: initialValue,
       setValue: setValue,
-      updateMyData: updateMyData
+      save: save
     }),
         _useStatus6 = _slicedToArray(_useStatus5, 2),
         Status = _useStatus6[0],
@@ -7255,8 +7231,8 @@ function Table(_ref) {
       setValue(initialValue);
     }, [initialValue]); // 
 
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(Status, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.Fragment, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(Status, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
         type: "date",
         value: value,
         onChange: onChange
@@ -7269,7 +7245,7 @@ function Table(_ref) {
     var initialValue = _ref5.value,
         index = _ref5.row.index,
         id = _ref5.column.id,
-        updateMyData = _ref5.updateMyData;
+        save = _ref5.save;
     // We need to keep and update the state of the cell normally
     initialValue = initialValue != null ? initialValue : '';
 
@@ -7286,7 +7262,7 @@ function Table(_ref) {
       getNewValue: function getNewValue(e) {
         return 1 - value;
       },
-      updateMyData: updateMyData
+      save: save
     }),
         _useStatus8 = _slicedToArray(_useStatus7, 2),
         Status = _useStatus8[0],
@@ -7296,10 +7272,10 @@ function Table(_ref) {
     react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
       setValue(initialValue);
     }, [initialValue]);
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(Status, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.Fragment, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(Status, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
         className: "form-check form-switch",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
           className: "form-check-input mx-auto",
           type: "checkbox",
           role: "switch",
@@ -7315,7 +7291,7 @@ function Table(_ref) {
     var initialValue = _ref6.value,
         index = _ref6.row.index,
         id = _ref6.column.id,
-        updateMyData = _ref6.updateMyData;
+        save = _ref6.save;
     // We need to keep and update the state of the cell normally
     initialValue = initialValue != null ? initialValue : '';
 
@@ -7337,7 +7313,7 @@ function Table(_ref) {
       getNewValue: function getNewValue(e) {
         return value;
       },
-      updateMyData: updateMyData
+      save: save
     }),
         _useStatus10 = _slicedToArray(_useStatus9, 2),
         Status = _useStatus10[0],
@@ -7347,8 +7323,8 @@ function Table(_ref) {
     react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
       setValue(initialValue);
     }, [initialValue]);
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(Status, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.Fragment, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(Status, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
         value: value,
         onChange: onTypingChange,
         onBlur: onChange
@@ -7363,15 +7339,15 @@ function Table(_ref) {
       var attributes = info;
 
       if (info.column.id == "degree") {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(EditableDegree, _objectSpread({}, attributes));
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(EditableDegree, _objectSpread({}, attributes));
       } else if (info.column.id == "category") {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(EditablePostCategory, _objectSpread({}, attributes));
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(EditablePostCategory, _objectSpread({}, attributes));
       } else if (info.column.id == "is_coach" || info.column.id == "is_best" || info.column.id == "is_actual") {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(EditableSwitchCell, _objectSpread({}, attributes));
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(EditableSwitchCell, _objectSpread({}, attributes));
       } else if (info.column.id == "dateAt") {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(EditableDateCell, _objectSpread({}, attributes));
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(EditableDateCell, _objectSpread({}, attributes));
       } else {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(EditableCell, _objectSpread({}, attributes));
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(EditableCell, _objectSpread({}, attributes));
       }
     }
   }; // Use the useTable Hook to send the columns and data to build the table
@@ -7382,7 +7358,7 @@ function Table(_ref) {
     defaultColumn: defaultColumn,
     // use the skipPageReset option to disable page resetting temporarily
     autoResetPage: !skipPageReset,
-    updateMyData: updateMyData
+    save: save
   }, react_table__WEBPACK_IMPORTED_MODULE_1__.useGlobalFilter, // Adding the useFilters Hook to the table
   // You can add as many Hooks as you want. Check the documentation for details. You can even add custom Hooks for react-table here
   react_table__WEBPACK_IMPORTED_MODULE_1__.useSortBy // This plugin Hook will help to sort our table columns
@@ -7400,14 +7376,14 @@ function Table(_ref) {
   // Input element
 
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.Fragment, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
       className: "table-responsive",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("table", _objectSpread(_objectSpread({}, getTableProps()), {}, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("table", _objectSpread(_objectSpread({}, getTableProps()), {}, {
         className: "table table-striped table-hover table-sm",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("thead", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("thead", {
           children: headerGroups.map(function (headerGroup) {
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("tr", _objectSpread(_objectSpread({}, headerGroup.getHeaderGroupProps()), {}, {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("tr", _objectSpread(_objectSpread({}, headerGroup.getHeaderGroupProps()), {}, {
               children: headerGroup.headers.map(function (column) {
                 function getColumnStyle(column) {
                   var customStyle = {};
@@ -7431,27 +7407,27 @@ function Table(_ref) {
                 // {...column.getHeaderProps(getColumnStyle(column))} 
 
 
-                var content = column.originalId == "Search" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_TableSearch__WEBPACK_IMPORTED_MODULE_4__["default"], {
+                var content = column.originalId == "Search" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.Fragment, {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_TableSearch__WEBPACK_IMPORTED_MODULE_4__["default"], {
                     setGlobalFilter: setGlobalFilter
                   }), " ", rows.length != data.length ? rows.length + ' / ' + data.length : data.length]
                 }) : column.render("Header");
-                var sortingIcon = column.columns ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
+                var sortingIcon = column.columns ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("i", {
                   className: column.isSorted ? column.isSortedDesc ? "fas fa-sort-up" : "fas fa-sort-down" : "fas fa-sort"
                 });
-                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("th", _objectSpread(_objectSpread({}, column.getHeaderProps(column.getSortByToggleProps())), {}, {
+                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("th", _objectSpread(_objectSpread({}, column.getHeaderProps(column.getSortByToggleProps())), {}, {
                   scope: "col",
                   children: [sortingIcon, " ", content]
                 }));
               })
             }));
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("tbody", _objectSpread(_objectSpread({}, getTableBodyProps()), {}, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("tbody", _objectSpread(_objectSpread({}, getTableBodyProps()), {}, {
           children: rows.map(function (row, i) {
             prepareRow(row);
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("tr", _objectSpread(_objectSpread({}, row.getRowProps()), {}, {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("tr", _objectSpread(_objectSpread({}, row.getRowProps()), {}, {
               children: row.cells.map(function (cell) {
-                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("td", _objectSpread(_objectSpread({}, cell.getCellProps()), {}, {
+                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", _objectSpread(_objectSpread({}, cell.getCellProps()), {}, {
                   children: cell.render("Cell")
                 }));
               })
@@ -9814,6 +9790,56 @@ function SiteRefresh() {
 
 /***/ }),
 
+/***/ "./resources/js/components/utils/useSave.js":
+/*!**************************************************!*\
+  !*** ./resources/js/components/utils/useSave.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ useSave)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+function useSave(inlineUpdateUrl, onBeforeSuccess) {
+  var save = function save(index, id, value, onSuccess, onFailure) {
+    var inlineEditData = {
+      'id': +index + 1,
+      'field': id,
+      'value': value
+    };
+    fetch(inlineUpdateUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(inlineEditData)
+    }) // .then(response => response.json())
+    .then(function (response) {
+      if (typeof response["Not success"] !== "undefined") {
+        // Failure
+        onFailure();
+      } else {
+        // Success
+        onBeforeSuccess(index, id, value); // synchronizeDataOnUpdateSuccess(index, id, value);
+
+        onSuccess(); // Show toasted message
+        // https://getbootstrap.com/docs/5.1/components/toasts/
+        // console.log('saved ' + id + ' to ' + value + ' - ' + JSON.stringify(responseSavedSuccess));
+      }
+    })["catch"](function (error) {
+      // console.error('Error:', JSON.stringify(error));
+      onFailure();
+    });
+  };
+
+  return [save];
+}
+
+/***/ }),
+
 /***/ "./resources/js/components/utils/useStatus.js":
 /*!****************************************************!*\
   !*** ./resources/js/components/utils/useStatus.js ***!
@@ -9850,7 +9876,7 @@ function useStatus(_ref) {
       initialValue = _ref.initialValue,
       setValue = _ref.setValue,
       getNewValue = _ref.getNewValue,
-      updateMyData = _ref.updateMyData;
+      save = _ref.save;
 
   var _React$useState = react__WEBPACK_IMPORTED_MODULE_0__.useState(initialValue),
       _React$useState2 = _slicedToArray(_React$useState, 2),
@@ -9879,7 +9905,7 @@ function useStatus(_ref) {
 
     if (previousValue != newValue) {
       setValue(newValue);
-      updateMyData(index, id, newValue, function () {
+      save(index, id, newValue, function () {
         setSuccessfullyUpdated(true);
         setPreviousValue(newValue);
         setTimeout(function () {
