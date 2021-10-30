@@ -96,3 +96,7 @@
 .group .value-name {
     margin-bottom: 1rem;
 }
+
+.form-control {
+    appearance: auto !important;
+}

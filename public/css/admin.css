@@ -12558,3 +12558,9 @@ a:focused {
     margin-bottom: 1rem;
 }
 
+.form-control {
+    -webkit-appearance: auto !important;
+       -moz-appearance: auto !important;
+            appearance: auto !important;
+}
+

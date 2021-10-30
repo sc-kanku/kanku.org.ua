@@ -7073,7 +7073,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Degree__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Degree */ "./resources/js/components/controls/Degree.js");
 /* harmony import */ var _PostCategory__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./PostCategory */ "./resources/js/components/controls/PostCategory.js");
 /* harmony import */ var _TableSearch__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./TableSearch */ "./resources/js/components/controls/TableSearch.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _utils_useStatus__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../utils/useStatus */ "./resources/js/components/utils/useStatus.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -7091,6 +7092,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -7172,70 +7174,24 @@ function Table(_ref) {
         value = _React$useState4[0],
         setValue = _React$useState4[1];
 
-    var _React$useState5 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
-        _React$useState6 = _slicedToArray(_React$useState5, 2),
-        successfullyUpdated = _React$useState6[0],
-        setSuccessfullyUpdated = _React$useState6[1];
+    var _useStatus = (0,_utils_useStatus__WEBPACK_IMPORTED_MODULE_5__["default"])({
+      id: id,
+      index: index,
+      getNewValue: function getNewValue(e) {
+        return e.target.value;
+      },
+      setValue: setValue,
+      updateMyData: updateMyData
+    }),
+        _useStatus2 = _slicedToArray(_useStatus, 2),
+        Status = _useStatus2[0],
+        onChange = _useStatus2[1];
 
-    var _React$useState7 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
-        _React$useState8 = _slicedToArray(_React$useState7, 2),
-        updatedWithFailure = _React$useState8[0],
-        setUpdatedWithFailure = _React$useState8[1];
-
-    var onChange = function onChange(e) {
-      var newValue = e.target.value;
-      updateMyData(index, id, newValue, function () {
-        setSuccessfullyUpdated(true);
-        setValue(newValue);
-        setTimeout(function () {
-          setSuccessfullyUpdated(false);
-        }, 2000);
-      }, function () {
-        setUpdatedWithFailure(true);
-        setTimeout(function () {
-          setUpdatedWithFailure(false);
-        }, 2000);
-      });
-    };
-
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-        style: {
-          position: "relative"
-        },
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Degree__WEBPACK_IMPORTED_MODULE_2__["default"], {
-          value: value,
-          editable: "true",
-          onChange: onChange
-        }), successfullyUpdated && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-          className: "position-absolute top-50 end-0 translate-middle bg-success border border-light rounded-circle",
-          style: {
-            marginRight: '-0.4em'
-          },
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
-            className: "fas fa-check",
-            style: {
-              color: 'white',
-              padding: '0.2em',
-              fontSize: '0.7em',
-              display: 'block'
-            }
-          })
-        }), updatedWithFailure && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-          className: "position-absolute top-50 end-0 translate-middle bg-danger border border-light rounded-circle",
-          style: {
-            marginRight: '-0.4em'
-          },
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
-            className: "fas fa-exclamation",
-            style: {
-              color: 'white',
-              padding: '0.2em 0.5em',
-              fontSize: '0.7em',
-              display: 'block'
-            }
-          })
-        })]
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(Status, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Degree__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        value: value,
+        editable: "true",
+        onChange: onChange
       })
     });
   };
@@ -7246,20 +7202,20 @@ function Table(_ref) {
         id = _ref3.column.id,
         updateMyData = _ref3.updateMyData;
 
-    var _React$useState9 = react__WEBPACK_IMPORTED_MODULE_0__.useState(initialValue),
+    var _React$useState5 = react__WEBPACK_IMPORTED_MODULE_0__.useState(initialValue),
+        _React$useState6 = _slicedToArray(_React$useState5, 2),
+        value = _React$useState6[0],
+        setValue = _React$useState6[1];
+
+    var _React$useState7 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
+        _React$useState8 = _slicedToArray(_React$useState7, 2),
+        successfullyUpdated = _React$useState8[0],
+        setSuccessfullyUpdated = _React$useState8[1];
+
+    var _React$useState9 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
         _React$useState10 = _slicedToArray(_React$useState9, 2),
-        value = _React$useState10[0],
-        setValue = _React$useState10[1];
-
-    var _React$useState11 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
-        _React$useState12 = _slicedToArray(_React$useState11, 2),
-        successfullyUpdated = _React$useState12[0],
-        setSuccessfullyUpdated = _React$useState12[1];
-
-    var _React$useState13 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
-        _React$useState14 = _slicedToArray(_React$useState13, 2),
-        updatedWithFailure = _React$useState14[0],
-        setUpdatedWithFailure = _React$useState14[1];
+        updatedWithFailure = _React$useState10[0],
+        setUpdatedWithFailure = _React$useState10[1];
 
     var onChange = function onChange(e) {
       var newValue = e.target.value; // TODO: Promises instead callbacks
@@ -7278,21 +7234,21 @@ function Table(_ref) {
       });
     };
 
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
         style: {
           position: "relative"
         },
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_PostCategory__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_PostCategory__WEBPACK_IMPORTED_MODULE_3__["default"], {
           value: value,
           editable: "true",
           onChange: onChange
-        }), successfullyUpdated && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+        }), successfullyUpdated && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
           className: "position-absolute top-50 end-0 translate-middle bg-success border border-light rounded-circle",
           style: {
             marginRight: '-0.4em'
           },
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
             className: "fas fa-check",
             style: {
               color: 'white',
@@ -7301,12 +7257,12 @@ function Table(_ref) {
               display: 'block'
             }
           })
-        }), updatedWithFailure && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+        }), updatedWithFailure && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
           className: "position-absolute top-50 end-0 translate-middle bg-danger border border-light rounded-circle",
           style: {
             marginRight: '-0.4em'
           },
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
             className: "fas fa-exclamation",
             style: {
               color: 'white',
@@ -7329,20 +7285,20 @@ function Table(_ref) {
     // We need to keep and update the state of the cell normally
     initialValue = initialValue != null ? initialValue : '';
 
-    var _React$useState15 = react__WEBPACK_IMPORTED_MODULE_0__.useState(initialValue),
+    var _React$useState11 = react__WEBPACK_IMPORTED_MODULE_0__.useState(initialValue),
+        _React$useState12 = _slicedToArray(_React$useState11, 2),
+        value = _React$useState12[0],
+        setValue = _React$useState12[1];
+
+    var _React$useState13 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
+        _React$useState14 = _slicedToArray(_React$useState13, 2),
+        successfullyUpdated = _React$useState14[0],
+        setSuccessfullyUpdated = _React$useState14[1];
+
+    var _React$useState15 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
         _React$useState16 = _slicedToArray(_React$useState15, 2),
-        value = _React$useState16[0],
-        setValue = _React$useState16[1];
-
-    var _React$useState17 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
-        _React$useState18 = _slicedToArray(_React$useState17, 2),
-        successfullyUpdated = _React$useState18[0],
-        setSuccessfullyUpdated = _React$useState18[1];
-
-    var _React$useState19 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
-        _React$useState20 = _slicedToArray(_React$useState19, 2),
-        updatedWithFailure = _React$useState20[0],
-        setUpdatedWithFailure = _React$useState20[1];
+        updatedWithFailure = _React$useState16[0],
+        setUpdatedWithFailure = _React$useState16[1];
 
     var onBlur = function onBlur(e) {// setValue(e.target.value)
     }; // We'll only update the external data when the input is blurred
@@ -7370,19 +7326,19 @@ function Table(_ref) {
       setValue(initialValue);
     }, [initialValue]); // 
 
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
         style: {
           position: "relative"
         },
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
           type: "date",
           value: value,
           onChange: onChange,
           onBlur: onBlur
-        }), successfullyUpdated && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+        }), successfullyUpdated && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
           className: "position-absolute top-50 end-0 translate-middle bg-success border border-light rounded-circle",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
             className: "fas fa-check",
             style: {
               color: 'white',
@@ -7391,9 +7347,9 @@ function Table(_ref) {
               display: 'block'
             }
           })
-        }), updatedWithFailure && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+        }), updatedWithFailure && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
           className: "position-absolute top-50 end-0 translate-middle bg-danger border border-light rounded-circle",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
             className: "fas fa-exclamation",
             style: {
               color: 'white',
@@ -7416,20 +7372,20 @@ function Table(_ref) {
     // We need to keep and update the state of the cell normally
     initialValue = initialValue != null ? initialValue : '';
 
-    var _React$useState21 = react__WEBPACK_IMPORTED_MODULE_0__.useState(initialValue),
+    var _React$useState17 = react__WEBPACK_IMPORTED_MODULE_0__.useState(initialValue),
+        _React$useState18 = _slicedToArray(_React$useState17, 2),
+        value = _React$useState18[0],
+        setValue = _React$useState18[1];
+
+    var _React$useState19 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
+        _React$useState20 = _slicedToArray(_React$useState19, 2),
+        successfullyUpdated = _React$useState20[0],
+        setSuccessfullyUpdated = _React$useState20[1];
+
+    var _React$useState21 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
         _React$useState22 = _slicedToArray(_React$useState21, 2),
-        value = _React$useState22[0],
-        setValue = _React$useState22[1];
-
-    var _React$useState23 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
-        _React$useState24 = _slicedToArray(_React$useState23, 2),
-        successfullyUpdated = _React$useState24[0],
-        setSuccessfullyUpdated = _React$useState24[1];
-
-    var _React$useState25 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
-        _React$useState26 = _slicedToArray(_React$useState25, 2),
-        updatedWithFailure = _React$useState26[0],
-        setUpdatedWithFailure = _React$useState26[1];
+        updatedWithFailure = _React$useState22[0],
+        setUpdatedWithFailure = _React$useState22[1];
 
     var onBlur = function onBlur(e) {// setValue(e.target.value)
     }; // We'll only update the external data when the input is blurred
@@ -7457,23 +7413,23 @@ function Table(_ref) {
       setValue(initialValue);
     }, [initialValue]); // 
 
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
         style: {
           position: "relative"
         },
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
           className: "form-check form-switch",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
             className: "form-check-input mx-auto",
             type: "checkbox",
             role: "switch",
             onChange: onChange,
             checked: value == 1
           })
-        }), successfullyUpdated && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+        }), successfullyUpdated && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
           className: "position-absolute top-50 end-0 translate-middle bg-success border border-light rounded-circle",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
             className: "fas fa-check",
             style: {
               color: 'white',
@@ -7482,9 +7438,9 @@ function Table(_ref) {
               display: 'block'
             }
           })
-        }), updatedWithFailure && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+        }), updatedWithFailure && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
           className: "position-absolute top-50 end-0 translate-middle bg-danger border border-light rounded-circle",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
             className: "fas fa-exclamation",
             style: {
               color: 'white',
@@ -7507,25 +7463,25 @@ function Table(_ref) {
     // We need to keep and update the state of the cell normally
     initialValue = initialValue != null ? initialValue : '';
 
-    var _React$useState27 = react__WEBPACK_IMPORTED_MODULE_0__.useState(initialValue),
+    var _React$useState23 = react__WEBPACK_IMPORTED_MODULE_0__.useState(initialValue),
+        _React$useState24 = _slicedToArray(_React$useState23, 2),
+        value = _React$useState24[0],
+        setValue = _React$useState24[1];
+
+    var _React$useState25 = react__WEBPACK_IMPORTED_MODULE_0__.useState(initialValue),
+        _React$useState26 = _slicedToArray(_React$useState25, 2),
+        previousValue = _React$useState26[0],
+        setPreviousValue = _React$useState26[1];
+
+    var _React$useState27 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
         _React$useState28 = _slicedToArray(_React$useState27, 2),
-        value = _React$useState28[0],
-        setValue = _React$useState28[1];
+        successfullyUpdated = _React$useState28[0],
+        setSuccessfullyUpdated = _React$useState28[1];
 
-    var _React$useState29 = react__WEBPACK_IMPORTED_MODULE_0__.useState(initialValue),
+    var _React$useState29 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
         _React$useState30 = _slicedToArray(_React$useState29, 2),
-        previousValue = _React$useState30[0],
-        setPreviousValue = _React$useState30[1];
-
-    var _React$useState31 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
-        _React$useState32 = _slicedToArray(_React$useState31, 2),
-        successfullyUpdated = _React$useState32[0],
-        setSuccessfullyUpdated = _React$useState32[1];
-
-    var _React$useState33 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
-        _React$useState34 = _slicedToArray(_React$useState33, 2),
-        updatedWithFailure = _React$useState34[0],
-        setUpdatedWithFailure = _React$useState34[1];
+        updatedWithFailure = _React$useState30[0],
+        setUpdatedWithFailure = _React$useState30[1];
 
     var onChange = function onChange(e) {
       setValue(e.target.value);
@@ -7555,18 +7511,18 @@ function Table(_ref) {
       setValue(initialValue);
     }, [initialValue]); // 
 
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
         style: {
           position: "relative"
         },
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
           value: value,
           onChange: onChange,
           onBlur: onBlur
-        }), successfullyUpdated && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+        }), successfullyUpdated && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
           className: "position-absolute top-50 end-0 translate-middle bg-success border border-light rounded-circle",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
             className: "fas fa-check",
             style: {
               color: 'white',
@@ -7575,9 +7531,9 @@ function Table(_ref) {
               display: 'block'
             }
           })
-        }), updatedWithFailure && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+        }), updatedWithFailure && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
           className: "position-absolute top-50 end-0 translate-middle bg-danger border border-light rounded-circle",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
             className: "fas fa-exclamation",
             style: {
               color: 'white',
@@ -7598,15 +7554,15 @@ function Table(_ref) {
       var attributes = info;
 
       if (info.column.id == "degree") {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(EditableDegree, _objectSpread({}, attributes));
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(EditableDegree, _objectSpread({}, attributes));
       } else if (info.column.id == "category") {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(EditablePostCategory, _objectSpread({}, attributes));
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(EditablePostCategory, _objectSpread({}, attributes));
       } else if (info.column.id == "is_coach" || info.column.id == "is_best" || info.column.id == "is_actual") {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(EditableSwitchCell, _objectSpread({}, attributes));
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(EditableSwitchCell, _objectSpread({}, attributes));
       } else if (info.column.id == "dateAt") {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(EditableDateCell, _objectSpread({}, attributes));
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(EditableDateCell, _objectSpread({}, attributes));
       } else {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(EditableCell, _objectSpread({}, attributes));
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(EditableCell, _objectSpread({}, attributes));
       }
     }
   }; // Use the useTable Hook to send the columns and data to build the table
@@ -7635,14 +7591,14 @@ function Table(_ref) {
   // Input element
 
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
       className: "table-responsive",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("table", _objectSpread(_objectSpread({}, getTableProps()), {}, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("table", _objectSpread(_objectSpread({}, getTableProps()), {}, {
         className: "table table-striped table-hover table-sm",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("thead", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("thead", {
           children: headerGroups.map(function (headerGroup) {
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("tr", _objectSpread(_objectSpread({}, headerGroup.getHeaderGroupProps()), {}, {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("tr", _objectSpread(_objectSpread({}, headerGroup.getHeaderGroupProps()), {}, {
               children: headerGroup.headers.map(function (column) {
                 function getColumnStyle(column) {
                   var customStyle = {};
@@ -7666,27 +7622,27 @@ function Table(_ref) {
                 // {...column.getHeaderProps(getColumnStyle(column))} 
 
 
-                var content = column.originalId == "Search" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_TableSearch__WEBPACK_IMPORTED_MODULE_4__["default"], {
+                var content = column.originalId == "Search" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_TableSearch__WEBPACK_IMPORTED_MODULE_4__["default"], {
                     setGlobalFilter: setGlobalFilter
                   }), " ", rows.length != data.length ? rows.length + ' / ' + data.length : data.length]
                 }) : column.render("Header");
-                var sortingIcon = column.columns ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
+                var sortingIcon = column.columns ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
                   className: column.isSorted ? column.isSortedDesc ? "fas fa-sort-up" : "fas fa-sort-down" : "fas fa-sort"
                 });
-                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("th", _objectSpread(_objectSpread({}, column.getHeaderProps(column.getSortByToggleProps())), {}, {
+                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("th", _objectSpread(_objectSpread({}, column.getHeaderProps(column.getSortByToggleProps())), {}, {
                   scope: "col",
                   children: [sortingIcon, " ", content]
                 }));
               })
             }));
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("tbody", _objectSpread(_objectSpread({}, getTableBodyProps()), {}, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("tbody", _objectSpread(_objectSpread({}, getTableBodyProps()), {}, {
           children: rows.map(function (row, i) {
             prepareRow(row);
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("tr", _objectSpread(_objectSpread({}, row.getRowProps()), {}, {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("tr", _objectSpread(_objectSpread({}, row.getRowProps()), {}, {
               children: row.cells.map(function (cell) {
-                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("td", _objectSpread(_objectSpread({}, cell.getCellProps()), {}, {
+                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("td", _objectSpread(_objectSpread({}, cell.getCellProps()), {}, {
                   children: cell.render("Cell")
                 }));
               })
@@ -10045,6 +10001,114 @@ function SiteRefresh() {
       })]
     })]
   });
+}
+
+/***/ }),
+
+/***/ "./resources/js/components/utils/useStatus.js":
+/*!****************************************************!*\
+  !*** ./resources/js/components/utils/useStatus.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ useStatus)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+function useStatus(_ref) {
+  var id = _ref.id,
+      index = _ref.index,
+      getNewValue = _ref.getNewValue,
+      setValue = _ref.setValue,
+      updateMyData = _ref.updateMyData;
+
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      successfullyUpdated = _React$useState2[0],
+      setSuccessfullyUpdated = _React$useState2[1];
+
+  var _React$useState3 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
+      _React$useState4 = _slicedToArray(_React$useState3, 2),
+      updatedWithFailure = _React$useState4[0],
+      setUpdatedWithFailure = _React$useState4[1];
+
+  var onChange = function onChange(e) {
+    var newValue = getNewValue(e);
+    updateMyData(index, id, newValue, function () {
+      setSuccessfullyUpdated(true);
+      setValue(newValue);
+      setTimeout(function () {
+        setSuccessfullyUpdated(false);
+      }, 2000);
+    }, function () {
+      setUpdatedWithFailure(true);
+      setTimeout(function () {
+        setUpdatedWithFailure(false);
+      }, 2000);
+    });
+  }; // <div style={{position: "relative"}}>
+
+
+  var StatusMarkup = function StatusMarkup(_ref2) {
+    var children = _ref2.children;
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        style: {
+          position: "relative"
+        },
+        children: [children, successfullyUpdated && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+          className: "position-absolute top-50 end-0 translate-middle bg-success border border-light rounded-circle",
+          style: {
+            marginRight: '-0.4em'
+          },
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("i", {
+            className: "fas fa-check",
+            style: {
+              color: 'white',
+              padding: '0.2em',
+              fontSize: '0.7em',
+              display: 'block'
+            }
+          })
+        }), updatedWithFailure && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+          className: "position-absolute top-50 end-0 translate-middle bg-danger border border-light rounded-circle",
+          style: {
+            marginRight: '-0.4em'
+          },
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("i", {
+            className: "fas fa-exclamation",
+            style: {
+              color: 'white',
+              padding: '0.2em 0.5em',
+              fontSize: '0.7em',
+              display: 'block'
+            }
+          })
+        })]
+      })
+    });
+  };
+
+  return [StatusMarkup, onChange];
 }
 
 /***/ }),
