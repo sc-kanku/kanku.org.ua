@@ -6840,12 +6840,53 @@ function EditableTable(_ref) {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
           path: [urls.editEntityWebUrl, urls.newEntityWebUrl],
           render: function render() {
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_EditEntity__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+              children: [entity == 'athlete' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+                  className: "alert alert-success mt-3",
+                  role: "alert",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h4", {
+                    "class": "alert-heading",
+                    children: "\u041D\u0430 \u0446\u0456\u0439 \u0441\u0442\u043E\u0440\u0456\u043D\u0446\u0456 \u043D\u0430\u0441\u0442\u0443\u043F\u043D\u0435 \u0432\u0436\u0435 \u043F\u0440\u0430\u0446\u044E\u0454:"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("ol", {
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
+                      children: "\u0412\u0456\u0434\u0440\u0435\u0434\u0430\u0433\u043E\u0432\u0430\u043D\u0456 \u0434\u0430\u043D\u0456 \u0437\u0431\u0435\u0440\u0456\u0433\u0430\u044E\u0442\u044C\u0441\u044F \u043D\u0430 \u0441\u0435\u0440\u0432\u0435\u0440 \u043F\u043E \u0432\u0442\u0440\u0430\u0442\u0456 \u0444\u043E\u043A\u0443\u0441\u0443 (\u0434\u043B\u044F \u0442\u0435\u043A\u0441\u0442\u043E\u0432\u0438\u0445 \u043F\u043E\u043B\u0456\u0432) \u0447\u0438 \u0437\u043C\u0456\u043D\u0456 \u0437\u043D\u0430\u0447\u0435\u043D\u043D\u044F (\u0434\u043B\u044F \u0441\u0435\u043B\u0435\u043A\u0442\u0456\u0432 \u0456 \u0447\u0435\u043A\u0431\u043E\u043A\u0441\u0456\u0432)."
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
+                      children: "\u0456 \u044F\u043A\u0449\u043E \u0432\u0441\u0435 \u0434\u043E\u0431\u0440\u0435 \u0437\u0431\u0435\u0440\u0435\u0433\u043B\u043E\u0441\u044C \u0442\u043E \u0437'\u044F\u0432\u043B\u044F\u0454\u0442\u044C\u0441\u044F \u0437\u0435\u043B\u0435\u043D\u0430 \u043F\u0456\u043C\u043F\u043E\u0447\u043A\u0430 \u0441\u043F\u0440\u0430\u0432\u0430 \u043F\u043E\u043B\u044F, \u044F\u043A\u0435 \u0440\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u043B\u043E\u0441\u044C (\u044F\u043A\u0449\u043E \u0449\u043E\u0441\u044C \u043D\u0435 \u0437\u0431\u0435\u0440\u0435\u0433\u043B\u043E\u0441\u044C, \u0442\u043E \u043F\u043E\u0432\u0456\u0434\u043E\u043C\u043B\u044F\u0454 \u043F\u0440\u043E \u0446\u0435 \u0430\u043D\u0430\u043B\u043E\u0433\u0456\u0447\u043D\u0430 \u0447\u0435\u0440\u0432\u043E\u043D\u0430 \u043F\u0456\u043C\u043F\u043E\u0447\u043A\u0430)"
+                    })]
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+                  className: "alert alert-warning",
+                  role: "alert",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h4", {
+                    "class": "alert-heading",
+                    children: "\u041D\u0430\u0440\u0430\u0437\u0456 \u043D\u0435 \u043F\u0440\u0430\u0446\u044E\u0454:"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("ol", {
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
+                      children: "\u0414\u043E\u0434\u0430\u0432\u0430\u043D\u043D\u044F \u043D\u043E\u0432\u043E\u0433\u043E \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430 / \u0437\u0430\u043B\u0443 / \u043D\u043E\u0432\u0438\u043D\u0438"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
+                      children: "\u0417\u0431\u0435\u0440\u0435\u0436\u0435\u043D\u043D\u044F \u0440\u0435\u0434\u0430\u0433\u043E\u0432\u0430\u043D\u043E\u0457 \u0432 \u0441\u0435\u043A\u0446\u0456\u0457 '\u0437\u0430\u043B\u0438' \u0456\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0456\u0457"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
+                      children: "\u0420\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u043D\u043D\u044F \u0444\u043E\u0442\u043E"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
+                      children: "\u0412\u0430\u043B\u0456\u0434\u0430\u0446\u0456\u044F"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("span", {
+                      className: "text-secondary",
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
+                        children: "\u041C\u043E\u0436\u043B\u0438\u0432\u0456\u0441\u0442\u0442\u044C \u0444\u043E\u0440\u043C\u0430\u0442\u0443\u0432\u0430\u0442\u0438 \u0442\u0435\u043A\u0441\u0442 \u0443 \u0442\u0435\u043A\u0441\u0442\u043E\u0432\u0438\u0445 \u043F\u043E\u043B\u044F\u0445, \u044F\u043A\u0449\u043E \u0442\u0440\u0435\u0431\u0430 (\u0442\u0440\u0435\u0431\u0430?)"
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
+                        children: "\u0406 \u0442\u0430\u043A\u043E\u0436 \u0433\u0430\u043B\u0435\u0440\u0435\u0457 \u0442\u0440\u0435\u043D\u0435\u0440\u0430 \u0432\u0456\u0434\u043A\u043B\u044E\u0447\u0435\u043D\u0456 \u043D\u0430\u0440\u0430\u0437\u0456)"
+                      })]
+                    })]
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
+                    children: "\u042F\u043A\u0431\u0438 \u0449\u0435 \u0432\u0438\u043B\u0456\u0437\u043B\u043E \u0449\u043E\u0441\u044C \u0456\u043D\u0448\u0435 (\u0430\u0431\u043E \u043F\u0440\u043E\u0441\u0442\u043E \u043C\u0430\u0454\u0442\u0435 \u0445\u043E\u0440\u043E\u0448\u0456 \u0456\u0434\u0435\u0457), \u0442\u043E \u0434\u0430\u0439\u0442\u0435 \u0431\u0443\u0434\u044C \u043B\u0430\u0441\u043A\u0430 \u0437\u043D\u0430\u0442\u0438"
+                  })]
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_EditEntity__WEBPACK_IMPORTED_MODULE_3__["default"], {
                 name: entity,
                 getUrl: urls.getUrl,
                 updateUrl: urls.updateEditedItemUrl
-              })
+              })]
             });
           }
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
@@ -6853,7 +6894,41 @@ function EditableTable(_ref) {
           exact: true,
           render: function render() {
             return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("h2", {
+              children: [entity == 'athlete' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+                  className: "alert alert-info mt-3",
+                  role: "alert",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h4", {
+                    "class": "alert-heading",
+                    children: "\u041D\u0430 \u0446\u0456\u0439 \u0441\u0442\u043E\u0440\u0456\u043D\u0446\u0456 \u043D\u0430\u0441\u0442\u0443\u043F\u043D\u0435 \u0432\u0436\u0435 \u043F\u0440\u0430\u0446\u044E\u0454:"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("ol", {
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
+                      children: "\u0422\u0430\u0431\u043B\u0438\u0446\u044F \u0441\u043E\u0440\u0442\u0443\u0454\u0442\u044C\u0441\u044F \u0456 \u0444\u0456\u043B\u044C\u0442\u0440\u0443\u0454\u0442\u044C\u0441\u044F (\u041F\u043E\u0448\u0443\u043A) \u043F\u043E \u0432\u0441\u0456\u043C \u043F\u043E\u043B\u044F\u043C"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
+                      children: "\u0414\u0430\u043D\u0456 \u043C\u043E\u0436\u043D\u0430 \u0440\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u0442\u0438 \u0431\u0435\u0437\u043F\u043E\u0441\u0435\u0440\u0435\u0434\u043D\u044C\u043E \u0432 \u0442\u0430\u0431\u043B\u0438\u0446\u0456."
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
+                      children: "\u041F\u0456\u0441\u043B\u044F \u0432\u0442\u0440\u0430\u0442\u0438 \u0444\u043E\u043A\u0443\u0441\u0443 \u043F\u043E\u043B\u044F \u0440\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u043D\u043D\u044F \u0439\u043E\u0433\u043E \u0437\u043D\u0430\u0447\u0435\u043D\u043D\u044F \u0437\u0431\u0435\u0440\u0456\u0433\u0430\u0454\u0442\u044C\u0441\u044F \u043D\u0430 \u0441\u0435\u0440\u0432\u0435\u0440\u0456, \u0456 \u044F\u043A\u0449\u043E \u0432\u0441\u0435 \u0434\u043E\u0431\u0440\u0435 \u0437\u0431\u0435\u0440\u0435\u0433\u043B\u043E\u0441\u044C \u0442\u043E \u0437'\u044F\u0432\u043B\u044F\u0454\u0442\u044C\u0441\u044F \u0437\u0435\u043B\u0435\u043D\u0430 \u043F\u0456\u043C\u043F\u043E\u0447\u043A\u0430 \u0441\u043F\u0440\u0430\u0432\u0430 \u0432 \u043A\u043B\u0456\u0442\u0438\u043D\u0446\u0456, \u044F\u043A\u0430 \u0440\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u043B\u0430\u0441\u044C (\u044F\u043A\u0449\u043E \u0449\u043E\u0441\u044C \u043D\u0435 \u0437\u0431\u0435\u0440\u0435\u0433\u043B\u043E\u0441\u044C, \u0442\u043E \u043F\u043E\u0432\u0456\u0434\u043E\u043C\u043B\u044F\u0454 \u043F\u0440\u043E \u0446\u0435 \u0430\u043D\u0430\u043B\u043E\u0433\u0456\u0447\u043D\u0430 \u0447\u0435\u0440\u0432\u043E\u043D\u0430 \u043F\u0456\u043C\u043F\u043E\u0447\u043A\u0430)"
+                    })]
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+                  className: "alert alert-warning",
+                  role: "alert",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h4", {
+                    "class": "alert-heading",
+                    children: "\u041D\u0430\u0440\u0430\u0437\u0456 \u043D\u0435 \u043F\u0440\u0430\u0446\u044E\u0454:"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("ol", {
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
+                      children: "\u0412\u0430\u043B\u0456\u0434\u0430\u0446\u0456\u044F"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
+                      children: "C\u043E\u0440\u0442\u0443\u0432\u0430\u043D\u043D\u044F \u043F\u043E \u0441\u0442\u0443\u043F\u0435\u043D\u044E"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
+                      children: "C\u0438\u043D\u0445\u0440\u043E\u043D\u0456\u0437\u0430\u0446\u0456\u044F \u0434\u0430\u043D\u0438\u0445 \u0442\u0430\u0431\u043B\u0438\u0447\u043A\u0438 \u0437\u0456 \u0437\u043C\u0456\u043D\u0430\u043C\u0438, \u044F\u043A\u0456 \u0431\u0443\u043B\u0438 \u0432\u043D\u0435\u0441\u0435\u043D\u0456 \u043D\u0430 \u0441\u0442\u043E\u0440\u0456\u043D\u0446\u0456 \u0440\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u043D\u043D\u044F \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430"
+                    })]
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
+                    children: "\u042F\u043A\u0431\u0438 \u0449\u0435 \u0432\u0438\u043B\u0456\u0437\u043B\u043E \u0449\u043E\u0441\u044C \u0456\u043D\u0448\u0435 (\u0430\u0431\u043E \u043F\u0440\u043E\u0441\u0442\u043E \u043C\u0430\u0454\u0442\u0435 \u0445\u043E\u0440\u043E\u0448\u0456 \u0456\u0434\u0435\u0457), \u0442\u043E \u0434\u0430\u0439\u0442\u0435 \u0431\u0443\u0434\u044C \u043B\u0430\u0441\u043A\u0430 \u0437\u043D\u0430\u0442\u0438"
+                  })]
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("h2", {
                 children: ["\u0412\u0441\u0456 ", entity]
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Table__WEBPACK_IMPORTED_MODULE_2__["default"], {
                 columns: columns,
@@ -7083,9 +7158,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 var _excluded = ["initialValue", "className"],
     _excluded2 = ["initialValue", "className"],
-    _excluded3 = ["initialValue", "className", "children"],
-    _excluded4 = ["initialValue", "type", "className"],
-    _excluded5 = ["initialValue", "type", "className", "rows"];
+    _excluded3 = ["initialValue", "className"],
+    _excluded4 = ["initialValue", "className", "children"],
+    _excluded5 = ["initialValue", "type", "className"],
+    _excluded6 = ["initialValue", "type", "className", "rows"];
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
@@ -7148,11 +7224,16 @@ var EditableDegree = function EditableDegree(_ref) {
     })]
   });
 };
-var EditablePostCategory = function EditablePostCategory(props) {
-  props.initialValue = props.initialValue != null ? props.initialValue : '';
-  props.className = typeof props.className == 'undefined' ? '' : props.className;
+var EditablePostCategory = function EditablePostCategory(_ref2) {
+  var initialValue = _ref2.initialValue,
+      className = _ref2.className,
+      props = _objectWithoutProperties(_ref2, _excluded2);
+
+  initialValue = initialValue != null ? initialValue : '';
+  className = typeof className == 'undefined' ? '' : className;
 
   var _useEditable3 = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_5__["default"])(_objectSpread(_objectSpread({}, props), {}, {
+    initialValue: initialValue,
     getNewValue: function getNewValue(e) {
       return e.target.value;
     }
@@ -7171,10 +7252,10 @@ var EditablePostCategory = function EditablePostCategory(props) {
   });
 }; // Create an editable cell renderer
 
-var EditableDate = function EditableDate(_ref2) {
-  var initialValue = _ref2.initialValue,
-      className = _ref2.className,
-      props = _objectWithoutProperties(_ref2, _excluded2);
+var EditableDate = function EditableDate(_ref3) {
+  var initialValue = _ref3.initialValue,
+      className = _ref3.className,
+      props = _objectWithoutProperties(_ref3, _excluded3);
 
   // We need to keep and update the state of the cell normally
   initialValue = initialValue != null ? initialValue : '';
@@ -7204,11 +7285,11 @@ var EditableDate = function EditableDate(_ref2) {
   });
 }; // Create an editable cell renderer
 
-var EditableSwitch = function EditableSwitch(_ref3) {
-  var initialValue = _ref3.initialValue,
-      className = _ref3.className,
-      children = _ref3.children,
-      props = _objectWithoutProperties(_ref3, _excluded3);
+var EditableSwitch = function EditableSwitch(_ref4) {
+  var initialValue = _ref4.initialValue,
+      className = _ref4.className,
+      children = _ref4.children,
+      props = _objectWithoutProperties(_ref4, _excluded4);
 
   // We need to keep and update the state of the cell normally
   initialValue = initialValue != null ? initialValue : "";
@@ -7248,11 +7329,11 @@ var EditableSwitch = function EditableSwitch(_ref3) {
   });
 }; // Create an editable cell renderer
 
-var EditableText = function EditableText(_ref4) {
-  var initialValue = _ref4.initialValue,
-      type = _ref4.type,
-      className = _ref4.className,
-      props = _objectWithoutProperties(_ref4, _excluded4);
+var EditableText = function EditableText(_ref5) {
+  var initialValue = _ref5.initialValue,
+      type = _ref5.type,
+      className = _ref5.className,
+      props = _objectWithoutProperties(_ref5, _excluded5);
 
   // We need to keep and update the state of the cell normally
   initialValue = initialValue != null ? initialValue : '';
@@ -7287,12 +7368,12 @@ var EditableText = function EditableText(_ref4) {
     })]
   });
 };
-var EditableTextarea = function EditableTextarea(_ref5) {
-  var initialValue = _ref5.initialValue,
-      type = _ref5.type,
-      className = _ref5.className,
-      rows = _ref5.rows,
-      props = _objectWithoutProperties(_ref5, _excluded5);
+var EditableTextarea = function EditableTextarea(_ref6) {
+  var initialValue = _ref6.initialValue,
+      type = _ref6.type,
+      className = _ref6.className,
+      rows = _ref6.rows,
+      props = _objectWithoutProperties(_ref6, _excluded6);
 
   // We need to keep and update the state of the cell normally
   initialValue = initialValue != null ? initialValue : '';
@@ -7327,10 +7408,10 @@ var EditableTextarea = function EditableTextarea(_ref5) {
     })]
   });
 };
-function Table(_ref6) {
-  var columns = _ref6.columns,
-      data = _ref6.data,
-      inlineUpdateUrl = _ref6.inlineUpdateUrl;
+function Table(_ref7) {
+  var columns = _ref7.columns,
+      data = _ref7.data,
+      inlineUpdateUrl = _ref7.inlineUpdateUrl;
 
   var _React$useState = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
       _React$useState2 = _slicedToArray(_React$useState, 2),

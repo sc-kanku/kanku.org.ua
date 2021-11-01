@@ -24,11 +24,12 @@ export const EditableDegree = ({ initialValue, className, ...props }) => {
   </>
 };
 
-export const EditablePostCategory = ( props ) => {
-  props.initialValue = props.initialValue != null ? props.initialValue : '';
-  props.className = typeof props.className == 'undefined' ? '' : props.className;
+export const EditablePostCategory = ( { initialValue, className, ...props } ) => {
+  initialValue = initialValue != null ? initialValue : '';
+  className = typeof className == 'undefined' ? '' : className;
 
   const [Editable, value, onChange] = useEditable({ ...props,
+    initialValue,
     getNewValue: (e) => e.target.value
   });
 
