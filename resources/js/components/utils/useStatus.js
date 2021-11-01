@@ -7,6 +7,10 @@ export default function useStatus({ id, field, initialValue, save, setValue, get
     const [successfullyUpdated, setSuccessfullyUpdated] = React.useState(false);
     const [updatedWithFailure, setUpdatedWithFailure] = React.useState(false);
 
+    React.useEffect(() => {
+      setPreviousValue(initialValue)
+    }, [initialValue])
+
     const onChange = // useRef(
       e => {
         let newValue = getNewValue(e);

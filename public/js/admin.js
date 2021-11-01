@@ -6434,7 +6434,7 @@ var AthleteEditDojos = function AthleteEditDojos(_ref) {
               return deleteDojo(dojo.id);
             },
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
-              "class": "far fa-trash-alt"
+              className: "far fa-trash-alt"
             })
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_schedule_Schedule__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -7065,7 +7065,12 @@ function PostCategory(_ref) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "EditableDegree": () => (/* binding */ EditableDegree),
+/* harmony export */   "EditablePostCategory": () => (/* binding */ EditablePostCategory),
+/* harmony export */   "EditableDate": () => (/* binding */ EditableDate),
+/* harmony export */   "EditableSwitch": () => (/* binding */ EditableSwitch),
 /* harmony export */   "EditableText": () => (/* binding */ EditableText),
+/* harmony export */   "EditableTextarea": () => (/* binding */ EditableTextarea),
 /* harmony export */   "default": () => (/* binding */ Table)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
@@ -7076,6 +7081,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _TableSearch__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./TableSearch */ "./resources/js/components/controls/TableSearch.js");
 /* harmony import */ var _utils_useEditable__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../utils/useEditable */ "./resources/js/components/utils/useEditable.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+var _excluded = ["initialValue", "className"],
+    _excluded2 = ["initialValue", "className"],
+    _excluded3 = ["initialValue", "className", "children"],
+    _excluded4 = ["initialValue", "type", "className"],
+    _excluded5 = ["initialValue", "type", "className", "rows"];
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -7094,6 +7105,9 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
 
 
@@ -7105,22 +7119,19 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var EditableDegree = function EditableDegree(_ref) {
-  var id = _ref.id,
-      field = _ref.field,
-      initialValue = _ref.initialValue,
-      inlineUpdateUrl = _ref.inlineUpdateUrl,
-      onBeforeSuccess = _ref.onBeforeSuccess;
+  var initialValue = _ref.initialValue,
+      className = _ref.className,
+      props = _objectWithoutProperties(_ref, _excluded);
 
-  var _useEditable = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_5__["default"])({
-    id: id,
-    field: field,
+  initialValue = initialValue != null ? initialValue : '';
+  className = typeof className == 'undefined' ? '' : className;
+
+  var _useEditable = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_5__["default"])(_objectSpread(_objectSpread({}, props), {}, {
     initialValue: initialValue,
-    inlineUpdateUrl: inlineUpdateUrl,
-    onBeforeSuccess: onBeforeSuccess,
     getNewValue: function getNewValue(e) {
       return e.target.value;
     }
-  }),
+  })),
       _useEditable2 = _slicedToArray(_useEditable, 3),
       Editable = _useEditable2[0],
       value = _useEditable2[1],
@@ -7128,30 +7139,24 @@ var EditableDegree = function EditableDegree(_ref) {
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(Editable, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Degree__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      id: props.field,
+      name: props.field,
+      className: className,
       value: value,
       editable: "true",
       onChange: onChange
     })]
   });
 };
+var EditablePostCategory = function EditablePostCategory(props) {
+  props.initialValue = props.initialValue != null ? props.initialValue : '';
+  props.className = typeof props.className == 'undefined' ? '' : props.className;
 
-var EditablePostCategory = function EditablePostCategory(_ref2) {
-  var id = _ref2.id,
-      field = _ref2.field,
-      initialValue = _ref2.initialValue,
-      inlineUpdateUrl = _ref2.inlineUpdateUrl,
-      onBeforeSuccess = _ref2.onBeforeSuccess;
-
-  var _useEditable3 = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_5__["default"])({
-    id: id,
-    field: field,
-    initialValue: initialValue,
-    inlineUpdateUrl: inlineUpdateUrl,
-    onBeforeSuccess: onBeforeSuccess,
+  var _useEditable3 = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_5__["default"])(_objectSpread(_objectSpread({}, props), {}, {
     getNewValue: function getNewValue(e) {
       return e.target.value;
     }
-  }),
+  })),
       _useEditable4 = _slicedToArray(_useEditable3, 3),
       Editable = _useEditable4[0],
       value = _useEditable4[1],
@@ -7166,104 +7171,100 @@ var EditablePostCategory = function EditablePostCategory(_ref2) {
   });
 }; // Create an editable cell renderer
 
+var EditableDate = function EditableDate(_ref2) {
+  var initialValue = _ref2.initialValue,
+      className = _ref2.className,
+      props = _objectWithoutProperties(_ref2, _excluded2);
 
-var EditableDate = function EditableDate(_ref3) {
-  var id = _ref3.id,
-      field = _ref3.field,
-      initialValue = _ref3.initialValue,
-      inlineUpdateUrl = _ref3.inlineUpdateUrl,
-      onBeforeSuccess = _ref3.onBeforeSuccess;
   // We need to keep and update the state of the cell normally
   initialValue = initialValue != null ? initialValue : '';
+  className = typeof className == 'undefined' ? '' : className;
 
-  var _useEditable5 = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_5__["default"])({
-    id: id,
-    field: field,
+  var _useEditable5 = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_5__["default"])(_objectSpread(_objectSpread({}, props), {}, {
     initialValue: initialValue,
-    inlineUpdateUrl: inlineUpdateUrl,
-    onBeforeSuccess: onBeforeSuccess,
     getNewValue: function getNewValue(e) {
       return e.target.value;
     }
-  }),
+  })),
       _useEditable6 = _slicedToArray(_useEditable5, 3),
       Editable = _useEditable6[0],
       value = _useEditable6[1],
-      onChange = _useEditable6[2];
+      onChange = _useEditable6[2]; // value={value}???
+
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(Editable, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
+      id: props.field,
+      name: props.field,
+      className: className,
       type: "date",
-      value: value,
+      defaultValue: initialValue,
       onChange: onChange
     })]
   });
 }; // Create an editable cell renderer
 
+var EditableSwitch = function EditableSwitch(_ref3) {
+  var initialValue = _ref3.initialValue,
+      className = _ref3.className,
+      children = _ref3.children,
+      props = _objectWithoutProperties(_ref3, _excluded3);
 
-var EditableSwitch = function EditableSwitch(_ref4) {
-  var id = _ref4.id,
-      field = _ref4.field,
-      initialValue = _ref4.initialValue,
-      inlineUpdateUrl = _ref4.inlineUpdateUrl,
-      onBeforeSuccess = _ref4.onBeforeSuccess;
   // We need to keep and update the state of the cell normally
-  initialValue = initialValue != null ? initialValue : '';
+  initialValue = initialValue != null ? initialValue : "";
+  className = typeof className == 'undefined' ? '' : className;
+  children = typeof children == 'undefined' ? null : children;
 
-  var _useEditable7 = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_5__["default"])({
-    id: id,
-    field: field,
+  var _useEditable7 = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_5__["default"])(_objectSpread(_objectSpread({}, props), {}, {
     initialValue: initialValue,
-    inlineUpdateUrl: inlineUpdateUrl,
-    onBeforeSuccess: onBeforeSuccess,
     getNewValue: function getNewValue(e) {
-      return 1 - value;
-    }
-  }),
+      return e.target.checked ? 1 : 0;
+    } // 1 - value
+
+  })),
       _useEditable8 = _slicedToArray(_useEditable7, 3),
       Editable = _useEditable8[0],
       value = _useEditable8[1],
       onChange = _useEditable8[2];
 
+  var id = props.field + Math.round(Math.random() * 1000000);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(Editable, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(Editable, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
       className: "form-check form-switch",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
-        className: "form-check-input mx-auto",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
+        id: id,
+        name: props.field,
+        className: className,
         type: "checkbox",
         role: "switch",
-        onChange: onChange,
-        checked: value == 1
-      })
+        checked: value == 1,
+        onChange: onChange
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
+        htmlFor: id,
+        className: "form-label",
+        children: children
+      })]
     })]
   });
 }; // Create an editable cell renderer
 
+var EditableText = function EditableText(_ref4) {
+  var initialValue = _ref4.initialValue,
+      type = _ref4.type,
+      className = _ref4.className,
+      props = _objectWithoutProperties(_ref4, _excluded4);
 
-var EditableText = function EditableText(_ref5) {
-  var id = _ref5.id,
-      field = _ref5.field,
-      initialValue = _ref5.initialValue,
-      inlineUpdateUrl = _ref5.inlineUpdateUrl,
-      onBeforeSuccess = _ref5.onBeforeSuccess,
-      type = _ref5.type,
-      className = _ref5.className;
   // We need to keep and update the state of the cell normally
   initialValue = initialValue != null ? initialValue : '';
-  onBeforeSuccess = typeof onBeforeSuccess == 'function' ? onBeforeSuccess : function () {};
   className = typeof className == 'undefined' ? '' : className;
-  type = typeof className == 'undefined' ? 'text' : type;
+  type = typeof type == 'undefined' ? 'text' : type;
 
-  var _useEditable9 = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_5__["default"])({
-    id: id,
-    field: field,
+  var _useEditable9 = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_5__["default"])(_objectSpread(_objectSpread({}, props), {}, {
     initialValue: initialValue,
-    inlineUpdateUrl: inlineUpdateUrl,
-    onBeforeSuccess: onBeforeSuccess,
     getNewValue: function getNewValue(e) {
       return value;
     }
-  }),
+  })),
       _useEditable10 = _slicedToArray(_useEditable9, 4),
       Editable = _useEditable10[0],
       value = _useEditable10[1],
@@ -7276,10 +7277,50 @@ var EditableText = function EditableText(_ref5) {
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(Editable, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
-      id: field,
-      name: field,
+      id: props.field,
+      name: props.field,
       className: className,
       type: type,
+      defaultValue: initialValue,
+      onChange: onTypingChange,
+      onBlur: onChange
+    })]
+  });
+};
+var EditableTextarea = function EditableTextarea(_ref5) {
+  var initialValue = _ref5.initialValue,
+      type = _ref5.type,
+      className = _ref5.className,
+      rows = _ref5.rows,
+      props = _objectWithoutProperties(_ref5, _excluded5);
+
+  // We need to keep and update the state of the cell normally
+  initialValue = initialValue != null ? initialValue : '';
+  className = typeof className == 'undefined' ? '' : className;
+  rows = typeof rows == 'undefined' ? '5' : rows;
+
+  var _useEditable11 = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_5__["default"])(_objectSpread(_objectSpread({}, props), {}, {
+    initialValue: initialValue,
+    getNewValue: function getNewValue(e) {
+      return value;
+    }
+  })),
+      _useEditable12 = _slicedToArray(_useEditable11, 4),
+      Editable = _useEditable12[0],
+      value = _useEditable12[1],
+      onChange = _useEditable12[2],
+      setValue = _useEditable12[3];
+
+  var onTypingChange = function onTypingChange(e) {
+    return setValue(e.target.value);
+  };
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(Editable, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("textarea", {
+      id: props.field,
+      name: props.field,
+      className: className,
+      rows: rows,
       defaultValue: initialValue,
       onChange: onTypingChange,
       onBlur: onChange
@@ -7334,7 +7375,9 @@ function Table(_ref6) {
       } else if (info.column.id == "category") {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(EditablePostCategory, _objectSpread({}, attributes));
       } else if (info.column.id == "is_coach" || info.column.id == "is_best" || info.column.id == "is_actual") {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(EditableSwitch, _objectSpread({}, attributes));
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(EditableSwitch, _objectSpread(_objectSpread({}, attributes), {}, {
+          className: "form-check-input"
+        }));
       } else if (info.column.id == "dateAt") {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(EditableDate, _objectSpread({}, attributes));
       } else {
@@ -8655,7 +8698,7 @@ var EditAthlete = function EditAthlete(_ref) {
     }).then(function (editedData) {
       setEditedData(editedData);
     });
-  }, []);
+  }, []); // @Unused inline saving is used
 
   var saveAthlete = function saveAthlete(e) {
     var formData = new FormData(document.getElementById('edit-athlete'));
@@ -8682,73 +8725,6 @@ var EditAthlete = function EditAthlete(_ref) {
   });
 
   var photoUrl = editedData && "/images/athletes/" + editedData.id + "/photo.png";
-  var coachChecked = isEdit && editedData.is_coach == 1 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
-    id: "is_coach",
-    className: "form-check-input",
-    type: "checkbox",
-    role: "switch",
-    name: "is_coach",
-    value: "1",
-    defaultChecked: "checked"
-  }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
-    id: "is_coach",
-    className: "form-check-input",
-    type: "checkbox",
-    role: "switch",
-    name: "is_coach",
-    value: "1"
-  });
-  var actualChecked = isEdit && editedData.is_actual == 1 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
-    id: "is_actual",
-    className: "form-check-input",
-    type: "checkbox",
-    role: "switch",
-    name: "is_actual",
-    value: "1",
-    defaultChecked: "checked"
-  }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
-    id: "is_actual",
-    className: "form-check-input",
-    type: "checkbox",
-    role: "switch",
-    name: "is_actual",
-    value: "1"
-  });
-  var bestChecked = isEdit && editedData.is_best == 1 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
-    id: "is_best",
-    className: "form-check-input",
-    type: "checkbox",
-    role: "switch",
-    name: "is_best",
-    value: "1",
-    defaultChecked: "checked"
-  }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
-    id: "is_best",
-    className: "form-check-input",
-    type: "checkbox",
-    role: "switch",
-    name: "is_best",
-    value: "1"
-  });
-  var blackChecked = isEdit && editedData.show_in_blacks == 1 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
-    id: "show_in_blacks",
-    className: "form-check-input",
-    type: "checkbox",
-    role: "switch",
-    name: "show_in_blacks",
-    value: "1",
-    defaultChecked: "checked"
-  }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
-    id: "show_in_blacks",
-    className: "form-check-input",
-    type: "checkbox",
-    role: "switch",
-    name: "show_in_blacks",
-    value: "1"
-  });
-  var full = isEdit ? editedData.full : '';
-  var brief = isEdit ? editedData.brief : '';
-  var briefBest = isEdit ? editedData.briefBest : '';
   var dojos = isEdit ? editedData.dojos : null;
   var garrerySnippet = "";
 
@@ -8789,7 +8765,7 @@ var EditAthlete = function EditAthlete(_ref) {
       children: editHeader
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("form", {
       id: "edit-athlete",
-      "class": "row",
+      className: "row",
       method: "post",
       action: updateUrl,
       encType: "multipart/form-data",
@@ -8836,25 +8812,24 @@ var EditAthlete = function EditAthlete(_ref) {
             htmlFor: "birthday",
             className: "form-label",
             children: "\u0414\u0430\u0442\u0430 \u043D\u0430\u0440\u043E\u0434\u0436\u0435\u043D\u043D\u044F"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
-            id: "birthday",
-            name: "birthday",
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableDate, {
+            field: "birthday",
             className: "form-control",
-            type: "date",
-            placeholder: "",
-            defaultValue: isEdit && editedData.birthday
+            id: isEdit && editedData.id,
+            initialValue: isEdit && editedData.birthday,
+            inlineUpdateUrl: "/api/athlete/update"
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
             htmlFor: "degree",
             className: "form-label",
             children: "\u0421\u0442\u0443\u043F\u0456\u043D\u044C"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Degree__WEBPACK_IMPORTED_MODULE_1__["default"], {
-            id: "degree",
-            name: "degree",
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableDegree, {
+            field: "degree",
             className: "form-control",
-            value: isEdit && editedData.degree,
-            editable: true
+            id: isEdit && editedData.id,
+            initialValue: isEdit && editedData.degree,
+            inlineUpdateUrl: "/api/athlete/update"
           })]
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
@@ -8874,7 +8849,7 @@ var EditAthlete = function EditAthlete(_ref) {
           editable: true
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-        "class": "col-md-5 d-grid gap-3 mb-3",
+        className: "col-md-5 d-grid gap-3 mb-3",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
           style: {
             'backgroundColor': 'yellow'
@@ -8921,26 +8896,26 @@ var EditAthlete = function EditAthlete(_ref) {
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
         className: "col-md-1"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-        "class": "col-md-6 mb-3",
+        className: "col-md-6 mb-3",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
           style: {
             'backgroundColor': 'yellow'
           },
           children: "\u041A\u043B\u0443\u0431\u043D\u0430 \u0456\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0456\u044F"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-          className: "form-check form-switch mb-3",
-          children: [actualChecked, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
-            htmlFor: "is_actual",
-            className: "form-label",
-            children: "\u041D\u0430\u043B\u0435\u0436\u0438\u0442\u044C \u0434\u043E \u043D\u0430\u0448\u043E\u0433\u043E \u043A\u043B\u0443\u0431\u0443?"
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-          className: "form-check form-switch mb-3",
-          children: [blackChecked, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
-            htmlFor: "show_in_blacks",
-            className: "form-label",
-            children: "\u041F\u043E\u043A\u0430\u0437\u0443\u0432\u0430\u0442\u0438 \u043D\u0430 \u0441\u0442\u043E\u0440\u0456\u043D\u0446\u0456 \u0447\u043E\u0440\u043D\u0438\u0445 \u043F\u043E\u044F\u0441\u0456\u0432 \u043D\u0430\u0448\u043E\u0433\u043E \u043A\u043B\u0443\u0431\u0443 (\u044F\u043A\u0449\u043E \u0434\u043E\u0441\u044F\u0433\u043D\u0443\u0442\u043E \u0432\u0456\u0434\u043F\u043E\u0432\u0456\u0434\u043D\u043E\u0433\u043E \u0441\u0442\u0443\u043F\u0435\u043D\u044E)?"
-          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableSwitch, {
+          field: "is_actual",
+          className: "form-check-input",
+          id: isEdit ? editedData.id : 0,
+          initialValue: isEdit && editedData.is_actual ? 1 : 0,
+          inlineUpdateUrl: "/api/athlete/update",
+          children: "\u041D\u0430\u043B\u0435\u0436\u0438\u0442\u044C \u0434\u043E \u043D\u0430\u0448\u043E\u0433\u043E \u043A\u043B\u0443\u0431\u0443?"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableSwitch, {
+          field: "show_in_blacks",
+          className: "form-check-input",
+          id: isEdit ? editedData.id : 0,
+          initialValue: isEdit && editedData.show_in_blacks ? 1 : 0,
+          inlineUpdateUrl: "/api/athlete/update",
+          children: "\u041F\u043E\u043A\u0430\u0437\u0443\u0432\u0430\u0442\u0438 \u043D\u0430 \u0441\u0442\u043E\u0440\u0456\u043D\u0446\u0456 \u0447\u043E\u0440\u043D\u0438\u0445 \u043F\u043E\u044F\u0441\u0456\u0432 \u043D\u0430\u0448\u043E\u0433\u043E \u043A\u043B\u0443\u0431\u0443 (\u044F\u043A\u0449\u043E \u0434\u043E\u0441\u044F\u0433\u043D\u0443\u0442\u043E \u0432\u0456\u0434\u043F\u043E\u0432\u0456\u0434\u043D\u043E\u0433\u043E \u0441\u0442\u0443\u043F\u0435\u043D\u044E)?"
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "mb-3 col-md-12 d-grid gap-3",
@@ -8954,52 +8929,53 @@ var EditAthlete = function EditAthlete(_ref) {
             htmlFor: "full",
             className: "form-label",
             children: "\u041F\u043E\u0432\u043D\u0430 \u0456\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0456\u044F \u0434\u043B\u044F \u0441\u0442\u043E\u0440\u0456\u043D\u043A\u0438 \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("textarea", {
-            id: "full",
-            name: "full",
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableTextarea, {
+            field: "full",
             className: "form-control",
-            rows: "10",
-            defaultValue: full
+            id: isEdit && editedData.id,
+            initialValue: isEdit ? editedData.full : '',
+            inlineUpdateUrl: "/api/athlete/update",
+            rows: "10"
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-          className: "form-check form-switch",
-          children: [coachChecked, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
-            htmlFor: "is_coach",
-            className: "form-label",
-            children: "\u0406\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440?"
-          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableSwitch, {
+          field: "is_coach",
+          className: "form-check-input",
+          id: isEdit ? editedData.id : 0,
+          initialValue: isEdit && editedData.is_coach ? 1 : 0,
+          inlineUpdateUrl: "/api/athlete/update",
+          children: "\u0406\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440?"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
           className: "mb-2",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
             htmlFor: "brief",
             className: "form-label",
             children: "\u041A\u043E\u0440\u043E\u0442\u043A\u0430 \u0456\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0456\u044F \u0434\u043B\u044F \u0441\u0442\u043E\u0440\u0456\u043D\u043A\u0438 \u0437\u0456 \u0441\u043F\u0438\u0441\u043A\u043E\u043C \u0432\u0441\u0456\u0445 \u0456\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440\u0456\u0432"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("textarea", {
-            id: "brief",
-            name: "brief",
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableTextarea, {
+            field: "brief",
             className: "form-control",
-            rows: "5",
-            defaultValue: brief
+            id: isEdit && editedData.id,
+            initialValue: isEdit ? editedData.brief : '',
+            inlineUpdateUrl: "/api/athlete/update"
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-          className: "form-check form-switch",
-          children: [bestChecked, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
-            htmlFor: "is_best",
-            className: "form-label",
-            children: "\u041F\u043E\u043A\u0430\u0437\u0443\u0432\u0430\u0442\u0438 \u0432 \u043A\u0440\u0430\u0449\u0438\u0445 \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430\u0445?"
-          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableSwitch, {
+          field: "is_best",
+          className: "form-check-input",
+          id: isEdit ? editedData.id : 0,
+          initialValue: isEdit && editedData.is_best ? 1 : 0,
+          inlineUpdateUrl: "/api/athlete/update",
+          children: "\u041F\u043E\u043A\u0430\u0437\u0443\u0432\u0430\u0442\u0438 \u0432 \u043A\u0440\u0430\u0449\u0438\u0445 \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430\u0445?"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
           className: "mb-2",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
             htmlFor: "briefBest",
             className: "form-label",
             children: "\u041A\u043E\u0440\u043E\u0442\u043A\u0430 \u0456\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0456\u044F \u0434\u043B\u044F \u0441\u0442\u043E\u0440\u0456\u043D\u043A\u0438 \u043D\u0430\u0439\u043A\u0440\u0430\u0449\u0438\u0445 \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0456\u0432"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("textarea", {
-            id: "briefBest",
-            name: "briefBest",
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableTextarea, {
+            field: "briefBest",
             className: "form-control",
-            rows: "5",
-            defaultValue: briefBest
+            id: isEdit && editedData.id,
+            initialValue: isEdit ? editedData.briefBest : '',
+            inlineUpdateUrl: "/api/athlete/update"
           })]
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
@@ -9818,6 +9794,7 @@ function useEditable(_ref) {
       getNewValue = _ref.getNewValue,
       inlineUpdateUrl = _ref.inlineUpdateUrl,
       onBeforeSuccess = _ref.onBeforeSuccess;
+  onBeforeSuccess = typeof onBeforeSuccess == 'function' ? onBeforeSuccess : function () {};
 
   var _React$useState = react__WEBPACK_IMPORTED_MODULE_0__.useState(initialValue),
       _React$useState2 = _slicedToArray(_React$useState, 2),
@@ -9963,6 +9940,10 @@ function useStatus(_ref) {
       _React$useState6 = _slicedToArray(_React$useState5, 2),
       updatedWithFailure = _React$useState6[0],
       setUpdatedWithFailure = _React$useState6[1];
+
+  react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
+    setPreviousValue(initialValue);
+  }, [initialValue]);
 
   var onChange = // useRef(
   function onChange(e) {

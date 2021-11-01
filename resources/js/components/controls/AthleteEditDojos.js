@@ -62,7 +62,7 @@ const AthleteEditDojos = function({dojos, updateUrl}) {
                         </a>
 
                         <a className="btn btn-outline-success" onClick={() => deleteDojo(dojo.id)}>
-                            <i class="far fa-trash-alt"></i>
+                            <i className="far fa-trash-alt"></i>
                         </a>
                     </div>
                     

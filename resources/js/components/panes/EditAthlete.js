@@ -2,7 +2,7 @@ import React, {useMemo, useState, useEffect} from 'react';
 import { useParams, Redirect} from 'react-router-dom';
 import Degree from '../controls/Degree';
 import Photo from '../controls/Photo';
-import { EditableText } from '../controls/Table';
+import { EditableText, EditableDate, EditableDegree, EditableSwitch, EditableTextarea } from '../controls/Table';
 
 import AthleteEditDojos from '../controls/AthleteEditDojos';
 
@@ -19,6 +19,7 @@ const EditAthlete = ({getUrl, updateUrl, photoFileName}) => {
             })
     }, []);
 
+    // @Unused inline saving is used
     const saveAthlete = (e) => {
         const formData = new FormData( document.getElementById('edit-athlete') );
 
@@ -38,28 +39,7 @@ const EditAthlete = ({getUrl, updateUrl, photoFileName}) => {
     let editHeader = isEdit  ?  "" + editedData.lastName + ' ' + editedData.firstName + ' ' + editedData.patronymic : "Ввести нового спортсмена";
     let editathleteHiddenInputId = isEdit && <input type="hidden" name="id" value={editedData.id} />
     let photoUrl = editedData && ("/images/athletes/" + editedData.id + "/photo.png");
-    
 
-    let coachChecked = isEdit && (editedData.is_coach == 1) 
-        ? <input id="is_coach" className="form-check-input" type="checkbox" role="switch" name="is_coach" value="1" defaultChecked="checked" />
-        : <input id="is_coach" className="form-check-input" type="checkbox" role="switch" name="is_coach" value="1"/>
-
-    let actualChecked = isEdit && (editedData.is_actual == 1)
-        ? <input id="is_actual" className="form-check-input" type="checkbox" role="switch" name="is_actual" value="1" defaultChecked="checked" />
-        : <input id="is_actual" className="form-check-input" type="checkbox" role="switch" name="is_actual" value="1"/>
-
-    let bestChecked = isEdit && (editedData.is_best == 1)
-        ? <input id="is_best" className="form-check-input" type="checkbox" role="switch" name="is_best" value="1" defaultChecked="checked" />
-        : <input id="is_best" className="form-check-input" type="checkbox" role="switch" name="is_best" value="1"/>
-
-    let blackChecked = isEdit && (editedData.show_in_blacks == 1)
-        ? <input id="show_in_blacks" className="form-check-input" type="checkbox" role="switch" name="show_in_blacks" value="1" defaultChecked="checked" />
-        : <input id="show_in_blacks" className="form-check-input" type="checkbox" role="switch" name="show_in_blacks" value="1"/>
-
-
-    let full = isEdit ? editedData.full : '';
-    let brief = isEdit ? editedData.brief : '';
-    let briefBest = isEdit ? editedData.briefBest : '';
     let dojos = isEdit ? editedData.dojos : null;
 
     let garrerySnippet = "";
@@ -88,7 +68,7 @@ const EditAthlete = ({getUrl, updateUrl, photoFileName}) => {
         <>
             <h2>{editHeader}</h2>
             
-            <form id="edit-athlete" class="row" method="post" action={updateUrl} encType="multipart/form-data">
+            <form id="edit-athlete" className="row" method="post" action={updateUrl} encType="multipart/form-data">
              {editathleteHiddenInputId}
 
              <div className="col-sm-5 d-grid gap-3">
@@ -124,26 +104,31 @@ const EditAthlete = ({getUrl, updateUrl, photoFileName}) => {
 
                 <div>
                     <label htmlFor="birthday" className="form-label">Дата народження</label>
-                    <input id="birthday" name="birthday" className="form-control"  
-                        type="date"
-                        placeholder="" 
-                        defaultValue={isEdit && editedData.birthday}
+                    
+                    <EditableDate field="birthday" className="form-control"
+                        id={isEdit && editedData.id} 
+                        initialValue={isEdit && editedData.birthday} 
+                        inlineUpdateUrl='/api/athlete/update'
                     />
                 </div>
 
                 <div> 
                     <label htmlFor="degree" className="form-label">Ступінь</label>
-                    <Degree id="degree" name="degree" className="form-control"
-                        value={isEdit && editedData.degree} 
-                        editable={true}
+                    
+                    <EditableDegree field="degree" className="form-control"
+                        id={isEdit && editedData.id} 
+                        initialValue={isEdit && editedData.degree} 
+                        inlineUpdateUrl='/api/athlete/update'
                     />
                 </div>
             </div>
 
             <div className="mb-3 col-sm-1 mb-3"></div>
 
+            {/* TODO */}
             <div className="form-floating_ mb-3 col-sm-6">
                 <label htmlFor="photo" className="form-label">Фото</label>
+                
                 <Photo id="photo" name="photo" className="form-control"
                     url={photoUrl}
                     alt={editHeader}
@@ -151,11 +136,12 @@ const EditAthlete = ({getUrl, updateUrl, photoFileName}) => {
                 />
             </div>
 
-            <div class="col-md-5 d-grid gap-3 mb-3">
+            <div className="col-md-5 d-grid gap-3 mb-3">
                 <p style={{'backgroundColor': 'yellow'}}>Контактна інформація</p>
              
                 <div>
                     <label htmlFor="phone" className="form-label">Телефон</label>
+                    
                     <EditableText field="phone" className="form-control"
                         id={isEdit && editedData.id} 
                         initialValue={isEdit && editedData.phone} 
@@ -187,18 +173,24 @@ const EditAthlete = ({getUrl, updateUrl, photoFileName}) => {
 
             <div className="col-md-1"></div>
 
-            <div class="col-md-6 mb-3">
+            <div className="col-md-6 mb-3">
                 <p style={{'backgroundColor': 'yellow'}}>Клубна інформація</p>
 
-                <div className="form-check form-switch mb-3">
-                    {actualChecked}
-                    <label htmlFor="is_actual" className="form-label">Належить до нашого клубу?</label>
-                </div>
+                <EditableSwitch
+                    field="is_actual" className="form-check-input"
+                    id={isEdit ? editedData.id : 0} 
+                    initialValue={(isEdit && editedData.is_actual) ? 1 : 0} 
+                    inlineUpdateUrl='/api/athlete/update'
+                >Належить до нашого клубу?
+                </EditableSwitch>
 
-                <div className="form-check form-switch mb-3">
-                    {blackChecked}
-                    <label htmlFor="show_in_blacks" className="form-label">Показувати на сторінці чорних поясів нашого клубу (якщо досягнуто відповідного ступеню)?</label>
-                </div>
+                <EditableSwitch
+                    field="show_in_blacks" className="form-check-input"
+                    id={isEdit ? editedData.id : 0} 
+                    initialValue={(isEdit && editedData.show_in_blacks) ? 1 : 0} 
+                    inlineUpdateUrl='/api/athlete/update'
+                >Показувати на сторінці чорних поясів нашого клубу (якщо досягнуто відповідного ступеню)?
+                </EditableSwitch>
             </div>
 
             <div className="mb-3 col-md-12 d-grid gap-3">                
@@ -207,36 +199,48 @@ const EditAthlete = ({getUrl, updateUrl, photoFileName}) => {
                 <div>                
                     <label htmlFor="full" className="form-label">Повна інформація для сторінки спортсмена</label>
                     
-                    <textarea id="full" name="full" className="form-control" rows="10"
-                        defaultValue={full}
-                    ></textarea>
-                    
+                    <EditableTextarea field="full" className="form-control"
+                        id={isEdit && editedData.id} 
+                        initialValue={isEdit ? editedData.full : ''} 
+                        inlineUpdateUrl='/api/athlete/update'
+                        rows='10'
+                    />
                 </div>
 
-                <div className="form-check form-switch">
-                    {coachChecked}
-                    <label htmlFor="is_coach" className="form-label">Інструктор?</label>
-                </div>
+                <EditableSwitch
+                    field="is_coach" className="form-check-input"
+                    id={isEdit ? editedData.id : 0} 
+                    initialValue={(isEdit && editedData.is_coach) ? 1 : 0} 
+                    inlineUpdateUrl='/api/athlete/update'
+                >Інструктор?
+                </EditableSwitch>
 
                 <div className="mb-2">                
                     <label htmlFor="brief" className="form-label">Коротка інформація для сторінки зі списком всіх інструкторів</label>
 
-                    <textarea id="brief" name="brief" className="form-control" rows="5"
-                        defaultValue={brief}
-                    ></textarea>
+                    <EditableTextarea field="brief" className="form-control"
+                        id={isEdit && editedData.id} 
+                        initialValue={isEdit ? editedData.brief : ''} 
+                        inlineUpdateUrl='/api/athlete/update'
+                    />
                 </div>
 
-                <div className="form-check form-switch">
-                    {bestChecked}
-                    <label htmlFor="is_best" className="form-label">Показувати в кращих спортсменах?</label>
-                </div>
+                <EditableSwitch
+                    field="is_best" className="form-check-input"
+                    id={isEdit ? editedData.id : 0} 
+                    initialValue={(isEdit && editedData.is_best) ? 1 : 0} 
+                    inlineUpdateUrl='/api/athlete/update'
+                >Показувати в кращих спортсменах?
+                </EditableSwitch>
 
                 <div className="mb-2">                
                     <label htmlFor="briefBest" className="form-label">Коротка інформація для сторінки найкращих спортсменів</label>
 
-                    <textarea id="briefBest" name="briefBest" className="form-control" rows="5"
-                        defaultValue={briefBest}
-                    ></textarea>
+                    <EditableTextarea field="briefBest" className="form-control"
+                        id={isEdit && editedData.id} 
+                        initialValue={isEdit ? editedData.briefBest : ''} 
+                        inlineUpdateUrl='/api/athlete/update'
+                    />
                 </div>
             </div>
 
@@ -307,7 +311,7 @@ const EditAthlete = ({getUrl, updateUrl, photoFileName}) => {
             <td><input type="text" name="ok" size="50" defaultValue={isEdit && editedData.ok} /></td>
         </tr>
         
-        <button type="submit" class="btn btn-success mb-3" onSubmit={saveAthlete}>Зберегти</button>
+        <button type="submit" className="btn btn-success mb-3" onSubmit={saveAthlete}>Зберегти</button>
         */}
         
        </>

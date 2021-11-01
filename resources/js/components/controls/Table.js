@@ -5,19 +5,30 @@ import PostCategory from './PostCategory';
 import TableSearch from './TableSearch';
 import useEditable from '../utils/useEditable';
 
-const EditableDegree = ({ id, field, initialValue, inlineUpdateUrl, onBeforeSuccess }) => {
-  const [Editable, value, onChange] = useEditable({ id, field, initialValue, inlineUpdateUrl, onBeforeSuccess,
+export const EditableDegree = ({ initialValue, className, ...props }) => {
+  initialValue = initialValue != null ? initialValue : '';
+  className = typeof className == 'undefined' ? '' : className;
+
+  const [Editable, value, onChange] = useEditable({ ...props,
+    initialValue,
     getNewValue: (e) => e.target.value
    });
 
   return <>
       <Editable />
-      <Degree value={value} editable="true" onChange={onChange} />
+      <Degree id={props.field} name={props.field} className={className}
+        value={value} 
+        editable="true" 
+        onChange={onChange} 
+      />
   </>
 };
 
-const EditablePostCategory = ({ id, field, initialValue, inlineUpdateUrl, onBeforeSuccess }) => {
-  const [Editable, value, onChange] = useEditable({ id, field, initialValue, inlineUpdateUrl, onBeforeSuccess,
+export const EditablePostCategory = ( props ) => {
+  props.initialValue = props.initialValue != null ? props.initialValue : '';
+  props.className = typeof props.className == 'undefined' ? '' : props.className;
+
+  const [Editable, value, onChange] = useEditable({ ...props,
     getNewValue: (e) => e.target.value
   });
 
@@ -28,46 +39,65 @@ const EditablePostCategory = ({ id, field, initialValue, inlineUpdateUrl, onBefo
 }; 
 
 // Create an editable cell renderer
-const EditableDate = ({ id, field, initialValue, inlineUpdateUrl, onBeforeSuccess }) => {
+export const EditableDate = ({ initialValue, className, ...props }) => {
   // We need to keep and update the state of the cell normally
   initialValue = initialValue != null ? initialValue : '';
+  className = typeof className == 'undefined' ? '' : className;
 
-  const [Editable, value, onChange] = useEditable({ id, field, initialValue, inlineUpdateUrl, onBeforeSuccess,
+  const [Editable, value, onChange] = useEditable({ ...props,
+    initialValue,
     getNewValue: (e) => e.target.value
   });
-
+  // value={value}???
   return <>
     <Editable />
-    <input type="date" value={value} onChange={onChange} />
+    <input 
+      id={props.field} name={props.field} className={className}
+      type='date' 
+      defaultValue={initialValue} 
+      onChange={onChange} 
+    />
   </>
 }
 
 // Create an editable cell renderer
-const EditableSwitch = ({ id, field, initialValue, inlineUpdateUrl, onBeforeSuccess }) => {
+export const EditableSwitch = ({ initialValue, className, children, ...props }) => {
     // We need to keep and update the state of the cell normally
-    initialValue = initialValue != null ? initialValue : '';
+    initialValue = initialValue != null ? initialValue : "";
+    className = typeof className == 'undefined' ? '' : className;
+    children = typeof children == 'undefined' ? null : children;
 
-    const [Editable, value, onChange] = useEditable({ id, field, initialValue, inlineUpdateUrl, onBeforeSuccess, 
-        getNewValue : (e) => 1 - value
+    const [Editable, value, onChange] = useEditable({ 
+        ...props, 
+        initialValue,
+        getNewValue : (e) => e.target.checked ? 1 : 0 // 1 - value
       });
-  
+
+    let id = props.field + Math.round(Math.random() * 1000000);
+
     return <>
       <Editable />
       <div className="form-check form-switch">
-        <input className="form-check-input mx-auto" type="checkbox" role="switch" onChange={onChange} checked={value == 1} />
+        <input
+          id={id} name={props.field} className={className}
+          type='checkbox' role="switch"
+          checked={value == 1}
+          onChange={onChange} 
+        />
+        <label htmlFor={id} className="form-label">{children}</label>
       </div>
     </>
 }
 
 // Create an editable cell renderer
-export const EditableText = ({ id, field, initialValue, inlineUpdateUrl, onBeforeSuccess, type, className }) => {
-  // We need to keep and update the state of the cell normally
-  initialValue = initialValue != null ? initialValue : '';
-  onBeforeSuccess = typeof onBeforeSuccess == 'function' ? onBeforeSuccess : () => {};
-  className = typeof className == 'undefined' ? '' : className;
-  type = typeof className == 'undefined' ? 'text' : type;
+export const EditableText = ({ initialValue, type, className, ...props }) => {
+    // We need to keep and update the state of the cell normally
+    initialValue = initialValue != null ? initialValue : '';
+    className = typeof className == 'undefined' ? '' : className;
+    type = typeof type == 'undefined' ? 'text' : type;
 
-  const [Editable, value, onChange, setValue] = useEditable({ id, field, initialValue, inlineUpdateUrl, onBeforeSuccess, 
+  const [Editable, value, onChange, setValue] = useEditable( { ...props, 
+    initialValue,
     getNewValue : (e) => value
   });
 
@@ -76,14 +106,38 @@ export const EditableText = ({ id, field, initialValue, inlineUpdateUrl, onBefor
   return <>
     <Editable />
     <input 
-      id={field} 
-      name={field} 
-      className={className}
+      id={props.field} name={props.field} className={className}
       type={type} 
       defaultValue={initialValue} 
       onChange={onTypingChange} 
-      onBlur={onChange} />
+      onBlur={onChange} 
+    />
   </>
+}
+
+export const EditableTextarea = ({ initialValue, type, className, rows, ...props }) => {
+  // We need to keep and update the state of the cell normally
+  initialValue = initialValue != null ? initialValue : '';
+  className = typeof className == 'undefined' ? '' : className;
+  rows = typeof rows == 'undefined' ? '5' : rows;
+
+const [Editable, value, onChange, setValue] = useEditable( { ...props, 
+  initialValue,
+  getNewValue : (e) => value
+});
+
+const onTypingChange = e => setValue(e.target.value)
+
+return <>
+  <Editable />
+  <textarea 
+    id={props.field} name={props.field} className={className}
+    rows={rows} 
+    defaultValue={initialValue} 
+    onChange={onTypingChange} 
+    onBlur={onChange} 
+  ></textarea>
+</>
 }
 
 export default function Table({ columns, data, inlineUpdateUrl }) {
@@ -133,7 +187,7 @@ const defaultColumn = {
     } else if (info.column.id == "is_coach" 
             || info.column.id == "is_best" 
             || info.column.id == "is_actual") {
-      return (<EditableSwitch {...attributes} />)
+      return (<EditableSwitch {...attributes} className="form-check-input" />)
     } else if (info.column.id == "dateAt") {
       return (<EditableDate {...attributes} />)
     } else {
