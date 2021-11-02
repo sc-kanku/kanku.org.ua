@@ -6846,7 +6846,7 @@ function EditableTable(_ref) {
                   className: "alert alert-success mt-3",
                   role: "alert",
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h4", {
-                    "class": "alert-heading",
+                    className: "alert-heading",
                     children: "\u041D\u0430 \u0446\u0456\u0439 \u0441\u0442\u043E\u0440\u0456\u043D\u0446\u0456 \u043D\u0430\u0441\u0442\u0443\u043F\u043D\u0435 \u0432\u0436\u0435 \u043F\u0440\u0430\u0446\u044E\u0454:"
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("ol", {
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
@@ -6859,7 +6859,7 @@ function EditableTable(_ref) {
                   className: "alert alert-warning",
                   role: "alert",
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h4", {
-                    "class": "alert-heading",
+                    className: "alert-heading",
                     children: "\u041D\u0430\u0440\u0430\u0437\u0456 \u043D\u0435 \u043F\u0440\u0430\u0446\u044E\u0454:"
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("ol", {
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
@@ -6899,7 +6899,7 @@ function EditableTable(_ref) {
                   className: "alert alert-info mt-3",
                   role: "alert",
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h4", {
-                    "class": "alert-heading",
+                    className: "alert-heading",
                     children: "\u041D\u0430 \u0446\u0456\u0439 \u0441\u0442\u043E\u0440\u0456\u043D\u0446\u0456 \u043D\u0430\u0441\u0442\u0443\u043F\u043D\u0435 \u0432\u0436\u0435 \u043F\u0440\u0430\u0446\u044E\u0454:"
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("ol", {
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
@@ -6914,7 +6914,7 @@ function EditableTable(_ref) {
                   className: "alert alert-warning",
                   role: "alert",
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h4", {
-                    "class": "alert-heading",
+                    className: "alert-heading",
                     children: "\u041D\u0430\u0440\u0430\u0437\u0456 \u043D\u0435 \u043F\u0440\u0430\u0446\u044E\u0454:"
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("ol", {
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
@@ -7160,7 +7160,7 @@ var _excluded = ["initialValue", "className"],
     _excluded2 = ["initialValue", "className"],
     _excluded3 = ["initialValue", "className"],
     _excluded4 = ["initialValue", "className", "children"],
-    _excluded5 = ["initialValue", "type", "className"],
+    _excluded5 = ["initialValue", "type", "className", "disabled"],
     _excluded6 = ["initialValue", "type", "className", "rows"];
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
@@ -7333,12 +7333,14 @@ var EditableText = function EditableText(_ref5) {
   var initialValue = _ref5.initialValue,
       type = _ref5.type,
       className = _ref5.className,
+      disabled = _ref5.disabled,
       props = _objectWithoutProperties(_ref5, _excluded5);
 
   // We need to keep and update the state of the cell normally
   initialValue = initialValue != null ? initialValue : '';
   className = typeof className == 'undefined' ? '' : className;
   type = typeof type == 'undefined' ? 'text' : type;
+  disabled = typeof disabled == 'undefined' ? false : disabled;
 
   var _useEditable9 = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_5__["default"])(_objectSpread(_objectSpread({}, props), {}, {
     initialValue: initialValue,
@@ -7363,6 +7365,8 @@ var EditableText = function EditableText(_ref5) {
       className: className,
       type: type,
       defaultValue: initialValue,
+      disabled: disabled,
+      readOnly: disabled,
       onChange: onTypingChange,
       onBlur: onChange
     })]
@@ -8961,15 +8965,19 @@ var EditAthlete = function EditAthlete(_ref) {
             inlineUpdateUrl: "/api/athlete/update"
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("label", {
             htmlFor: "email",
             className: "form-label",
-            children: "E-mail"
+            children: ["E-mail ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+              className: "text-secondary",
+              children: "(\u043D\u0435 \u043C\u043E\u0436\u043D\u0430 \u0440\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u0442\u0438)"
+            })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableText, {
             field: "email",
             className: "form-control",
             id: isEdit && editedData.id,
             type: "email",
+            disabled: true,
             initialValue: isEdit && editedData.email,
             inlineUpdateUrl: "/api/athlete/update"
           })]

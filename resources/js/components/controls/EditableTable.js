@@ -52,7 +52,7 @@ export default function EditableTable ({
                     */}
                         { entity == 'athlete' && <>
                             <div className="alert alert-success mt-3" role="alert">
-                                <h4 class="alert-heading">На цій сторінці наступне вже працює:</h4>
+                                <h4 className="alert-heading">На цій сторінці наступне вже працює:</h4>
                                 <ol>
                                     <li>Відредаговані дані зберігаються на сервер по втраті фокусу 
                                         (для текстових полів) чи зміні значення (для селектів і чекбоксів).</li>
@@ -62,7 +62,7 @@ export default function EditableTable ({
                             </div>
 
                             <div className="alert alert-warning" role="alert">
-                                <h4 class="alert-heading">Наразі не працює:</h4>
+                                <h4 className="alert-heading">Наразі не працює:</h4>
                                 <ol>
                                     <li>Додавання нового спортсмена / залу / новини</li>
                                     <li>Збереження редагованої в секції 'зали' інформації</li>
@@ -94,7 +94,7 @@ export default function EditableTable ({
                     */}
                     { entity == 'athlete' && <>
                             <div className="alert alert-info mt-3" role="alert">
-                                <h4 class="alert-heading">На цій сторінці наступне вже працює:</h4>
+                                <h4 className="alert-heading">На цій сторінці наступне вже працює:</h4>
                                 <ol>
                                     <li>Таблиця сортується і фільтрується (Пошук) по всім полям</li>
                                     <li>Дані можна редагувати безпосередньо в таблиці.</li>
@@ -105,7 +105,7 @@ export default function EditableTable ({
                             </div>
 
                             <div className="alert alert-warning" role="alert">
-                                <h4 class="alert-heading">Наразі не працює:</h4>
+                                <h4 className="alert-heading">Наразі не працює:</h4>
                                 <ol>
                                     <li>Валідація</li>
                                     <li>Cортування по ступеню</li>

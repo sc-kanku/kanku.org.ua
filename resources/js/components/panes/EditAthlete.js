@@ -160,11 +160,11 @@ const EditAthlete = ({getUrl, updateUrl, photoFileName}) => {
                 </div>
 
                 <div>
-                    <label htmlFor="email" className="form-label">E-mail</label>
+                    <label htmlFor="email" className="form-label">E-mail <span className='text-secondary' >(не можна редагувати)</span></label>
                     
                     <EditableText field="email" className="form-control"
                         id={isEdit && editedData.id} 
-                        type="email"
+                        type="email" disabled={true}
                         initialValue={isEdit && editedData.email} 
                         inlineUpdateUrl='/api/athlete/update'
                     />

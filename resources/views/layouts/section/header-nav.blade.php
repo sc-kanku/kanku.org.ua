@@ -9,21 +9,22 @@
     </div>
 
     <div class="collapse navbar-collapse" id="navbarCollapse">
-        <nav class="navbar-nav mr-auto">
+        <nav class="authorized-nav navbar-nav mr-auto">
             <a class="nav-link" href="/dojos/">Зали</a>
             <a class="nav-link" href="/instructors/">Інструктори</a>
 
             <a class="nav-link" href="/contacts/">Контакти</a>
             <a class="nav-link" href="/blog/">Блог</a>
 
+            <span class="top-socials">
+                <a class="nav-link btn-xsm" target="_blank" href="https://www.facebook.com/sc.kanku.lviv/" aria-label="facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
 
-            <a class="nav-link btn-xsm" target="_blank" href="https://www.facebook.com/sc.kanku.lviv/" aria-label="facebook">
-                <i class="fab fa-facebook-f"></i>
-            </a>
-
-            <a class="nav-link btn-xsm" target="_blank" href="http://instagram.com/sc_kanku_lviv/" aria-label="instagram">
-                <i class="fab fa-instagram"></i>
-            </a>
+                <a class="nav-link btn-xsm" target="_blank" href="http://instagram.com/sc_kanku_lviv/" aria-label="instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </span>
 
             
             <ul class="navbar-nav navbar-nav justify-content-end">
@@ -95,7 +96,7 @@
                 @if(auth()->user())
                     @if(auth()->user()->hasRole('admin'))
                     <li class="nav-item pl-2" id="logged-in-nav-support">
-                        <a class="nav-link" href="\admin">Адміністрація</a>
+                        <a class="nav-link" href="\admin"><i class="fas fa-tools"></i></a>
                     </li>
                     @endif
 

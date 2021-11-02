@@ -91,11 +91,12 @@ export const EditableSwitch = ({ initialValue, className, children, ...props }) 
 }
 
 // Create an editable cell renderer
-export const EditableText = ({ initialValue, type, className, ...props }) => {
+export const EditableText = ({ initialValue, type, className, disabled, ...props }) => {
     // We need to keep and update the state of the cell normally
     initialValue = initialValue != null ? initialValue : '';
     className = typeof className == 'undefined' ? '' : className;
     type = typeof type == 'undefined' ? 'text' : type;
+    disabled = typeof disabled == 'undefined' ? false : disabled;
 
   const [Editable, value, onChange, setValue] = useEditable( { ...props, 
     initialValue,
@@ -103,13 +104,14 @@ export const EditableText = ({ initialValue, type, className, ...props }) => {
   });
 
   const onTypingChange = e => setValue(e.target.value)
-
+  
   return <>
     <Editable />
     <input 
       id={props.field} name={props.field} className={className}
       type={type} 
       defaultValue={initialValue} 
+      disabled={disabled} readOnly={disabled}
       onChange={onTypingChange} 
       onBlur={onChange} 
     />

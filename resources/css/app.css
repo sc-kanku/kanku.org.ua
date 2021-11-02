@@ -286,6 +286,44 @@ nav > .active {
     margin-left: 0.5em;
 }
 
+@media (max-width: 420px) {
+    .navbar-brand {
+        display: none !important;
+    }
+}
+
+@media (max-width: 326px) {
+    .navbar-toggler {
+        padding: 0 !important;
+        margin-left: 0.5em !important;
+    }
+}
+
+.top-socials {
+    display: flex;
+    flex-direction: row;
+    margin-right: 0.5em;
+}
+
+@media (max-width: 768px) {
+    #navbarCollapse {
+        padding-left: 1em;
+        padding-right: 1em;
+    }
+
+    .authorized-nav,
+    .top-socials {
+        border-bottom: 2px solid #ffffff11;
+    }
+
+    .top-socials {
+        padding-bottom: 2em;
+    }
+
+    .authorized-nav {
+        padding-bottom: 0.5em;
+    }
+}
 /*
 @media (max-width: 768px) {
   .phone-us {
