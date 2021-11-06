@@ -79,7 +79,7 @@ const AthleteEditDojos = function({athleteId, dojos, updateUrl}) {
 
         dojosSnippet = <>
             <ol>{dojosArray}</ol>
-            <AddEntitySelector url="/api/dojos" onSelect={addDojo} onAllDojosLoaded={onAllDojosLoaded} />
+            <AddEntitySelector url="/api/dojo/list" onSelect={addDojo} onAllLoaded={onAllDojosLoaded} />
         </>
     } else {
         if (!true) {            
@@ -93,7 +93,7 @@ const AthleteEditDojos = function({athleteId, dojos, updateUrl}) {
 
     return (
         <>
-            <AddEntitySelector url="/api/dojos" onSelect={addDojo} onAllDojosLoaded={onAllDojosLoaded} />
+            <AddEntitySelector url="/api/dojo/list" onSelect={addDojo} onAllLoaded={onAllDojosLoaded} />
             {dojosSnippet}
         </>
     );

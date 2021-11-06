@@ -6433,9 +6433,9 @@ var AthleteEditDojos = function AthleteEditDojos(_ref) {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("ol", {
         children: dojosArray
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_AddEntitySelector__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        url: "/api/dojos",
+        url: "/api/dojo/list",
         onSelect: addDojo,
-        onAllDojosLoaded: onAllDojosLoaded
+        onAllLoaded: onAllDojosLoaded
       })]
     });
   } else {
@@ -6446,9 +6446,9 @@ var AthleteEditDojos = function AthleteEditDojos(_ref) {
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_AddEntitySelector__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      url: "/api/dojos",
+      url: "/api/dojo/list",
       onSelect: addDojo,
-      onAllDojosLoaded: onAllDojosLoaded
+      onAllLoaded: onAllDojosLoaded
     }), dojosSnippet]
   });
 };
