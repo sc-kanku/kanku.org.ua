@@ -1,10 +1,13 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import ScheduleHelper from './ScheduleHelper';
 import Group from './Group';
-import Context from './../../Context'
+// import Context from './../../Context';
+import useSave from './../../utils/useSave';
 
-const Schedule = ({markup, editable, saveUrl}) => {
+const Schedule = ({athleteId, dojoId, markup, editable, saveUrl}) => {
     const [isEditable, setEditable] = useState(editable);
+    // TODO: use useEditable here.
+    let [saveRequest] = useSave(saveUrl, () => {});
 
     let parsedGroups = ScheduleHelper.parseGroups(markup);
 
@@ -27,18 +30,19 @@ const Schedule = ({markup, editable, saveUrl}) => {
     }
 
     const saveToServer = (e) => {
-        // TODO: implement on server
-        fetch(saveUrl, {
-            method: 'POST',
-            headers: {'Content-Type': 'application/text'},
-            body: ScheduleHelper.toString(groups)
-        })
-        .then(response => response/*.json()*/)
-        .then( response => {
-            // setIsSavingDone(true);
-            // TODO: synch
-            // setEditedData(editedData);
+        let dataObj = { 
+            athleteId, dojoId, schedule : ScheduleHelper.scheduleToString(groups) 
+        }; 
+
+        saveRequest({
+            dataObj,
+            onSuccess : () => {console.log('ok')}, 
+            onFailure : () => {console.log('f')}
         });
+
+        // setIsSavingDone(true);
+        // TODO: synch
+        // setEditedData(editedData);
     }
 
     const addGroup = function() {
@@ -55,11 +59,11 @@ const Schedule = ({markup, editable, saveUrl}) => {
             </a>
 
             <a className="btn btn-success" onClick={save}>
-                <i class="fas fa-check"></i> Зберегти
+                <i className="fas fa-check"></i> Зберегти
             </a>
 
             <a className="btn btn-outline-secondary" onClick={cancel}>
-                <i aria-hidden="true" class="btn btn-close" style={{verticalAlign: 'bottom'}}></i> Вимкнути редагування / не зберігати
+                <i aria-hidden="true" className="btn btn-close" style={{verticalAlign: 'bottom'}}></i> Вимкнути редагування / не зберігати
             </a>
         </>
     ) : (
@@ -124,6 +128,15 @@ const Schedule = ({markup, editable, saveUrl}) => {
             }
         }
 
+        const synchronizeGroups = (groupInGroupsArrayToSynchronize) => {
+            let i = ScheduleHelper.getIndex(groups, groupInGroupsArrayToSynchronize);
+            let synchronizedGroups = [...groups];
+    
+            synchronizedGroups[i] = groupInGroupsArrayToSynchronize;
+    
+            setGroups(synchronizedGroups);
+        }
+
         let groupsControls = [];
         
         groups.map(group => groupsControls.push(
@@ -132,35 +145,27 @@ const Schedule = ({markup, editable, saveUrl}) => {
                 onLeft={moveLeft} 
                 onRight={moveRight} 
                 key={ScheduleHelper.generateId()} 
+                changeCallback={synchronizeGroups}
             />
         ));
 
         editableOrNonEditableContent = 
             <>
-                
-
                 {groupsControls}
             </>
     }
 
-    const synchronizeGroups = (groupInGroupsArrayToSynchronize) => {
-        let i = ScheduleHelper.getIndex(groups, groupInGroupsArrayToSynchronize);
-        let synchronizedGroups = [...groups];
-
-        synchronizedGroups[i] = groupInGroupsArrayToSynchronize;
-
-        setGroups(synchronizedGroups);
-    }
-
     return (
-        <Context.Provider value={{synchronizeGroups}}>
+        // <Context.Provider value={{synchronizeGroups}}>
+        <>
             <div className="input-group mt-3 mb-3">
                 <span className="input-group-text">Розклад</span>
                 {editControls}
             </div>
             
             {editableOrNonEditableContent}
-        </Context.Provider>
+        </>
+        // </Context.Provider>
     );
 }
 

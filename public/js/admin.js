@@ -6188,24 +6188,6 @@ if (document.getElementById('admin-app')) {
 
 /***/ }),
 
-/***/ "./resources/js/components/Context.js":
-/*!********************************************!*\
-  !*** ./resources/js/components/Context.js ***!
-  \********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-var Context = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createContext();
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Context);
-
-/***/ }),
-
 /***/ "./resources/js/components/controls/AddEntitySelector.js":
 /*!***************************************************************!*\
   !*** ./resources/js/components/controls/AddEntitySelector.js ***!
@@ -6351,7 +6333,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var AthleteEditDojos = function AthleteEditDojos(_ref) {
-  var dojos = _ref.dojos,
+  var athleteId = _ref.athleteId,
+      dojos = _ref.dojos,
       updateUrl = _ref.updateUrl;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(dojos),
@@ -6410,7 +6393,7 @@ var AthleteEditDojos = function AthleteEditDojos(_ref) {
       var _dojo$pivot;
 
       var dojoUrl = "/admin/dojo/edit/" + dojo.id;
-      var scheduleUrl = updateUrl + '/schedule/' + dojo.id;
+      var scheduleUrl = updateUrl + '/schedule';
       dojosArray.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("li", {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
           className: "input-group",
@@ -6438,6 +6421,8 @@ var AthleteEditDojos = function AthleteEditDojos(_ref) {
             })
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_schedule_Schedule__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          athleteId: athleteId,
+          dojoId: dojo.id,
           markup: (_dojo$pivot = dojo.pivot) === null || _dojo$pivot === void 0 ? void 0 : _dojo$pivot.schedule,
           editable: false,
           saveUrl: scheduleUrl
@@ -6808,7 +6793,7 @@ function EditableTable(_ref) {
     getTableDataUrl: prefixes.api + '/list',
     inlineUpdateUrl: prefixes.api + '/update',
     getUrl: prefixes.api + '/edit',
-    updateEditedItemUrl: prefixes.api + '/save',
+    // updateEditedItemUrl : prefixes.api + '/save',
     listEntityWebUrl: prefixes.web + '/list',
     editEntityWebUrl: prefixes.web + '/edit/:id',
     newEntityWebUrl: prefixes.web + '/new'
@@ -6885,7 +6870,7 @@ function EditableTable(_ref) {
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_EditEntity__WEBPACK_IMPORTED_MODULE_3__["default"], {
                 name: entity,
                 getUrl: urls.getUrl,
-                updateUrl: urls.updateEditedItemUrl
+                updateUrl: urls.inlineUpdateUrl
               })]
             });
           }
@@ -7767,9 +7752,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _ScheduleHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ScheduleHelper */ "./resources/js/components/controls/schedule/ScheduleHelper.js");
-/* harmony import */ var _Context__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../Context */ "./resources/js/components/Context.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -7788,8 +7771,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-
-
+ // import Context from './../../Context';
 
 /*
 Warning: Maximum update depth exceeded. 
@@ -7802,31 +7784,44 @@ changes on every render.
 
 
 var counter1 = 0;
+/**
+ * schedule = {
+ *      day
+ *      start
+ *      finish
+ * }
+ */
 
 var Day = function Day(_ref) {
   var schedule = _ref.schedule,
-      onRemove = _ref.onRemove;
+      onRemove = _ref.onRemove,
+      changeCallback = _ref.changeCallback;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(schedule),
       _useState2 = _slicedToArray(_useState, 2),
       scheduleModel = _useState2[0],
-      setScheduleModel = _useState2[1];
+      setScheduleModel = _useState2[1]; // const {synchronizeGroup} = useContext(Context);
 
-  var _useContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_Context__WEBPACK_IMPORTED_MODULE_2__["default"]),
-      synchronizeGroup = _useContext.synchronizeGroup;
+  /*
+      useEffect(() => {
+          if (counter1 < 100) {
+              console.log("Day", counter1, scheduleModel);
+  
+              counter1++;
+  
+              changeCallback(scheduleModel);
+              // synchronizeGroup(scheduleModel)
+          }
+      }, []);
+  */
 
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    if (counter1 < 10) {
-      counter1++;
-      synchronizeGroup(scheduleModel);
-    }
-  }, [scheduleModel]);
 
   var changeDay = function changeDay(event) {
     var newSchedule = _objectSpread({}, scheduleModel);
 
     newSchedule.day = event.target.value;
     setScheduleModel(newSchedule);
+    changeCallback(newSchedule);
   };
 
   var changeStart = function changeStart(event) {
@@ -7834,6 +7829,7 @@ var Day = function Day(_ref) {
 
     newSchedule.start = event.target.value;
     setScheduleModel(newSchedule);
+    changeCallback(newSchedule);
   };
 
   var changeFinish = function changeFinish(event) {
@@ -7841,39 +7837,40 @@ var Day = function Day(_ref) {
 
     newSchedule.finish = event.target.value;
     setScheduleModel(newSchedule);
+    changeCallback(newSchedule);
   };
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
     className: "row day",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
       className: "col-3",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("select", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("select", {
         className: "value-day",
         defaultValue: scheduleModel.day,
         onChange: changeDay,
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("option", {
           value: "\u041F\u043D",
           children: "\u041F\u043D"
-        }, 'Пн'), ")", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+        }, 'Пн'), ")", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("option", {
           value: "\u0412\u0442",
           children: "\u0412\u0442"
-        }, 'Вт'), ")", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+        }, 'Вт'), ")", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("option", {
           value: "\u0421\u0440",
           children: "\u0421\u0440"
-        }, 'Ср'), ")", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+        }, 'Ср'), ")", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("option", {
           value: "\u0427\u0442",
           children: "\u0427\u0442"
-        }, 'Чт'), ")", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+        }, 'Чт'), ")", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("option", {
           value: "\u041F\u0442",
           children: "\u041F\u0442"
-        }, 'Пт'), ")", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+        }, 'Пт'), ")", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("option", {
           value: "\u0421\u0431",
           children: "\u0421\u0431"
         }, 'Сб'), ")"]
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
       className: "col-4",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
         style: {
           border: '1px solid gray'
         },
@@ -7882,9 +7879,9 @@ var Day = function Day(_ref) {
         defaultValue: scheduleModel.start,
         onChange: changeStart
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
       className: "col-4",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
         style: {
           border: '1px solid gray'
         },
@@ -7893,16 +7890,16 @@ var Day = function Day(_ref) {
         defaultValue: scheduleModel.finish,
         onChange: changeFinish
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
       className: "col-1",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
         className: "close-day",
         title: "\u0412\u0438\u0434\u0430\u043B\u0438\u0442\u0438 \u0446\u0435\u0439 \u0434\u0435\u043D\u044C \u0442\u0438\u0436\u043D\u044F",
         onClick: function onClick() {
           return onRemove(scheduleModel);
         },
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
-          "class": "far fa-trash-alt",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("i", {
+          className: "far fa-trash-alt",
           "aria-hidden": "true"
         })
       })
@@ -7928,8 +7925,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _ScheduleHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ScheduleHelper */ "./resources/js/components/controls/schedule/ScheduleHelper.js");
 /* harmony import */ var _Day__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Day */ "./resources/js/components/controls/schedule/Day.js");
-/* harmony import */ var _Context__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../../Context */ "./resources/js/components/Context.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -7950,56 +7946,84 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
+ // import Context from './../../Context';
 
 
 
 var counter2 = 0;
+/** 
+ * group = {
+ *      name 
+ *      schedule = [ <Day> ]
+ * }
+ */
 
 var Group = function Group(_ref) {
   var group = _ref.group,
       onRemove = _ref.onRemove,
       onLeft = _ref.onLeft,
-      onRight = _ref.onRight;
+      onRight = _ref.onRight,
+      changeCallback = _ref.changeCallback;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(group),
       _useState2 = _slicedToArray(_useState, 2),
       groupModel = _useState2[0],
-      setGroupModel = _useState2[1];
+      setGroupModel = _useState2[1]; // const [norma, ] = useState();
+  // const {synchronizeGroups} = useContext(Context);
+  // const countNorma = () => {
+  //     // return ScheduleHelper.groupToString(groupModel);
+  //     return groupModel.schedule.reduce((previousValue, currentValue) => ('' + previousValue + currentValue.day + currentValue.start + currentValue.finish) );
+  // }
 
-  var _useContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_Context__WEBPACK_IMPORTED_MODULE_3__["default"]),
-      synchronizeGroups = _useContext.synchronizeGroups;
+  /*
+      useEffect(() => {
+          if (counter2 < 100) {
+              console.log("Group", counter2, groupModel);
+  
+              counter2++;
+  
+              changeCallback(groupModel);            
+              // synchronizeGroups(groupModel)
+          }
+      }, []);
+  */
 
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    if (counter2 < 10) {
-      counter2++;
-      synchronizeGroups(groupModel);
-    }
-  }, [groupModel]);
 
   var addDay = function addDay() {
     var newDay = _ScheduleHelper__WEBPACK_IMPORTED_MODULE_1__["default"].newDayModel();
     var resultingDays = groupModel.schedule.concat([newDay]);
-    setGroupModel(_objectSpread(_objectSpread({}, groupModel), {}, {
+
+    var newGroupModel = _objectSpread(_objectSpread({}, groupModel), {}, {
       schedule: resultingDays
-    }));
+    });
+
+    setGroupModel(newGroupModel);
+    changeCallback(newGroupModel);
   };
 
   var removeDay = function removeDay(day) {
     var position = _ScheduleHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getIndex(groupModel.schedule, day);
     var resultingDays = groupModel.schedule.slice(0, position).concat(groupModel.schedule.slice(position + 1));
-    setGroupModel(_objectSpread(_objectSpread({}, groupModel), {}, {
+
+    var newGroupModel = _objectSpread(_objectSpread({}, groupModel), {}, {
       schedule: resultingDays
-    }));
+    });
+
+    setGroupModel(newGroupModel);
+    changeCallback(newGroupModel);
   };
 
-  var editableDays = [];
-  groupModel.schedule.map(function (day) {
-    return editableDays.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_Day__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      schedule: day,
-      onRemove: removeDay
-    }, _ScheduleHelper__WEBPACK_IMPORTED_MODULE_1__["default"].generateId()));
-  });
+  var changeName = function changeName(e) {
+    var newGroupModel = _objectSpread(_objectSpread({}, groupModel), {}, {
+      name: e.target.value
+    });
+
+    setGroupModel(newGroupModel);
+  };
+
+  var blurName = function blurName(e) {
+    changeCallback(groupModel);
+  };
 
   var synchronizeGroup = function synchronizeGroup(scheduleDay) {
     var position = _ScheduleHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getIndex(groupModel.schedule, scheduleDay);
@@ -8011,22 +8035,21 @@ var Group = function Group(_ref) {
     // (because of useEffect)
   };
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_Context__WEBPACK_IMPORTED_MODULE_3__["default"].Provider, {
-    value: {
-      synchronizeGroup: synchronizeGroup
-    },
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+  return (
+    /*#__PURE__*/
+    // <Context.Provider value={{synchronizeGroup}}>
+    (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
       className: "group card card-outline-secondary",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "card-header",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
           className: "row",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
             className: "col",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
               className: "label-group-name col-8 form-label",
               children: "\u041D\u0430\u0437\u0432\u0430 \u0433\u0440\u0443\u043F\u0438"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
               className: "btn-delete",
               style: {
                 verticalAlign: 'middle'
@@ -8035,18 +8058,18 @@ var Group = function Group(_ref) {
               onClick: function onClick() {
                 return onRemove(groupModel);
               },
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
-                "class": "far fa-trash-alt",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
+                className: "far fa-trash-alt",
                 "aria-hidden": "true"
               })
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
               className: "move-right",
               title: "\u041F\u0435\u0440\u0435\u043C\u0456\u0441\u0442\u0438\u0442\u0438 \u0446\u044E \u0433\u0440\u0443\u043F\u0443 \u0432\u043F\u0435\u0440\u0435\u0434",
               onClick: function onClick() {
                 return onRight(groupModel);
               },
               children: ">"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
               className: "move-left",
               title: "\u041F\u0435\u0440\u0435\u043C\u0456\u0441\u0442\u0438\u0442\u0438 \u0446\u044E \u0433\u0440\u0443\u043F\u0443 \u043D\u0430\u0437\u0430\u0434",
               onClick: function onClick() {
@@ -8055,46 +8078,55 @@ var Group = function Group(_ref) {
               children: "<"
             })]
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
           className: "row",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
             className: "col",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
               className: "value-name",
               style: {
                 border: '1px solid gray'
               },
               type: "text",
-              defaultValue: group.name
+              value: groupModel.name,
+              onBlur: blurName,
+              onChange: changeName
             })
           })
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "card-body",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
           className: "row",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
             className: "form-label col-3",
             children: "\u0414\u0435\u043D\u044C"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
             className: "form-label col-4",
             children: "\u041F\u043E\u0447\u0430\u0442\u043E\u043A"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
             className: "form-label col-4",
             children: "\u0417\u0430\u043A\u0456\u043D\u0447\u0435\u043D\u043D\u044F"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
             className: "col-1",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
               className: "add-day",
               title: "\u0414\u043E\u0434\u0430\u0442\u0438 \u0449\u0435 \u043E\u0434\u0438\u043D \u0434\u0435\u043D\u044C \u0442\u0438\u0436\u043D\u044F",
               onClick: addDay,
               children: "+"
             })
           })]
-        }), editableDays]
+        }), groupModel.schedule.map(function (day) {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_Day__WEBPACK_IMPORTED_MODULE_2__["default"], {
+            schedule: day,
+            onRemove: removeDay,
+            changeCallback: synchronizeGroup
+          }, _ScheduleHelper__WEBPACK_IMPORTED_MODULE_1__["default"].generateId());
+        })]
       })]
-    })
-  });
+    }) // </Context.Provider>
+
+  );
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Group);
@@ -8115,7 +8147,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _ScheduleHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ScheduleHelper */ "./resources/js/components/controls/schedule/ScheduleHelper.js");
 /* harmony import */ var _Group__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Group */ "./resources/js/components/controls/schedule/Group.js");
-/* harmony import */ var _Context__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../../Context */ "./resources/js/components/Context.js");
+/* harmony import */ var _utils_useSave__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../../utils/useSave */ "./resources/js/components/utils/useSave.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
@@ -8139,6 +8171,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+ // import Context from './../../Context';
 
 
 
@@ -8146,14 +8179,21 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var Schedule = function Schedule(_ref) {
-  var markup = _ref.markup,
+  var athleteId = _ref.athleteId,
+      dojoId = _ref.dojoId,
+      markup = _ref.markup,
       editable = _ref.editable,
       saveUrl = _ref.saveUrl;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(editable),
       _useState2 = _slicedToArray(_useState, 2),
       isEditable = _useState2[0],
-      setEditable = _useState2[1];
+      setEditable = _useState2[1]; // TODO: use useEditable here.
+
+
+  var _useSave = (0,_utils_useSave__WEBPACK_IMPORTED_MODULE_3__["default"])(saveUrl, function () {}),
+      _useSave2 = _slicedToArray(_useSave, 1),
+      saveRequest = _useSave2[0];
 
   var parsedGroups = _ScheduleHelper__WEBPACK_IMPORTED_MODULE_1__["default"].parseGroups(markup);
 
@@ -8183,21 +8223,22 @@ var Schedule = function Schedule(_ref) {
   };
 
   var saveToServer = function saveToServer(e) {
-    // TODO: implement on server
-    fetch(saveUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/text'
+    var dataObj = {
+      athleteId: athleteId,
+      dojoId: dojoId,
+      schedule: _ScheduleHelper__WEBPACK_IMPORTED_MODULE_1__["default"].scheduleToString(groups)
+    };
+    saveRequest({
+      dataObj: dataObj,
+      onSuccess: function onSuccess() {
+        console.log('ok');
       },
-      body: _ScheduleHelper__WEBPACK_IMPORTED_MODULE_1__["default"].toString(groups)
-    }).then(function (response) {
-      return response;
-    }
-    /*.json()*/
-    ).then(function (response) {// setIsSavingDone(true);
-      // TODO: synch
-      // setEditedData(editedData);
-    });
+      onFailure: function onFailure() {
+        console.log('f');
+      }
+    }); // setIsSavingDone(true);
+    // TODO: synch
+    // setEditedData(editedData);
   };
 
   var addGroup = function addGroup() {
@@ -8218,14 +8259,14 @@ var Schedule = function Schedule(_ref) {
       className: "btn btn-success",
       onClick: save,
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
-        "class": "fas fa-check"
+        className: "fas fa-check"
       }), " \u0417\u0431\u0435\u0440\u0435\u0433\u0442\u0438"]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("a", {
       className: "btn btn-outline-secondary",
       onClick: cancel,
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
         "aria-hidden": "true",
-        "class": "btn btn-close",
+        className: "btn btn-close",
         style: {
           verticalAlign: 'bottom'
         }
@@ -8278,13 +8319,23 @@ var Schedule = function Schedule(_ref) {
       }
     };
 
+    var synchronizeGroups = function synchronizeGroups(groupInGroupsArrayToSynchronize) {
+      var i = _ScheduleHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getIndex(groups, groupInGroupsArrayToSynchronize);
+
+      var synchronizedGroups = _toConsumableArray(groups);
+
+      synchronizedGroups[i] = groupInGroupsArrayToSynchronize;
+      setGroups(synchronizedGroups);
+    };
+
     var groupsControls = [];
     groups.map(function (group) {
       return groupsControls.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_Group__WEBPACK_IMPORTED_MODULE_2__["default"], {
         group: group,
         onRemove: removeGroup,
         onLeft: moveLeft,
-        onRight: moveRight
+        onRight: moveRight,
+        changeCallback: synchronizeGroups
       }, _ScheduleHelper__WEBPACK_IMPORTED_MODULE_1__["default"].generateId()));
     });
     editableOrNonEditableContent = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
@@ -8292,27 +8343,20 @@ var Schedule = function Schedule(_ref) {
     });
   }
 
-  var synchronizeGroups = function synchronizeGroups(groupInGroupsArrayToSynchronize) {
-    var i = _ScheduleHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getIndex(groups, groupInGroupsArrayToSynchronize);
+  return (
+    /*#__PURE__*/
+    // <Context.Provider value={{synchronizeGroups}}>
+    (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        className: "input-group mt-3 mb-3",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+          className: "input-group-text",
+          children: "\u0420\u043E\u0437\u043A\u043B\u0430\u0434"
+        }), editControls]
+      }), editableOrNonEditableContent]
+    }) // </Context.Provider>
 
-    var synchronizedGroups = _toConsumableArray(groups);
-
-    synchronizedGroups[i] = groupInGroupsArrayToSynchronize;
-    setGroups(synchronizedGroups);
-  };
-
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_Context__WEBPACK_IMPORTED_MODULE_3__["default"].Provider, {
-    value: {
-      synchronizeGroups: synchronizeGroups
-    },
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-      className: "input-group mt-3 mb-3",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
-        className: "input-group-text",
-        children: "\u0420\u043E\u0437\u043A\u043B\u0430\u0434"
-      }), editControls]
-    }), editableOrNonEditableContent]
-  });
+  );
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Schedule);
@@ -8404,7 +8448,7 @@ var ScheduleHelper = {
   },
   scheduleToString: function scheduleToString(groups) {
     var str = "<div class='card-deck'>";
-    str = groups.map(function (group) {
+    str += groups.map(function (group) {
       return ScheduleHelper.groupToString(group);
     }).join('');
     str += "</div>";
@@ -9075,8 +9119,9 @@ var EditAthlete = function EditAthlete(_ref) {
           },
           children: "\u0417\u0430\u043B\u0438"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_AthleteEditDojos__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          athleteId: isEdit && editedData.id,
           dojos: dojos,
-          updateUrl: updateUrl + '/' + id
+          updateUrl: updateUrl
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "mb-3 col-md-12 d-grid gap-3",
@@ -9937,23 +9982,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 function useSave(inlineUpdateUrl, onBeforeSuccess) {
+  /** dataObj = {id, field, value} **/
   var save = function save(_ref) {
-    var id = _ref.id,
-        field = _ref.field,
-        value = _ref.value,
+    var dataObj = _ref.dataObj,
         onSuccess = _ref.onSuccess,
         onFailure = _ref.onFailure;
-    var inlineEditData = {
-      id: id,
-      field: field,
-      value: value
-    };
     fetch(inlineUpdateUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(inlineEditData)
+      body: JSON.stringify(dataObj)
     }) // .then(response => response.json())
     .then(function (response) {
       if (typeof response["Not success"] !== "undefined") {
@@ -10041,9 +10080,11 @@ function useStatus(_ref) {
     if (previousValue != newValue) {
       setValue(newValue);
       save({
-        id: id,
-        field: field,
-        value: newValue,
+        dataObj: {
+          id: id,
+          field: field,
+          value: newValue
+        },
         onSuccess: function onSuccess() {
           setSuccessfullyUpdated(true);
           setPreviousValue(newValue);

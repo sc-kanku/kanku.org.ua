@@ -3,7 +3,7 @@ import React, {useState, useEffect, useContext} from 'react';
 import Schedule from './schedule/Schedule'
 import AddEntitySelector from './AddEntitySelector'
 
-const AthleteEditDojos = function({dojos, updateUrl}) {
+const AthleteEditDojos = function({athleteId, dojos, updateUrl}) {
     const [dojosModel, setDojosModel] = useState(dojos);
     const [allDojos, setAllDojos] = useState([]);
 
@@ -50,7 +50,7 @@ const AthleteEditDojos = function({dojos, updateUrl}) {
 
         dojosModel.map((dojo, index) => {
             let dojoUrl = "/admin/dojo/edit/" + dojo.id;
-            let scheduleUrl = updateUrl + '/schedule/' + dojo.id;
+            let scheduleUrl = updateUrl + '/schedule';
 
             dojosArray.push(
                 <li key={index}>
@@ -67,7 +67,9 @@ const AthleteEditDojos = function({dojos, updateUrl}) {
                     </div>
                     
                     <Schedule 
-                        markup={dojo.pivot?.schedule } 
+                        athleteId={athleteId}
+                        dojoId={dojo.id}
+                        markup={dojo.pivot?.schedule}
                         editable={false}
                         saveUrl={scheduleUrl}
                     />

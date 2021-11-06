@@ -22,6 +22,7 @@ use App\Http\Controllers\RefreshSiteController;
 
 Route::get('/athlete/list', [AthleteController::class, 'apiAthletes']);
 Route::post('/athlete/update', [AthleteController::class, 'apiUpdateAthlete']);
+Route::post('/athlete/update/schedule', [AthleteController::class, 'apiUpdateSchedule']);
 Route::get('/athlete/edit/{id}', [AthleteController::class, 'apiEditAthlete']);
 Route::post('/athlete/save/{id}', [AthleteController::class, 'apiSaveAthlete']);
 

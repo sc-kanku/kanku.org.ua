@@ -246,7 +246,11 @@ const EditAthlete = ({getUrl, updateUrl, photoFileName}) => {
 
             <div className="mb-3 col-md-12">                
                 <p style={{'backgroundColor': 'yellow'}}>Зали</p>
-                <AthleteEditDojos dojos={dojos} updateUrl={updateUrl + '/' + id} />
+                <AthleteEditDojos 
+                    athleteId={isEdit && editedData.id} 
+                    dojos={dojos} 
+                    updateUrl={updateUrl} 
+                />
             </div>
 
             <div className="mb-3 col-md-12 d-grid gap-3">                

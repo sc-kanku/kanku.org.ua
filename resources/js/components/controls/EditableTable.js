@@ -20,7 +20,7 @@ export default function EditableTable ({
         getTableDataUrl : prefixes.api + '/list',
         inlineUpdateUrl : prefixes.api + '/update',
         getUrl : prefixes.api + '/edit',
-        updateEditedItemUrl : prefixes.api + '/save',
+        // updateEditedItemUrl : prefixes.api + '/save',
         listEntityWebUrl : prefixes.web + '/list',
         editEntityWebUrl : prefixes.web + '/edit/:id',
         newEntityWebUrl : prefixes.web + '/new',
@@ -81,7 +81,7 @@ export default function EditableTable ({
                         <EditEntity
                             name={entity}
                             getUrl={urls.getUrl}
-                            updateUrl={urls.updateEditedItemUrl}
+                            updateUrl={urls.inlineUpdateUrl}
                         />
                     </>
                 )}>

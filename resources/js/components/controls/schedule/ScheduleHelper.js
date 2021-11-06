@@ -82,7 +82,7 @@
     scheduleToString : function(groups) {
         let str = "<div class='card-deck'>";
 
-        str = groups.map(group => ScheduleHelper.groupToString(group)).join('');
+        str += groups.map(group => ScheduleHelper.groupToString(group)).join('');
 
         str += "</div>";
 

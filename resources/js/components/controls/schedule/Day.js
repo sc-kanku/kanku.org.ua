@@ -1,6 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react';
-import ScheduleHelper from './ScheduleHelper';
-import Context from './../../Context';
+// import Context from './../../Context';
 
 /*
 Warning: Maximum update depth exceeded. 
@@ -11,22 +10,34 @@ changes on every render.
 // TODO: Infinite refresh loop
 let counter1 = 0;
 
-const Day = function({schedule, onRemove}) {
+/**
+ * schedule = {
+ *      day
+ *      start
+ *      finish
+ * }
+ */
+const Day = function({schedule, onRemove, changeCallback}) {
     const [scheduleModel, setScheduleModel] = useState(schedule);
-    const {synchronizeGroup} = useContext(Context);
-
+    // const {synchronizeGroup} = useContext(Context);
+/*
     useEffect(() => {
-        if (counter1 < 10) {
-            counter1++;
-            synchronizeGroup(scheduleModel)
-        }
-    }, [scheduleModel]);
+        if (counter1 < 100) {
+            console.log("Day", counter1, scheduleModel);
 
+            counter1++;
+
+            changeCallback(scheduleModel);
+            // synchronizeGroup(scheduleModel)
+        }
+    }, []);
+*/
     const changeDay = (event) => {
         let newSchedule = {...scheduleModel};
         newSchedule.day = event.target.value;
 
         setScheduleModel(newSchedule);
+        changeCallback(newSchedule);
     }
 
     const changeStart = (event) => {
@@ -34,6 +45,7 @@ const Day = function({schedule, onRemove}) {
         newSchedule.start = event.target.value;
 
         setScheduleModel(newSchedule);
+        changeCallback(newSchedule);
     }
 
     const changeFinish = (event) => {
@@ -41,6 +53,7 @@ const Day = function({schedule, onRemove}) {
         newSchedule.finish = event.target.value;
 
         setScheduleModel(newSchedule);
+        changeCallback(newSchedule);
     }
 
     return (
@@ -66,7 +79,7 @@ const Day = function({schedule, onRemove}) {
 
                 <div className="col-1">
                     <div className="close-day" title="Видалити цей день тижня" onClick={() => onRemove(scheduleModel)}>
-                        <i class="far fa-trash-alt" aria-hidden="true"></i>
+                        <i className="far fa-trash-alt" aria-hidden="true"></i>
                     </div>
                 </div>
             </div>

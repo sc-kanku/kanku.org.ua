@@ -1,13 +1,12 @@
 import React from 'react';
 
 export default function useSave(inlineUpdateUrl, onBeforeSuccess) {
-    const save =  ({id, field, value, onSuccess, onFailure}) => {
-        let inlineEditData = { id, field, value };
-    
+    /** dataObj = {id, field, value} **/
+    const save =  ({dataObj, onSuccess, onFailure}) => {
         fetch(inlineUpdateUrl, {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify(inlineEditData)  
+          body: JSON.stringify(dataObj)  
         })
         // .then(response => response.json())
         .then(response => {
