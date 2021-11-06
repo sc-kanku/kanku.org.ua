@@ -65,7 +65,7 @@ export default function EditableTable ({
                                 <h4 className="alert-heading">Наразі не працює:</h4>
                                 <ol>
                                     <li>Додавання нового спортсмена / залу / новини</li>
-                                    <li>Збереження редагованої в секції 'зали' інформації</li>
+                                    <li>Збереження редагованої в секції 'зали' інформації (крім розкладу)</li>
                                     <li>Редагування фото</li>
                                     <li>Валідація</li>
                                     <span className="text-secondary">

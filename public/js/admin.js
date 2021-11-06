@@ -6850,7 +6850,7 @@ function EditableTable(_ref) {
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
                       children: "\u0414\u043E\u0434\u0430\u0432\u0430\u043D\u043D\u044F \u043D\u043E\u0432\u043E\u0433\u043E \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430 / \u0437\u0430\u043B\u0443 / \u043D\u043E\u0432\u0438\u043D\u0438"
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
-                      children: "\u0417\u0431\u0435\u0440\u0435\u0436\u0435\u043D\u043D\u044F \u0440\u0435\u0434\u0430\u0433\u043E\u0432\u0430\u043D\u043E\u0457 \u0432 \u0441\u0435\u043A\u0446\u0456\u0457 '\u0437\u0430\u043B\u0438' \u0456\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0456\u0457"
+                      children: "\u0417\u0431\u0435\u0440\u0435\u0436\u0435\u043D\u043D\u044F \u0440\u0435\u0434\u0430\u0433\u043E\u0432\u0430\u043D\u043E\u0457 \u0432 \u0441\u0435\u043A\u0446\u0456\u0457 '\u0437\u0430\u043B\u0438' \u0456\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0456\u0457 (\u043A\u0440\u0456\u043C \u0440\u043E\u0437\u043A\u043B\u0430\u0434\u0443)"
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
                       children: "\u0420\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u043D\u043D\u044F \u0444\u043E\u0442\u043E"
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
