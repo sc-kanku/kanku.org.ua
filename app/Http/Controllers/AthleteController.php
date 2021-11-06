@@ -121,6 +121,29 @@ class AthleteController extends Controller
         return $queryStatus;
     }
 
+
+    public function apiDojoDelete(Request $request)
+    {
+        try {
+            $athleteId = $request->get('athleteId');
+            $dojoId = $request->get('dojoId');
+
+            $result = Athlete
+                ::where('id', $athleteId)
+                ->first()
+                ->dojos()
+                ->detach([$dojoId]);
+            //->syncWithoutDetaching([$dojoId => ['schedule' => $schedule, 'schedule_notes' => '']]);
+
+            $queryStatus = "{Successful: " . $result . "}";
+        } catch (Exception $e) {
+            $queryStatus = "{Not success: " . $e . "}";
+        }
+
+        return $queryStatus;
+    }
+
+
     public function apiEditAthlete($id)
     {
         $athlete = Athlete::where('id', $id)->with('dojos')->get()->first();

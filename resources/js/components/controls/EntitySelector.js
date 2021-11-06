@@ -18,7 +18,8 @@ const EntitySelector = function({url, onSelect, onAllLoaded}) {
 
     let entitiesList = [
         <option key='-1' value={-1}>Виберіть</option>,
-        <option key='0' value={0}>Створити новий</option>,
+        // TODO
+        // <option key='0' value={0}>Створити новий</option>,
     ].concat(
         entities.map(entity => <option key={entity.id} value={entity.id}>{entity.name}</option>)
     );

@@ -19,7 +19,7 @@ export default function useStatus({ id, field, initialValue, save, setValue, get
           setValue(newValue);
 
           save({
-            dataObj: {id, field, value: newValue}, 
+            data: {id, field, value: newValue}, 
             onSuccess: () => {
               setSuccessfullyUpdated(true);
               setPreviousValue(newValue);

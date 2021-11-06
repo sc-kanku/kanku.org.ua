@@ -7,7 +7,7 @@ import useSave from './../../utils/useSave';
 const Schedule = ({athleteId, dojoId, markup, editable, saveUrl}) => {
     const [isEditable, setEditable] = useState(editable);
     // TODO: use useEditable here.
-    let [saveRequest] = useSave(saveUrl, () => {});
+    let [saveRequest] = useSave(saveUrl);
 
     let parsedGroups = ScheduleHelper.parseGroups(markup);
 
@@ -30,14 +30,10 @@ const Schedule = ({athleteId, dojoId, markup, editable, saveUrl}) => {
     }
 
     const saveToServer = (e) => {
-        let dataObj = { 
-            athleteId, dojoId, schedule : ScheduleHelper.scheduleToString(groups) 
-        }; 
-
-        saveRequest({
-            dataObj,
-            onSuccess : () => {console.log('ok')}, 
-            onFailure : () => {console.log('f')}
+        saveRequest({ 
+            data: { 
+                athleteId, dojoId, schedule : ScheduleHelper.scheduleToString(groups)
+            }
         });
 
         // setIsSavingDone(true);

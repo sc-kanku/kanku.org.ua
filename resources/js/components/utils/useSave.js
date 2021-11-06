@@ -1,23 +1,30 @@
 import React from 'react';
 
 export default function useSave(inlineUpdateUrl, onBeforeSuccess) {
-    /** dataObj = {id, field, value} **/
-    const save =  ({dataObj, onSuccess, onFailure}) => {
+    /** data = {id, field, value} **/
+    const save =  ({data, onSuccess, onFailure}) => {
         fetch(inlineUpdateUrl, {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify(dataObj)  
+          body: JSON.stringify(data)  
         })
         // .then(response => response.json())
         .then(response => {
           if (typeof (response["Not success"]) !== "undefined" ) {
             // Failure
-            onFailure();
+            if (typeof onFailure == 'function') {
+              onFailure();
+            }
           } else {
             // Success
-            onBeforeSuccess(id - 1, field, value);
+            if (typeof onBeforeSuccess == 'function') {
+              onBeforeSuccess(id - 1, field, value);
+            }
+
             // synchronizeDataOnUpdateSuccess(index, id, value);
-            onSuccess();
+            if (typeof onSuccess == 'function') {
+              onSuccess();
+            }
 
             // Show toasted message
             // https://getbootstrap.com/docs/5.1/components/toasts/
@@ -25,7 +32,9 @@ export default function useSave(inlineUpdateUrl, onBeforeSuccess) {
           }
           })
           .catch((error) => {
-            onFailure()
+            if (typeof onFailure == 'function') {
+              onFailure()
+            }
           });
       }
 

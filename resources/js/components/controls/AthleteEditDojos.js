@@ -2,10 +2,14 @@ import React, {useState, useEffect, useContext} from 'react';
 
 import Schedule from './schedule/Schedule'
 import AddEntitySelector from './AddEntitySelector'
+import useSave from './../utils/useSave';
 
 const AthleteEditDojos = function({athleteId, dojos, updateUrl}) {
     const [dojosModel, setDojosModel] = useState(dojos);
     const [allDojos, setAllDojos] = useState([]);
+    // TODO: refactor useSave to be suitable one for both actions.
+    let [saveRequest] = useSave('/api/athlete/update/schedule');
+    let [deleteRequest] = useSave('/api/athlete/dojo/delete');
 
     function onAllDojosLoaded (allLoadedDojos) {
         setAllDojos(allLoadedDojos);
@@ -14,24 +18,27 @@ const AthleteEditDojos = function({athleteId, dojos, updateUrl}) {
     const addDojo = (dojoId) => {
         if (dojoId == "-1") { // Виберіть зал
         } else if (dojoId == "0") { // Новий зал
+            // TODO: 
         } else {
             let selectedDojo = allDojos.filter(dojo => dojo.id == dojoId);
             let newDojosModel = [...dojosModel].concat(selectedDojo);
 
             setDojosModel(newDojosModel);
-        }
-    }
 
-    const editDojo = (id) => {
-        console.log("edit - redirect to edit dojo page", id);
-        // TODO:
-        // redirect to edit dojo page
+            saveRequest({data : { 
+                    athleteId, dojoId, schedule : '' 
+            }});
+        }
     }
 
     const deleteDojo = (dojoId) => {
         let dojos = dojosModel.filter(dojo => dojo.id != dojoId);
 
         setDojosModel(dojos);
+
+        deleteRequest({data: {
+            athleteId, dojoId
+        }})
     }
 
     // using effect hooks and deps to execute logic as componentWillMount
@@ -56,8 +63,8 @@ const AthleteEditDojos = function({athleteId, dojos, updateUrl}) {
                 <li key={index}>
                     <div className="input-group" role="group" aria-label="Dojo actions">
                         <a className="input-group-text alert-success" href={dojoUrl}>{dojo.name}</a>
-                    
-                        <a className="btn btn-outline-success" onClick={() => editDojo(dojo.id)}>
+
+                        <a className="btn btn-outline-success" href={dojoUrl}>
                             <i className="fas fa-edit"></i> Редагувати зал
                         </a>
 
