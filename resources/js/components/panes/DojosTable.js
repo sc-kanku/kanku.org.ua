@@ -37,10 +37,10 @@ function DojosTable() {
                 Header: "Район",
                 accessor: "district"
               },
-          {
-            Header: "url",
-            accessor: "url"
-          },
+          // {
+          //   Header: "url",
+          //   accessor: "url"
+          // },
           {
             Header: "Проводяться тренування",
             accessor: "is_actual"

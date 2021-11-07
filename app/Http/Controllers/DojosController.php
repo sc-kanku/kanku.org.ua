@@ -45,7 +45,9 @@ class DojosController extends Controller
     public function apiDojos()
     {
         $dojos = Dojo
-            ::where('is_actual', '=', 1)
+            // ::where('is_actual', '=', 1)
+            // ::orderBy("name")
+            ::orderByDesc("is_actual")
             ->orderBy("name")
             ->get();
 
