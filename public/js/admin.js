@@ -6915,6 +6915,8 @@ function EditableTable(_ref) {
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
                         children: "\u0406 \u0442\u0430\u043A\u043E\u0436 \u0433\u0430\u043B\u0435\u0440\u0435\u0457 \u0442\u0440\u0435\u043D\u0435\u0440\u0430 \u0432\u0456\u0434\u043A\u043B\u044E\u0447\u0435\u043D\u0456 \u043D\u0430\u0440\u0430\u0437\u0456"
                       })
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
+                      children: "\u0412 \u0441\u0435\u043A\u0446\u0456\u0457 \u0437\u0430\u043B\u0438 \u043F\u043E\u0442\u0440\u0456\u0431\u043D\u043E \u043F\u043E\u043A\u0430\u0437\u0443\u0432\u0430\u0442\u0438 \u043B\u0438\u0448\u0435 \u0442\u0456 \u0437\u0430\u043B\u0438 \u0432 \u044F\u043A\u0438\u0445 \u0434\u0430\u043D\u0438\u0439 \u0442\u0440\u0435\u0442\u0435\u0440 \u043D\u0435 \u0442\u0440\u0435\u043D\u0443\u0454."
                     })]
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
                     children: "\u042F\u043A\u0431\u0438 \u0449\u0435 \u0432\u0438\u043B\u0456\u0437\u043B\u043E \u0449\u043E\u0441\u044C \u0456\u043D\u0448\u0435 (\u0430\u0431\u043E \u043F\u0440\u043E\u0441\u0442\u043E \u043C\u0430\u0454\u0442\u0435 \u0445\u043E\u0440\u043E\u0448\u0456 \u0456\u0434\u0435\u0457), \u0442\u043E \u0434\u0430\u0439\u0442\u0435 \u0431\u0443\u0434\u044C \u043B\u0430\u0441\u043A\u0430 \u0437\u043D\u0430\u0442\u0438"
@@ -8849,12 +8851,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var _controls_Degree__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../controls/Degree */ "./resources/js/components/controls/Degree.js");
-/* harmony import */ var _controls_Photo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../controls/Photo */ "./resources/js/components/controls/Photo.js");
-/* harmony import */ var _controls_Table__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../controls/Table */ "./resources/js/components/controls/Table.js");
-/* harmony import */ var _controls_AthleteEditDojos__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../controls/AthleteEditDojos */ "./resources/js/components/controls/AthleteEditDojos.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _controls_Photo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../controls/Photo */ "./resources/js/components/controls/Photo.js");
+/* harmony import */ var _controls_Table__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../controls/Table */ "./resources/js/components/controls/Table.js");
+/* harmony import */ var _controls_AthleteEditDojos__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../controls/AthleteEditDojos */ "./resources/js/components/controls/AthleteEditDojos.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -8876,381 +8877,339 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
 var EditAthlete = function EditAthlete(_ref) {
   var getUrl = _ref.getUrl,
       updateUrl = _ref.updateUrl,
       photoFileName = _ref.photoFileName;
 
-  var _useParams = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.useParams)(),
+  var _useParams = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useParams)(),
       id = _useParams.id;
 
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
       _useState2 = _slicedToArray(_useState, 2),
-      editedData = _useState2[0],
-      setEditedData = _useState2[1];
-
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-      _useState4 = _slicedToArray(_useState3, 2),
-      isSavingDone = _useState4[0],
-      setIsSavingDone = _useState4[1];
+      athlete = _useState2[0],
+      setAthlete = _useState2[1];
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     fetch(getUrl + "/" + id).then(function (response) {
       return response.json();
-    }).then(function (editedData) {
-      setEditedData(editedData);
-    });
-  }, []); // @Unused inline saving is used
+    }).then(setAthlete);
+  }, []);
+  var isEdit = id != null; // TODO: 
 
-  var saveAthlete = function saveAthlete(e) {
-    var formData = new FormData(document.getElementById('edit-athlete'));
-    fetch(updateUrl + "/" + id, {
-      method: 'POST',
-      body: formData
-    }).then(function (response) {
-      return response;
-    }
-    /*.json()*/
-    ).then(function (response) {
-      setIsSavingDone(true); // synch
-      // setEditedData(editedData);
-    });
-  };
-
-  var isEdit = editedData && editedData.id != null;
-  var editHeader = isEdit ? "" + editedData.lastName + ' ' + editedData.firstName + ' ' + editedData.patronymic : "Ввести нового спортсмена";
-
-  var editathleteHiddenInputId = isEdit && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
-    type: "hidden",
-    name: "id",
-    value: editedData.id
-  });
-
-  var photoUrl = editedData && "/images/athletes/" + editedData.id + "/photo.png";
-  var dojos = isEdit ? editedData.dojos : null;
   var garrerySnippet = "";
 
-  if (isEdit && editedData.gallery) {
-    var galleryUrl = "photo.php?galleryID=" + editedData.gallery['galleryID'];
-    garrerySnippet = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("ol", {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("li", {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("a", {
+  if (isEdit && athlete.gallery) {
+    var galleryUrl = "photo.php?galleryID=" + athlete.gallery['galleryID'];
+    garrerySnippet = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("ol", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
           href: galleryUrl,
-          children: editedData.gallery['name']
+          children: athlete.gallery['name']
         })
       })
     });
   } else {
     if (isEdit) {
-      garrerySnippet = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("p", {
-        children: ["\u0424\u043E\u0442\u043E\u0433\u0430\u043B\u0435\u0440\u0435\u044F \u0435\u0449\u0435 \u043D\u0435 \u0432\u0432\u0435\u0434\u0435\u043D\u0430", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
+      garrerySnippet = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
+        children: ["\u0424\u043E\u0442\u043E\u0433\u0430\u043B\u0435\u0440\u0435\u044F \u0435\u0449\u0435 \u043D\u0435 \u0432\u0432\u0435\u0434\u0435\u043D\u0430", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
           type: "button",
           value: "\u0412\u0432\u0435\u0441\u0442\u0438 \u0444\u043E\u0442\u043E\u0433\u0430\u043B\u0435\u0440\u0435\u044E",
           onclick: "location.href='new_a_gallery.php?id=<?= $athlet->id ?>'"
         })]
       });
     } else {
-      garrerySnippet = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
+      garrerySnippet = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
         children: "\u0424\u043E\u0442\u043E\u0433\u0430\u043B\u0435\u0440\u0435\u044E \u0412\u0438 \u0437\u043C\u043E\u0436\u0435\u0442\u0435 \u0432\u0432\u0435\u0441\u0442\u0438 \u043F\u0456\u0441\u043B\u044F \u043F\u0435\u0440\u0448\u043E\u0433\u043E \u0437\u0431\u0435\u0440\u0435\u0436\u0435\u043D\u043D\u044F \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430"
       });
     }
   }
 
-  if (isSavingDone) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Redirect, {
-      to: "/admin/athlete/list"
-    });
-  }
-
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h2", {
-      children: editHeader
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("form", {
-      id: "edit-athlete",
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
+      children: isEdit ? '' + athlete.lastName + ' ' + athlete.firstName + ' ' + athlete.patronymic : "Створити нового спортсмена"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("form", {
       className: "row",
-      method: "post",
-      action: updateUrl,
       encType: "multipart/form-data",
-      children: [editathleteHiddenInputId, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         className: "col-sm-5 d-grid gap-3",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
             htmlFor: "lastName",
             className: "form-label",
             children: "\u041F\u0440\u0456\u0437\u0432\u0438\u0449\u0435"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableText, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableText, {
             field: "lastName",
             className: "form-control",
-            id: isEdit && editedData.id,
-            initialValue: isEdit && editedData.lastName,
-            inlineUpdateUrl: "/api/athlete/update"
+            id: isEdit && athlete.id,
+            initialValue: isEdit && athlete.lastName,
+            inlineUpdateUrl: updateUrl
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
             htmlFor: "firstName",
             className: "form-label",
             children: "\u0406\u043C'\u044F"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableText, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableText, {
             field: "firstName",
             className: "form-control",
-            id: isEdit && editedData.id,
-            initialValue: isEdit && editedData.firstName,
-            inlineUpdateUrl: "/api/athlete/update"
+            id: isEdit && athlete.id,
+            initialValue: isEdit && athlete.firstName,
+            inlineUpdateUrl: updateUrl
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
             htmlFor: "patronymic",
             className: "form-label",
             children: "\u041F\u043E \u0431\u0430\u0442\u044C\u043A\u043E\u0432\u0456"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableText, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableText, {
             field: "patronymic",
             className: "form-control",
-            id: isEdit && editedData.id,
-            initialValue: isEdit && editedData.patronymic,
-            inlineUpdateUrl: "/api/athlete/update"
+            id: isEdit && athlete.id,
+            initialValue: isEdit && athlete.patronymic,
+            inlineUpdateUrl: updateUrl
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
             htmlFor: "birthday",
             className: "form-label",
             children: "\u0414\u0430\u0442\u0430 \u043D\u0430\u0440\u043E\u0434\u0436\u0435\u043D\u043D\u044F"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableDate, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableDate, {
             field: "birthday",
             className: "form-control",
-            id: isEdit && editedData.id,
-            initialValue: isEdit && editedData.birthday,
-            inlineUpdateUrl: "/api/athlete/update"
+            id: isEdit && athlete.id,
+            initialValue: isEdit && athlete.birthday,
+            inlineUpdateUrl: updateUrl
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
             htmlFor: "degree",
             className: "form-label",
             children: "\u0421\u0442\u0443\u043F\u0456\u043D\u044C"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableDegree, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableDegree, {
             field: "degree",
             className: "form-control",
-            id: isEdit && editedData.id,
-            initialValue: isEdit && editedData.degree,
-            inlineUpdateUrl: "/api/athlete/update"
+            id: isEdit && athlete.id,
+            initialValue: isEdit && athlete.degree,
+            inlineUpdateUrl: updateUrl
           })]
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
         className: "mb-3 col-sm-1 mb-3"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         className: "form-floating_ mb-3 col-sm-6",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
           htmlFor: "photo",
           className: "form-label",
           children: "\u0424\u043E\u0442\u043E"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Photo__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Photo__WEBPACK_IMPORTED_MODULE_1__["default"], {
           id: "photo",
           name: "photo",
           className: "form-control",
-          url: photoUrl,
-          alt: editHeader,
+          url: athlete && "/images/athletes/" + athlete.id + "/photo.png",
+          alt: isEdit ? '' + athlete.lastName + ' ' + athlete.firstName + ' ' + athlete.patronymic : "Фото спортсмена",
           editable: true
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         className: "col-md-5 d-grid gap-3 mb-3",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
           style: {
             'backgroundColor': 'yellow'
           },
           children: "\u041A\u043E\u043D\u0442\u0430\u043A\u0442\u043D\u0430 \u0456\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0456\u044F"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
             htmlFor: "phone",
             className: "form-label",
             children: "\u0422\u0435\u043B\u0435\u0444\u043E\u043D"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableText, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableText, {
             field: "phone",
             className: "form-control",
-            id: isEdit && editedData.id,
-            initialValue: isEdit && editedData.phone,
-            inlineUpdateUrl: "/api/athlete/update"
+            id: isEdit && athlete.id,
+            initialValue: isEdit && athlete.phone,
+            inlineUpdateUrl: updateUrl
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
             htmlFor: "phone2",
             className: "form-label",
             children: "\u0414\u043E\u0434\u0430\u0442\u043A\u043E\u0432\u0438\u0439 \u0442\u0435\u043B\u0435\u0444\u043E\u043D"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableText, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableText, {
             field: "phone2",
             className: "form-control",
-            id: isEdit && editedData.id,
-            initialValue: isEdit && editedData.phone2,
-            inlineUpdateUrl: "/api/athlete/update"
+            id: isEdit && athlete.id,
+            initialValue: isEdit && athlete.phone2,
+            inlineUpdateUrl: updateUrl
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("label", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("label", {
             htmlFor: "email",
             className: "form-label",
-            children: ["E-mail ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+            children: ["E-mail ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
               className: "text-secondary",
               children: "(\u043D\u0435 \u043C\u043E\u0436\u043D\u0430 \u0440\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u0442\u0438)"
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableText, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableText, {
             field: "email",
             className: "form-control",
-            id: isEdit && editedData.id,
+            id: isEdit && athlete.id,
             type: "email",
             disabled: true,
-            initialValue: isEdit && editedData.email,
-            inlineUpdateUrl: "/api/athlete/update"
+            initialValue: isEdit && athlete.email,
+            inlineUpdateUrl: updateUrl
           })]
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
         className: "col-md-1"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         className: "col-md-6 mb-3",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
           style: {
             'backgroundColor': 'yellow'
           },
           children: "\u041A\u043B\u0443\u0431\u043D\u0430 \u0456\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0456\u044F"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableSwitch, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableSwitch, {
           field: "is_actual",
           className: "form-check-input",
-          id: isEdit ? editedData.id : 0,
-          initialValue: isEdit && editedData.is_actual ? 1 : 0,
-          inlineUpdateUrl: "/api/athlete/update",
+          id: isEdit ? athlete.id : 0,
+          initialValue: isEdit && athlete.is_actual ? 1 : 0,
+          inlineUpdateUrl: updateUrl,
           children: "\u041D\u0430\u043B\u0435\u0436\u0438\u0442\u044C \u0434\u043E \u043D\u0430\u0448\u043E\u0433\u043E \u043A\u043B\u0443\u0431\u0443?"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableSwitch, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableSwitch, {
           field: "show_in_blacks",
           className: "form-check-input",
-          id: isEdit ? editedData.id : 0,
-          initialValue: isEdit && editedData.show_in_blacks ? 1 : 0,
-          inlineUpdateUrl: "/api/athlete/update",
+          id: isEdit ? athlete.id : 0,
+          initialValue: isEdit && athlete.show_in_blacks ? 1 : 0,
+          inlineUpdateUrl: updateUrl,
           children: "\u041F\u043E\u043A\u0430\u0437\u0443\u0432\u0430\u0442\u0438 \u043D\u0430 \u0441\u0442\u043E\u0440\u0456\u043D\u0446\u0456 \u0447\u043E\u0440\u043D\u0438\u0445 \u043F\u043E\u044F\u0441\u0456\u0432 \u043D\u0430\u0448\u043E\u0433\u043E \u043A\u043B\u0443\u0431\u0443 (\u044F\u043A\u0449\u043E \u0434\u043E\u0441\u044F\u0433\u043D\u0443\u0442\u043E \u0432\u0456\u0434\u043F\u043E\u0432\u0456\u0434\u043D\u043E\u0433\u043E \u0441\u0442\u0443\u043F\u0435\u043D\u044E)?"
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         className: "mb-3 col-md-12 d-grid gap-3",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
           style: {
             'backgroundColor': 'yellow'
           },
           children: "\u041F\u0440\u043E \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
             htmlFor: "full",
             className: "form-label",
             children: "\u041F\u043E\u0432\u043D\u0430 \u0456\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0456\u044F \u0434\u043B\u044F \u0441\u0442\u043E\u0440\u0456\u043D\u043A\u0438 \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableTextarea, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableTextarea, {
             field: "full",
             className: "form-control",
-            id: isEdit && editedData.id,
-            initialValue: isEdit ? editedData.full : '',
-            inlineUpdateUrl: "/api/athlete/update",
+            id: isEdit && athlete.id,
+            initialValue: isEdit ? athlete.full : '',
+            inlineUpdateUrl: updateUrl,
             rows: "10"
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableSwitch, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableSwitch, {
           field: "is_coach",
           className: "form-check-input",
-          id: isEdit ? editedData.id : 0,
-          initialValue: isEdit && editedData.is_coach ? 1 : 0,
-          inlineUpdateUrl: "/api/athlete/update",
+          id: isEdit ? athlete.id : 0,
+          initialValue: isEdit && athlete.is_coach ? 1 : 0,
+          inlineUpdateUrl: updateUrl,
           children: "\u0406\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440?"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           className: "mb-2",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
             htmlFor: "brief",
             className: "form-label",
             children: "\u041A\u043E\u0440\u043E\u0442\u043A\u0430 \u0456\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0456\u044F \u0434\u043B\u044F \u0441\u0442\u043E\u0440\u0456\u043D\u043A\u0438 \u0437\u0456 \u0441\u043F\u0438\u0441\u043A\u043E\u043C \u0432\u0441\u0456\u0445 \u0456\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440\u0456\u0432"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableTextarea, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableTextarea, {
             field: "brief",
             className: "form-control",
-            id: isEdit && editedData.id,
-            initialValue: isEdit ? editedData.brief : '',
-            inlineUpdateUrl: "/api/athlete/update"
+            id: isEdit && athlete.id,
+            initialValue: isEdit ? athlete.brief : '',
+            inlineUpdateUrl: updateUrl
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableSwitch, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableSwitch, {
           field: "is_best",
           className: "form-check-input",
-          id: isEdit ? editedData.id : 0,
-          initialValue: isEdit && editedData.is_best ? 1 : 0,
-          inlineUpdateUrl: "/api/athlete/update",
+          id: isEdit ? athlete.id : 0,
+          initialValue: isEdit && athlete.is_best ? 1 : 0,
+          inlineUpdateUrl: updateUrl,
           children: "\u041F\u043E\u043A\u0430\u0437\u0443\u0432\u0430\u0442\u0438 \u0432 \u043A\u0440\u0430\u0449\u0438\u0445 \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430\u0445?"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           className: "mb-2",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
             htmlFor: "briefBest",
             className: "form-label",
             children: "\u041A\u043E\u0440\u043E\u0442\u043A\u0430 \u0456\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0456\u044F \u0434\u043B\u044F \u0441\u0442\u043E\u0440\u0456\u043D\u043A\u0438 \u043D\u0430\u0439\u043A\u0440\u0430\u0449\u0438\u0445 \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0456\u0432"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableTextarea, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableTextarea, {
             field: "briefBest",
             className: "form-control",
-            id: isEdit && editedData.id,
-            initialValue: isEdit ? editedData.briefBest : '',
-            inlineUpdateUrl: "/api/athlete/update"
+            id: isEdit && athlete.id,
+            initialValue: isEdit ? athlete.briefBest : '',
+            inlineUpdateUrl: updateUrl
           })]
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         className: "mb-3 col-md-12",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
           style: {
             'backgroundColor': 'yellow'
           },
           children: "\u0417\u0430\u043B\u0438"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_AthleteEditDojos__WEBPACK_IMPORTED_MODULE_4__["default"], {
-          athleteId: isEdit && editedData.id,
-          dojos: dojos,
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_AthleteEditDojos__WEBPACK_IMPORTED_MODULE_3__["default"], {
+          athleteId: isEdit && athlete.id,
+          dojos: isEdit ? athlete.dojos : null,
           updateUrl: updateUrl
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         className: "mb-3 col-md-12 d-grid gap-3",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
           style: {
             'backgroundColor': 'yellow'
           },
           children: "\u0421\u043E\u0446\u0456\u0430\u043B\u044C\u043D\u0456 \u043C\u0435\u0440\u0435\u0436\u0456"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
             htmlFor: "facebook",
             className: "form-label",
             children: "Facebook"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableText, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableText, {
             field: "facebook",
             className: "form-control",
-            id: isEdit && editedData.id,
-            initialValue: isEdit && editedData.facebook,
-            inlineUpdateUrl: "/api/athlete/update"
+            id: isEdit && athlete.id,
+            initialValue: isEdit && athlete.facebook,
+            inlineUpdateUrl: updateUrl
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
             htmlFor: "instagram",
             className: "form-label",
             children: "Instagram"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableText, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableText, {
             field: "instagram",
             className: "form-control",
-            id: isEdit && editedData.id,
-            initialValue: isEdit && editedData.instagram,
-            inlineUpdateUrl: "/api/athlete/update"
+            id: isEdit && athlete.id,
+            initialValue: isEdit && athlete.instagram,
+            inlineUpdateUrl: updateUrl
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
             htmlFor: "youtube",
             className: "form-label",
             children: "Youtube"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableText, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableText, {
             field: "youtube",
             className: "form-control",
-            id: isEdit && editedData.id,
-            initialValue: isEdit && editedData.youtube,
-            inlineUpdateUrl: "/api/athlete/update"
+            id: isEdit && athlete.id,
+            initialValue: isEdit && athlete.youtube,
+            inlineUpdateUrl: updateUrl
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
             htmlFor: "twitter",
             className: "form-label",
             children: "Twitter"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableText, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableText, {
             field: "twitter",
             className: "form-control",
-            id: isEdit && editedData.id,
-            initialValue: isEdit && editedData.twitter,
-            inlineUpdateUrl: "/api/athlete/update"
+            id: isEdit && athlete.id,
+            initialValue: isEdit && athlete.twitter,
+            inlineUpdateUrl: updateUrl
           })]
         })]
       })]
@@ -9304,41 +9263,18 @@ var EditDojo = function EditDojo(_ref) {
   var _useParams = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useParams)(),
       id = _useParams.id;
 
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
       _useState2 = _slicedToArray(_useState, 2),
-      editedData = _useState2[0],
-      setEditedData = _useState2[1];
-
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-      _useState4 = _slicedToArray(_useState3, 2),
-      isSavingDone = _useState4[0],
-      setIsSavingDone = _useState4[1];
+      dojo = _useState2[0],
+      setDojo = _useState2[1];
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     fetch(getUrl + "/" + id).then(function (response) {
       return response.json();
-    }).then(function (editedData) {
-      setEditedData(editedData);
-    });
+    }).then(setDojo);
   }, []);
-
-  var saveEntity = function saveEntity(e) {
-    var formData = new FormData(document.getElementById('edit-athlete'));
-    fetch(updateUrl + "/" + id, {
-      method: 'POST',
-      body: formData
-    }).then(function (response) {
-      return response;
-    }
-    /*.json()*/
-    ).then(function (response) {
-      setIsSavingDone(true); // synch
-      // setEditedData(editedData);
-    });
-  };
-
   var isEdit = editedData && editedData.id != null;
-  var editHeader = isEdit ? "Відредагувати " + editedData.name : "Ввести нового спортсмена";
+  var editHeader = isEdit ? editedData.name : "Ввести нового спортсмена";
 
   var editEntityHiddenInputId = isEdit && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
     type: "hidden",
@@ -9566,16 +9502,6 @@ var EditDojo = function EditDojo(_ref) {
                 children: "\u0412\u0440\u0443\u0447\u043D\u0443 \u0432\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D\u0456 \u043A\u043E\u043E\u0440\u0434\u0438\u043D\u0430\u0442\u0438?"
               }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), "\u0432 \u0446\u044C\u043E\u043C\u0443 \u0432\u0438\u043F\u0430\u0434\u043A\u0443 \u0432\u043E\u043D\u0438 \u043D\u0435 \u0431\u0443\u0434\u0443\u0442\u044C", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), "\u043F\u0435\u0440\u0435\u0440\u0430\u0445\u043E\u0432\u0443\u0432\u0430\u0442\u0438\u0441\u044F \u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u043D\u043E"]
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("tr", {
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
-              colSpan: "2",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-                type: "button",
-                name: "save",
-                value: "\u0437\u0431\u0435\u0440\u0435\u0433\u0442\u0438",
-                onClick: saveEntity
-              })
-            })
           })]
         })
       })]
