@@ -2,24 +2,44 @@ import React, {useRef, useMemo} from "react";
 
 const STATUS_DURATION = 2000;
 
-export default function useStatus({ id, field, initialValue, save, setValue, getNewValue }) {
-    const [previousValue, setPreviousValue] = React.useState(initialValue);
+/**
+ * data: { value, ...otherFieldsThatWillBeSentWithRequest }
+ * 
+ * When used from Editable components data = { id, field, value }
+ */
+export default function useStatus({ data, save, setValue, getNewValue }) {
+    let isValue = typeof data.value != 'undefined';
+    let isNewValue = typeof getNewValue == 'function';
+    let isSetValue = typeof setValue == 'function';
+
+    const [previousValue, setPreviousValue] = React.useState(isValue ? data.value : null);
     const [successfullyUpdated, setSuccessfullyUpdated] = React.useState(false);
     const [updatedWithFailure, setUpdatedWithFailure] = React.useState(false);
 
     React.useEffect(() => {
-      setPreviousValue(initialValue)
-    }, [initialValue])
+      setPreviousValue(isValue ? data.value : null)
+    }, [isValue ? data.value : null]);
 
     const onChange = // useRef(
       e => {
-        let newValue = getNewValue(e);
+        let newValue = isNewValue ? getNewValue(e) : null; 
 
-        if (previousValue != newValue) {
-          setValue(newValue);
+        // console.log(newValue);
+
+        // console.log(isNewValue, previousValue, newValue, isSetValue);
+
+        if (!isNewValue || isNewValue && previousValue != newValue) {
+          if (isSetValue) {
+            // console.log('setting new val');
+            setValue(newValue);
+          }
+
+          if (isNewValue) {
+            data.value = newValue;
+          }
 
           save({
-            data: {id, field, value: newValue}, 
+            data,
             onSuccess: () => {
               setSuccessfullyUpdated(true);
               setPreviousValue(newValue);
@@ -30,7 +50,10 @@ export default function useStatus({ id, field, initialValue, save, setValue, get
             },
             onFailure: () => {
               setUpdatedWithFailure(true);
-              setValue(previousValue);
+
+              if (isSetValue) {
+                setValue(previousValue);
+              }
 
               setTimeout(() => {
                 setUpdatedWithFailure(false);

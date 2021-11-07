@@ -6305,7 +6305,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _schedule_Schedule__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./schedule/Schedule */ "./resources/js/components/controls/schedule/Schedule.js");
 /* harmony import */ var _AddEntitySelector__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AddEntitySelector */ "./resources/js/components/controls/AddEntitySelector.js");
 /* harmony import */ var _utils_useSave__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../utils/useSave */ "./resources/js/components/utils/useSave.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _utils_useEditable__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./../utils/useEditable */ "./resources/js/components/utils/useEditable.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -6334,6 +6335,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var AthleteEditDojos = function AthleteEditDojos(_ref) {
   var athleteId = _ref.athleteId,
       dojos = _ref.dojos,
@@ -6347,16 +6349,37 @@ var AthleteEditDojos = function AthleteEditDojos(_ref) {
   var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
       _useState4 = _slicedToArray(_useState3, 2),
       allDojos = _useState4[0],
-      setAllDojos = _useState4[1]; // TODO: refactor useSave to be suitable one for both actions.
+      setAllDojos = _useState4[1];
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+      _useState6 = _slicedToArray(_useState5, 2),
+      addedDojoId = _useState6[0],
+      setAddedDojoId = _useState6[1]; // TODO: refactor useSave to be suitable one for both actions.
 
 
-  var _useSave = (0,_utils_useSave__WEBPACK_IMPORTED_MODULE_3__["default"])('/api/athlete/update/schedule'),
+  var _useEditable = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_4__["default"])({
+    inlineUpdateUrl: '/api/athlete/update/schedule',
+    data: {
+      athleteId: athleteId,
+      dojoId: addedDojoId,
+      schedule: ''
+    }
+  }),
+      _useEditable2 = _slicedToArray(_useEditable, 3),
+      AddDojoEditable = _useEditable2[0],
+      value = _useEditable2[1],
+      saveAddedDojo = _useEditable2[2];
+
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (addedDojoId > 0) {
+      // console.log('useEffect', 'saveAddedDojo');
+      saveAddedDojo();
+    }
+  }, [addedDojoId]); // let [saveRequest] = useSave('/api/athlete/update/schedule');
+
+  var _useSave = (0,_utils_useSave__WEBPACK_IMPORTED_MODULE_3__["default"])('/api/athlete/dojo/delete'),
       _useSave2 = _slicedToArray(_useSave, 1),
-      saveRequest = _useSave2[0];
-
-  var _useSave3 = (0,_utils_useSave__WEBPACK_IMPORTED_MODULE_3__["default"])('/api/athlete/dojo/delete'),
-      _useSave4 = _slicedToArray(_useSave3, 1),
-      deleteRequest = _useSave4[0];
+      deleteRequest = _useSave2[0];
 
   function onAllDojosLoaded(allLoadedDojos) {
     setAllDojos(allLoadedDojos);
@@ -6374,13 +6397,7 @@ var AthleteEditDojos = function AthleteEditDojos(_ref) {
       var newDojosModel = _toConsumableArray(dojosModel).concat(selectedDojo);
 
       setDojosModel(newDojosModel);
-      saveRequest({
-        data: {
-          athleteId: athleteId,
-          dojoId: dojoId,
-          schedule: ''
-        }
-      });
+      setAddedDojoId(dojoId); // saveAddedDojo();
     }
   };
 
@@ -6414,31 +6431,31 @@ var AthleteEditDojos = function AthleteEditDojos(_ref) {
 
       var dojoUrl = "/admin/dojo/edit/" + dojo.id;
       var scheduleUrl = updateUrl + '/schedule';
-      dojosArray.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("li", {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      dojosArray.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("li", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
           className: "input-group",
           role: "group",
           "aria-label": "Dojo actions",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("a", {
             className: "input-group-text alert-success",
             href: dojoUrl,
             children: dojo.name
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("a", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("a", {
             className: "btn btn-outline-success",
             href: dojoUrl,
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
               className: "fas fa-edit"
             }), " \u0420\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u0442\u0438 \u0437\u0430\u043B"]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("a", {
             className: "btn btn-outline-success",
             onClick: function onClick() {
               return deleteDojo(dojo.id);
             },
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
               className: "far fa-trash-alt"
             })
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_schedule_Schedule__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_schedule_Schedule__WEBPACK_IMPORTED_MODULE_1__["default"], {
           athleteId: athleteId,
           dojoId: dojo.id,
           markup: (_dojo$pivot = dojo.pivot) === null || _dojo$pivot === void 0 ? void 0 : _dojo$pivot.schedule,
@@ -6447,10 +6464,10 @@ var AthleteEditDojos = function AthleteEditDojos(_ref) {
         })]
       }, index));
     });
-    dojosSnippet = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("ol", {
+    dojosSnippet = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("ol", {
         children: dojosArray
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_AddEntitySelector__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(AddDojoEditable, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_AddEntitySelector__WEBPACK_IMPORTED_MODULE_2__["default"], {
         url: "/api/dojo/list",
         onSelect: addDojo,
         onAllLoaded: onAllDojosLoaded
@@ -6462,8 +6479,8 @@ var AthleteEditDojos = function AthleteEditDojos(_ref) {
   } // useEffect(showDojos, [dojosModel]);
 
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_AddEntitySelector__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(AddDojoEditable, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_AddEntitySelector__WEBPACK_IMPORTED_MODULE_2__["default"], {
       url: "/api/dojo/list",
       onSelect: addDojo,
       onAllLoaded: onAllDojosLoaded
@@ -7204,7 +7221,11 @@ var EditableDegree = function EditableDegree(_ref) {
   className = typeof className == 'undefined' ? '' : className;
 
   var _useEditable = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_5__["default"])(_objectSpread(_objectSpread({}, props), {}, {
-    initialValue: initialValue,
+    data: {
+      id: props.id,
+      field: props.field,
+      value: initialValue
+    },
     getNewValue: function getNewValue(e) {
       return e.target.value;
     }
@@ -7234,7 +7255,11 @@ var EditablePostCategory = function EditablePostCategory(_ref2) {
   className = typeof className == 'undefined' ? '' : className;
 
   var _useEditable3 = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_5__["default"])(_objectSpread(_objectSpread({}, props), {}, {
-    initialValue: initialValue,
+    data: {
+      id: props.id,
+      field: props.field,
+      value: initialValue
+    },
     getNewValue: function getNewValue(e) {
       return e.target.value;
     }
@@ -7263,7 +7288,11 @@ var EditableDate = function EditableDate(_ref3) {
   className = typeof className == 'undefined' ? '' : className;
 
   var _useEditable5 = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_5__["default"])(_objectSpread(_objectSpread({}, props), {}, {
-    initialValue: initialValue,
+    data: {
+      id: props.id,
+      field: props.field,
+      value: initialValue
+    },
     getNewValue: function getNewValue(e) {
       return e.target.value;
     }
@@ -7298,7 +7327,11 @@ var EditableSwitch = function EditableSwitch(_ref4) {
   children = typeof children == 'undefined' ? null : children;
 
   var _useEditable7 = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_5__["default"])(_objectSpread(_objectSpread({}, props), {}, {
-    initialValue: initialValue,
+    data: {
+      id: props.id,
+      field: props.field,
+      value: initialValue
+    },
     getNewValue: function getNewValue(e) {
       return e.target.checked ? 1 : 0;
     } // 1 - value
@@ -7344,7 +7377,11 @@ var EditableText = function EditableText(_ref5) {
   disabled = typeof disabled == 'undefined' ? false : disabled;
 
   var _useEditable9 = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_5__["default"])(_objectSpread(_objectSpread({}, props), {}, {
-    initialValue: initialValue,
+    data: {
+      id: props.id,
+      field: props.field,
+      value: initialValue
+    },
     getNewValue: function getNewValue(e) {
       return value;
     }
@@ -7386,7 +7423,11 @@ var EditableTextarea = function EditableTextarea(_ref6) {
   rows = typeof rows == 'undefined' ? '5' : rows;
 
   var _useEditable11 = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_5__["default"])(_objectSpread(_objectSpread({}, props), {}, {
-    initialValue: initialValue,
+    data: {
+      id: props.id,
+      field: props.field,
+      value: initialValue
+    },
     getNewValue: function getNewValue(e) {
       return value;
     }
@@ -7421,9 +7462,13 @@ function Table(_ref7) {
   var _React$useState = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
       _React$useState2 = _slicedToArray(_React$useState, 2),
       skipPageReset = _React$useState2[0],
-      setSkipPageReset = _React$useState2[1];
+      setSkipPageReset = _React$useState2[1]; // data = { id, field, value }
 
-  var synchronizeDataOnUpdateSuccess = function synchronizeDataOnUpdateSuccess(rowIndex, columnId, value) {
+
+  var synchronizeDataOnUpdateSuccess = function synchronizeDataOnUpdateSuccess(data) {
+    // rowIndex = data.id - 1, 
+    // columnId = data.field
+    // value = data.value
     setSkipPageReset(true); // TODO: via context access parent state data var
 
     /*
@@ -9926,20 +9971,20 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+ // data: { id, field, value }
 
 
 
 
 function useEditable(_ref) {
-  var id = _ref.id,
-      field = _ref.field,
-      initialValue = _ref.initialValue,
+  var data = _ref.data,
       getNewValue = _ref.getNewValue,
       inlineUpdateUrl = _ref.inlineUpdateUrl,
       onBeforeSuccess = _ref.onBeforeSuccess;
   onBeforeSuccess = typeof onBeforeSuccess == 'function' ? onBeforeSuccess : function () {};
+  var noValue = typeof data.value == 'undefined';
 
-  var _React$useState = react__WEBPACK_IMPORTED_MODULE_0__.useState(initialValue),
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_0__.useState(noValue ? null : data.value),
       _React$useState2 = _slicedToArray(_React$useState, 2),
       value = _React$useState2[0],
       setValue = _React$useState2[1];
@@ -9949,9 +9994,7 @@ function useEditable(_ref) {
       save = _useSave2[0];
 
   var _useStatus = (0,_utils_useStatus__WEBPACK_IMPORTED_MODULE_2__["default"])({
-    id: id,
-    field: field,
-    initialValue: initialValue,
+    data: data,
     save: save,
     setValue: setValue,
     getNewValue: getNewValue
@@ -9962,8 +10005,8 @@ function useEditable(_ref) {
 
 
   react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
-    setValue(initialValue);
-  }, [initialValue]);
+    setValue(data.value);
+  }, [noValue ? null : data.value]);
 
   var Editable = function Editable(_ref2) {
     var children = _ref2.children;
@@ -10012,7 +10055,7 @@ function useSave(inlineUpdateUrl, onBeforeSuccess) {
       } else {
         // Success
         if (typeof onBeforeSuccess == 'function') {
-          onBeforeSuccess(id - 1, field, value);
+          onBeforeSuccess(data);
         } // synchronizeDataOnUpdateSuccess(index, id, value);
 
 
@@ -10025,7 +10068,7 @@ function useSave(inlineUpdateUrl, onBeforeSuccess) {
       }
     })["catch"](function (error) {
       if (typeof onFailure == 'function') {
-        onFailure();
+        onFailure(error);
       }
     });
   };
@@ -10065,15 +10108,22 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var STATUS_DURATION = 2000;
+/**
+ * data: { value, ...otherFieldsThatWillBeSentWithRequest }
+ * 
+ * When used from Editable components data = { id, field, value }
+ */
+
 function useStatus(_ref) {
-  var id = _ref.id,
-      field = _ref.field,
-      initialValue = _ref.initialValue,
+  var data = _ref.data,
       save = _ref.save,
       setValue = _ref.setValue,
       getNewValue = _ref.getNewValue;
+  var isValue = typeof data.value != 'undefined';
+  var isNewValue = typeof getNewValue == 'function';
+  var isSetValue = typeof setValue == 'function';
 
-  var _React$useState = react__WEBPACK_IMPORTED_MODULE_0__.useState(initialValue),
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_0__.useState(isValue ? data.value : null),
       _React$useState2 = _slicedToArray(_React$useState, 2),
       previousValue = _React$useState2[0],
       setPreviousValue = _React$useState2[1];
@@ -10089,21 +10139,26 @@ function useStatus(_ref) {
       setUpdatedWithFailure = _React$useState6[1];
 
   react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
-    setPreviousValue(initialValue);
-  }, [initialValue]);
+    setPreviousValue(isValue ? data.value : null);
+  }, [isValue ? data.value : null]);
 
   var onChange = // useRef(
   function onChange(e) {
-    var newValue = getNewValue(e);
+    var newValue = isNewValue ? getNewValue(e) : null; // console.log(newValue);
+    // console.log(isNewValue, previousValue, newValue, isSetValue);
 
-    if (previousValue != newValue) {
-      setValue(newValue);
+    if (!isNewValue || isNewValue && previousValue != newValue) {
+      if (isSetValue) {
+        // console.log('setting new val');
+        setValue(newValue);
+      }
+
+      if (isNewValue) {
+        data.value = newValue;
+      }
+
       save({
-        data: {
-          id: id,
-          field: field,
-          value: newValue
-        },
+        data: data,
         onSuccess: function onSuccess() {
           setSuccessfullyUpdated(true);
           setPreviousValue(newValue);
@@ -10113,7 +10168,11 @@ function useStatus(_ref) {
         },
         onFailure: function onFailure() {
           setUpdatedWithFailure(true);
-          setValue(previousValue);
+
+          if (isSetValue) {
+            setValue(previousValue);
+          }
+
           setTimeout(function () {
             setUpdatedWithFailure(false);
           }, STATUS_DURATION);

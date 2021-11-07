@@ -9,8 +9,9 @@ export const EditableDegree = ({ initialValue, className, ...props }) => {
   initialValue = initialValue != null ? initialValue : '';
   className = typeof className == 'undefined' ? '' : className;
 
-  const [Editable, value, onChange] = useEditable({ ...props,
-    initialValue,
+  const [Editable, value, onChange] = useEditable({ 
+    ...props,
+    data: {id: props.id, field: props.field, value: initialValue},
     getNewValue: (e) => e.target.value
    });
 
@@ -28,8 +29,9 @@ export const EditablePostCategory = ( { initialValue, className, ...props } ) =>
   initialValue = initialValue != null ? initialValue : '';
   className = typeof className == 'undefined' ? '' : className;
 
-  const [Editable, value, onChange] = useEditable({ ...props,
-    initialValue,
+  const [Editable, value, onChange] = useEditable({ 
+    ...props,
+    data: {id: props.id, field: props.field, value: initialValue},
     getNewValue: (e) => e.target.value
   });
 
@@ -45,8 +47,9 @@ export const EditableDate = ({ initialValue, className, ...props }) => {
   initialValue = initialValue != null ? initialValue : '';
   className = typeof className == 'undefined' ? '' : className;
 
-  const [Editable, value, onChange] = useEditable({ ...props,
-    initialValue,
+  const [Editable, value, onChange] = useEditable({ 
+    ...props,
+    data: {id: props.id, field: props.field, value: initialValue},
     getNewValue: (e) => e.target.value
   });
   // value={value}???
@@ -70,7 +73,7 @@ export const EditableSwitch = ({ initialValue, className, children, ...props }) 
 
     const [Editable, value, onChange] = useEditable({ 
         ...props, 
-        initialValue,
+        data: {id: props.id, field: props.field, value: initialValue},
         getNewValue : (e) => e.target.checked ? 1 : 0 // 1 - value
       });
 
@@ -98,10 +101,11 @@ export const EditableText = ({ initialValue, type, className, disabled, ...props
     type = typeof type == 'undefined' ? 'text' : type;
     disabled = typeof disabled == 'undefined' ? false : disabled;
 
-  const [Editable, value, onChange, setValue] = useEditable( { ...props, 
-    initialValue,
-    getNewValue : (e) => value
-  });
+    const [Editable, value, onChange, setValue] = useEditable( { 
+      ...props, 
+      data: {id: props.id, field: props.field, value: initialValue},
+      getNewValue : (e) => value
+    });
 
   const onTypingChange = e => setValue(e.target.value)
   
@@ -124,10 +128,11 @@ export const EditableTextarea = ({ initialValue, type, className, rows, ...props
   className = typeof className == 'undefined' ? '' : className;
   rows = typeof rows == 'undefined' ? '5' : rows;
 
-const [Editable, value, onChange, setValue] = useEditable( { ...props, 
-  initialValue,
-  getNewValue : (e) => value
-});
+  const [Editable, value, onChange, setValue] = useEditable( { 
+    ...props, 
+    data: {id: props.id, field: props.field, value: initialValue},
+    getNewValue : (e) => value
+  });
 
 const onTypingChange = e => setValue(e.target.value)
 
@@ -146,7 +151,11 @@ return <>
 export default function Table({ columns, data, inlineUpdateUrl }) {
   const [skipPageReset, setSkipPageReset] = React.useState(false);
 
-  const synchronizeDataOnUpdateSuccess = (rowIndex, columnId, value) => {
+  // data = { id, field, value }
+  const synchronizeDataOnUpdateSuccess = (data) => {
+    // rowIndex = data.id - 1, 
+    // columnId = data.field
+    // value = data.value
     setSkipPageReset(true);
 
     // TODO: via context access parent state data var

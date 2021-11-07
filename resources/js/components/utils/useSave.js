@@ -18,7 +18,7 @@ export default function useSave(inlineUpdateUrl, onBeforeSuccess) {
           } else {
             // Success
             if (typeof onBeforeSuccess == 'function') {
-              onBeforeSuccess(id - 1, field, value);
+              onBeforeSuccess(data);
             }
 
             // synchronizeDataOnUpdateSuccess(index, id, value);
@@ -33,7 +33,7 @@ export default function useSave(inlineUpdateUrl, onBeforeSuccess) {
           })
           .catch((error) => {
             if (typeof onFailure == 'function') {
-              onFailure()
+              onFailure(error);
             }
           });
       }

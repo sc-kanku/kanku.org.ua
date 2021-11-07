@@ -3,12 +3,28 @@ import React, {useState, useEffect, useContext} from 'react';
 import Schedule from './schedule/Schedule'
 import AddEntitySelector from './AddEntitySelector'
 import useSave from './../utils/useSave';
+import useEditable from './../utils/useEditable';
 
 const AthleteEditDojos = function({athleteId, dojos, updateUrl}) {
     const [dojosModel, setDojosModel] = useState(dojos);
     const [allDojos, setAllDojos] = useState([]);
+    const [addedDojoId, setAddedDojoId] = useState(null);
+
     // TODO: refactor useSave to be suitable one for both actions.
-    let [saveRequest] = useSave('/api/athlete/update/schedule');
+    const [AddDojoEditable, value, saveAddedDojo] = useEditable( { 
+        inlineUpdateUrl : '/api/athlete/update/schedule', 
+        data: {athleteId, dojoId: addedDojoId, schedule : ''}
+      });
+
+    useEffect(() => {
+        if (addedDojoId > 0) {
+            // console.log('useEffect', 'saveAddedDojo');
+
+            saveAddedDojo();
+        }
+    }, [addedDojoId]);
+
+    // let [saveRequest] = useSave('/api/athlete/update/schedule');
     let [deleteRequest] = useSave('/api/athlete/dojo/delete');
 
     function onAllDojosLoaded (allLoadedDojos) {
@@ -24,10 +40,9 @@ const AthleteEditDojos = function({athleteId, dojos, updateUrl}) {
             let newDojosModel = [...dojosModel].concat(selectedDojo);
 
             setDojosModel(newDojosModel);
+            setAddedDojoId(dojoId);
 
-            saveRequest({data : { 
-                    athleteId, dojoId, schedule : '' 
-            }});
+            // saveAddedDojo();
         }
     }
 
@@ -86,6 +101,7 @@ const AthleteEditDojos = function({athleteId, dojos, updateUrl}) {
 
         dojosSnippet = <>
             <ol>{dojosArray}</ol>
+            <AddDojoEditable />
             <AddEntitySelector url="/api/dojo/list" onSelect={addDojo} onAllLoaded={onAllDojosLoaded} />
         </>
     } else {
@@ -100,6 +116,7 @@ const AthleteEditDojos = function({athleteId, dojos, updateUrl}) {
 
     return (
         <>
+            <AddDojoEditable />
             <AddEntitySelector url="/api/dojo/list" onSelect={addDojo} onAllLoaded={onAllDojosLoaded} />
             {dojosSnippet}
         </>

@@ -113,9 +113,9 @@ class AthleteController extends Controller
                 ->dojos()
                 ->syncWithoutDetaching([$dojoId => ['schedule' => $schedule, 'schedule_notes' => '']]);
 
-            $queryStatus = "{Successful: " . $result . "}";
+            $queryStatus = "{Successful: " . json_encode($result) . "}";
         } catch (Exception $e) {
-            $queryStatus = "{Not success: " . $e . "}";
+            $queryStatus = "{Not success: " . json_encode($e) . "}";
         }
 
         return $queryStatus;
