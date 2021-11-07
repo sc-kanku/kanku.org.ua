@@ -6354,7 +6354,13 @@ var AthleteEditDojos = function AthleteEditDojos(_ref) {
   var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
       _useState6 = _slicedToArray(_useState5, 2),
       addedDojoId = _useState6[0],
-      setAddedDojoId = _useState6[1]; // TODO: refactor useSave to be suitable one for both actions.
+      setAddedDojoId = _useState6[1];
+
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+      _useState8 = _slicedToArray(_useState7, 2),
+      removedDojoId = _useState8[0],
+      setRemovedDojoId = _useState8[1]; // TODO: Rename - attachDojo / dettachDojo
+  // TODO: refactor useEditable to be suitable one for both actions.
 
 
   var _useEditable = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_4__["default"])({
@@ -6363,23 +6369,52 @@ var AthleteEditDojos = function AthleteEditDojos(_ref) {
       athleteId: athleteId,
       dojoId: addedDojoId,
       schedule: ''
+    },
+    onBeforeSuccess: function onBeforeSuccess(data) {
+      var dojoId = addedDojoId;
+      var selectedDojo = allDojos.filter(function (dojo) {
+        return dojo.id == dojoId;
+      });
+
+      var newDojosModel = _toConsumableArray(dojosModel).concat(selectedDojo);
+
+      setDojosModel(newDojosModel);
     }
   }),
       _useEditable2 = _slicedToArray(_useEditable, 3),
       AddDojoEditable = _useEditable2[0],
-      value = _useEditable2[1],
+      value_unused = _useEditable2[1],
       saveAddedDojo = _useEditable2[2];
+
+  var _useEditable3 = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_4__["default"])({
+    inlineUpdateUrl: '/api/athlete/dojo/delete',
+    data: {
+      athleteId: athleteId,
+      dojoId: removedDojoId
+    },
+    onBeforeSuccess: function onBeforeSuccess(data) {
+      var dojoId = removedDojoId;
+      var dojos = dojosModel.filter(function (dojo) {
+        return dojo.id != dojoId;
+      });
+      setDojosModel(dojos);
+    }
+  }),
+      _useEditable4 = _slicedToArray(_useEditable3, 3),
+      RemoveDojoEditable = _useEditable4[0],
+      value_unused_refactior_this = _useEditable4[1],
+      removeDojo = _useEditable4[2];
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (addedDojoId > 0) {
-      // console.log('useEffect', 'saveAddedDojo');
       saveAddedDojo();
     }
-  }, [addedDojoId]); // let [saveRequest] = useSave('/api/athlete/update/schedule');
-
-  var _useSave = (0,_utils_useSave__WEBPACK_IMPORTED_MODULE_3__["default"])('/api/athlete/dojo/delete'),
-      _useSave2 = _slicedToArray(_useSave, 1),
-      deleteRequest = _useSave2[0];
+  }, [addedDojoId]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (removedDojoId !== null) {
+      removeDojo();
+    }
+  }, [removedDojoId]);
 
   function onAllDojosLoaded(allLoadedDojos) {
     setAllDojos(allLoadedDojos);
@@ -6390,28 +6425,12 @@ var AthleteEditDojos = function AthleteEditDojos(_ref) {
     } else if (dojoId == "0") {// Новий зал
       // TODO: 
     } else {
-      var selectedDojo = allDojos.filter(function (dojo) {
-        return dojo.id == dojoId;
-      });
-
-      var newDojosModel = _toConsumableArray(dojosModel).concat(selectedDojo);
-
-      setDojosModel(newDojosModel);
-      setAddedDojoId(dojoId); // saveAddedDojo();
+      setAddedDojoId(dojoId);
     }
   };
 
   var deleteDojo = function deleteDojo(dojoId) {
-    var dojos = dojosModel.filter(function (dojo) {
-      return dojo.id != dojoId;
-    });
-    setDojosModel(dojos);
-    deleteRequest({
-      data: {
-        athleteId: athleteId,
-        dojoId: dojoId
-      }
-    });
+    setRemovedDojoId(dojoId);
   }; // using effect hooks and deps to execute logic as componentWillMount
 
 
@@ -6467,7 +6486,7 @@ var AthleteEditDojos = function AthleteEditDojos(_ref) {
     dojosSnippet = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("ol", {
         children: dojosArray
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(AddDojoEditable, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_AddEntitySelector__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(AddDojoEditable, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(RemoveDojoEditable, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_AddEntitySelector__WEBPACK_IMPORTED_MODULE_2__["default"], {
         url: "/api/dojo/list",
         onSelect: addDojo,
         onAllLoaded: onAllDojosLoaded
@@ -6480,7 +6499,7 @@ var AthleteEditDojos = function AthleteEditDojos(_ref) {
 
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(AddDojoEditable, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_AddEntitySelector__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(AddDojoEditable, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(RemoveDojoEditable, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_AddEntitySelector__WEBPACK_IMPORTED_MODULE_2__["default"], {
       url: "/api/dojo/list",
       onSelect: addDojo,
       onAllLoaded: onAllDojosLoaded
@@ -6871,9 +6890,9 @@ function EditableTable(_ref) {
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("ol", {
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
                       className: "text-danger",
-                      children: "\u0420\u043E\u0437\u0434\u0456\u043B '\u0437\u0430\u043B\u0438' \u0437\u0431\u0435\u0440\u0456\u0433\u0430\u0454\u0442\u044C\u0441\u044F, \u0430\u043B\u0435 \u0449\u0435 \u043F\u043E\u043A\u0438 \u0431\u0435\u0437 \u0456\u043D\u0434\u0438\u043A\u0430\u0442\u043E\u0440\u0456\u0432 \u0437\u0431\u0435\u0440\u0435\u0436\u0435\u043D\u043D\u044F"
+                      children: "\u0420\u043E\u0437\u0434\u0456\u043B '\u0437\u0430\u043B\u0438' \u0432\u0436\u0435 \u0437\u0431\u0435\u0440\u0456\u0433\u0430\u0454\u0442\u044C\u0441\u044F"
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
-                      children: "\u0412\u0456\u0434\u0440\u0435\u0434\u0430\u0433\u043E\u0432\u0430\u043D\u0456 \u0434\u0430\u043D\u0456 \u0437\u0431\u0435\u0440\u0456\u0433\u0430\u044E\u0442\u044C\u0441\u044F \u043D\u0430 \u0441\u0435\u0440\u0432\u0435\u0440 \u043F\u043E \u0432\u0442\u0440\u0430\u0442\u0456 \u0444\u043E\u043A\u0443\u0441\u0443 (\u0434\u043B\u044F \u0442\u0435\u043A\u0441\u0442\u043E\u0432\u0438\u0445 \u043F\u043E\u043B\u0456\u0432) \u0447\u0438 \u0437\u043C\u0456\u043D\u0456 \u0437\u043D\u0430\u0447\u0435\u043D\u043D\u044F (\u0434\u043B\u044F \u0441\u0435\u043B\u0435\u043A\u0442\u0456\u0432 \u0456 \u0447\u0435\u043A\u0431\u043E\u043A\u0441\u0456\u0432)"
+                      children: "\u0412\u0456\u0434\u0440\u0435\u0434\u0430\u0433\u043E\u0432\u0430\u043D\u0456 \u0434\u0430\u043D\u0456 \u0437\u0431\u0435\u0440\u0456\u0433\u0430\u044E\u0442\u044C\u0441\u044F \u043D\u0430 \u0441\u0435\u0440\u0432\u0435\u0440 \u043F\u043E \u0432\u0442\u0440\u0430\u0442\u0456 \u0444\u043E\u043A\u0443\u0441\u0443 (\u043A\u0440\u0456\u043C \u0440\u043E\u0437\u043A\u043B\u0430\u0434\u0443) (\u0434\u043B\u044F \u0442\u0435\u043A\u0441\u0442\u043E\u0432\u0438\u0445 \u043F\u043E\u043B\u0456\u0432) \u0447\u0438 \u0437\u043C\u0456\u043D\u0456 \u0437\u043D\u0430\u0447\u0435\u043D\u043D\u044F (\u0434\u043B\u044F \u0441\u0435\u043B\u0435\u043A\u0442\u0456\u0432 \u0456 \u0447\u0435\u043A\u0431\u043E\u043A\u0441\u0456\u0432)"
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
                       children: "\u0456 \u044F\u043A\u0449\u043E \u0432\u0441\u0435 \u0434\u043E\u0431\u0440\u0435 \u0437\u0431\u0435\u0440\u0435\u0433\u043B\u043E\u0441\u044C \u0442\u043E \u0437'\u044F\u0432\u043B\u044F\u0454\u0442\u044C\u0441\u044F \u0437\u0435\u043B\u0435\u043D\u0430 \u043F\u0456\u043C\u043F\u043E\u0447\u043A\u0430 \u0441\u043F\u0440\u0430\u0432\u0430 \u043F\u043E\u043B\u044F, \u044F\u043A\u0435 \u0440\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u043B\u043E\u0441\u044C (\u044F\u043A\u0449\u043E \u0449\u043E\u0441\u044C \u043D\u0435 \u0437\u0431\u0435\u0440\u0435\u0433\u043B\u043E\u0441\u044C, \u0442\u043E \u043F\u043E\u0432\u0456\u0434\u043E\u043C\u043B\u044F\u0454 \u043F\u0440\u043E \u0446\u0435 \u0430\u043D\u0430\u043B\u043E\u0433\u0456\u0447\u043D\u0430 \u0447\u0435\u0440\u0432\u043E\u043D\u0430 \u043F\u0456\u043C\u043F\u043E\u0447\u043A\u0430)"
                     })]

@@ -9,23 +9,45 @@ const AthleteEditDojos = function({athleteId, dojos, updateUrl}) {
     const [dojosModel, setDojosModel] = useState(dojos);
     const [allDojos, setAllDojos] = useState([]);
     const [addedDojoId, setAddedDojoId] = useState(null);
+    const [removedDojoId, setRemovedDojoId] = useState(null);
 
-    // TODO: refactor useSave to be suitable one for both actions.
-    const [AddDojoEditable, value, saveAddedDojo] = useEditable( { 
+    // TODO: Rename - attachDojo / dettachDojo
+    // TODO: refactor useEditable to be suitable one for both actions.
+    const [AddDojoEditable, value_unused, saveAddedDojo] = useEditable( { 
         inlineUpdateUrl : '/api/athlete/update/schedule', 
-        data: {athleteId, dojoId: addedDojoId, schedule : ''}
-      });
+        data: {athleteId, dojoId: addedDojoId, schedule : ''},
+        onBeforeSuccess: (data) => {
+            let dojoId = addedDojoId;
+            let selectedDojo = allDojos.filter(dojo => dojo.id == dojoId);
+            let newDojosModel = [...dojosModel].concat(selectedDojo);
+
+            setDojosModel(newDojosModel);
+        }
+    });
+
+    const [RemoveDojoEditable, value_unused_refactior_this, removeDojo] = useEditable( { 
+        inlineUpdateUrl : '/api/athlete/dojo/delete', 
+        data: {athleteId, dojoId: removedDojoId},
+        onBeforeSuccess: (data) => {
+            let dojoId = removedDojoId;
+
+            let dojos = dojosModel.filter(dojo => dojo.id != dojoId);
+
+            setDojosModel(dojos);
+        }
+    });
 
     useEffect(() => {
         if (addedDojoId > 0) {
-            // console.log('useEffect', 'saveAddedDojo');
-
             saveAddedDojo();
         }
     }, [addedDojoId]);
 
-    // let [saveRequest] = useSave('/api/athlete/update/schedule');
-    let [deleteRequest] = useSave('/api/athlete/dojo/delete');
+    useEffect(() => {
+        if (removedDojoId !== null) {
+            removeDojo();
+        }
+    }, [removedDojoId]);
 
     function onAllDojosLoaded (allLoadedDojos) {
         setAllDojos(allLoadedDojos);
@@ -36,24 +58,12 @@ const AthleteEditDojos = function({athleteId, dojos, updateUrl}) {
         } else if (dojoId == "0") { // Новий зал
             // TODO: 
         } else {
-            let selectedDojo = allDojos.filter(dojo => dojo.id == dojoId);
-            let newDojosModel = [...dojosModel].concat(selectedDojo);
-
-            setDojosModel(newDojosModel);
             setAddedDojoId(dojoId);
-
-            // saveAddedDojo();
         }
     }
 
     const deleteDojo = (dojoId) => {
-        let dojos = dojosModel.filter(dojo => dojo.id != dojoId);
-
-        setDojosModel(dojos);
-
-        deleteRequest({data: {
-            athleteId, dojoId
-        }})
+        setRemovedDojoId(dojoId);
     }
 
     // using effect hooks and deps to execute logic as componentWillMount
@@ -88,6 +98,7 @@ const AthleteEditDojos = function({athleteId, dojos, updateUrl}) {
                         </a>
                     </div>
                     
+                    
                     <Schedule 
                         athleteId={athleteId}
                         dojoId={dojo.id}
@@ -102,6 +113,7 @@ const AthleteEditDojos = function({athleteId, dojos, updateUrl}) {
         dojosSnippet = <>
             <ol>{dojosArray}</ol>
             <AddDojoEditable />
+            <RemoveDojoEditable />
             <AddEntitySelector url="/api/dojo/list" onSelect={addDojo} onAllLoaded={onAllDojosLoaded} />
         </>
     } else {
@@ -117,6 +129,7 @@ const AthleteEditDojos = function({athleteId, dojos, updateUrl}) {
     return (
         <>
             <AddDojoEditable />
+            <RemoveDojoEditable />
             <AddEntitySelector url="/api/dojo/list" onSelect={addDojo} onAllLoaded={onAllDojosLoaded} />
             {dojosSnippet}
         </>
