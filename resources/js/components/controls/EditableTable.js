@@ -148,7 +148,6 @@ export default function EditableTable ({
                                 <h4 className="alert-heading">Крім</h4>
                                 <ol>
                                     <li>Випадайки для Львів / Область і Район</li>
-                                    <li className="text-danger">Щось пропадають зміни після оновлення сторінки??!!</li>
                                     <span className="text-secondary">
                                         <li>Валідація</li>
                                         <li>Cинхронізація даних таблички зі змінами, які були внесені на сторінці редагування залу</li>

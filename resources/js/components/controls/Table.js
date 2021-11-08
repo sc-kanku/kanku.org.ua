@@ -184,7 +184,7 @@ export default function Table({ columns, data, inlineUpdateUrl }) {
 const defaultColumn = {
   Cell: info => {
     let attributes = {
-      id: info.row.index + 1,
+      id: info.row.values.id,
       field: info.column.id,
       initialValue: info.value,
       onBeforeSuccess: synchronizeDataOnUpdateSuccess,

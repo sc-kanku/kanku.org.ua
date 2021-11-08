@@ -6876,9 +6876,6 @@ function EditableTable(_ref) {
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("ol", {
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
                       children: "\u0412\u0438\u043F\u0430\u0434\u0430\u0439\u043A\u0438 \u0434\u043B\u044F \u041B\u044C\u0432\u0456\u0432 / \u041E\u0431\u043B\u0430\u0441\u0442\u044C \u0456 \u0420\u0430\u0439\u043E\u043D"
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
-                      className: "text-danger",
-                      children: "\u0429\u043E\u0441\u044C \u043F\u0440\u043E\u043F\u0430\u0434\u0430\u044E\u0442\u044C \u0437\u043C\u0456\u043D\u0438 \u043F\u0456\u0441\u043B\u044F \u043E\u043D\u043E\u0432\u043B\u0435\u043D\u043D\u044F \u0441\u0442\u043E\u0440\u0456\u043D\u043A\u0438??!!"
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("span", {
                       className: "text-secondary",
                       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
@@ -7437,7 +7434,7 @@ function Table(_ref7) {
   var defaultColumn = {
     Cell: function Cell(info) {
       var attributes = {
-        id: info.row.index + 1,
+        id: info.row.values.id,
         field: info.column.id,
         initialValue: info.value,
         onBeforeSuccess: synchronizeDataOnUpdateSuccess,
