@@ -151,7 +151,6 @@ export default function EditableTable ({
                                     <li className="text-danger">Щось пропадають зміни після оновлення сторінки??!!</li>
                                     <span className="text-secondary">
                                         <li>Валідація</li>
-                                        <li>Cортування по ступеню</li>
                                         <li>Cинхронізація даних таблички зі змінами, які були внесені на сторінці редагування залу</li>
                                     </span>
                                 </ol>
