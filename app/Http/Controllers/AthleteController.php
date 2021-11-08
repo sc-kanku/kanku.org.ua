@@ -90,9 +90,9 @@ class AthleteController extends Controller
                 ::where('id', $request->get('id'))
                 ->update([$request->get('field') => $request->get('value')]);
 
-            $queryStatus = "{Successful: " . $result . "}";
+            $queryStatus = ["Successful" => $result];
         } catch (Exception $e) {
-            $queryStatus = "{Not success: " . $e . "}";
+            $queryStatus = ["Unsuccessful" => $e];
         }
 
         return $queryStatus;
@@ -113,9 +113,9 @@ class AthleteController extends Controller
                 ->dojos()
                 ->syncWithoutDetaching([$dojoId => ['schedule' => $schedule, 'schedule_notes' => '']]);
 
-            $queryStatus = "{Successful: " . json_encode($result) . "}";
+            $queryStatus = ["Successful" => $result];
         } catch (Exception $e) {
-            $queryStatus = "{Not success: " . json_encode($e) . "}";
+            $queryStatus = ["Unsuccessful" => $e];
         }
 
         return $queryStatus;
@@ -135,9 +135,9 @@ class AthleteController extends Controller
                 ->detach([$dojoId]);
             //->syncWithoutDetaching([$dojoId => ['schedule' => $schedule, 'schedule_notes' => '']]);
 
-            $queryStatus = "{Successful: " . $result . "}";
+            $queryStatus = ["Successful" => $result];
         } catch (Exception $e) {
-            $queryStatus = "{Not success: " . $e . "}";
+            $queryStatus = ["Unsuccessful" => $e];
         }
 
         return $queryStatus;

@@ -3,36 +3,36 @@ import { useParams, Redirect} from 'react-router-dom';
 import Photo from '../controls/Photo';
 import { EditableText, EditableDate, EditableDegree, EditableSwitch, EditableTextarea } from '../controls/Table';
 
-import AthleteEditDojos from '../controls/AthleteEditDojos';
+import EditAttachedEntities from '../controls/EditAttachedEntities';
 
 const EditAthlete = ({getUrl, updateUrl, photoFileName}) => {
     const { id } = useParams();
     const [athlete, setAthlete] = useState({});
 
     useEffect(() => {
-        fetch(getUrl + "/" + id)
-            .then(response => response.json())
-            .then(setAthlete)
+        fetch( getUrl + "/" + id )
+            .then( response => response.json() )
+            .then( setAthlete)
     }, []);
 
     let isEdit = id != null;
 
     // TODO: 
-    let garrerySnippet = "";
+    let gallerySnippet = "";
 
     if (isEdit && athlete.gallery) {
         let galleryUrl = "photo.php?galleryID=" + athlete.gallery['galleryID'];
-        garrerySnippet = 
+        gallerySnippet = 
                     <ol><li><a href={galleryUrl}>{athlete.gallery['name']}</a></li></ol>
     } else {
         if (isEdit) {
-            garrerySnippet = 
+            gallerySnippet = 
             <p>
                 Фотогалерея еще не введена<br />
                 <input type="button" value="Ввести фотогалерею" onclick="location.href='new_a_gallery.php?id=<?= $athlet->id ?>'" />
             </p>
         } else {
-            garrerySnippet = <p>Фотогалерею Ви зможете ввести після першого збереження спортсмена</p>
+            gallerySnippet = <p>Фотогалерею Ви зможете ввести після першого збереження спортсмена</p>
         }
     }
 
@@ -165,7 +165,7 @@ const EditAthlete = ({getUrl, updateUrl, photoFileName}) => {
                 <div className="mb-3 col-md-12 d-grid gap-3">                
                     <p style={{'backgroundColor': 'yellow'}}>Про спортсмена</p>
                 
-                    <div>                
+                    <div>
                         <label htmlFor="full" className="form-label">Повна інформація для сторінки спортсмена</label>
                         
                         <EditableTextarea field="full" className="form-control"
@@ -178,7 +178,7 @@ const EditAthlete = ({getUrl, updateUrl, photoFileName}) => {
 
                     <EditableSwitch
                         field="is_coach" className="form-check-input"
-                        id={isEdit ? athlete.id : 0} 
+                        id={ id } 
                         initialValue={(isEdit && athlete.is_coach) ? 1 : 0} 
                         inlineUpdateUrl={updateUrl}
                     >Інструктор?
@@ -215,10 +215,12 @@ const EditAthlete = ({getUrl, updateUrl, photoFileName}) => {
 
                 <div className="mb-3 col-md-12">                
                     <p style={{'backgroundColor': 'yellow'}}>Зали</p>
-                    <AthleteEditDojos 
-                        athleteId={isEdit && athlete.id} 
-                        dojos={isEdit ? athlete.dojos : null} 
-                        updateUrl={updateUrl} 
+                    <EditAttachedEntities 
+                        entityName='athlete'
+                        entityId={isEdit && athlete.id} 
+                        entityNameToAttach='dojo'
+                        attachedEntities={isEdit ? athlete.dojos : null} 
+                        updateUrl={updateUrl}
                     />
                 </div>
 

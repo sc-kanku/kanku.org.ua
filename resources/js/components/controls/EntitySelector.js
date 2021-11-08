@@ -21,9 +21,8 @@ const EntitySelector = function({url, onSelect, onAllLoaded}) {
         // TODO
         // <option key='0' value={0}>Створити новий</option>,
     ].concat(
-        entities.map(entity => <option key={entity.id} value={entity.id}>{entity.name}</option>)
+        entities.map(entity => <option key={entity.id} value={entity.id}>{entity.name ? entity.name : entity.lastName + ' ' + entity.firstName}</option>)
     );
-
 
     return (
             <select className="form-select" onChange={onChange}>{entitiesList}</select>

@@ -55,9 +55,9 @@ class PostController extends Controller
                 ::where('id', $request->get('id'))
                 ->update([$request->get('field') => $request->get('value')]);
 
-            $queryStatus = "{Successful: " . $result . "}";
+            $queryStatus = ["Successful" => $result];
         } catch (Exception $e) {
-            $queryStatus = "{Not success: " . $e . "}";
+            $queryStatus = ["Unsuccessful" => $e];
         }
 
         return $queryStatus;

@@ -8,12 +8,12 @@ export default function useSave(inlineUpdateUrl, onBeforeSuccess) {
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify(data)  
         })
-        // .then(response => response.json())
+        .then(response => response.json())
         .then(response => {
-          if (typeof (response["Not success"]) !== "undefined" ) {
+          if (typeof (response['Unsuccessful']) !== 'undefined' ) {
             // Failure
             if (typeof onFailure == 'function') {
-              onFailure();
+              onFailure(response['Unsuccessful']);
             }
           } else {
             // Success
@@ -23,7 +23,7 @@ export default function useSave(inlineUpdateUrl, onBeforeSuccess) {
 
             // synchronizeDataOnUpdateSuccess(index, id, value);
             if (typeof onSuccess == 'function') {
-              onSuccess();
+              onSuccess(response['Successful']);
             }
 
             // Show toasted message

@@ -6216,11 +6216,18 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+/**
+ * Is used to
+ *  - select dojo to add on Admin > Edit Athlete screen
+ *  - select athlete to add on Admin > Edit Dojo screen
+ */
+
 
 
 
 var AddEntitySelector = function AddEntitySelector(_ref) {
-  var url = _ref.url,
+  var entityName = _ref.entityName,
+      url = _ref.url,
       onSelect = _ref.onSelect,
       onAllLoaded = _ref.onAllLoaded;
 
@@ -6232,17 +6239,6 @@ var AddEntitySelector = function AddEntitySelector(_ref) {
   var selectEntity = function selectEntity() {
     setIsAdding(!isAdding);
   };
-  /*
-      let addDojo = ()=> {
-          setIsAddingDojo(false);
-          // ad
-      };
-  
-      let cancel = ()=> {
-          setIsAddingDojo(false);
-      };
-  */
-
 
   var onEntitySelect = function onEntitySelect(id) {
     onSelect(id);
@@ -6281,233 +6277,12 @@ var AddEntitySelector = function AddEntitySelector(_ref) {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
         className: "fas fa-plus",
         "aria-hidden": "true"
-      }), " \u0414\u043E\u0434\u0430\u0442\u0438 \u0437\u0430\u043B"]
+      }), " \u0414\u043E\u0434\u0430\u0442\u0438 ", entityName]
     }), addingSnippet]
   });
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AddEntitySelector);
-
-/***/ }),
-
-/***/ "./resources/js/components/controls/AthleteEditDojos.js":
-/*!**************************************************************!*\
-  !*** ./resources/js/components/controls/AthleteEditDojos.js ***!
-  \**************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _schedule_Schedule__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./schedule/Schedule */ "./resources/js/components/controls/schedule/Schedule.js");
-/* harmony import */ var _AddEntitySelector__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AddEntitySelector */ "./resources/js/components/controls/AddEntitySelector.js");
-/* harmony import */ var _utils_useSave__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../utils/useSave */ "./resources/js/components/utils/useSave.js");
-/* harmony import */ var _utils_useEditable__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./../utils/useEditable */ "./resources/js/components/utils/useEditable.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-
-
-
-
-
-
-
-
-
-var AthleteEditDojos = function AthleteEditDojos(_ref) {
-  var athleteId = _ref.athleteId,
-      dojos = _ref.dojos,
-      updateUrl = _ref.updateUrl;
-
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(dojos),
-      _useState2 = _slicedToArray(_useState, 2),
-      dojosModel = _useState2[0],
-      setDojosModel = _useState2[1];
-
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
-      _useState4 = _slicedToArray(_useState3, 2),
-      allDojos = _useState4[0],
-      setAllDojos = _useState4[1];
-
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
-      _useState6 = _slicedToArray(_useState5, 2),
-      addedDojoId = _useState6[0],
-      setAddedDojoId = _useState6[1];
-
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
-      _useState8 = _slicedToArray(_useState7, 2),
-      removedDojoId = _useState8[0],
-      setRemovedDojoId = _useState8[1]; // TODO: Rename - attachDojo / dettachDojo
-  // TODO: refactor useEditable to be suitable one for both actions.
-
-
-  var _useEditable = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_4__["default"])({
-    inlineUpdateUrl: '/api/athlete/update/schedule',
-    data: {
-      athleteId: athleteId,
-      dojoId: addedDojoId,
-      schedule: ''
-    },
-    onBeforeSuccess: function onBeforeSuccess(data) {
-      var dojoId = addedDojoId;
-      var selectedDojo = allDojos.filter(function (dojo) {
-        return dojo.id == dojoId;
-      });
-
-      var newDojosModel = _toConsumableArray(dojosModel).concat(selectedDojo);
-
-      setDojosModel(newDojosModel);
-    }
-  }),
-      _useEditable2 = _slicedToArray(_useEditable, 3),
-      AddDojoEditable = _useEditable2[0],
-      value_unused = _useEditable2[1],
-      saveAddedDojo = _useEditable2[2];
-
-  var _useEditable3 = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_4__["default"])({
-    inlineUpdateUrl: '/api/athlete/dojo/delete',
-    data: {
-      athleteId: athleteId,
-      dojoId: removedDojoId
-    },
-    onBeforeSuccess: function onBeforeSuccess(data) {
-      var dojoId = removedDojoId;
-      var dojos = dojosModel.filter(function (dojo) {
-        return dojo.id != dojoId;
-      });
-      setDojosModel(dojos);
-    }
-  }),
-      _useEditable4 = _slicedToArray(_useEditable3, 3),
-      RemoveDojoEditable = _useEditable4[0],
-      value_unused_refactior_this = _useEditable4[1],
-      removeDojo = _useEditable4[2];
-
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    if (addedDojoId > 0) {
-      saveAddedDojo();
-    }
-  }, [addedDojoId]);
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    if (removedDojoId !== null) {
-      removeDojo();
-    }
-  }, [removedDojoId]);
-
-  function onAllDojosLoaded(allLoadedDojos) {
-    setAllDojos(allLoadedDojos);
-  }
-
-  var addDojo = function addDojo(dojoId) {
-    if (dojoId == "-1") {// Виберіть зал
-    } else if (dojoId == "0") {// Новий зал
-      // TODO: 
-    } else {
-      setAddedDojoId(dojoId);
-    }
-  };
-
-  var deleteDojo = function deleteDojo(dojoId) {
-    setRemovedDojoId(dojoId);
-  }; // using effect hooks and deps to execute logic as componentWillMount
-
-
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    // check that props.data.status is non-empty and update statusValue
-    if (dojos !== null) {
-      setDojosModel(dojos);
-    }
-  }, [dojos]);
-  var areSomeDojos = dojosModel && dojosModel.length > 0;
-  var dojosSnippet = null;
-
-  if (areSomeDojos) {
-    var dojosArray = [];
-    dojosModel.map(function (dojo, index) {
-      var _dojo$pivot;
-
-      var dojoUrl = "/admin/dojo/edit/" + dojo.id;
-      var scheduleUrl = updateUrl + '/schedule';
-      dojosArray.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("li", {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-          className: "input-group",
-          role: "group",
-          "aria-label": "Dojo actions",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("a", {
-            className: "input-group-text alert-success",
-            href: dojoUrl,
-            children: dojo.name
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("a", {
-            className: "btn btn-outline-success",
-            href: dojoUrl,
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
-              className: "fas fa-edit"
-            }), " \u0420\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u0442\u0438 \u0437\u0430\u043B"]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("a", {
-            className: "btn btn-outline-success",
-            onClick: function onClick() {
-              return deleteDojo(dojo.id);
-            },
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
-              className: "far fa-trash-alt"
-            })
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_schedule_Schedule__WEBPACK_IMPORTED_MODULE_1__["default"], {
-          athleteId: athleteId,
-          dojoId: dojo.id,
-          markup: (_dojo$pivot = dojo.pivot) === null || _dojo$pivot === void 0 ? void 0 : _dojo$pivot.schedule,
-          editable: false,
-          saveUrl: scheduleUrl
-        })]
-      }, index));
-    });
-    dojosSnippet = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("ol", {
-        children: dojosArray
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(AddDojoEditable, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(RemoveDojoEditable, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_AddEntitySelector__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        url: "/api/dojo/list",
-        onSelect: addDojo,
-        onAllLoaded: onAllDojosLoaded
-      })]
-    });
-  } else {
-    if (false) {} else {//              dojosSnippet = <p>Залы Вы зможете вказати після першого збереження спортсмена</p>
-    }
-  } // useEffect(showDojos, [dojosModel]);
-
-
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(AddDojoEditable, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(RemoveDojoEditable, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_AddEntitySelector__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      url: "/api/dojo/list",
-      onSelect: addDojo,
-      onAllLoaded: onAllDojosLoaded
-    }), dojosSnippet]
-  });
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AthleteEditDojos);
 
 /***/ }),
 
@@ -6589,10 +6364,10 @@ function Degree(_ref) {
 
 /***/ }),
 
-/***/ "./resources/js/components/controls/DojoEditAthletes.js":
-/*!**************************************************************!*\
-  !*** ./resources/js/components/controls/DojoEditAthletes.js ***!
-  \**************************************************************/
+/***/ "./resources/js/components/controls/EditAttachedEntities.js":
+/*!******************************************************************!*\
+  !*** ./resources/js/components/controls/EditAttachedEntities.js ***!
+  \******************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -6603,8 +6378,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _schedule_Schedule__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./schedule/Schedule */ "./resources/js/components/controls/schedule/Schedule.js");
 /* harmony import */ var _AddEntitySelector__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AddEntitySelector */ "./resources/js/components/controls/AddEntitySelector.js");
-/* harmony import */ var _buttons_EditButton__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./buttons/EditButton */ "./resources/js/components/controls/buttons/EditButton.js");
+/* harmony import */ var _utils_useEditable__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils/useEditable */ "./resources/js/components/utils/useEditable.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -6612,6 +6391,8 @@ function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread n
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -6628,117 +6409,192 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+ // EditAttachedEntities -> AthleteEditDojos
+// entityId -> athleteId
+// attachedEntities -> dojos
+// entityName, entityNameToAttach = { dojo | athlete }
+
+/**
+ * Is Used to 
+ *  - edit attached to athlete dojos on Admin > Edit Athlete screen
+ *  - edit attached to dojo athletes on Admin > Edit Dojo screen
+ * 
+ * entityName - Name of the 'main' entity 
+ *      i.e. 'athlete' when used on Edit Athlete screen 
+ *      and 'dojo' when used on Edit Dojo screen
+ * 
+ * entityNameToAttach - Name of the entity that is attached
+ *      i.e. 'athlete' when used on Edit Dojo screen (athletes are attached to the dojo that is currently being edited)
+ *      and 'dojo' when used on Edit Dojo screen (dojos are attached to the athlete that is currently being edited)
+ * 
+ * @param {*} param0 
+ * @returns 
+ */
 
 
 
 
 
-var DojoEditAthletes = function DojoEditAthletes(_ref) {
-  var athletes = _ref.athletes,
+var EditAttachedEntities = function EditAttachedEntities(_ref) {
+  var _data, _data2;
+
+  var entityName = _ref.entityName,
+      entityId = _ref.entityId,
+      entityNameToAttach = _ref.entityNameToAttach,
+      attachedEntities = _ref.attachedEntities,
       updateUrl = _ref.updateUrl;
 
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(athletes),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(attachedEntities),
       _useState2 = _slicedToArray(_useState, 2),
-      athletesModel = _useState2[0],
-      setAthletesModel = _useState2[1];
+      attachedEntitiesState = _useState2[0],
+      setAttachedEntitiesState = _useState2[1];
 
   var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
       _useState4 = _slicedToArray(_useState3, 2),
-      allAthletes = _useState4[0],
-      setAllAthletes = _useState4[1];
+      allEntitiesToAttachFrom = _useState4[0],
+      setAllEntitiesToAttachFrom = _useState4[1];
 
-  function onAllAthletesLoaded(allLoadedAthletes) {
-    setAllAthletes(allLoadedAthletes);
-  }
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+      _useState6 = _slicedToArray(_useState5, 2),
+      attachedEntityId = _useState6[0],
+      setAttachedEntityId = _useState6[1];
 
-  var addAthlete = function addAthlete(id) {
-    if (id == "-1") {// Виберіть cпортсмена
-    } else if (id == "0") {// Новий зал
-    } else {
-      var selectedAthlete = allAthletes.filter(function (athlete) {
-        return athlete.id == id;
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+      _useState8 = _slicedToArray(_useState7, 2),
+      detachedEntityId = _useState8[0],
+      setDetachedEntityId = _useState8[1]; // TODO: refactor useEditable to be suitable one for both actions.    
+
+
+  var _useEditable = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_3__["default"])({
+    inlineUpdateUrl: '/api/athlete/update/schedule',
+    data: (_data = {}, _defineProperty(_data, entityName + 'Id', entityId), _defineProperty(_data, entityNameToAttach + 'Id', attachedEntityId), _defineProperty(_data, "schedule", ''), _data),
+    onBeforeSuccess: function onBeforeSuccess(data) {
+      var selectedEntityToAttach = allEntitiesToAttachFrom.filter(function (dojo) {
+        return dojo.id == attachedEntityId;
       });
 
-      var newAthletesModel = _toConsumableArray(athletesModel).concat(selectedAthlete);
+      var newAttachedEntitiesState = _toConsumableArray(attachedEntitiesState).concat(selectedEntityToAttach);
 
-      setAthletesModel(newAthletesModel);
+      setAttachedEntitiesState(newAttachedEntitiesState);
     }
-  };
+  }),
+      _useEditable2 = _slicedToArray(_useEditable, 3),
+      SavingStatus = _useEditable2[0],
+      value_unused = _useEditable2[1],
+      saveAttachedEntity = _useEditable2[2]; // RemoveDojoEditable,sfsfd, removeDojo
 
-  var editAthlete = function editAthlete(id) {
-    console.log("edit - redirect to edit athlete page", id); // TODO:
-    // redirect to edit dojo page
-  };
 
-  var deleteAthlete = function deleteAthlete(id) {
-    var athletes = athletesModel.filter(function (athlete) {
-      return athlete.id != id;
-    });
-    setAthletesModel(athletes);
+  var _useEditable3 = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_3__["default"])({
+    inlineUpdateUrl: '/api/athlete/dojo/delete',
+    data: (_data2 = {}, _defineProperty(_data2, entityName + 'Id', entityId), _defineProperty(_data2, entityNameToAttach + 'Id', detachedEntityId), _data2),
+    onBeforeSuccess: function onBeforeSuccess(data) {
+      var attachedEntities = attachedEntitiesState.filter(function (entity) {
+        return entity.id != detachedEntityId;
+      });
+      setAttachedEntitiesState(attachedEntities);
+    }
+  }),
+      _useEditable4 = _slicedToArray(_useEditable3, 3),
+      RemovalStatus = _useEditable4[0],
+      value_unused_refactior_this = _useEditable4[1],
+      saveDetachedEntity = _useEditable4[2];
+
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (attachedEntityId > 0) {
+      saveAttachedEntity();
+    }
+  }, [attachedEntityId]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (detachedEntityId !== null) {
+      saveDetachedEntity();
+    }
+  }, [detachedEntityId]);
+
+  var attachEntity = function attachEntity(entityId) {
+    if (entityId == "-1") {// Виберіть зал
+    } else if (entityId == "0") {// Новий зал
+      // TODO: 
+    } else {
+      setAttachedEntityId(entityId);
+    }
   }; // using effect hooks and deps to execute logic as componentWillMount
 
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    // check that props.data.status is non-empty and update statusValue
-    if (athletes !== null) {
-      setAthletesModel(athletes);
+    if (attachedEntities !== null) {
+      setAttachedEntitiesState(attachedEntities);
     }
-  }, [athletes]);
-  var areSomeAthletes = athletesModel && athletesModel.length > 0;
-  var athletesSnippet = null;
+  }, [attachedEntities]);
+  var areSomeEntitiesAttached = attachedEntitiesState && attachedEntitiesState.length > 0;
+  var attachedSnippet = null;
 
-  if (areSomeAthletes) {
-    var athletesArray = [];
-    athletesModel.map(function (athlete, index) {
-      var _athlete$pivot;
+  if (areSomeEntitiesAttached) {
+    var attachedArray = [];
+    attachedEntitiesState.map(function (entity, index) {
+      var _entitiesParams, _entity$pivot;
 
-      var athleteUrl = "/admin/athlete/edit/" + athlete.id;
-      var athleteName = athlete.lastName + ' ' + athlete.firstName + ' ' + athlete.patronymic;
-      var scheduleUrl = updateUrl + '/schedule' + '/' + athlete.id;
-      athletesArray.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("li", {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
-          href: athleteUrl,
-          children: athleteName
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_buttons_EditButton__WEBPACK_IMPORTED_MODULE_3__["default"], {
-          hrefPrefix: "/admin/athlete",
-          value: athlete.id,
-          children: "\u0420\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u0442\u0438 \u0456\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440\u0430"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("a", {
-          className: "btn btn-outline-success",
-          onClick: function onClick() {
-            return deleteAthlete(athlete.id);
-          },
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
-            className: "fas fa-delete"
-          }), " \u0412\u0438\u0434\u0430\u043B\u0438\u0442\u0438 \u0456\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440\u0430"]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_schedule_Schedule__WEBPACK_IMPORTED_MODULE_1__["default"], {
-          markup: (_athlete$pivot = athlete.pivot) === null || _athlete$pivot === void 0 ? void 0 : _athlete$pivot.schedule,
+      var entityUrl = '/admin/' + entityNameToAttach + '/edit/' + entity.id; // let scheduleUrl = updateUrl + '/schedule';
+
+      var scheduleUrl = '/api/athlete/update/schedule';
+      var entitiesParams = (_entitiesParams = {}, _defineProperty(_entitiesParams, entityName + 'Id', entityId), _defineProperty(_entitiesParams, entityNameToAttach + 'Id', entity.id), _entitiesParams);
+      attachedArray.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("li", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          className: "input-group",
+          role: "group",
+          "aria-label": "Dojo actions",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
+            className: "input-group-text alert-success",
+            href: entityUrl,
+            children: entity.name ? entity.name : entity.lastName + ' ' + entity.firstName
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("a", {
+            className: "btn btn-outline-success",
+            href: entityUrl,
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
+              className: "fas fa-edit"
+            }), " \u0420\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u0442\u0438 ", entityNameToAttach]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
+            className: "btn btn-outline-success",
+            onClick: function onClick() {
+              return setDetachedEntityId(entity.id);
+            },
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
+              className: "far fa-trash-alt"
+            })
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_schedule_Schedule__WEBPACK_IMPORTED_MODULE_1__["default"], _objectSpread(_objectSpread({}, entitiesParams), {}, {
+          markup: (_entity$pivot = entity.pivot) === null || _entity$pivot === void 0 ? void 0 : _entity$pivot.schedule,
           editable: false,
           saveUrl: scheduleUrl
-        })]
+        }))]
       }, index));
     });
-    athletesSnippet = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
+    attachedSnippet = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("ol", {
-        children: athletesArray
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_AddEntitySelector__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        url: "/api/athletes",
-        onSelect: addAthlete,
-        onAllAthletesLoaded: onAllAthletesLoaded
+        children: attachedArray
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(SavingStatus, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(RemovalStatus, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_AddEntitySelector__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        entityName: entityNameToAttach,
+        url: "/api/".concat(entityNameToAttach, "/list"),
+        onSelect: attachEntity,
+        onAllLoaded: setAllEntitiesToAttachFrom
       })]
     });
   } else {
     if (false) {} else {//              dojosSnippet = <p>Залы Вы зможете вказати після першого збереження спортсмена</p>
     }
-  } // useEffect(showDojos, [dojosModel]);
+  } // useEffect(showDojos, [attachedEntitiesState]);
 
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
-    children: athletesSnippet
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(SavingStatus, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(RemovalStatus, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_AddEntitySelector__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      entityName: entityNameToAttach,
+      url: "/api/".concat(entityNameToAttach, "/list"),
+      onSelect: attachEntity,
+      onAllLoaded: setAllEntitiesToAttachFrom
+    }), attachedSnippet]
   });
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DojoEditAthletes);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (EditAttachedEntities);
 
 /***/ }),
 
@@ -6903,20 +6759,55 @@ function EditableTable(_ref) {
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h4", {
                     className: "alert-heading",
                     children: "\u041D\u0430\u0440\u0430\u0437\u0456 \u043D\u0435 \u043F\u0440\u0430\u0446\u044E\u0454:"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("ol", {
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("span", {
+                      className: "text-secondary",
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
+                        children: "\u0414\u043E\u0434\u0430\u0432\u0430\u043D\u043D\u044F \u043D\u043E\u0432\u043E\u0433\u043E \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430 / \u0437\u0430\u043B\u0443 / \u043D\u043E\u0432\u0438\u043D\u0438"
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
+                        children: "\u0420\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u043D\u043D\u044F \u0444\u043E\u0442\u043E"
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
+                        children: "\u0412\u0430\u043B\u0456\u0434\u0430\u0446\u0456\u044F"
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
+                        children: "\u0406 \u0442\u0430\u043A\u043E\u0436 \u0433\u0430\u043B\u0435\u0440\u0435\u0457 \u0442\u0440\u0435\u043D\u0435\u0440\u0430 \u0432\u0456\u0434\u043A\u043B\u044E\u0447\u0435\u043D\u0456 \u043D\u0430\u0440\u0430\u0437\u0456"
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
+                        children: "\u0412 \u0441\u0435\u043A\u0446\u0456\u0457 '\u0437\u0430\u043B\u0438 / \u0434\u043E\u0434\u0430\u0442\u0438 dojo' \u043F\u043E\u0442\u0440\u0456\u0431\u043D\u043E \u043F\u043E\u043A\u0430\u0437\u0443\u0432\u0430\u0442\u0438 \u043B\u0438\u0448\u0435 \u0442\u0456 \u0437\u0430\u043B\u0438 \u0432 \u044F\u043A\u0438\u0445 \u0434\u0430\u043D\u0438\u0439 \u0442\u0440\u0435\u0442\u0435\u0440 \u043D\u0435 \u0442\u0440\u0435\u043D\u0443\u0454."
+                      })]
+                    })
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
+                    children: "\u042F\u043A\u0431\u0438 \u0449\u0435 \u0432\u0438\u043B\u0456\u0437\u043B\u043E \u0449\u043E\u0441\u044C \u0456\u043D\u0448\u0435 (\u0430\u0431\u043E \u043F\u0440\u043E\u0441\u0442\u043E \u043C\u0430\u0454\u0442\u0435 \u0445\u043E\u0440\u043E\u0448\u0456 \u0456\u0434\u0435\u0457), \u0442\u043E \u0434\u0430\u0439\u0442\u0435 \u0431\u0443\u0434\u044C \u043B\u0430\u0441\u043A\u0430 \u0437\u043D\u0430\u0442\u0438"
+                  })]
+                })]
+              }), entity == 'dojo' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+                  className: "alert alert-success mt-3",
+                  role: "alert",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h4", {
+                    className: "alert-heading",
+                    children: "\u041D\u0430 \u0446\u0456\u0439 \u0441\u0442\u043E\u0440\u0456\u043D\u0446\u0456 \u043C\u0430\u0439\u0436\u0435 \u0432\u0441\u0435 \u043F\u0440\u0430\u0446\u044E\u0454."
+                  })
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+                  className: "alert alert-warning",
+                  role: "alert",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h4", {
+                    className: "alert-heading",
+                    children: "\u041A\u0440\u0456\u043C:"
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("ol", {
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
-                      children: "\u0414\u043E\u0434\u0430\u0432\u0430\u043D\u043D\u044F \u043D\u043E\u0432\u043E\u0433\u043E \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430 / \u0437\u0430\u043B\u0443 / \u043D\u043E\u0432\u0438\u043D\u0438"
+                      children: "\u041B\u043E\u043A\u0430\u0446\u0456\u044F \\ \u0420\u043E\u0437\u0442\u0430\u0448\u0443\u0432\u0430\u043D\u043D\u044F"
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
-                      children: "\u0420\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u043D\u043D\u044F \u0444\u043E\u0442\u043E"
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
-                      children: "\u0412\u0430\u043B\u0456\u0434\u0430\u0446\u0456\u044F"
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
+                      children: "\u0412\u0440\u0443\u0447\u043D\u0443 \u0432\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D\u0456 \u043A\u043E\u043E\u0440\u0434\u0438\u043D\u0430\u0442\u0438? \u0432 \u0446\u044C\u043E\u043C\u0443 \u0432\u0438\u043F\u0430\u0434\u043A\u0443 \u0432\u043E\u043D\u0438 \u043D\u0435 \u0431\u0443\u0434\u0443\u0442\u044C \u043F\u0435\u0440\u0435\u0440\u0430\u0445\u043E\u0432\u0443\u0432\u0430\u0442\u0438\u0441\u044F \u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u043D\u043E"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("span", {
                       className: "text-secondary",
-                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
-                        children: "\u0406 \u0442\u0430\u043A\u043E\u0436 \u0433\u0430\u043B\u0435\u0440\u0435\u0457 \u0442\u0440\u0435\u043D\u0435\u0440\u0430 \u0432\u0456\u0434\u043A\u043B\u044E\u0447\u0435\u043D\u0456 \u043D\u0430\u0440\u0430\u0437\u0456"
-                      })
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
-                      children: "\u0412 \u0441\u0435\u043A\u0446\u0456\u0457 \u0437\u0430\u043B\u0438 \u043F\u043E\u0442\u0440\u0456\u0431\u043D\u043E \u043F\u043E\u043A\u0430\u0437\u0443\u0432\u0430\u0442\u0438 \u043B\u0438\u0448\u0435 \u0442\u0456 \u0437\u0430\u043B\u0438 \u0432 \u044F\u043A\u0438\u0445 \u0434\u0430\u043D\u0438\u0439 \u0442\u0440\u0435\u0442\u0435\u0440 \u043D\u0435 \u0442\u0440\u0435\u043D\u0443\u0454."
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
+                        children: "\u0420\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u043D\u043D\u044F \u0444\u043E\u0442\u043E"
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
+                        children: "\u0412\u0430\u043B\u0456\u0434\u0430\u0446\u0456\u044F"
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
+                        children: "\u0406 \u0442\u0430\u043A\u043E\u0436 \u0433\u0430\u043B\u0435\u0440\u0435\u0457 \u0432\u0456\u0434\u043A\u043B\u044E\u0447\u0435\u043D\u0456 \u043D\u0430\u0440\u0430\u0437\u0456"
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
+                        children: "\u0412 \u0441\u0435\u043A\u0446\u0456\u0457 '\u0456\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440\u0438 / \u0434\u043E\u0434\u0430\u0442\u0438 athlete' \u043F\u043E\u0442\u0440\u0456\u0431\u043D\u043E \u043F\u043E\u043A\u0430\u0437\u0443\u0432\u0430\u0442\u0438 \u043B\u0438\u0448\u0435 \u0442\u0456 athlete \u0432 \u044F\u043A\u0438\u0445 \u0434\u0430\u043D\u043E\u0433\u043E \u0434\u043E\u0434\u0436\u043E \u043D\u0435\u043C\u0430."
+                      })]
                     })]
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
                     children: "\u042F\u043A\u0431\u0438 \u0449\u0435 \u0432\u0438\u043B\u0456\u0437\u043B\u043E \u0449\u043E\u0441\u044C \u0456\u043D\u0448\u0435 (\u0430\u0431\u043E \u043F\u0440\u043E\u0441\u0442\u043E \u043C\u0430\u0454\u0442\u0435 \u0445\u043E\u0440\u043E\u0448\u0456 \u0456\u0434\u0435\u0457), \u0442\u043E \u0434\u0430\u0439\u0442\u0435 \u0431\u0443\u0434\u044C \u043B\u0430\u0441\u043A\u0430 \u0437\u043D\u0430\u0442\u0438"
@@ -6963,6 +6854,40 @@ function EditableTable(_ref) {
                       children: "C\u043E\u0440\u0442\u0443\u0432\u0430\u043D\u043D\u044F \u043F\u043E \u0441\u0442\u0443\u043F\u0435\u043D\u044E"
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
                       children: "C\u0438\u043D\u0445\u0440\u043E\u043D\u0456\u0437\u0430\u0446\u0456\u044F \u0434\u0430\u043D\u0438\u0445 \u0442\u0430\u0431\u043B\u0438\u0447\u043A\u0438 \u0437\u0456 \u0437\u043C\u0456\u043D\u0430\u043C\u0438, \u044F\u043A\u0456 \u0431\u0443\u043B\u0438 \u0432\u043D\u0435\u0441\u0435\u043D\u0456 \u043D\u0430 \u0441\u0442\u043E\u0440\u0456\u043D\u0446\u0456 \u0440\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u043D\u043D\u044F \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430"
+                    })]
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
+                    children: "\u042F\u043A\u0431\u0438 \u0449\u0435 \u0432\u0438\u043B\u0456\u0437\u043B\u043E \u0449\u043E\u0441\u044C \u0456\u043D\u0448\u0435 (\u0430\u0431\u043E \u043F\u0440\u043E\u0441\u0442\u043E \u043C\u0430\u0454\u0442\u0435 \u0445\u043E\u0440\u043E\u0448\u0456 \u0456\u0434\u0435\u0457), \u0442\u043E \u0434\u0430\u0439\u0442\u0435 \u0431\u0443\u0434\u044C \u043B\u0430\u0441\u043A\u0430 \u0437\u043D\u0430\u0442\u0438"
+                  })]
+                })]
+              }), entity == 'dojo' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+                  className: "alert alert-info mt-3",
+                  role: "alert",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h4", {
+                    className: "alert-heading",
+                    children: "\u041D\u0430 \u0446\u0456\u0439 \u0441\u0442\u043E\u0440\u0456\u043D\u0446\u0456 \u0432\u0441\u0435 \u043F\u0440\u0430\u0446\u044E\u0454"
+                  })
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+                  className: "alert alert-warning",
+                  role: "alert",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h4", {
+                    className: "alert-heading",
+                    children: "\u041A\u0440\u0456\u043C"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("ol", {
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
+                      children: "\u0412\u0438\u043F\u0430\u0434\u0430\u0439\u043A\u0438 \u0434\u043B\u044F \u041B\u044C\u0432\u0456\u0432 / \u041E\u0431\u043B\u0430\u0441\u0442\u044C \u0456 \u0420\u0430\u0439\u043E\u043D"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
+                      className: "text-danger",
+                      children: "\u0429\u043E\u0441\u044C \u043F\u0440\u043E\u043F\u0430\u0434\u0430\u044E\u0442\u044C \u0437\u043C\u0456\u043D\u0438 \u043F\u0456\u0441\u043B\u044F \u043E\u043D\u043E\u0432\u043B\u0435\u043D\u043D\u044F \u0441\u0442\u043E\u0440\u0456\u043D\u043A\u0438??!!"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("span", {
+                      className: "text-secondary",
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
+                        children: "\u0412\u0430\u043B\u0456\u0434\u0430\u0446\u0456\u044F"
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
+                        children: "C\u043E\u0440\u0442\u0443\u0432\u0430\u043D\u043D\u044F \u043F\u043E \u0441\u0442\u0443\u043F\u0435\u043D\u044E"
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
+                        children: "C\u0438\u043D\u0445\u0440\u043E\u043D\u0456\u0437\u0430\u0446\u0456\u044F \u0434\u0430\u043D\u0438\u0445 \u0442\u0430\u0431\u043B\u0438\u0447\u043A\u0438 \u0437\u0456 \u0437\u043C\u0456\u043D\u0430\u043C\u0438, \u044F\u043A\u0456 \u0431\u0443\u043B\u0438 \u0432\u043D\u0435\u0441\u0435\u043D\u0456 \u043D\u0430 \u0441\u0442\u043E\u0440\u0456\u043D\u0446\u0456 \u0440\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u043D\u043D\u044F \u0437\u0430\u043B\u0443"
+                      })]
                     })]
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
                     children: "\u042F\u043A\u0431\u0438 \u0449\u0435 \u0432\u0438\u043B\u0456\u0437\u043B\u043E \u0449\u043E\u0441\u044C \u0456\u043D\u0448\u0435 (\u0430\u0431\u043E \u043F\u0440\u043E\u0441\u0442\u043E \u043C\u0430\u0454\u0442\u0435 \u0445\u043E\u0440\u043E\u0448\u0456 \u0456\u0434\u0435\u0457), \u0442\u043E \u0434\u0430\u0439\u0442\u0435 \u0431\u0443\u0434\u044C \u043B\u0430\u0441\u043A\u0430 \u0437\u043D\u0430\u0442\u0438"
@@ -7044,7 +6969,7 @@ var EntitySelector = function EntitySelector(_ref) {
   ].concat(entities.map(function (entity) {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("option", {
       value: entity.id,
-      children: entity.name
+      children: entity.name ? entity.name : entity.lastName + ' ' + entity.firstName
     }, entity.id);
   }));
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("select", {
@@ -8854,7 +8779,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _controls_Photo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../controls/Photo */ "./resources/js/components/controls/Photo.js");
 /* harmony import */ var _controls_Table__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../controls/Table */ "./resources/js/components/controls/Table.js");
-/* harmony import */ var _controls_AthleteEditDojos__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../controls/AthleteEditDojos */ "./resources/js/components/controls/AthleteEditDojos.js");
+/* harmony import */ var _controls_EditAttachedEntities__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../controls/EditAttachedEntities */ "./resources/js/components/controls/EditAttachedEntities.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -8897,11 +8822,11 @@ var EditAthlete = function EditAthlete(_ref) {
   }, []);
   var isEdit = id != null; // TODO: 
 
-  var garrerySnippet = "";
+  var gallerySnippet = "";
 
   if (isEdit && athlete.gallery) {
     var galleryUrl = "photo.php?galleryID=" + athlete.gallery['galleryID'];
-    garrerySnippet = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("ol", {
+    gallerySnippet = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("ol", {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
           href: galleryUrl,
@@ -8911,7 +8836,7 @@ var EditAthlete = function EditAthlete(_ref) {
     });
   } else {
     if (isEdit) {
-      garrerySnippet = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
+      gallerySnippet = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
         children: ["\u0424\u043E\u0442\u043E\u0433\u0430\u043B\u0435\u0440\u0435\u044F \u0435\u0449\u0435 \u043D\u0435 \u0432\u0432\u0435\u0434\u0435\u043D\u0430", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
           type: "button",
           value: "\u0412\u0432\u0435\u0441\u0442\u0438 \u0444\u043E\u0442\u043E\u0433\u0430\u043B\u0435\u0440\u0435\u044E",
@@ -8919,7 +8844,7 @@ var EditAthlete = function EditAthlete(_ref) {
         })]
       });
     } else {
-      garrerySnippet = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+      gallerySnippet = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
         children: "\u0424\u043E\u0442\u043E\u0433\u0430\u043B\u0435\u0440\u0435\u044E \u0412\u0438 \u0437\u043C\u043E\u0436\u0435\u0442\u0435 \u0432\u0432\u0435\u0441\u0442\u0438 \u043F\u0456\u0441\u043B\u044F \u043F\u0435\u0440\u0448\u043E\u0433\u043E \u0437\u0431\u0435\u0440\u0435\u0436\u0435\u043D\u043D\u044F \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430"
       });
     }
@@ -9106,7 +9031,7 @@ var EditAthlete = function EditAthlete(_ref) {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableSwitch, {
           field: "is_coach",
           className: "form-check-input",
-          id: isEdit ? athlete.id : 0,
+          id: id,
           initialValue: isEdit && athlete.is_coach ? 1 : 0,
           inlineUpdateUrl: updateUrl,
           children: "\u0406\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440?"
@@ -9151,9 +9076,11 @@ var EditAthlete = function EditAthlete(_ref) {
             'backgroundColor': 'yellow'
           },
           children: "\u0417\u0430\u043B\u0438"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_AthleteEditDojos__WEBPACK_IMPORTED_MODULE_3__["default"], {
-          athleteId: isEdit && athlete.id,
-          dojos: isEdit ? athlete.dojos : null,
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_EditAttachedEntities__WEBPACK_IMPORTED_MODULE_3__["default"], {
+          entityName: "athlete",
+          entityId: isEdit && athlete.id,
+          entityNameToAttach: "dojo",
+          attachedEntities: isEdit ? athlete.dojos : null,
           updateUrl: updateUrl
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
@@ -9233,9 +9160,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var _controls_DojoEditAthletes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../controls/DojoEditAthletes */ "./resources/js/components/controls/DojoEditAthletes.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _controls_EditAttachedEntities__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../controls/EditAttachedEntities */ "./resources/js/components/controls/EditAttachedEntities.js");
+/* harmony import */ var _controls_Photo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../controls/Photo */ "./resources/js/components/controls/Photo.js");
+/* harmony import */ var _controls_Table__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../controls/Table */ "./resources/js/components/controls/Table.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -9255,12 +9184,14 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
+
 var EditDojo = function EditDojo(_ref) {
   var getUrl = _ref.getUrl,
       updateUrl = _ref.updateUrl,
       photoFileName = _ref.photoFileName;
 
-  var _useParams = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useParams)(),
+  var _useParams = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useParams)(),
       id = _useParams.id;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
@@ -9273,237 +9204,175 @@ var EditDojo = function EditDojo(_ref) {
       return response.json();
     }).then(setDojo);
   }, []);
-  var isEdit = editedData && editedData.id != null;
-  var editHeader = isEdit ? editedData.name : "Ввести нового спортсмена";
-
-  var editEntityHiddenInputId = isEdit && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-    type: "hidden",
-    name: "id",
-    value: editedData.id
-  });
-
-  var photoUrl = editedData && "/images/dojos/" + editedData.id + "/photo.jpg";
-  var place = editedData && editedData.place == 1 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-      type: "radio",
-      name: "place",
-      value: "1",
-      defaultChecked: "checked"
-    }), " \u041B\u044C\u0432\u0456\u0432", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-      type: "radio",
-      name: "place",
-      value: "2"
-    }), " \u041E\u0431\u043B\u0430\u0441\u0442\u044C"]
-  }) : editedData && editedData.place == 2 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-      type: "radio",
-      name: "place",
-      value: "1"
-    }), " \u041B\u044C\u0432\u0456\u0432", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-      type: "radio",
-      name: "place",
-      value: "2",
-      defaultChecked: "checked"
-    }), " \u041E\u0431\u043B\u0430\u0441\u0442\u044C"]
-  }) : null;
-  var actualChecked = isEdit && editedData.is_actual == 1 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-    type: "checkbox",
-    name: "is_actual",
-    value: "1",
-    defaultChecked: "checked"
-  }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-    type: "checkbox",
-    name: "is_actual",
-    value: "1"
-  });
-  var manualChecked = isEdit && editedData.is_manual == 1 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-    type: "checkbox",
-    name: "is_manual",
-    value: "1",
-    defaultChecked: "checked"
-  }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-    type: "checkbox",
-    name: "is_manual",
-    value: "1"
-  });
-  var full = isEdit ? editedData.info : '';
-  var athletes = isEdit ? editedData.athletes : null;
+  var isEdit = id != null;
   var garrerySnippet = "";
 
-  if (isEdit && editedData.gallery) {
-    var galleryUrl = "photo.php?galleryID=" + editedData.gallery['galleryID'];
-    garrerySnippet = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ol", {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
+  if (isEdit && dojo.gallery) {
+    var galleryUrl = "photo.php?galleryID=" + dojo.gallery['galleryID'];
+    garrerySnippet = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("ol", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
           href: galleryUrl,
-          children: editedData.gallery['name']
+          children: dojo.gallery['name']
         })
       })
     });
   } else {
     if (isEdit) {
-      garrerySnippet = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
-        children: ["\u0424\u043E\u0442\u043E\u0433\u0430\u043B\u0435\u0440\u0435\u044F \u0435\u0449\u0435 \u043D\u0435 \u0432\u0432\u0435\u0434\u0435\u043D\u0430", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+      garrerySnippet = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
+        children: ["\u0424\u043E\u0442\u043E\u0433\u0430\u043B\u0435\u0440\u0435\u044F \u0435\u0449\u0435 \u043D\u0435 \u0432\u0432\u0435\u0434\u0435\u043D\u0430", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
           type: "button",
           value: "\u0412\u0432\u0435\u0441\u0442\u0438 \u0444\u043E\u0442\u043E\u0433\u0430\u043B\u0435\u0440\u0435\u044E",
           onclick: "location.href='new_a_gallery.php?id=<?= $athlet->id ?>'"
         })]
       });
     } else {
-      garrerySnippet = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+      garrerySnippet = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
         children: "\u0424\u043E\u0442\u043E\u0433\u0430\u043B\u0435\u0440\u0435\u044E \u0412\u0438 \u0437\u043C\u043E\u0436\u0435\u0442\u0435 \u0432\u0432\u0435\u0441\u0442\u0438 \u043F\u0456\u0441\u043B\u044F \u043F\u0435\u0440\u0448\u043E\u0433\u043E \u0437\u0431\u0435\u0440\u0435\u0436\u0435\u043D\u043D\u044F \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430"
       });
     }
   }
 
-  if (isSavingDone) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Redirect, {
-      to: "/admin/dojo/list"
-    });
-  }
-
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
-      children: editHeader
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("form", {
-      id: "edit-dojo",
-      method: "post",
-      action: updateUrl,
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
+      children: isEdit ? dojo.name : "Новий доджо"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("form", {
       encType: "multipart/form-data",
-      children: [editEntityHiddenInputId, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("table", {
-        className: "usual",
-        cellSpacing: "0",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tbody", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
-              children: "\u041D\u0430\u0437\u0432\u0430"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("td", {
-              children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-                type: "text",
-                name: "name",
-                size: "50",
-                defaultValue: isEdit && editedData.name
-              }), " "]
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
-              children: "\u0406\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0456\u044F"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("td", {
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("textarea", {
-                name: "full",
-                rows: "10",
-                cols: "50",
-                defaultValue: full
-              }), " "]
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
-              style: {
-                textAlign: 'right'
-              },
-              children: actualChecked
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("td", {
-              children: ["\u0427\u0438 \u0430\u043A\u0442\u0443\u0430\u043B\u044C\u043D\u0438\u0439 \u0437\u0430\u043B ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), " (\u0447\u0438 \u043F\u0440\u043E\u0432\u043E\u0434\u044F\u0442\u044C\u0441\u044F \u0432 \u043D\u044C\u043E\u043C\u0443 \u0437\u0430\u043D\u044F\u0442\u0442\u044F?)"]
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
-              children: "\u0406\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440\u0438"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_controls_DojoEditAthletes__WEBPACK_IMPORTED_MODULE_1__["default"], {
-                athletes: athletes,
-                updateUrl: updateUrl + '/' + id
-              })
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
-              children: "\u0424\u043E\u0442\u043E"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("td", {
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-                className: "col-2",
-                style: {
-                  width: '10%'
-                },
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
-                  className: "dojo-photo instructor-photo",
-                  src: photoUrl,
-                  alt: editHeader
-                })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), "\u0417\u043C\u0456\u043D\u0438\u0442\u0438", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-                type: "file",
-                name: "photo"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), "\u0411\u0443\u0434\u0435 \u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u043D\u043E \u0441\u0442\u0432\u043E\u0440\u0435\u043D\u043E preview \u0441 \u0448\u0438\u0440\u0438\u043D\u043E\u044E 300px"]
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("tr", {
-            style: {
-              'backgroundColor': 'yellow'
-            },
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
-              colSpan: "2",
-              children: "\u041B\u043E\u043A\u0430\u0446\u0456\u044F"
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
-              children: "\u0420\u043E\u0437\u0442\u0430\u0448\u0443\u0432\u0430\u043D\u043D\u044F"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
-              children: place
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
-              children: "\u0420\u0430\u0439\u043E\u043D"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-                type: "text",
-                name: "district",
-                size: "30",
-                defaultValue: isEdit && editedData.district
-              })
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
-              children: "point"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("td", {
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-                type: "text",
-                name: "point",
-                size: "20",
-                defaultValue: isEdit && editedData.point
-              }), " "]
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("td", {
-              children: ["\u0410\u0434\u0440\u0435\u0441\u0430", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), "(\u0431\u0435\u0437 \u0437\u0430\u0437\u043D\u0430\u0447\u0435\u043D\u043D\u044F \u0423\u043A\u0440\u0430\u0457\u043D\u0438", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), "\u0456 \u041B\u044C\u0432\u043E\u0432\u0430/\u041B\u044C\u0432\u0456\u0432\u0441\u044C\u043A\u043E\u0439 \u043E\u0431\u043B\u0430\u0441\u0442\u0456)"]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-                type: "text",
-                name: "address",
-                size: "30",
-                defaultValue: isEdit && editedData.address
-              })
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
-              children: "\u041A\u043E\u043E\u0440\u0434\u0438\u043D\u0430\u0442\u044B \u043D\u0430 \u0413\u0443\u0433\u043B-\u043C\u0430\u043F\u0456"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-                type: "text",
-                name: "coords",
-                size: "30",
-                defaultValue: isEdit && editedData.coords
-              })
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
-              style: {
-                textAlign: 'right'
-              },
-              children: manualChecked
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("td", {
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("b", {
-                children: "\u0412\u0440\u0443\u0447\u043D\u0443 \u0432\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D\u0456 \u043A\u043E\u043E\u0440\u0434\u0438\u043D\u0430\u0442\u0438?"
-              }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), "\u0432 \u0446\u044C\u043E\u043C\u0443 \u0432\u0438\u043F\u0430\u0434\u043A\u0443 \u0432\u043E\u043D\u0438 \u043D\u0435 \u0431\u0443\u0434\u0443\u0442\u044C", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), "\u043F\u0435\u0440\u0435\u0440\u0430\u0445\u043E\u0432\u0443\u0432\u0430\u0442\u0438\u0441\u044F \u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u043D\u043E"]
-            })]
+      className: "row",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        className: "col-sm-5 d-grid gap-3",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+            htmlFor: "lastName",
+            className: "form-label",
+            children: "\u041D\u0430\u0437\u0432\u0430"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableText, {
+            field: "name",
+            className: "form-control",
+            id: id,
+            initialValue: isEdit && dojo.name,
+            inlineUpdateUrl: updateUrl
           })]
-        })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableSwitch, {
+          field: "is_actual",
+          className: "form-check-input",
+          id: id,
+          initialValue: isEdit && dojo.is_actual ? 1 : 0,
+          inlineUpdateUrl: updateUrl,
+          children: "\u0427\u0438 \u0430\u043A\u0442\u0443\u0430\u043B\u044C\u043D\u0438\u0439 \u0437\u0430\u043B (\u0447\u0438 \u043F\u0440\u043E\u0432\u043E\u0434\u044F\u0442\u044C\u0441\u044F \u0432 \u043D\u044C\u043E\u043C\u0443 \u0437\u0430\u043D\u044F\u0442\u0442\u044F?)"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+            htmlFor: "info",
+            className: "form-label",
+            children: "\u0406\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0456\u044F"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableTextarea, {
+            field: "info",
+            className: "form-control",
+            id: id,
+            initialValue: isEdit ? dojo.info : '',
+            inlineUpdateUrl: updateUrl,
+            rows: "10"
+          })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        className: "mb-3 col-sm-1 mb-3"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        className: "form-floating_ mb-3 col-sm-6",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+          htmlFor: "photo",
+          className: "form-label",
+          children: "\u0424\u043E\u0442\u043E"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Photo__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          id: "photo",
+          name: "photo",
+          className: "form-control",
+          url: dojo && "/images/dojos/" + dojo.id + "/photo.png",
+          alt: isEdit ? '' + dojo.name : "Фото доджо",
+          editable: true
+        }), "\u0411\u0443\u0434\u0435 \u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u043D\u043E \u0441\u0442\u0432\u043E\u0440\u0435\u043D\u043E preview \u0441 \u0448\u0438\u0440\u0438\u043D\u043E\u044E 300px"]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        className: "col-md-12 mb-3",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+          style: {
+            'backgroundColor': 'yellow'
+          },
+          children: "\u0406\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440\u0438"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_EditAttachedEntities__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          entityName: "dojo",
+          entityId: id,
+          entityNameToAttach: "athlete",
+          attachedEntities: isEdit ? dojo.athletes : null,
+          updateUrl: updateUrl
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+        className: "col-md-12 d-grid mb-3",
+        style: {
+          'backgroundColor': 'yellow'
+        },
+        children: "\u041B\u043E\u043A\u0430\u0446\u0456\u044F"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        className: "col-md-3 mb-3",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+          htmlFor: "place",
+          className: "form-label",
+          children: "\u0420\u043E\u0437\u0442\u0430\u0448\u0443\u0432\u0430\u043D\u043D\u044F"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableSwitch, {
+          field: "place",
+          className: "form-check-input",
+          id: id,
+          initialValue: isEdit ? dojo.place : 1,
+          inlineUpdateUrl: updateUrl,
+          children: "\u041B\u044C\u0432\u0456\u0432 / \u041E\u0431\u043B\u0430\u0441\u0442\u044C"
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        className: "col-md-9 mb-3",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+          htmlFor: "district",
+          className: "form-label",
+          children: "\u0420\u0430\u0439\u043E\u043D"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableText, {
+          field: "district",
+          className: "form-control",
+          id: id,
+          initialValue: isEdit && dojo.district,
+          inlineUpdateUrl: updateUrl
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        className: "col-md-12 d-grid gap-3 mb-3",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+            htmlFor: "address",
+            className: "form-label",
+            children: "\u0410\u0434\u0440\u0435\u0441\u0430 (\u0431\u0435\u0437 \u0437\u0430\u0437\u043D\u0430\u0447\u0435\u043D\u043D\u044F \u0423\u043A\u0440\u0430\u0457\u043D\u0438 \u0456 \u041B\u044C\u0432\u043E\u0432\u0430/\u041B\u044C\u0432\u0456\u0432\u0441\u044C\u043A\u043E\u0439 \u043E\u0431\u043B\u0430\u0441\u0442\u0456)"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableText, {
+            field: "address",
+            className: "form-control",
+            id: id,
+            initialValue: isEdit && dojo.address,
+            inlineUpdateUrl: updateUrl
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+            htmlFor: "coords",
+            className: "form-label",
+            children: "\u041A\u043E\u043E\u0440\u0434\u0438\u043D\u0430\u0442\u044B \u043D\u0430 \u0413\u0443\u0433\u043B-\u043C\u0430\u043F\u0456"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableText, {
+            field: "coords",
+            className: "form-control",
+            id: id,
+            initialValue: isEdit && dojo.coords,
+            inlineUpdateUrl: updateUrl
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableSwitch, {
+          field: "is_manual",
+          className: "form-check-input",
+          id: id,
+          initialValue: isEdit && dojo.is_manual,
+          inlineUpdateUrl: updateUrl,
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("b", {
+            children: "\u0412\u0440\u0443\u0447\u043D\u0443 \u0432\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D\u0456 \u043A\u043E\u043E\u0440\u0434\u0438\u043D\u0430\u0442\u0438?"
+          }), " \u0432 \u0446\u044C\u043E\u043C\u0443 \u0432\u0438\u043F\u0430\u0434\u043A\u0443 \u0432\u043E\u043D\u0438 \u043D\u0435 \u0431\u0443\u0434\u0443\u0442\u044C \u043F\u0435\u0440\u0435\u0440\u0430\u0445\u043E\u0432\u0443\u0432\u0430\u0442\u0438\u0441\u044F \u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u043D\u043E"]
+        })]
       })]
     })]
   });
@@ -9991,12 +9860,13 @@ function useSave(inlineUpdateUrl, onBeforeSuccess) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(data)
-    }) // .then(response => response.json())
-    .then(function (response) {
-      if (typeof response["Not success"] !== "undefined") {
+    }).then(function (response) {
+      return response.json();
+    }).then(function (response) {
+      if (typeof response['Unsuccessful'] !== 'undefined') {
         // Failure
         if (typeof onFailure == 'function') {
-          onFailure();
+          onFailure(response['Unsuccessful']);
         }
       } else {
         // Success
@@ -10006,7 +9876,7 @@ function useSave(inlineUpdateUrl, onBeforeSuccess) {
 
 
         if (typeof onSuccess == 'function') {
-          onSuccess();
+          onSuccess(response['Successful']);
         } // Show toasted message
         // https://getbootstrap.com/docs/5.1/components/toasts/
         // console.log('saved ' + id + ' to ' + value + ' - ' + JSON.stringify(responseSavedSuccess));

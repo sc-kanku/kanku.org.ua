@@ -1,69 +1,27 @@
 import React, {useMemo, useState, useEffect} from 'react';
 import { useParams, Redirect} from 'react-router-dom';
-import DojoEditAthletes from '../controls/DojoEditAthletes';
+import EditAttachedEntities from '../controls/EditAttachedEntities';
+import Photo from '../controls/Photo';
+import { EditableText, EditableDate, EditableDegree, EditableSwitch, EditableTextarea } from '../controls/Table';
 
 const EditDojo = ({getUrl, updateUrl, photoFileName}) => {
     let { id } = useParams();
-    const [editedData, setEditedData] = useState(null);
-    const [isSavingDone, setIsSavingDone] = useState(false);
+    const [dojo, setDojo] = useState({});
 
     useEffect(() => {
         fetch(getUrl + "/" + id)
-            .then(response => response.json())
-            .then( editedData => {
-                setEditedData(editedData);
-            })
+            .then( response => response.json() )
+            .then( setDojo )
     }, []);
 
-    const saveEntity = (e) => {
-        const formData = new FormData( document.getElementById('edit-athlete') );
-
-        fetch(updateUrl + "/" + id, {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response/*.json()*/)
-        .then( response => {
-            setIsSavingDone(true);
-            // synch
-            // setEditedData(editedData);
-        });
-    }
-
-    let isEdit = editedData && editedData.id != null;
-    let editHeader = isEdit  ?  "Відредагувати " + editedData.name : "Ввести нового спортсмена";
-    let editEntityHiddenInputId = isEdit && <input type="hidden" name="id" value={editedData.id} />
-    let photoUrl = editedData && ("/images/dojos/" + editedData.id + "/photo.jpg");
-
-    let place = editedData && editedData.place == 1 
-        ? <>
-            <input type="radio" name="place" value="1" defaultChecked="checked" /> Львів
-            <input type="radio" name="place" value="2" /> Область
-        </>
-        : editedData && editedData.place == 2 
-            ? <>
-            <input type="radio" name="place" value="1" /> Львів
-            <input type="radio" name="place" value="2" defaultChecked="checked" /> Область
-        </>
-            : null;
-    
-    let actualChecked = isEdit && (editedData.is_actual == 1)
-        ? <input type="checkbox" name="is_actual" value="1" defaultChecked="checked" />
-        : <input type="checkbox" name="is_actual" value="1"/>
-
-    let manualChecked = isEdit && (editedData.is_manual == 1)
-        ? <input type="checkbox" name="is_manual" value="1" defaultChecked="checked" />
-        : <input type="checkbox" name="is_manual" value="1"/>
-
-    let full = isEdit ? editedData.info : '';
-    let athletes = isEdit ? editedData.athletes : null;
+    let isEdit = id != null;
 
     let garrerySnippet = "";
     
-    if (isEdit && editedData.gallery) {
-        let galleryUrl = "photo.php?galleryID=" + editedData.gallery['galleryID'];
+    if (isEdit && dojo.gallery) {
+        let galleryUrl = "photo.php?galleryID=" + dojo.gallery['galleryID'];
         garrerySnippet = 
-                    <ol><li><a href={galleryUrl}>{editedData.gallery['name']}</a></li></ol>
+                    <ol><li><a href={galleryUrl}>{dojo.gallery['name']}</a></li></ol>
     } else {
         if (isEdit) {
             garrerySnippet = 
@@ -76,91 +34,138 @@ const EditDojo = ({getUrl, updateUrl, photoFileName}) => {
         }
     }
 
-    if (isSavingDone) {
-        return (<Redirect to='/admin/dojo/list' />);
-    }
-
     return (
         <>
-            <h2>{editHeader}</h2>
+            <h2>{ isEdit ? dojo.name : "Новий доджо" }</h2>
 
-            <form id="edit-dojo" method="post" action={updateUrl} encType="multipart/form-data">
-                {editEntityHiddenInputId}
+            <form encType="multipart/form-data" className="row">
+                <div className="col-sm-5 d-grid gap-3">
+                    <div>
+                        <label htmlFor="lastName" className="form-label">Назва</label>
 
-                <table className="usual" cellSpacing="0">
-                    <tbody>
-                    <tr>
-                        <td>Назва</td>
-                        <td> <input type="text" name="name" size="50" defaultValue={isEdit && editedData.name} /> </td>
-                    </tr>
+                        <EditableText field="name" className="form-control"
+                            id={id} 
+                            initialValue={isEdit && dojo.name} 
+                            inlineUpdateUrl={updateUrl}
+                        />
+                    </div>
 
-                    <tr>
-                        <td>Інформація</td>
-                        <td><textarea name="full" rows="10" cols="50" defaultValue={full}></textarea> </td>
-                    </tr>
+                    <EditableSwitch
+                        field="is_actual" className="form-check-input"
+                        id={ id } 
+                        initialValue={(isEdit && dojo.is_actual) ? 1 : 0} 
+                        inlineUpdateUrl={updateUrl}
+                    >Чи актуальний зал (чи проводяться в ньому заняття?)
+                    </EditableSwitch>
 
-                    <tr>
-                        <td style={{textAlign:'right'}}>{actualChecked}</td>
-                        <td>Чи актуальний зал <br /> (чи проводяться в ньому заняття?)</td>
-                    </tr>
+                    <div>
+                        <label htmlFor="info" className="form-label">Інформація</label>
+                        
+                        <EditableTextarea field="info" className="form-control"
+                            id={id} 
+                            initialValue={isEdit ? dojo.info : ''} 
+                            inlineUpdateUrl={updateUrl}
+                            rows='10'
+                        />
+                    </div>
+                </div>
 
-                    <tr>                    
-                        <td>Інструктори</td>
-                        <td><DojoEditAthletes athletes={athletes} updateUrl={updateUrl + '/' + id} /></td>
-                    </tr>
+                <div className="mb-3 col-sm-1 mb-3"></div>
 
-                    <tr>
-                        <td>
-                            Фото
-                        </td>
-                        <td>
-                            <div className="col-2" style={{width:'10%'}}>
-                                <img className="dojo-photo instructor-photo" src={photoUrl} alt={editHeader} />
-                            </div>
-                            <br/>Змінити
-                            <br/><input type="file" name="photo" />
-                            <br/>Буде автоматично створено preview с шириною 300px
-                        </td>
-                    </tr>
-
-                    <tr  style={{'backgroundColor': 'yellow'}}>
-                        <td colSpan="2">Локація</td>
-                    </tr>
-
-                    <tr>
-                        <td>Розташування</td>
-                        <td>{place}</td>
-                    </tr>
-
-                    <tr>
-                        <td>Район</td>
-                        <td><input type="text" name="district" size="30" defaultValue={isEdit && editedData.district} /></td>
-                    </tr>
-
-                    <tr>
-                        <td>point</td>
-                        <td><input type="text" name="point" size="20" defaultValue={isEdit && editedData.point} /> </td>
-                    </tr>
-
-                    <tr>
-                        <td>Адреса<br />(без зазначення України<br />і Львова/Львівськой області)</td>
-                        <td><input type="text" name="address" size="30" defaultValue={isEdit && editedData.address} /></td>
-                    </tr>
-
-                    <tr>
-                        <td>Координаты на Гугл-мапі</td>
-                        <td><input type="text" name="coords" size="30" defaultValue={isEdit && editedData.coords} /></td>
-                    </tr>
+                {/* TODO */}
+                <div className="form-floating_ mb-3 col-sm-6">
+                    <label htmlFor="photo" className="form-label">Фото</label>
                     
-                    <tr> 
-                        <td style={{textAlign:'right'}}>{manualChecked}</td>
-                        <td><b>Вручну встановлені координати?</b> <br />в цьому випадку вони не будуть<br />перераховуватися автоматично</td>
-                    </tr>
+                    <Photo id="photo" name="photo" className="form-control"
+                        url={dojo && ("/images/dojos/" + dojo.id + "/photo.png")}
+                        alt={isEdit ? ('' + dojo.name) : "Фото доджо"}
+                        editable={true}
+                    />
+                    Буде автоматично створено preview с шириною 300px
+                </div>
 
+
+                <div className="col-md-12 mb-3">
+                    <p style={{'backgroundColor': 'yellow'}}>Інструктори</p>
+                    <EditAttachedEntities 
+                        entityName='dojo'
+                        entityId={ id} 
+                        entityNameToAttach='athlete'
+                        attachedEntities={isEdit ? dojo.athletes : null} 
+                        updateUrl={updateUrl}
+                    />
+                </div>
+
+                <p className="col-md-12 d-grid mb-3" style={{'backgroundColor': 'yellow'}}>Локація</p>
+
+                <div className="col-md-3 mb-3">
+                    <label htmlFor="place" className="form-label">Розташування</label>
+                    
+                    <EditableSwitch
+                        field="place" className="form-check-input"
+                        id={ id } 
+                        initialValue={ isEdit ? dojo.place : 1 } 
+                        inlineUpdateUrl={updateUrl}
+                    >Львів / Область
+                    </EditableSwitch>
+                    {/* <input type="radio" name="place" value="1" defaultChecked="checked" /> Львів
+                    <input type="radio" name="place" value="2" /> Область */}
+                </div>
+
+                <div className="col-md-9 mb-3">
+                    <label htmlFor="district" className="form-label">Район</label>
+
+                    <EditableText field="district" className="form-control"
+                        id={id} 
+                        initialValue={isEdit && dojo.district} 
+                        inlineUpdateUrl={updateUrl}
+                    />
+                </div>
+
+                {/* <div className="col-md-6 mb-3">
+                    <label htmlFor="point" className="form-label">point</label>
+
+                    <EditableText field="point" className="form-control"
+                        id={ id } 
+                        initialValue={isEdit && dojo.point} 
+                        inlineUpdateUrl={updateUrl}
+                    />
+                </div> */}
+
+                <div className="col-md-12 d-grid gap-3 mb-3">
+                    <div>
+                        <label htmlFor="address" className="form-label">Адреса (без зазначення України і Львова/Львівськой області)</label>
+
+                        <EditableText field="address" className="form-control"
+                            id={ id } 
+                            initialValue={ isEdit && dojo.address } 
+                            inlineUpdateUrl={ updateUrl }
+                        />
+                    </div>
+
+                    <div>
+                        <label htmlFor="coords" className="form-label">Координаты на Гугл-мапі</label>
+
+                        <EditableText field="coords" className="form-control"
+                            id={ id } 
+                            initialValue={ isEdit && dojo.coords } 
+                            inlineUpdateUrl={ updateUrl }
+                        />
+                    </div>
+
+                    <EditableSwitch
+                        field="is_manual" className="form-check-input"
+                        id={ id } 
+                        initialValue={ isEdit && dojo.is_manual } 
+                        inlineUpdateUrl={ updateUrl }
+                    ><b>Вручну встановлені координати?</b> в цьому випадку вони не будуть перераховуватися автоматично
+                    </EditableSwitch>
+                </div>
+                
                     {/*}
                     <tr>
                         <td>url</td>
-                        <td><input type="text" name="url" size="30" defaultValue={isEdit && editedData.url} /></td>
+                        <td><input type="text" name="url" size="30" defaultValue={isEdit && dojo.url} /></td>
                     </tr>
                     */}
 
@@ -172,13 +177,12 @@ const EditDojo = ({getUrl, updateUrl, photoFileName}) => {
 */}
 
 
-                    <tr>
+                    {/* <tr>
                         <td colSpan="2">
                             <input type="button" name="save" value="зберегти" onClick={saveEntity} />
                         </td>
-                    </tr>
-                    </tbody>
-                </table>
+                    </tr> */}
+                    
             </form>
         </>
     )
