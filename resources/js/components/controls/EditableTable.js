@@ -86,7 +86,6 @@ export default function EditableTable ({
                             <div className="alert alert-warning" role="alert">
                                 <h4 className="alert-heading">Крім:</h4>
                                 <ol>
-                                    <li>Локація \ Розташування</li>
                                     <li>Вручну встановлені координати? в цьому випадку вони не будуть перераховуватися автоматично</li>
                                     
                                     <span className="text-secondary">
