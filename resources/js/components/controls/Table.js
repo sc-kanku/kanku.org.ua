@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTable, useGlobalFilter, useSortBy } from 'react-table';
 import Degree from './Degree';
 import PostCategory from './PostCategory';
@@ -65,17 +65,33 @@ export const EditableDate = ({ initialValue, className, ...props }) => {
 }
 
 // Create an editable cell renderer
-export const EditableSwitch = ({ initialValue, className, children, ...props }) => {
+// TODO: debug and optimize it (rerenders to many times)
+export const EditableSwitch = ({ initialValue, className, children, values, labels, ...props }) => {
     // We need to keep and update the state of the cell normally
     initialValue = initialValue != null ? initialValue : "";
     className = typeof className == 'undefined' ? '' : className;
     children = typeof children == 'undefined' ? null : children;
+    values = typeof values == 'undefined' ? [0, 1] : values;
 
     const [Editable, value, onChange] = useEditable({ 
         ...props, 
         data: {id: props.id, field: props.field, value: initialValue},
-        getNewValue : (e) => e.target.checked ? 1 : 0 // 1 - value
+        getNewValue : (e) => e.target.checked ? values[1] : values[0],
       });
+
+    const defineLabel = (value) => {
+      let defined = children;
+
+      if (typeof labels != 'undefined') {
+        if (value == values[0]) {
+          defined = labels[ 0]
+        } else if (value == values[1]) {
+          defined = labels[1]
+        }
+      } 
+
+      return defined;
+    }
 
     let id = props.field + Math.round(Math.random() * 1000000);
 
@@ -83,12 +99,12 @@ export const EditableSwitch = ({ initialValue, className, children, ...props }) 
       <Editable />
       <div className="form-check form-switch">
         <input
-          id={id} name={props.field} className={className}
+          id={ id } name={ props.field } className={ className }
           type='checkbox' role="switch"
-          checked={value == 1}
-          onChange={onChange} 
+          checked={ value == values[1] }
+          onChange={ onChange } 
         />
-        <label htmlFor={id} className="form-label">{children}</label>
+        <label htmlFor={id} className="form-label">{ defineLabel(value) }</label>
       </div>
     </>
 }

@@ -7118,7 +7118,7 @@ __webpack_require__.r(__webpack_exports__);
 var _excluded = ["initialValue", "className"],
     _excluded2 = ["initialValue", "className"],
     _excluded3 = ["initialValue", "className"],
-    _excluded4 = ["initialValue", "className", "children"],
+    _excluded4 = ["initialValue", "className", "children", "values", "labels"],
     _excluded5 = ["initialValue", "type", "className", "disabled"],
     _excluded6 = ["initialValue", "type", "className", "rows"];
 
@@ -7255,17 +7255,21 @@ var EditableDate = function EditableDate(_ref3) {
     })]
   });
 }; // Create an editable cell renderer
+// TODO: debug and optimize it (rerenders to many times)
 
 var EditableSwitch = function EditableSwitch(_ref4) {
   var initialValue = _ref4.initialValue,
       className = _ref4.className,
       children = _ref4.children,
+      values = _ref4.values,
+      labels = _ref4.labels,
       props = _objectWithoutProperties(_ref4, _excluded4);
 
   // We need to keep and update the state of the cell normally
   initialValue = initialValue != null ? initialValue : "";
   className = typeof className == 'undefined' ? '' : className;
   children = typeof children == 'undefined' ? null : children;
+  values = typeof values == 'undefined' ? [0, 1] : values;
 
   var _useEditable7 = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_5__["default"])(_objectSpread(_objectSpread({}, props), {}, {
     data: {
@@ -7274,14 +7278,27 @@ var EditableSwitch = function EditableSwitch(_ref4) {
       value: initialValue
     },
     getNewValue: function getNewValue(e) {
-      return e.target.checked ? 1 : 0;
-    } // 1 - value
-
+      return e.target.checked ? values[1] : values[0];
+    }
   })),
       _useEditable8 = _slicedToArray(_useEditable7, 3),
       Editable = _useEditable8[0],
       value = _useEditable8[1],
       onChange = _useEditable8[2];
+
+  var defineLabel = function defineLabel(value) {
+    var defined = children;
+
+    if (typeof labels != 'undefined') {
+      if (value == values[0]) {
+        defined = labels[0];
+      } else if (value == values[1]) {
+        defined = labels[1];
+      }
+    }
+
+    return defined;
+  };
 
   var id = props.field + Math.round(Math.random() * 1000000);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
@@ -7293,12 +7310,12 @@ var EditableSwitch = function EditableSwitch(_ref4) {
         className: className,
         type: "checkbox",
         role: "switch",
-        checked: value == 1,
+        checked: value == values[1],
         onChange: onChange
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
         htmlFor: id,
         className: "form-label",
-        children: children
+        children: defineLabel(value)
       })]
     })]
   });
@@ -9198,7 +9215,7 @@ var EditDojo = function EditDojo(_ref) {
     fetch(getUrl + "/" + id).then(function (response) {
       return response.json();
     }).then(setDojo);
-  }, []);
+  }, [id]);
   var isEdit = id != null;
   var garrerySnippet = "";
 
@@ -9306,7 +9323,7 @@ var EditDojo = function EditDojo(_ref) {
         },
         children: "\u041B\u043E\u043A\u0430\u0446\u0456\u044F"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-        className: "col-md-3 mb-3",
+        className: "col-md-2 mb-3",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
           htmlFor: "place",
           className: "form-label",
@@ -9317,10 +9334,11 @@ var EditDojo = function EditDojo(_ref) {
           id: id,
           initialValue: isEdit ? dojo.place : 1,
           inlineUpdateUrl: updateUrl,
-          children: "\u041B\u044C\u0432\u0456\u0432 / \u041E\u0431\u043B\u0430\u0441\u0442\u044C"
+          values: [1, 2],
+          labels: ['Львів', 'Область']
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-        className: "col-md-9 mb-3",
+        className: "col-md-10 mb-3",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
           htmlFor: "district",
           className: "form-label",

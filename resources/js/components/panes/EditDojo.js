@@ -12,7 +12,7 @@ const EditDojo = ({getUrl, updateUrl, photoFileName}) => {
         fetch(getUrl + "/" + id)
             .then( response => response.json() )
             .then( setDojo )
-    }, []);
+    }, [id]);
 
     let isEdit = id != null;
 
@@ -98,7 +98,7 @@ const EditDojo = ({getUrl, updateUrl, photoFileName}) => {
 
                 <p className="col-md-12 d-grid mb-3" style={{'backgroundColor': 'yellow'}}>Локація</p>
 
-                <div className="col-md-3 mb-3">
+                <div className="col-md-2 mb-3">
                     <label htmlFor="place" className="form-label">Розташування</label>
                     
                     <EditableSwitch
@@ -106,13 +106,12 @@ const EditDojo = ({getUrl, updateUrl, photoFileName}) => {
                         id={ id } 
                         initialValue={ isEdit ? dojo.place : 1 } 
                         inlineUpdateUrl={updateUrl}
-                    >Львів / Область
-                    </EditableSwitch>
-                    {/* <input type="radio" name="place" value="1" defaultChecked="checked" /> Львів
-                    <input type="radio" name="place" value="2" /> Область */}
+                        values = { [1, 2] }
+                        labels = { ['Львів', 'Область']}
+                    />
                 </div>
 
-                <div className="col-md-9 mb-3">
+                <div className="col-md-10 mb-3">
                     <label htmlFor="district" className="form-label">Район</label>
 
                     <EditableText field="district" className="form-control"
