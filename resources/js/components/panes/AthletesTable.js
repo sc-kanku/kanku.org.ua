@@ -5,7 +5,7 @@ import EditableTable from './../controls/EditableTable';
 // {athletes.length ? <AthletesTable athletes={athletes} /> : <p>No Athletes</p>}
 function AthletesTable() {
 
-     /* 
+     /*
     - Columns is a simple array right now, but it will contain some logic later on. It is recommended by react-table to memoize the columns data
     - Here in this example, we have grouped our columns into two headers. react-table is flexible enough to create grouped table headers
   */
@@ -51,19 +51,19 @@ function AthletesTable() {
             accessor: "is_coach"
           },
           {
-            Header: "В найкращих спортсменах",
+            Header: <>В найкращих <br/> спортсменах</>,
             accessor: "is_best"
           },
           {
-            Header: "Проводить тренування",
+            Header: <>Проводить <br/>тренування </>,
             accessor: "is_actual"
           },
           {
-            Header: "Номер телефону",
+            Header: 'Телефон',
             accessor: "phone"
           },
           {
-            Header: "Додатковий номер телефону",
+            Header: <>Додатковий <br /> телефон</>,
             accessor: "phone2",
             headerClassName: 'col-3'
           }]}
@@ -71,8 +71,8 @@ function AthletesTable() {
   );
 
   return (
-      <EditableTable 
-        columns = {columns} 
+      <EditableTable
+        columns = {columns}
         entity = 'athlete'
       />
   );

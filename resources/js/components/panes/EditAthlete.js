@@ -5,7 +5,7 @@ import { EditableText, EditableDate, EditableDegree, EditableSwitch, EditableTex
 
 import EditAttachedEntities from '../controls/EditAttachedEntities';
 
-const EditAthlete = ({getUrl, updateUrl, photoFileName}) => {
+const EditAthlete = ({getUrl, updateUrl}) => {
     const { id } = useParams();
     const [athlete, setAthlete] = useState({});
 
@@ -17,16 +17,16 @@ const EditAthlete = ({getUrl, updateUrl, photoFileName}) => {
 
     let isEdit = id != null;
 
-    // TODO: 
+    // TODO:
     let gallerySnippet = "";
 
     if (isEdit && athlete.gallery) {
         let galleryUrl = "photo.php?galleryID=" + athlete.gallery['galleryID'];
-        gallerySnippet = 
+        gallerySnippet =
                     <ol><li><a href={galleryUrl}>{athlete.gallery['name']}</a></li></ol>
     } else {
         if (isEdit) {
-            gallerySnippet = 
+            gallerySnippet =
             <p>
                 Фотогалерея еще не введена<br />
                 <input type="button" value="Ввести фотогалерею" onclick="location.href='new_a_gallery.php?id=<?= $athlet->id ?>'" />
@@ -45,8 +45,8 @@ const EditAthlete = ({getUrl, updateUrl, photoFileName}) => {
                         <label htmlFor="lastName" className="form-label">Прізвище</label>
 
                         <EditableText field="lastName" className="form-control"
-                            id={isEdit && athlete.id} 
-                            initialValue={isEdit && athlete.lastName} 
+                            id={isEdit && athlete.id}
+                            initialValue={isEdit && athlete.lastName}
                             inlineUpdateUrl={updateUrl}
                         />
                     </div>
@@ -55,8 +55,8 @@ const EditAthlete = ({getUrl, updateUrl, photoFileName}) => {
                         <label htmlFor="firstName" className="form-label">Ім'я</label>
 
                         <EditableText field="firstName" className="form-control"
-                            id={isEdit && athlete.id} 
-                            initialValue={isEdit && athlete.firstName} 
+                            id={isEdit && athlete.id}
+                            initialValue={isEdit && athlete.firstName}
                             inlineUpdateUrl={updateUrl}
                         />
                     </div>
@@ -65,28 +65,28 @@ const EditAthlete = ({getUrl, updateUrl, photoFileName}) => {
                         <label htmlFor="patronymic" className="form-label">По батькові</label>
 
                         <EditableText field="patronymic" className="form-control"
-                            id={isEdit && athlete.id} 
-                            initialValue={isEdit && athlete.patronymic} 
+                            id={isEdit && athlete.id}
+                            initialValue={isEdit && athlete.patronymic}
                             inlineUpdateUrl={updateUrl}
                         />
                     </div>
 
                     <div>
                         <label htmlFor="birthday" className="form-label">Дата народження</label>
-                        
+
                         <EditableDate field="birthday" className="form-control"
-                            id={isEdit && athlete.id} 
-                            initialValue={isEdit && athlete.birthday} 
+                            id={isEdit && athlete.id}
+                            initialValue={isEdit && athlete.birthday}
                             inlineUpdateUrl={updateUrl}
                         />
                     </div>
 
-                    <div> 
+                    <div>
                         <label htmlFor="degree" className="form-label">Ступінь</label>
-                        
+
                         <EditableDegree field="degree" className="form-control"
-                            id={isEdit && athlete.id} 
-                            initialValue={isEdit && athlete.degree} 
+                            id={isEdit && athlete.id}
+                            initialValue={isEdit && athlete.degree}
                             inlineUpdateUrl={updateUrl}
                         />
                     </div>
@@ -97,7 +97,7 @@ const EditAthlete = ({getUrl, updateUrl, photoFileName}) => {
                 {/* TODO */}
                 <div className="form-floating_ mb-3 col-sm-6">
                     <label htmlFor="photo" className="form-label">Фото</label>
-                    
+
                     <Photo id="photo" name="photo" className="form-control"
                         url={athlete && ("/images/athletes/" + athlete.id + "/photo.png")}
                         alt={isEdit ? ('' + athlete.lastName + ' ' + athlete.firstName + ' ' + athlete.patronymic ) : "Фото спортсмена"}
@@ -107,34 +107,34 @@ const EditAthlete = ({getUrl, updateUrl, photoFileName}) => {
 
                 <div className="col-md-5 d-grid gap-3 mb-3">
                     <p style={{'backgroundColor': 'yellow'}}>Контактна інформація</p>
-                
+
                     <div>
                         <label htmlFor="phone" className="form-label">Телефон</label>
-                        
+
                         <EditableText field="phone" className="form-control"
-                            id={isEdit && athlete.id} 
-                            initialValue={isEdit && athlete.phone} 
+                            id={isEdit && athlete.id}
+                            initialValue={isEdit && athlete.phone}
                             inlineUpdateUrl={updateUrl}
                         />
                     </div>
 
                     <div>
                         <label htmlFor="phone2" className="form-label">Додатковий телефон</label>
-                        
+
                         <EditableText field="phone2" className="form-control"
-                            id={isEdit && athlete.id} 
-                            initialValue={isEdit && athlete.phone2} 
+                            id={isEdit && athlete.id}
+                            initialValue={isEdit && athlete.phone2}
                             inlineUpdateUrl={updateUrl}
                         />
                     </div>
 
                     <div>
                         <label htmlFor="email" className="form-label">E-mail <span className='text-secondary' >(не можна редагувати)</span></label>
-                        
+
                         <EditableText field="email" className="form-control"
-                            id={isEdit && athlete.id} 
+                            id={isEdit && athlete.id}
                             type="email" disabled={true}
-                            initialValue={isEdit && athlete.email} 
+                            initialValue={isEdit && athlete.email}
                             inlineUpdateUrl={updateUrl}
                         />
                     </div>
@@ -147,30 +147,30 @@ const EditAthlete = ({getUrl, updateUrl, photoFileName}) => {
 
                     <EditableSwitch
                         field="is_actual" className="form-check-input"
-                        id={isEdit ? athlete.id : 0} 
-                        initialValue={(isEdit && athlete.is_actual) ? 1 : 0} 
+                        id={isEdit ? athlete.id : 0}
+                        initialValue={(isEdit && athlete.is_actual) ? 1 : 0}
                         inlineUpdateUrl={updateUrl}
                     >Належить до нашого клубу?
                     </EditableSwitch>
 
                     <EditableSwitch
                         field="show_in_blacks" className="form-check-input"
-                        id={isEdit ? athlete.id : 0} 
-                        initialValue={(isEdit && athlete.show_in_blacks) ? 1 : 0} 
+                        id={isEdit ? athlete.id : 0}
+                        initialValue={(isEdit && athlete.show_in_blacks) ? 1 : 0}
                         inlineUpdateUrl={updateUrl}
                     >Показувати на сторінці чорних поясів нашого клубу (якщо досягнуто відповідного ступеню)?
                     </EditableSwitch>
                 </div>
 
-                <div className="mb-3 col-md-12 d-grid gap-3">                
+                <div className="mb-3 col-md-12 d-grid gap-3">
                     <p style={{'backgroundColor': 'yellow'}}>Про спортсмена</p>
-                
+
                     <div>
                         <label htmlFor="full" className="form-label">Повна інформація для сторінки спортсмена</label>
-                        
+
                         <EditableTextarea field="full" className="form-control"
-                            id={isEdit && athlete.id} 
-                            initialValue={isEdit ? athlete.full : ''} 
+                            id={isEdit && athlete.id}
+                            initialValue={isEdit ? athlete.full : ''}
                             inlineUpdateUrl={updateUrl}
                             rows='10'
                         />
@@ -178,96 +178,96 @@ const EditAthlete = ({getUrl, updateUrl, photoFileName}) => {
 
                     <EditableSwitch
                         field="is_coach" className="form-check-input"
-                        id={ id } 
-                        initialValue={(isEdit && athlete.is_coach) ? 1 : 0} 
+                        id={ id }
+                        initialValue={(isEdit && athlete.is_coach) ? 1 : 0}
                         inlineUpdateUrl={updateUrl}
                     >Інструктор?
                     </EditableSwitch>
 
-                    <div className="mb-2">                
+                    <div className="mb-2">
                         <label htmlFor="brief" className="form-label">Коротка інформація для сторінки зі списком всіх інструкторів</label>
 
                         <EditableTextarea field="brief" className="form-control"
-                            id={isEdit && athlete.id} 
-                            initialValue={isEdit ? athlete.brief : ''} 
+                            id={isEdit && athlete.id}
+                            initialValue={isEdit ? athlete.brief : ''}
                             inlineUpdateUrl={updateUrl}
                         />
                     </div>
 
                     <EditableSwitch
                         field="is_best" className="form-check-input"
-                        id={isEdit ? athlete.id : 0} 
-                        initialValue={(isEdit && athlete.is_best) ? 1 : 0} 
+                        id={isEdit ? athlete.id : 0}
+                        initialValue={(isEdit && athlete.is_best) ? 1 : 0}
                         inlineUpdateUrl={updateUrl}
                     >Показувати в кращих спортсменах?
                     </EditableSwitch>
 
-                    <div className="mb-2">                
+                    <div className="mb-2">
                         <label htmlFor="briefBest" className="form-label">Коротка інформація для сторінки найкращих спортсменів</label>
 
                         <EditableTextarea field="briefBest" className="form-control"
-                            id={isEdit && athlete.id} 
-                            initialValue={isEdit ? athlete.briefBest : ''} 
+                            id={isEdit && athlete.id}
+                            initialValue={isEdit ? athlete.briefBest : ''}
                             inlineUpdateUrl={updateUrl}
                         />
                     </div>
                 </div>
 
-                <div className="mb-3 col-md-12">                
+                <div className="mb-3 col-md-12">
                     <p style={{'backgroundColor': 'yellow'}}>Зали</p>
-                    <EditAttachedEntities 
+                    <EditAttachedEntities
                         entityName='athlete'
-                        entityId={isEdit && athlete.id} 
+                        entityId={isEdit && athlete.id}
                         entityNameToAttach='dojo'
-                        attachedEntities={isEdit ? athlete.dojos : null} 
+                        attachedEntities={isEdit ? athlete.dojos : null}
                         updateUrl={updateUrl}
                     />
                 </div>
 
-                <div className="mb-3 col-md-12 d-grid gap-3">                
+                <div className="mb-3 col-md-12 d-grid gap-3">
                     <p style={{'backgroundColor': 'yellow'}}>Соціальні мережі</p>
-                    
-                    <div>                
+
+                    <div>
                         <label htmlFor="facebook" className="form-label">Facebook</label>
 
                         <EditableText field="facebook" className="form-control"
-                            id={isEdit && athlete.id} 
-                            initialValue={isEdit && athlete.facebook} 
+                            id={isEdit && athlete.id}
+                            initialValue={isEdit && athlete.facebook}
                             inlineUpdateUrl={updateUrl}
                         />
                     </div>
 
-                    <div>                
+                    <div>
                         <label htmlFor="instagram" className="form-label">Instagram</label>
-                        
+
                         <EditableText field="instagram" className="form-control"
-                            id={isEdit && athlete.id} 
-                            initialValue={isEdit && athlete.instagram} 
+                            id={isEdit && athlete.id}
+                            initialValue={isEdit && athlete.instagram}
                             inlineUpdateUrl={updateUrl}
                         />
                     </div>
 
-                    <div>                
+                    <div>
                         <label htmlFor="youtube" className="form-label">Youtube</label>
 
                         <EditableText field="youtube" className="form-control"
-                            id={isEdit && athlete.id} 
-                            initialValue={isEdit && athlete.youtube} 
+                            id={isEdit && athlete.id}
+                            initialValue={isEdit && athlete.youtube}
                             inlineUpdateUrl={updateUrl}
                         />
                     </div>
 
-                    <div>                
+                    <div>
                         <label htmlFor="twitter" className="form-label">Twitter</label>
 
                         <EditableText field="twitter" className="form-control"
-                            id={isEdit && athlete.id} 
-                            initialValue={isEdit && athlete.twitter} 
+                            id={isEdit && athlete.id}
+                            initialValue={isEdit && athlete.twitter}
                             inlineUpdateUrl={updateUrl}
                         />
                     </div>
                 </div>
-            </form>        
+            </form>
         </>
     );
 };

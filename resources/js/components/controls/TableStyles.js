@@ -48,8 +48,9 @@ const TableStyles = styled.div`
     margin: 0;
     border: 0;
     background-color: inherit;
+    width: 100%;
   }
-  
+
   .form-check-input:checked {
     background-color: #0cc80f;
   }
@@ -80,7 +81,7 @@ const TableStyles = styled.div`
   .table-striped tbody tr:nth-of-type(odd) {
     background-color: rgba(26, 135, 200, 0.09);
   }
-  
+
   .table-hover tbody tr:hover {
     color: #0ba9e7;
     background-color: rgba(26, 135, 200, 0.2);

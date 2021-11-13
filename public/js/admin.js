@@ -6735,87 +6735,12 @@ function EditableTable(_ref) {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
           path: [urls.editEntityWebUrl, urls.newEntityWebUrl],
           render: function render() {
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
-              children: [entity == 'athlete' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-                  className: "alert alert-success mt-3",
-                  role: "alert",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h4", {
-                    className: "alert-heading",
-                    children: "\u041D\u0430 \u0446\u0456\u0439 \u0441\u0442\u043E\u0440\u0456\u043D\u0446\u0456 \u043D\u0430\u0441\u0442\u0443\u043F\u043D\u0435 \u0432\u0436\u0435 \u043F\u0440\u0430\u0446\u044E\u0454:"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("ol", {
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
-                      className: "text-danger",
-                      children: "\u0420\u043E\u0437\u0434\u0456\u043B '\u0437\u0430\u043B\u0438' \u0432\u0436\u0435 \u0437\u0431\u0435\u0440\u0456\u0433\u0430\u0454\u0442\u044C\u0441\u044F"
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
-                      children: "\u0412\u0456\u0434\u0440\u0435\u0434\u0430\u0433\u043E\u0432\u0430\u043D\u0456 \u0434\u0430\u043D\u0456 \u0437\u0431\u0435\u0440\u0456\u0433\u0430\u044E\u0442\u044C\u0441\u044F \u043D\u0430 \u0441\u0435\u0440\u0432\u0435\u0440 \u043F\u043E \u0432\u0442\u0440\u0430\u0442\u0456 \u0444\u043E\u043A\u0443\u0441\u0443 (\u043A\u0440\u0456\u043C \u0440\u043E\u0437\u043A\u043B\u0430\u0434\u0443) (\u0434\u043B\u044F \u0442\u0435\u043A\u0441\u0442\u043E\u0432\u0438\u0445 \u043F\u043E\u043B\u0456\u0432) \u0447\u0438 \u0437\u043C\u0456\u043D\u0456 \u0437\u043D\u0430\u0447\u0435\u043D\u043D\u044F (\u0434\u043B\u044F \u0441\u0435\u043B\u0435\u043A\u0442\u0456\u0432 \u0456 \u0447\u0435\u043A\u0431\u043E\u043A\u0441\u0456\u0432)"
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
-                      children: "\u0456 \u044F\u043A\u0449\u043E \u0432\u0441\u0435 \u0434\u043E\u0431\u0440\u0435 \u0437\u0431\u0435\u0440\u0435\u0433\u043B\u043E\u0441\u044C \u0442\u043E \u0437'\u044F\u0432\u043B\u044F\u0454\u0442\u044C\u0441\u044F \u0437\u0435\u043B\u0435\u043D\u0430 \u043F\u0456\u043C\u043F\u043E\u0447\u043A\u0430 \u0441\u043F\u0440\u0430\u0432\u0430 \u043F\u043E\u043B\u044F, \u044F\u043A\u0435 \u0440\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u043B\u043E\u0441\u044C (\u044F\u043A\u0449\u043E \u0449\u043E\u0441\u044C \u043D\u0435 \u0437\u0431\u0435\u0440\u0435\u0433\u043B\u043E\u0441\u044C, \u0442\u043E \u043F\u043E\u0432\u0456\u0434\u043E\u043C\u043B\u044F\u0454 \u043F\u0440\u043E \u0446\u0435 \u0430\u043D\u0430\u043B\u043E\u0433\u0456\u0447\u043D\u0430 \u0447\u0435\u0440\u0432\u043E\u043D\u0430 \u043F\u0456\u043C\u043F\u043E\u0447\u043A\u0430)"
-                    })]
-                  })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-                  className: "alert alert-warning",
-                  role: "alert",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h4", {
-                    className: "alert-heading",
-                    children: "\u041D\u0430\u0440\u0430\u0437\u0456 \u043D\u0435 \u043F\u0440\u0430\u0446\u044E\u0454:"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("ol", {
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("span", {
-                      className: "text-secondary",
-                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
-                        children: "\u0414\u043E\u0434\u0430\u0432\u0430\u043D\u043D\u044F \u043D\u043E\u0432\u043E\u0433\u043E \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430 / \u0437\u0430\u043B\u0443 / \u043D\u043E\u0432\u0438\u043D\u0438"
-                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
-                        children: "\u0420\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u043D\u043D\u044F \u0444\u043E\u0442\u043E"
-                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
-                        children: "\u0412\u0430\u043B\u0456\u0434\u0430\u0446\u0456\u044F"
-                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
-                        children: "\u0406 \u0442\u0430\u043A\u043E\u0436 \u0433\u0430\u043B\u0435\u0440\u0435\u0457 \u0442\u0440\u0435\u043D\u0435\u0440\u0430 \u0432\u0456\u0434\u043A\u043B\u044E\u0447\u0435\u043D\u0456 \u043D\u0430\u0440\u0430\u0437\u0456"
-                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
-                        children: "\u0412 \u0441\u0435\u043A\u0446\u0456\u0457 '\u0437\u0430\u043B\u0438 / \u0434\u043E\u0434\u0430\u0442\u0438 dojo' \u043F\u043E\u0442\u0440\u0456\u0431\u043D\u043E \u043F\u043E\u043A\u0430\u0437\u0443\u0432\u0430\u0442\u0438 \u043B\u0438\u0448\u0435 \u0442\u0456 \u0437\u0430\u043B\u0438 \u0432 \u044F\u043A\u0438\u0445 \u0434\u0430\u043D\u0438\u0439 \u0442\u0440\u0435\u0442\u0435\u0440 \u043D\u0435 \u0442\u0440\u0435\u043D\u0443\u0454."
-                      })]
-                    })
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
-                    children: "\u042F\u043A\u0431\u0438 \u0449\u0435 \u0432\u0438\u043B\u0456\u0437\u043B\u043E \u0449\u043E\u0441\u044C \u0456\u043D\u0448\u0435 (\u0430\u0431\u043E \u043F\u0440\u043E\u0441\u0442\u043E \u043C\u0430\u0454\u0442\u0435 \u0445\u043E\u0440\u043E\u0448\u0456 \u0456\u0434\u0435\u0457), \u0442\u043E \u0434\u0430\u0439\u0442\u0435 \u0431\u0443\u0434\u044C \u043B\u0430\u0441\u043A\u0430 \u0437\u043D\u0430\u0442\u0438"
-                  })]
-                })]
-              }), entity == 'dojo' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-                  className: "alert alert-success mt-3",
-                  role: "alert",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h4", {
-                    className: "alert-heading",
-                    children: "\u041D\u0430 \u0446\u0456\u0439 \u0441\u0442\u043E\u0440\u0456\u043D\u0446\u0456 \u043C\u0430\u0439\u0436\u0435 \u0432\u0441\u0435 \u043F\u0440\u0430\u0446\u044E\u0454."
-                  })
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-                  className: "alert alert-warning",
-                  role: "alert",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h4", {
-                    className: "alert-heading",
-                    children: "\u041A\u0440\u0456\u043C:"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("ol", {
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
-                      children: "\u0412\u0440\u0443\u0447\u043D\u0443 \u0432\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D\u0456 \u043A\u043E\u043E\u0440\u0434\u0438\u043D\u0430\u0442\u0438? \u0432 \u0446\u044C\u043E\u043C\u0443 \u0432\u0438\u043F\u0430\u0434\u043A\u0443 \u0432\u043E\u043D\u0438 \u043D\u0435 \u0431\u0443\u0434\u0443\u0442\u044C \u043F\u0435\u0440\u0435\u0440\u0430\u0445\u043E\u0432\u0443\u0432\u0430\u0442\u0438\u0441\u044F \u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u043D\u043E"
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("span", {
-                      className: "text-secondary",
-                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
-                        children: "\u0420\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u043D\u043D\u044F \u0444\u043E\u0442\u043E"
-                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
-                        children: "\u0412\u0430\u043B\u0456\u0434\u0430\u0446\u0456\u044F"
-                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
-                        children: "\u0406 \u0442\u0430\u043A\u043E\u0436 \u0433\u0430\u043B\u0435\u0440\u0435\u0457 \u0432\u0456\u0434\u043A\u043B\u044E\u0447\u0435\u043D\u0456 \u043D\u0430\u0440\u0430\u0437\u0456"
-                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
-                        children: "\u0412 \u0441\u0435\u043A\u0446\u0456\u0457 '\u0456\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440\u0438 / \u0434\u043E\u0434\u0430\u0442\u0438 athlete' \u043F\u043E\u0442\u0440\u0456\u0431\u043D\u043E \u043F\u043E\u043A\u0430\u0437\u0443\u0432\u0430\u0442\u0438 \u043B\u0438\u0448\u0435 \u0442\u0456 athlete \u0432 \u044F\u043A\u0438\u0445 \u0434\u0430\u043D\u043E\u0433\u043E \u0434\u043E\u0434\u0436\u043E \u043D\u0435\u043C\u0430."
-                      })]
-                    })]
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
-                    children: "\u042F\u043A\u0431\u0438 \u0449\u0435 \u0432\u0438\u043B\u0456\u0437\u043B\u043E \u0449\u043E\u0441\u044C \u0456\u043D\u0448\u0435 (\u0430\u0431\u043E \u043F\u0440\u043E\u0441\u0442\u043E \u043C\u0430\u0454\u0442\u0435 \u0445\u043E\u0440\u043E\u0448\u0456 \u0456\u0434\u0435\u0457), \u0442\u043E \u0434\u0430\u0439\u0442\u0435 \u0431\u0443\u0434\u044C \u043B\u0430\u0441\u043A\u0430 \u0437\u043D\u0430\u0442\u0438"
-                  })]
-                })]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_EditEntity__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_EditEntity__WEBPACK_IMPORTED_MODULE_3__["default"], {
                 name: entity,
                 getUrl: urls.getUrl,
                 updateUrl: urls.inlineUpdateUrl
-              })]
+              })
             });
           }
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
@@ -6823,70 +6748,7 @@ function EditableTable(_ref) {
           exact: true,
           render: function render() {
             return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
-              children: [entity == 'athlete' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-                  className: "alert alert-info mt-3",
-                  role: "alert",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h4", {
-                    className: "alert-heading",
-                    children: "\u041D\u0430 \u0446\u0456\u0439 \u0441\u0442\u043E\u0440\u0456\u043D\u0446\u0456 \u043D\u0430\u0441\u0442\u0443\u043F\u043D\u0435 \u0432\u0436\u0435 \u043F\u0440\u0430\u0446\u044E\u0454:"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("ol", {
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
-                      children: "\u0422\u0430\u0431\u043B\u0438\u0446\u044F \u0441\u043E\u0440\u0442\u0443\u0454\u0442\u044C\u0441\u044F \u0456 \u0444\u0456\u043B\u044C\u0442\u0440\u0443\u0454\u0442\u044C\u0441\u044F (\u041F\u043E\u0448\u0443\u043A) \u043F\u043E \u0432\u0441\u0456\u043C \u043F\u043E\u043B\u044F\u043C"
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
-                      children: "\u0414\u0430\u043D\u0456 \u043C\u043E\u0436\u043D\u0430 \u0440\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u0442\u0438 \u0431\u0435\u0437\u043F\u043E\u0441\u0435\u0440\u0435\u0434\u043D\u044C\u043E \u0432 \u0442\u0430\u0431\u043B\u0438\u0446\u0456."
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
-                      children: "\u041F\u0456\u0441\u043B\u044F \u0432\u0442\u0440\u0430\u0442\u0438 \u0444\u043E\u043A\u0443\u0441\u0443 \u043F\u043E\u043B\u044F \u0440\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u043D\u043D\u044F \u0439\u043E\u0433\u043E \u0437\u043D\u0430\u0447\u0435\u043D\u043D\u044F \u0437\u0431\u0435\u0440\u0456\u0433\u0430\u0454\u0442\u044C\u0441\u044F \u043D\u0430 \u0441\u0435\u0440\u0432\u0435\u0440\u0456, \u0456 \u044F\u043A\u0449\u043E \u0432\u0441\u0435 \u0434\u043E\u0431\u0440\u0435 \u0437\u0431\u0435\u0440\u0435\u0433\u043B\u043E\u0441\u044C \u0442\u043E \u0437'\u044F\u0432\u043B\u044F\u0454\u0442\u044C\u0441\u044F \u0437\u0435\u043B\u0435\u043D\u0430 \u043F\u0456\u043C\u043F\u043E\u0447\u043A\u0430 \u0441\u043F\u0440\u0430\u0432\u0430 \u0432 \u043A\u043B\u0456\u0442\u0438\u043D\u0446\u0456, \u044F\u043A\u0430 \u0440\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u043B\u0430\u0441\u044C (\u044F\u043A\u0449\u043E \u0449\u043E\u0441\u044C \u043D\u0435 \u0437\u0431\u0435\u0440\u0435\u0433\u043B\u043E\u0441\u044C, \u0442\u043E \u043F\u043E\u0432\u0456\u0434\u043E\u043C\u043B\u044F\u0454 \u043F\u0440\u043E \u0446\u0435 \u0430\u043D\u0430\u043B\u043E\u0433\u0456\u0447\u043D\u0430 \u0447\u0435\u0440\u0432\u043E\u043D\u0430 \u043F\u0456\u043C\u043F\u043E\u0447\u043A\u0430)"
-                    })]
-                  })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-                  className: "alert alert-warning",
-                  role: "alert",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h4", {
-                    className: "alert-heading",
-                    children: "\u041D\u0430\u0440\u0430\u0437\u0456 \u043D\u0435 \u043F\u0440\u0430\u0446\u044E\u0454:"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("ol", {
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
-                      children: "\u0412\u0430\u043B\u0456\u0434\u0430\u0446\u0456\u044F"
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
-                      children: "C\u043E\u0440\u0442\u0443\u0432\u0430\u043D\u043D\u044F \u043F\u043E \u0441\u0442\u0443\u043F\u0435\u043D\u044E"
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
-                      children: "C\u0438\u043D\u0445\u0440\u043E\u043D\u0456\u0437\u0430\u0446\u0456\u044F \u0434\u0430\u043D\u0438\u0445 \u0442\u0430\u0431\u043B\u0438\u0447\u043A\u0438 \u0437\u0456 \u0437\u043C\u0456\u043D\u0430\u043C\u0438, \u044F\u043A\u0456 \u0431\u0443\u043B\u0438 \u0432\u043D\u0435\u0441\u0435\u043D\u0456 \u043D\u0430 \u0441\u0442\u043E\u0440\u0456\u043D\u0446\u0456 \u0440\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u043D\u043D\u044F \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430"
-                    })]
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
-                    children: "\u042F\u043A\u0431\u0438 \u0449\u0435 \u0432\u0438\u043B\u0456\u0437\u043B\u043E \u0449\u043E\u0441\u044C \u0456\u043D\u0448\u0435 (\u0430\u0431\u043E \u043F\u0440\u043E\u0441\u0442\u043E \u043C\u0430\u0454\u0442\u0435 \u0445\u043E\u0440\u043E\u0448\u0456 \u0456\u0434\u0435\u0457), \u0442\u043E \u0434\u0430\u0439\u0442\u0435 \u0431\u0443\u0434\u044C \u043B\u0430\u0441\u043A\u0430 \u0437\u043D\u0430\u0442\u0438"
-                  })]
-                })]
-              }), entity == 'dojo' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-                  className: "alert alert-info mt-3",
-                  role: "alert",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h4", {
-                    className: "alert-heading",
-                    children: "\u041D\u0430 \u0446\u0456\u0439 \u0441\u0442\u043E\u0440\u0456\u043D\u0446\u0456 \u0432\u0441\u0435 \u043F\u0440\u0430\u0446\u044E\u0454"
-                  })
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-                  className: "alert alert-warning",
-                  role: "alert",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h4", {
-                    className: "alert-heading",
-                    children: "\u041A\u0440\u0456\u043C"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("ol", {
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
-                      children: "\u0412\u0438\u043F\u0430\u0434\u0430\u0439\u043A\u0438 \u0434\u043B\u044F \u041B\u044C\u0432\u0456\u0432 / \u041E\u0431\u043B\u0430\u0441\u0442\u044C \u0456 \u0420\u0430\u0439\u043E\u043D"
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("span", {
-                      className: "text-secondary",
-                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
-                        children: "\u0412\u0430\u043B\u0456\u0434\u0430\u0446\u0456\u044F"
-                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
-                        children: "C\u0438\u043D\u0445\u0440\u043E\u043D\u0456\u0437\u0430\u0446\u0456\u044F \u0434\u0430\u043D\u0438\u0445 \u0442\u0430\u0431\u043B\u0438\u0447\u043A\u0438 \u0437\u0456 \u0437\u043C\u0456\u043D\u0430\u043C\u0438, \u044F\u043A\u0456 \u0431\u0443\u043B\u0438 \u0432\u043D\u0435\u0441\u0435\u043D\u0456 \u043D\u0430 \u0441\u0442\u043E\u0440\u0456\u043D\u0446\u0456 \u0440\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u043D\u043D\u044F \u0437\u0430\u043B\u0443"
-                      })]
-                    })]
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
-                    children: "\u042F\u043A\u0431\u0438 \u0449\u0435 \u0432\u0438\u043B\u0456\u0437\u043B\u043E \u0449\u043E\u0441\u044C \u0456\u043D\u0448\u0435 (\u0430\u0431\u043E \u043F\u0440\u043E\u0441\u0442\u043E \u043C\u0430\u0454\u0442\u0435 \u0445\u043E\u0440\u043E\u0448\u0456 \u0456\u0434\u0435\u0457), \u0442\u043E \u0434\u0430\u0439\u0442\u0435 \u0431\u0443\u0434\u044C \u043B\u0430\u0441\u043A\u0430 \u0437\u043D\u0430\u0442\u0438"
-                  })]
-                })]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("h2", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("h2", {
                 children: ["\u0412\u0441\u0456 ", entity]
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Table__WEBPACK_IMPORTED_MODULE_2__["default"], {
                 columns: columns,
@@ -7048,8 +6910,10 @@ __webpack_require__.r(__webpack_exports__);
 function PostCategory(_ref) {
   var value = _ref.value,
       editable = _ref.editable,
-      onChange = _ref.onChange;
+      onChange = _ref.onChange,
+      className = _ref.className;
   var key = value;
+  className = typeof className == 'undefined' ? '' : className;
   var labels = {
     '6': 'Федерація кіокушинкай-карате України',
     '5': 'Громадська діяльність',
@@ -7071,7 +6935,7 @@ function PostCategory(_ref) {
     });
     markup = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("select", {
       value: key,
-      className: "form-select-sm",
+      className: "".concat(className, " form-select-sm"),
       "aria-label": "Select Category",
       onChange: onChange,
       children: options
@@ -7212,7 +7076,8 @@ var EditablePostCategory = function EditablePostCategory(_ref2) {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(Editable, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_PostCategory__WEBPACK_IMPORTED_MODULE_3__["default"], {
       value: value,
       editable: "true",
-      onChange: onChange
+      onChange: onChange,
+      className: className
     })]
   });
 }; // Create an editable cell renderer
@@ -7313,7 +7178,7 @@ var EditableSwitch = function EditableSwitch(_ref4) {
   var id = props.field + Math.round(Math.random() * 1000000);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(Editable, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-      className: "form-check form-switch",
+      className: "form-switch",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
         id: id,
         name: props.field,
@@ -7556,7 +7421,8 @@ function Table(_ref7) {
                 }) : column.render("Header");
                 var sortingIcon = column.columns ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
                   className: column.isSorted ? column.isSortedDesc ? "fas fa-sort-up" : "fas fa-sort-down" : "fas fa-sort"
-                });
+                }); // console.log(column.getSortByToggleProps());
+
                 return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("th", _objectSpread(_objectSpread({}, column.getHeaderProps(column.getSortByToggleProps())), {}, {
                   scope: "col",
                   children: [sortingIcon, " ", content]
@@ -7569,7 +7435,17 @@ function Table(_ref7) {
             prepareRow(row);
             return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("tr", _objectSpread(_objectSpread({}, row.getRowProps()), {}, {
               children: row.cells.map(function (cell) {
-                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("td", _objectSpread(_objectSpread({}, cell.getCellProps()), {}, {
+                var cellProp = cell.getCellProps();
+                var id = cell.column.id;
+                var width = id == 'id' || id == 'dateAt' || id == 'category' || id == 'is_actual' || id == 'point' ? '1%' : id == 'address' || id == 'district' || id == 'name' || id == 'phone' || id == 'phone2' || id == 'firstName' || id == 'lastName' || id == 'patronymic' || id == 'email' ? '20%' : null;
+
+                if (width) {
+                  cellProp.style = {
+                    width: width
+                  };
+                }
+
+                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("td", _objectSpread(_objectSpread({}, cellProp), {}, {
                   children: cell.render("Cell")
                 }));
               })
@@ -7634,6 +7510,7 @@ function TableSearch(_ref) {
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+    "class": "table-filter-search",
     value: filterInput,
     onChange: handleFilterChange,
     placeholder: "Пошук (по всім полям)",
@@ -7662,7 +7539,7 @@ var _templateObject;
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 
-var TableStyles = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  table {\n    border-spacing: 0;\n\n    tr {\n      :last-child {\n        td {\n          border-bottom: 0;\n        }\n      }\n    }\n\n    th,\n    td {\n      white-space: nowrap;\n      margin: 0;\n      padding: 0.1rem 0.5rem;\n      border-bottom: 1px solid #999999;\n      border-right: 1px solid #999999;\n\n      :last-child {\n        border-right: 0;\n      }\n    }\n  }\n\n  .fa-sort-up,\n  .fa-sort-down,\n  .fa-sort {\n    color: #999999;\n  }\n\n  th {\n    :hover {\n      .fa-sort-up,\n      .fa-sort-down,\n      .fa-sort {\n          color: red;\n      }\n    }\n  }\n\n  input:not([role='switch']) {\n    font-size: 1rem;\n    padding: 0 0 0 0.3em;\n    margin: 0;\n    border: 0;\n    background-color: inherit;\n  }\n  \n  .form-check-input:checked {\n    background-color: #0cc80f;\n  }\n\n  input[role=switch] {\n    border: 2px solid #999999;\n  }\n\n  form input:not([role='switch']) {\n    border: 1px solid #999999;\n  }\n\n  select {\n    background-color: inherit;\n    border: 1px solid gray;\n  }\n\n  .table th, table td {\n    border-bottom: 1px solid #0ba9e7;\n    border-right: 1px solid #0ba9e7;\n  }\n\n  .table {\n    border: 1px solid #0ba9e7;\n    border-top-width: 2px;\n  }\n\n  .table-striped tbody tr:nth-of-type(odd) {\n    background-color: rgba(26, 135, 200, 0.09);\n  }\n  \n  .table-hover tbody tr:hover {\n    color: #0ba9e7;\n    background-color: rgba(26, 135, 200, 0.2);\n  }\n\n  form #brief {\n    color: inherit;\n    font-weight: inherit;\n  }\n\n  .form-label {\n    margin-bottom: 0.3em;\n    color: #012372;\n    font-weight: 700;\n    font-size: 0.9em;\n  }\n\n  input[type='file'] {\n    border: 0 !important;\n    // display: none;\n  }\n\n  .custom-file-upload {/*\n    border: 1px solid #ccc;\n    display: inline-block;\n    padding: 6px 12px;\n    cursor: pointer;*/\n    position: absolute;\n    z-index: 1000;\n    background-color: white;\n    border: 1px solid;\n}\n\n.custom-file-upload:hover {\n  background-color: green;\n}\n\n"])));
+var TableStyles = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  table {\n    border-spacing: 0;\n\n    tr {\n      :last-child {\n        td {\n          border-bottom: 0;\n        }\n      }\n    }\n\n    th,\n    td {\n      white-space: nowrap;\n      margin: 0;\n      padding: 0.1rem 0.5rem;\n      border-bottom: 1px solid #999999;\n      border-right: 1px solid #999999;\n\n      :last-child {\n        border-right: 0;\n      }\n    }\n  }\n\n  .fa-sort-up,\n  .fa-sort-down,\n  .fa-sort {\n    color: #999999;\n  }\n\n  th {\n    :hover {\n      .fa-sort-up,\n      .fa-sort-down,\n      .fa-sort {\n          color: red;\n      }\n    }\n  }\n\n  input:not([role='switch']) {\n    font-size: 1rem;\n    padding: 0 0 0 0.3em;\n    margin: 0;\n    border: 0;\n    background-color: inherit;\n    width: 100%;\n  }\n\n  .form-check-input:checked {\n    background-color: #0cc80f;\n  }\n\n  input[role=switch] {\n    border: 2px solid #999999;\n  }\n\n  form input:not([role='switch']) {\n    border: 1px solid #999999;\n  }\n\n  select {\n    background-color: inherit;\n    border: 1px solid gray;\n  }\n\n  .table th, table td {\n    border-bottom: 1px solid #0ba9e7;\n    border-right: 1px solid #0ba9e7;\n  }\n\n  .table {\n    border: 1px solid #0ba9e7;\n    border-top-width: 2px;\n  }\n\n  .table-striped tbody tr:nth-of-type(odd) {\n    background-color: rgba(26, 135, 200, 0.09);\n  }\n\n  .table-hover tbody tr:hover {\n    color: #0ba9e7;\n    background-color: rgba(26, 135, 200, 0.2);\n  }\n\n  form #brief {\n    color: inherit;\n    font-weight: inherit;\n  }\n\n  .form-label {\n    margin-bottom: 0.3em;\n    color: #012372;\n    font-weight: 700;\n    font-size: 0.9em;\n  }\n\n  input[type='file'] {\n    border: 0 !important;\n    // display: none;\n  }\n\n  .custom-file-upload {/*\n    border: 1px solid #ccc;\n    display: inline-block;\n    padding: 6px 12px;\n    cursor: pointer;*/\n    position: absolute;\n    z-index: 1000;\n    background-color: white;\n    border: 1px solid;\n}\n\n.custom-file-upload:hover {\n  background-color: green;\n}\n\n"])));
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TableStyles);
 
 /***/ }),
@@ -8530,8 +8407,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
 function AthletesTable() {
-  /* 
+  /*
   - Columns is a simple array right now, but it will contain some logic later on. It is recommended by react-table to memoize the columns data
   - Here in this example, we have grouped our columns into two headers. react-table is flexible enough to create grouped table headers
   */
@@ -8575,16 +8454,22 @@ function AthletesTable() {
         Header: "Інструктор",
         accessor: "is_coach"
       }, {
-        Header: "В найкращих спортсменах",
+        Header: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+          children: ["\u0412 \u043D\u0430\u0439\u043A\u0440\u0430\u0449\u0438\u0445 ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("br", {}), " \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430\u0445"]
+        }),
         accessor: "is_best"
       }, {
-        Header: "Проводить тренування",
+        Header: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+          children: ["\u041F\u0440\u043E\u0432\u043E\u0434\u0438\u0442\u044C ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("br", {}), "\u0442\u0440\u0435\u043D\u0443\u0432\u0430\u043D\u043D\u044F "]
+        }),
         accessor: "is_actual"
       }, {
-        Header: "Номер телефону",
+        Header: 'Телефон',
         accessor: "phone"
       }, {
-        Header: "Додатковий номер телефону",
+        Header: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+          children: ["\u0414\u043E\u0434\u0430\u0442\u043A\u043E\u0432\u0438\u0439 ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("br", {}), " \u0442\u0435\u043B\u0435\u0444\u043E\u043D"]
+        }),
         accessor: "phone2",
         headerClassName: 'col-3'
       }]
@@ -8628,68 +8513,115 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function Dashboard() {
-  return (
-    /*#__PURE__*/
-
-    /*
-    <Switch>
-    <Route path='/admin/dashboard' render={() => (
-    */
-    (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-        className: "btn-group",
-        role: "group",
-        style: {
-          margin: '1em 0.3em 0 0'
-        },
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_buttons_ListButton__WEBPACK_IMPORTED_MODULE_2__["default"], {
-          hrefPrefix: "/admin/athlete",
-          children: "C\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0438"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_buttons_AddButton__WEBPACK_IMPORTED_MODULE_3__["default"], {
-          hrefPrefix: "/admin/athlete"
-        })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-        className: "btn-group",
-        role: "group",
-        style: {
-          margin: '1em 0.3em 0 0'
-        },
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_buttons_ListButton__WEBPACK_IMPORTED_MODULE_2__["default"], {
-          hrefPrefix: "/admin/dojo",
-          children: "\u0417\u0430\u043B\u0438"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_buttons_AddButton__WEBPACK_IMPORTED_MODULE_3__["default"], {
-          hrefPrefix: "/admin/dojo"
-        })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-        className: "btn-group",
-        role: "group",
-        style: {
-          margin: '1em 0.3em 0 0'
-        },
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_buttons_ListButton__WEBPACK_IMPORTED_MODULE_2__["default"], {
-          hrefPrefix: "/admin/post",
-          children: "\u041F\u043E\u0441\u0442\u0438"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_buttons_AddButton__WEBPACK_IMPORTED_MODULE_3__["default"], {
-          hrefPrefix: "/admin/post"
-        })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
-        to: "/admin/site/refresh",
-        type: "button",
-        className: "btn btn-outline-success",
-        style: {
-          margin: '1em 0.3em 0 0'
-        },
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
-          className: "fas fa-refresh"
-        }), "\u041E\u043D\u043E\u0432\u0438\u0442\u0438 \u0441\u0430\u0439\u0442"]
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
+      className: "btn btn-outline-warning",
+      "data-bs-toggle": "collapse",
+      href: "#collapseExample",
+      role: "button",
+      "aria-expanded": "false",
+      "aria-controls": "collapseExample",
+      style: {
+        margin: '1em 0.3em 0 0'
+      },
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
+        "class": "fas fa-info-circle"
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      className: "btn-group",
+      role: "group",
+      style: {
+        margin: '1em 0.3em 0 0'
+      },
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_buttons_ListButton__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        hrefPrefix: "/admin/athlete",
+        children: "C\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0438"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_buttons_AddButton__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        hrefPrefix: "/admin/athlete"
       })]
-    })
-    /*
-    )} />
-    </Switch>
-    */
-
-  );
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      className: "btn-group",
+      role: "group",
+      style: {
+        margin: '1em 0.3em 0 0'
+      },
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_buttons_ListButton__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        hrefPrefix: "/admin/dojo",
+        children: "\u0417\u0430\u043B\u0438"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_buttons_AddButton__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        hrefPrefix: "/admin/dojo"
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      className: "btn-group",
+      role: "group",
+      style: {
+        margin: '1em 0.3em 0 0'
+      },
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_buttons_ListButton__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        hrefPrefix: "/admin/post",
+        children: "\u041F\u043E\u0441\u0442\u0438"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_buttons_AddButton__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        hrefPrefix: "/admin/post"
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
+      to: "/admin/site/refresh",
+      type: "button",
+      className: "btn btn-outline-success",
+      style: {
+        margin: '1em 0.3em 0 0'
+      },
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
+        className: "fas fa-refresh"
+      }), "\u041E\u043D\u043E\u0432\u0438\u0442\u0438 \u0441\u0430\u0439\u0442"]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      className: "collapse mt-2 alert alert-warning border border-warning",
+      id: "collapseExample",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("ul", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
+          className: "alert-heading",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h5", {
+            children: "\u0420\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u043D\u043D\u044F \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430 / \u0437\u0430\u043B\u0443 / \u043F\u043E\u0434\u0456\u0457 \u0432 \u0437\u0430\u0433\u0430\u043B\u044C\u043D\u043E\u043C\u0443 \u043F\u0440\u0430\u0446\u044E\u0454."
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("li", {
+          className: "alert-heading",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h5", {
+            children: "\u041D\u0430\u0440\u0430\u0437\u0456 \u043D\u0435 \u043F\u0440\u0430\u0446\u044E\u0454:"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("ol", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
+              children: "\u0414\u043E\u0434\u0430\u0432\u0430\u043D\u043D\u044F \u043D\u043E\u0432\u043E\u0433\u043E \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430 / \u0437\u0430\u043B\u0443 / \u043D\u043E\u0432\u0438\u043D\u0438"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
+              children: "\u0420\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u043D\u043D\u044F \u0444\u043E\u0442\u043E"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
+              children: "\u0412\u0430\u043B\u0456\u0434\u0430\u0446\u0456\u044F"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
+              children: "\u0413\u0430\u043B\u0435\u0440\u0435\u0457 \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430 / \u0437\u0430\u043B\u0443 / \u043D\u043E\u0432\u0438\u043D\u0438 \u0432\u0456\u0434\u043A\u043B\u044E\u0447\u0435\u043D\u0456 \u043D\u0430\u0440\u0430\u0437\u0456"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
+              children: "\u0412 \u0441\u0435\u043A\u0446\u0456\u0457 '\u0437\u0430\u043B\u0438 / \u0434\u043E\u0434\u0430\u0442\u0438 dojo' \u043F\u043E\u0442\u0440\u0456\u0431\u043D\u043E \u043F\u043E\u043A\u0430\u0437\u0443\u0432\u0430\u0442\u0438 \u043B\u0438\u0448\u0435 \u0442\u0456 \u0437\u0430\u043B\u0438 \u0432 \u044F\u043A\u0438\u0445 \u0434\u0430\u043D\u0438\u0439 \u0442\u0440\u0435\u0442\u0435\u0440 \u043D\u0435 \u0442\u0440\u0435\u043D\u0443\u0454 (\u0412 \u0441\u0435\u043A\u0446\u0456\u0457 '\u0456\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440\u0438 / \u0434\u043E\u0434\u0430\u0442\u0438 athlete' \u043F\u043E\u0442\u0440\u0456\u0431\u043D\u043E \u043F\u043E\u043A\u0430\u0437\u0443\u0432\u0430\u0442\u0438 \u043B\u0438\u0448\u0435 \u0442\u0456 athlete \u0432 \u044F\u043A\u0438\u0445 \u0434\u0430\u043D\u043E\u0433\u043E \u0434\u043E\u0434\u0436\u043E \u043D\u0435\u043C\u0430)"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
+              children: "\u0420\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u043D\u043D\u044F \u0417\u0430\u043B\u0443 / \u0412\u0440\u0443\u0447\u043D\u0443 \u0432\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D\u0456 \u043A\u043E\u043E\u0440\u0434\u0438\u043D\u0430\u0442\u0438"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
+              children: "\u0420\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u043D\u043D\u044F \u0420\u043E\u0437\u043A\u043B\u0430\u0434\u0443 / \u0427\u0430\u0441 - \u0437\u043B\u0456\u0442\u0430\u0454 \u0444\u043E\u043A\u0443\u0441 on typing"
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+            children: "\u042F\u043A\u0431\u0438 \u0449\u0435 \u0432\u0438\u043B\u0456\u0437\u043B\u043E \u0449\u043E\u0441\u044C \u0456\u043D\u0448\u0435 (\u0430\u0431\u043E \u043F\u0440\u043E\u0441\u0442\u043E \u043C\u0430\u0454\u0442\u0435 \u0445\u043E\u0440\u043E\u0448\u0456 \u0456\u0434\u0435\u0457), \u0442\u043E \u0434\u0430\u0439\u0442\u0435 \u0431\u0443\u0434\u044C \u043B\u0430\u0441\u043A\u0430 \u0437\u043D\u0430\u0442\u0438"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("li", {
+          className: "alert-heading",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h5", {
+            children: "TODO"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("ol", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
+              children: "\u0414\u043E\u0434\u0430\u0432\u0430\u043D\u043D\u044F \u043D\u043E\u0432\u043E\u0433\u043E \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430 / \u0437\u0430\u043B\u0443 / \u043D\u043E\u0432\u0438\u043D\u0438"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
+              children: "\u0420\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u043D\u043D\u044F \u0420\u043E\u0437\u043A\u043B\u0430\u0434\u0443 / \u0427\u0430\u0441 - \u041A\u0440\u043E\u043A 15 (\u0447\u0438 30) \u0445\u0432"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
+              children: "\u0422\u0435\u043A\u0441\u0442\u043E\u0432\u0456 \u043F\u043E\u043B\u044F \u0441\u043A\u043E\u0440\u043E\u0447\u0435\u043D\u043E\u0433\u043E \u0432\u0430\u0440\u0456\u0430\u043D\u0442\u0443 \u043E\u043F\u0438\u0441\u0443 \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430 / \u0437\u0430\u043B\u0443 / \u043D\u043E\u0432\u0438\u043D\u0438 \u0433\u0435\u043D\u0435\u0440\u0443\u0432\u0430\u0442\u0438 \u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u043D\u043E"
+            })]
+          })]
+        })]
+      })
+    })]
+  });
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Dashboard);
@@ -8715,6 +8647,8 @@ __webpack_require__.r(__webpack_exports__);
 
  // TODO remove jquery
 // {athletes.length ? <AthletesTable athletes={athletes} /> : <p>No Athletes</p>}
+
+
 
 
 
@@ -8757,7 +8691,9 @@ function DojosTable() {
       //   accessor: "url"
       // },
       {
-        Header: "Проводяться тренування",
+        Header: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+          children: ["\u041F\u0440\u043E\u0432\u043E\u0434\u044F\u0442\u044C\u0441\u044F ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("br", {}), " \u0442\u0440\u0435\u043D\u0443\u0432\u0430\u043D\u043D\u044F "]
+        }),
         accessor: "is_actual"
       },
       /*
@@ -8835,8 +8771,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var EditAthlete = function EditAthlete(_ref) {
   var getUrl = _ref.getUrl,
-      updateUrl = _ref.updateUrl,
-      photoFileName = _ref.photoFileName;
+      updateUrl = _ref.updateUrl;
 
   var _useParams = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useParams)(),
       id = _useParams.id;
@@ -8851,7 +8786,7 @@ var EditAthlete = function EditAthlete(_ref) {
       return response.json();
     }).then(setAthlete);
   }, []);
-  var isEdit = id != null; // TODO: 
+  var isEdit = id != null; // TODO:
 
   var gallerySnippet = "";
 
@@ -9535,9 +9470,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _controls_PostCategory__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../controls/PostCategory */ "./resources/js/components/controls/PostCategory.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _controls_Photo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../controls/Photo */ "./resources/js/components/controls/Photo.js");
+/* harmony import */ var _controls_Table__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../controls/Table */ "./resources/js/components/controls/Table.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -9557,192 +9494,162 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
+
 var EditPost = function EditPost(_ref) {
   var getUrl = _ref.getUrl,
-      updateUrl = _ref.updateUrl,
-      photoFileName = _ref.photoFileName;
+      updateUrl = _ref.updateUrl;
 
-  var _useParams = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useParams)(),
+  var _useParams = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useParams)(),
       id = _useParams.id;
 
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
       _useState2 = _slicedToArray(_useState, 2),
-      editedData = _useState2[0],
-      setEditedData = _useState2[1];
+      post = _useState2[0],
+      setPost = _useState2[1]; // TODO: id dep?
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-      _useState4 = _slicedToArray(_useState3, 2),
-      isSavingDone = _useState4[0],
-      setIsSavingDone = _useState4[1];
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     fetch(getUrl + "/" + id).then(function (response) {
       return response.json();
-    }).then(function (editedData) {
-      setEditedData(editedData);
-    });
+    }).then(setPost);
   }, []);
+  var isEdit = id != null;
+  var editHeader = isEdit ? "Відредагувати " + post.title : "Додати новину";
 
-  var saveEntity = function saveEntity(e) {
-    var formData = new FormData(document.getElementById('edit-post'));
-    fetch(updateUrl + "/" + id, {
-      method: 'POST',
-      body: formData
-    }).then(function (response) {
-      return response;
-    }
-    /*.json()*/
-    ).then(function (response) {
-      setIsSavingDone(true); // synch
-      // setEditedData(editedData);
-    });
-  };
-
-  var isEdit = editedData && editedData.id != null;
-  var editHeader = isEdit ? "Відредагувати " + editedData.title : "Додати новину";
-
-  var editEntityHiddenInputId = isEdit && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+  var editEntityHiddenInputId = isEdit && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
     type: "hidden",
     name: "id",
-    value: editedData.id
+    value: post.id
   });
 
-  var postCategory = isEdit && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_controls_PostCategory__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    value: editedData.category,
+  var postCategory = isEdit && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_PostCategory__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    value: post.category,
     editable: true
   });
 
-  var photoUrl = editedData && "/images/posts/" + editedData.id + "/photo.jpg";
+  var photoUrl = post && "/images/posts/" + post.id + "/photo.jpg";
   var garrerySnippet = "";
 
-  if (isEdit && editedData.gallery) {
-    var galleryUrl = "photo.php?galleryID=" + editedData.gallery['galleryID'];
-    garrerySnippet = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ol", {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
+  if (isEdit && post.gallery) {
+    var galleryUrl = "photo.php?galleryID=" + post.gallery['galleryID'];
+    garrerySnippet = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("ol", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
           href: galleryUrl,
-          children: editedData.gallery['name']
+          children: post.gallery['name']
         })
       })
     });
   } else {
     if (isEdit) {
-      garrerySnippet = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
-        children: ["\u0424\u043E\u0442\u043E\u0433\u0430\u043B\u0435\u0440\u0435\u044F \u0435\u0449\u0435 \u043D\u0435 \u0432\u0432\u0435\u0434\u0435\u043D\u0430", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+      garrerySnippet = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
+        children: ["\u0424\u043E\u0442\u043E\u0433\u0430\u043B\u0435\u0440\u0435\u044F \u0435\u0449\u0435 \u043D\u0435 \u0432\u0432\u0435\u0434\u0435\u043D\u0430", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
           type: "button",
           value: "\u0412\u0432\u0435\u0441\u0442\u0438 \u0444\u043E\u0442\u043E\u0433\u0430\u043B\u0435\u0440\u0435\u044E",
           onclick: "location.href='new_a_gallery.php?id=<?= $athlet->id ?>'"
         })]
       });
     } else {
-      garrerySnippet = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+      garrerySnippet = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
         children: "\u0424\u043E\u0442\u043E\u0433\u0430\u043B\u0435\u0440\u0435\u044E \u0412\u0438 \u0437\u043C\u043E\u0436\u0435\u0442\u0435 \u0432\u0432\u0435\u0441\u0442\u0438 \u043F\u0456\u0441\u043B\u044F \u043F\u0435\u0440\u0448\u043E\u0433\u043E \u0437\u0431\u0435\u0440\u0435\u0436\u0435\u043D\u043D\u044F \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430"
       });
     }
   }
 
-  if (isSavingDone) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Redirect, {
-      to: "/admin/dojo/list"
-    });
-  }
-
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
-      children: editHeader
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("form", {
-      id: "edit-post",
-      method: "post",
-      action: updateUrl,
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
+      children: isEdit ? post.title : "Новий пост"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("form", {
       encType: "multipart/form-data",
-      children: [editEntityHiddenInputId, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("table", {
-        className: "usual",
-        cellSpacing: "0",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tbody", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
-              children: "\u0417\u0430\u0433\u043E\u043B\u043E\u0432\u043E\u043A"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-                type: "text",
-                name: "title",
-                defaultValue: isEdit && editedData.title
-              })
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
-              children: "\u041A\u0430\u0442\u0435\u0433\u043E\u0440\u0438\u044F"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
-              children: postCategory
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
-              children: "\u0414\u0430\u0442\u0430"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-                name: "dateAt",
-                type: "date",
-                defaultValue: isEdit && editedData.dateAt
-              })
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
-              children: "\u041A\u043B\u044E\u0447\u043E\u0432\u0456 \u0441\u043B\u043E\u0432\u0430 \u0434\u043B\u044F \u043C\u0435\u0442\u0430\u0442\u0435\u0433\u0443 \u0441\u0442\u043E\u0440\u0456\u043D\u043A\u0438 \u043D\u043E\u0432\u0438\u043D\u0438"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("textarea", {
-                name: "keywords",
-                children: isEdit && editedData.keywords
-              })
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
-              children: "\u041F\u043E\u0432\u043D\u0438\u0439 \u0442\u0435\u043A\u0441\u0442 \u043D\u043E\u0432\u0438\u043D\u0438"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("textarea", {
-                name: "full",
-                children: isEdit && editedData.full
-              })
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
-              children: "\u041A\u043E\u0440\u043E\u0442\u043A\u0438\u0439 \u0442\u0435\u043A\u0441\u0442 \u0434\u043B\u044F \u0441\u0442\u043E\u0440\u0456\u043D\u043A\u0438 \u0441\u043F\u0438\u0441\u043A\u0443 \u043D\u043E\u0432\u0438\u043D"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("textarea", {
-                name: "brief",
-                children: isEdit && editedData.brief
-              })
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
-              children: "\u0424\u043E\u0442\u043E"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("td", {
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-                className: "col-2",
-                style: {
-                  width: '10%'
-                },
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
-                  className: "dojo-photo instructor-photo",
-                  src: photoUrl,
-                  alt: editHeader
-                })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), "\u0417\u043C\u0456\u043D\u0438\u0442\u0438", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-                type: "file",
-                name: "photo"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), "\u0411\u0443\u0434\u0435 \u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u043D\u043E \u0441\u0442\u0432\u043E\u0440\u0435\u043D\u043E preview \u0441 \u0448\u0438\u0440\u0438\u043D\u043E\u044E 200px"]
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("tr", {
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
-              colSpan: "2",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-                type: "button",
-                name: "save",
-                value: "\u0437\u0431\u0435\u0440\u0435\u0433\u0442\u0438",
-                onClick: saveEntity
-              })
-            })
+      className: "row",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        className: "col-sm-12 d-grid mb-3",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+            htmlFor: "title",
+            className: "form-label",
+            children: "\u0417\u0430\u0433\u043E\u043B\u043E\u0432\u043E\u043A"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableText, {
+            field: "title",
+            className: "form-control",
+            id: id,
+            initialValue: isEdit && post.title,
+            inlineUpdateUrl: updateUrl
           })]
         })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        className: "col-sm-5 d-grid gap-3 mb-3",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+            htmlFor: "category",
+            className: "form-label",
+            children: "\u041A\u0430\u0442\u0435\u0433\u043E\u0440\u0456\u044F"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditablePostCategory, {
+            field: "category",
+            className: "form-control",
+            id: id,
+            initialValue: isEdit && post.category,
+            inlineUpdateUrl: updateUrl
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+            htmlFor: "birthday",
+            className: "form-label",
+            children: "\u0414\u0430\u0442\u0430"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableDate, {
+            field: "dateAt",
+            className: "form-control",
+            id: isEdit && post.id,
+            initialValue: isEdit && post.dateAt,
+            inlineUpdateUrl: updateUrl
+          })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        className: "col-sm-1 d-grid mb-3"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        className: "mb-3 col-sm-6",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+          htmlFor: "photo",
+          className: "form-label",
+          children: "\u0424\u043E\u0442\u043E"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Photo__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          id: "photo",
+          name: "photo",
+          className: "form-control",
+          url: post && "/images/dojos/" + post.id + "/photo.png",
+          alt: isEdit ? '' + post.title : "Фото новини",
+          editable: true
+        }), "\u0411\u0443\u0434\u0435 \u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u043D\u043E \u0441\u0442\u0432\u043E\u0440\u0435\u043D\u043E preview \u0441 \u0448\u0438\u0440\u0438\u043D\u043E\u044E 300px"]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        className: "mb-3 col-sm-12 gap-3",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          className: "mb-3",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+            htmlFor: "full",
+            className: "form-label",
+            children: "\u041F\u043E\u0432\u043D\u0438\u0439 \u0442\u0435\u043A\u0441\u0442 \u043D\u043E\u0432\u0438\u043D\u0438"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableTextarea, {
+            field: "full",
+            className: "form-control",
+            id: isEdit && post.id,
+            initialValue: isEdit ? post.full : '',
+            inlineUpdateUrl: updateUrl,
+            rows: 10
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+            htmlFor: "brief",
+            className: "form-label",
+            children: "\u041A\u043E\u0440\u043E\u0442\u043A\u0438\u0439 \u0442\u0435\u043A\u0441\u0442 \u0434\u043B\u044F \u0441\u0442\u043E\u0440\u0456\u043D\u043A\u0438 \u0441\u043F\u0438\u0441\u043A\u0443 \u043D\u043E\u0432\u0438\u043D"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableTextarea, {
+            field: "brief",
+            className: "form-control",
+            id: isEdit && post.id,
+            initialValue: isEdit ? post.brief : '',
+            inlineUpdateUrl: updateUrl
+          })]
+        })]
       })]
     })]
   });
@@ -9788,7 +9695,8 @@ function PostsTable() {
             hrefPrefix: "/admin/post",
             value: value
           });
-        }
+        },
+        width: 10
       }, {
         Header: "Заголовок",
         accessor: "title"
@@ -9796,24 +9704,32 @@ function PostsTable() {
         Header: "Дата",
         accessor: "dateAt"
       }]
-    }, {
-      Header: "Add",
-      columns: [{
-        Header: "Ключові слова",
-        accessor: "keywords"
-      }]
-    }, {
+    },
+    /*{
+    Header: "Add",
+    columns: [
+     {
+         Header: "Ключові слова",
+         accessor: "keywords"
+     },
+    ]
+    },*/
+    {
       Header: "Details",
       columns: [{
         Header: "Категорія",
         accessor: "category"
-      }, {
-        Header: "Повний текст новини",
-        accessor: "full"
-      }, {
-        Header: "Скорочений текст новини",
-        accessor: "brief"
-      }]
+      }
+      /*,
+      {
+      Header: "Повний текст новини",
+      accessor: "full"
+      },
+      {
+      Header: "Скорочений текст новини",
+      accessor: "brief"
+      }*/
+      ]
     }];
   }, []);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_controls_EditableTable__WEBPACK_IMPORTED_MODULE_2__["default"], {

@@ -42,7 +42,7 @@ function DojosTable() {
           //   accessor: "url"
           // },
           {
-            Header: "Проводяться тренування",
+            Header: <>Проводяться <br /> тренування </>,
             accessor: "is_actual"
           },
           /*
@@ -71,8 +71,8 @@ function DojosTable() {
   );
 
   return (
-    <EditableTable 
-      columns={columns} 
+    <EditableTable
+      columns={columns}
       entity='dojo'
     />
   );

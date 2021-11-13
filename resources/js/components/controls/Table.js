@@ -37,7 +37,7 @@ export const EditablePostCategory = ( { initialValue, className, ...props } ) =>
 
   return <>
       <Editable />
-      <PostCategory value={value} editable="true" onChange={onChange} />
+      <PostCategory value={value} editable="true" onChange={onChange} className={className} />
   </>
 };
 
@@ -55,8 +55,8 @@ export const EditableDate = ({ initialValue, className, ...props }) => {
   // value={value}???
   return <>
     <Editable />
-      <input
-      id={props.field} name={props.field} className={className}
+    <input
+        id={props.field} name={props.field} className={className}
           type='date'
           defaultValue={initialValue}
           onChange={onChange}
@@ -109,7 +109,7 @@ export const EditableSwitch = ({ initialValue, className, children, values, labe
 
     return <>
       <Editable />
-      <div className="form-check form-switch">
+      <div className="form-switch">
         <input
           id={ id } name={ props.field } className={ className }
           type='checkbox' role="switch"
@@ -317,11 +317,11 @@ const {
                         : "fas fa-sort"
                   }></i>;
 
+                  // console.log(column.getSortByToggleProps());
                 return (
                     <th
-
                         {...column.getHeaderProps(column.getSortByToggleProps())}
-                      scope="col"
+                        scope="col"
                     >{sortingIcon} {content}
                     </th>
                 )
@@ -334,9 +334,33 @@ const {
           prepareRow(row);
           return (
             <tr {...row.getRowProps()}>
-              {row.cells.map(cell => {
-                return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
-              })}
+                {row.cells.map(cell => {
+                    let cellProp = cell.getCellProps();
+                    let id = cell.column.id;
+
+                    let width =
+                        id == 'id' ||
+                        id == 'dateAt' ||
+                        id == 'category' ||
+                        id == 'is_actual' ||
+                        id == 'point'
+                            ? '1%' :
+                        id == 'address' ||
+                        id == 'district' ||
+                        id == 'name' ||
+                        id == 'phone' ||
+                        id == 'phone2' ||
+                        id == 'firstName' ||
+                        id == 'lastName' ||
+                        id == 'patronymic' ||
+                        id == 'email'
+                            ? '20%' : null;
+
+                    if (width) {
+                        cellProp.style = { width };
+                    }
+                    return <td {...cellProp}>{cell.render("Cell")}</td>;
+                })}
             </tr>
           );
         })}

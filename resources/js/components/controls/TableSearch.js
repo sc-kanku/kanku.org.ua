@@ -15,6 +15,7 @@ export default function TableSearch({ setGlobalFilter }) {
 
     return(
         <input
+            class='table-filter-search'
             value={filterInput}
             onChange={handleFilterChange}
             placeholder={"Пошук (по всім полям)"}

@@ -1,7 +1,8 @@
 import React from 'react';
 
-export default function PostCategory({value, editable, onChange}) {
+export default function PostCategory({value, editable, onChange, className}) {
     let key = value;
+    className = typeof className == 'undefined' ? '' : className;
 
     let labels = {
         '6': 'Федерація кіокушинкай-карате України',
@@ -18,12 +19,12 @@ export default function PostCategory({value, editable, onChange}) {
 
     if (editable) {
         let options = Object.keys(labels).map(
-            (key) => 
+            (key) =>
             <option key={key} value={key}>{labels[key]}</option>
         );
 
-        markup = 
-            <select value={key} className="form-select-sm" aria-label="Select Category" onChange={onChange}>
+        markup =
+            <select value={key} className={`${className} form-select-sm`} aria-label="Select Category" onChange={onChange}>
                 {options}
             </select>
     } else {

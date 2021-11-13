@@ -12602,3 +12602,15 @@ a:focused {
             appearance: auto !important;
 }
 
+.table-filter-search {
+    width: auto !important;
+}
+
+.table .form-switch {
+    text-align: center;
+}
+
+.form-switch .form-label {
+    padding-left: 0.5em;
+}
+

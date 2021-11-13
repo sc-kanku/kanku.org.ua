@@ -1,51 +1,38 @@
 import React, {useMemo, useState, useEffect} from 'react';
 import { useParams, Redirect} from 'react-router-dom';
 
-import PostCategory from './../controls/PostCategory'
+import PostCategory from './../controls/PostCategory';
+import Photo from '../controls/Photo';
+import { EditablePostCategory, EditableText, EditableDate, EditableDegree, EditableSwitch, EditableTextarea } from '../controls/Table';
 
-const EditPost = ({getUrl, updateUrl, photoFileName}) => {
+const EditPost = ({getUrl, updateUrl}) => {
     let { id } = useParams();
-    const [editedData, setEditedData] = useState(null);
-    const [isSavingDone, setIsSavingDone] = useState(false);
+    const [post, setPost] = useState({});
 
+    // TODO: id dep?
     useEffect(() => {
         fetch(getUrl + "/" + id)
             .then(response => response.json())
-            .then( editedData => {
-                setEditedData(editedData);
-            })
+            .then(setPost)
     }, []);
 
-    const saveEntity = (e) => {
-        const formData = new FormData( document.getElementById('edit-post') );
+    let isEdit = id != null;
 
-        fetch(updateUrl + "/" + id, {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response/*.json()*/)
-        .then( response => {
-            setIsSavingDone(true);
-            // synch
-            // setEditedData(editedData);
-        });
-    }
 
-    let isEdit = editedData && editedData.id != null;
-    let editHeader = isEdit  ?  "Відредагувати " + editedData.title : "Додати новину";
-    let editEntityHiddenInputId = isEdit && <input type="hidden" name="id" value={editedData.id} />
-    let postCategory = isEdit && <PostCategory value={editedData.category} editable={true} />
-    let photoUrl = editedData && ("/images/posts/" + editedData.id + "/photo.jpg");
+    let editHeader = isEdit  ?  "Відредагувати " + post.title : "Додати новину";
+    let editEntityHiddenInputId = isEdit && <input type="hidden" name="id" value={post.id} />
+    let postCategory = isEdit && <PostCategory value={post.category} editable={true} />
+    let photoUrl = post && ("/images/posts/" + post.id + "/photo.jpg");
 
     let garrerySnippet = "";
-    
-    if (isEdit && editedData.gallery) {
-        let galleryUrl = "photo.php?galleryID=" + editedData.gallery['galleryID'];
-        garrerySnippet = 
-                    <ol><li><a href={galleryUrl}>{editedData.gallery['name']}</a></li></ol>
+
+    if (isEdit && post.gallery) {
+        let galleryUrl = "photo.php?galleryID=" + post.gallery['galleryID'];
+        garrerySnippet =
+                    <ol><li><a href={galleryUrl}>{post.gallery['name']}</a></li></ol>
     } else {
         if (isEdit) {
-            garrerySnippet = 
+            garrerySnippet =
             <p>
                 Фотогалерея еще не введена<br />
                 <input type="button" value="Ввести фотогалерею" onclick="location.href='new_a_gallery.php?id=<?= $athlet->id ?>'" />
@@ -55,77 +42,100 @@ const EditPost = ({getUrl, updateUrl, photoFileName}) => {
         }
     }
 
-    if (isSavingDone) {
-        return (<Redirect to='/admin/dojo/list' />);
-    }
-
     return (
         <>
-            <h2>{editHeader}</h2>
+            <h2>{ isEdit ? post.title : "Новий пост" }</h2>
 
-            <form id="edit-post" method="post" action={updateUrl} encType="multipart/form-data">
-                {editEntityHiddenInputId}
+            <form encType="multipart/form-data" className="row">
+                <div className="col-sm-12 d-grid mb-3">
+                    <div>
+                        <label htmlFor="title" className="form-label">Заголовок</label>
 
-                <table className="usual" cellSpacing="0">
-                    <tbody>
-                    <tr>
-                        <td>Заголовок</td>
-                        <td><input type="text" name="title"  defaultValue={isEdit && editedData.title} /></td>
-                    </tr>
+                        <EditableText field="title" className="form-control"
+                            id={id}
+                            initialValue={isEdit && post.title}
+                            inlineUpdateUrl={updateUrl}
+                        />
+                    </div>
+                </div>
 
-                    <tr>
-                        <td>Категория</td>
-                        <td>{postCategory}</td>
-                    </tr>
+                <div className="col-sm-5 d-grid gap-3 mb-3">
+                    <div>
+                        <label htmlFor="category" className="form-label">Категорія</label>
 
-                    <tr>
-                        <td>Дата</td>
-                        <td><input name="dateAt" type="date" defaultValue={isEdit && editedData.dateAt}/></td>
-                    </tr>
+                        <EditablePostCategory field="category" className="form-control"
+                            id={id}
+                            initialValue={isEdit && post.category}
+                            inlineUpdateUrl={updateUrl}
+                        />
+                    </div>
 
-                    <tr>
-                        <td>Ключові слова для метатегу сторінки новини</td>
-                        <td><textarea name="keywords">{isEdit && editedData.keywords}</textarea></td>
-                    </tr>
+                    <div>
+                        <label htmlFor="birthday" className="form-label">Дата</label>
 
-                    <tr>
-                        <td>Повний текст новини</td>
-                        <td><textarea name="full">{isEdit && editedData.full}</textarea></td>
-                    </tr>
+                        <EditableDate field="dateAt" className="form-control"
+                            id={isEdit && post.id}
+                            initialValue={isEdit && post.dateAt}
+                            inlineUpdateUrl={updateUrl}
+                        />
+                    </div>
+{/* TODO: keywords*/}
+{/*
+                    <div>
+                        <label htmlFor="keywords" className="form-label">Ключові слова для метатегу сторінки новини</label>
 
-                    <tr>
-                        <td>Короткий текст для сторінки списку новин</td>
-                        <td><textarea name="brief">{isEdit && editedData.brief}</textarea></td>
-                    </tr>
+                        <EditableTextarea field="keywords" className="form-control"
+                            id={isEdit && post.id}
+                            initialValue={isEdit ? post.keywords : ''}
+                            inlineUpdateUrl={updateUrl}
+                        />
+                    </div>
+*/}
+                </div>
 
-                    <tr>
-                        <td>
-                            Фото
-                        </td>
-                        <td>
-                            <div className="col-2" style={{width:'10%'}}>
-                                <img className="dojo-photo instructor-photo" src={photoUrl} alt={editHeader} />
-                            </div>
-                            <br/>Змінити
-                            <br/><input type="file" name="photo" />
-                            <br/>Буде автоматично створено preview с шириною 200px
-                        </td>
-                    </tr>
-    
-{/* 
+                <div className="col-sm-1 d-grid mb-3"></div>
+
+                <div className="mb-3 col-sm-6">
+                    <label htmlFor="photo" className="form-label">Фото</label>
+
+                    <Photo id="photo" name="photo" className="form-control"
+                        url={post && ("/images/dojos/" + post.id + "/photo.png")}
+                        alt={isEdit ? ('' + post.title) : "Фото новини"}
+                        editable={true}
+                    />
+                    Буде автоматично створено preview с шириною 300px
+                </div>
+
+                <div className="mb-3 col-sm-12 gap-3">
+                    <div className="mb-3">
+                        <label htmlFor="full" className="form-label">Повний текст новини</label>
+
+                        <EditableTextarea field="full" className="form-control"
+                            id={isEdit && post.id}
+                            initialValue={isEdit ? post.full : ''}
+                            inlineUpdateUrl={updateUrl}
+                            rows={10}
+                        />
+                    </div>
+
+                    <div>
+                        <label htmlFor="brief" className="form-label">Короткий текст для сторінки списку новин</label>
+
+                        <EditableTextarea field="brief" className="form-control"
+                            id={isEdit && post.id}
+                            initialValue={isEdit ? post.brief : ''}
+                            inlineUpdateUrl={updateUrl}
+                        />
+                    </div>
+                </div>
+
+{/*
                     <tr>
                         <td>Фотогалерея</td>
                         <td>{garrerySnippet}</td>
                     </tr>
 */}
 
-                    <tr>
-                        <td colSpan="2">
-                            <input type="button" name="save" value="зберегти" onClick={saveEntity} />
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
             </form>
         </>
     )

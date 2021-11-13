@@ -10,7 +10,8 @@ function PostsTable() {
           {
             Header: <i className="fas fa-edit"></i>,
             accessor: "id",
-            Cell: ({ value }) => <EditButton hrefPrefix='/admin/post' value={value} />
+            Cell: ({ value }) => <EditButton hrefPrefix='/admin/post' value={value} />,
+            width: 10
           },
           {
             Header: "Заголовок",
@@ -20,7 +21,7 @@ function PostsTable() {
             Header: "Дата",
             accessor: "dateAt"
           },
-        ]},{
+        ]},/*{
           Header: "Add",
           columns: [
             {
@@ -28,14 +29,14 @@ function PostsTable() {
                 accessor: "keywords"
             },
           ]
-        },
+        },*/
         {
         Header: "Details",
         columns: [
             {
                 Header: "Категорія",
                 accessor: "category"
-              },
+              }/*,
           {
             Header: "Повний текст новини",
             accessor: "full"
@@ -43,14 +44,14 @@ function PostsTable() {
           {
             Header: "Скорочений текст новини",
             accessor: "brief"
-          }
+          }*/
         ]}
     ],[]
   );
 
   return (
-    <EditableTable 
-      columns={columns} 
+    <EditableTable
+      columns={columns}
       entity='post'
     />
   );
