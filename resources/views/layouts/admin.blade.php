@@ -10,4 +10,6 @@
 
 @section('footer-includes')
     <script src="/js/admin.js"></script>
+    {{-- <script async src="https://maps.googleapis.com/maps/api/js?language=uk&key=AIzaSyDcjZOr-j8BsLk34WNyqQihiIKTRvquU_Y&callback=geocode"></script> --}}
+    <script async src="https://maps.googleapis.com/maps/api/js?language=uk&key=AIzaSyDcjZOr-j8BsLk34WNyqQihiIKTRvquU_Y&callback=geocode"></script>
 @endsection

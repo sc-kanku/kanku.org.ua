@@ -7116,8 +7116,8 @@ __webpack_require__.r(__webpack_exports__);
 var _excluded = ["initialValue", "className"],
     _excluded2 = ["initialValue", "className"],
     _excluded3 = ["initialValue", "className"],
-    _excluded4 = ["initialValue", "className", "children", "values", "labels"],
-    _excluded5 = ["initialValue", "type", "className", "disabled"],
+    _excluded4 = ["initialValue", "className", "children", "values", "labels", "onChange"],
+    _excluded5 = ["initialValue", "type", "className", "disabled", "onChange"],
     _excluded6 = ["initialValue", "type", "className", "rows"];
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
@@ -7261,6 +7261,7 @@ var EditableSwitch = function EditableSwitch(_ref4) {
       children = _ref4.children,
       values = _ref4.values,
       labels = _ref4.labels,
+      onChange = _ref4.onChange,
       props = _objectWithoutProperties(_ref4, _excluded4);
 
   // We need to keep and update the state of the cell normally
@@ -7277,12 +7278,23 @@ var EditableSwitch = function EditableSwitch(_ref4) {
     },
     getNewValue: function getNewValue(e) {
       return e.target.checked ? values[1] : values[0];
+    },
+    onBeforeSuccess: function onBeforeSuccess() {
+      if (typeof onChange == 'function') {
+        // value is not yet switched so to take correct value lets take the opposite (values[0] instead of values[1]).
+        var isOn = value == values[0];
+
+        try {
+          onChange(isOn);
+        } catch (e) {// console.log(e);
+        }
+      }
     }
   })),
       _useEditable8 = _slicedToArray(_useEditable7, 3),
       Editable = _useEditable8[0],
       value = _useEditable8[1],
-      onChange = _useEditable8[2];
+      onEditableChange = _useEditable8[2];
 
   var defineLabel = function defineLabel(value) {
     var defined = children;
@@ -7309,7 +7321,7 @@ var EditableSwitch = function EditableSwitch(_ref4) {
         type: "checkbox",
         role: "switch",
         checked: value == values[1],
-        onChange: onChange
+        onChange: onEditableChange
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
         htmlFor: id,
         className: "form-label",
@@ -7324,13 +7336,18 @@ var EditableText = function EditableText(_ref5) {
       type = _ref5.type,
       className = _ref5.className,
       disabled = _ref5.disabled,
+      onChange = _ref5.onChange,
       props = _objectWithoutProperties(_ref5, _excluded5);
 
   // We need to keep and update the state of the cell normally
   initialValue = initialValue != null ? initialValue : '';
   className = typeof className == 'undefined' ? '' : className;
   type = typeof type == 'undefined' ? 'text' : type;
-  disabled = typeof disabled == 'undefined' ? false : disabled;
+  disabled = typeof disabled == 'undefined' ? false : disabled; // if (props.field == 'coords') {
+  //     console.log('disabled', disabled);
+  //     console.log('props', props);
+  //     console.log('initialValue', initialValue);
+  // }
 
   var _useEditable9 = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_5__["default"])(_objectSpread(_objectSpread({}, props), {}, {
     data: {
@@ -7339,17 +7356,21 @@ var EditableText = function EditableText(_ref5) {
       value: initialValue
     },
     getNewValue: function getNewValue(e) {
-      return value;
+      return typeof value === 'undefined' ? initialValue : value;
     }
   })),
       _useEditable10 = _slicedToArray(_useEditable9, 4),
       Editable = _useEditable10[0],
       value = _useEditable10[1],
-      onChange = _useEditable10[2],
+      onEditableChange = _useEditable10[2],
       setValue = _useEditable10[3];
 
   var onTypingChange = function onTypingChange(e) {
-    return setValue(e.target.value);
+    setValue(e.target.value);
+
+    if (typeof onChange == 'funtion') {
+      onChange(e.target.value);
+    }
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
@@ -7362,7 +7383,7 @@ var EditableText = function EditableText(_ref5) {
       disabled: disabled,
       readOnly: disabled,
       onChange: onTypingChange,
-      onBlur: onChange
+      onBlur: onEditableChange
     })]
   });
 };
@@ -7422,7 +7443,7 @@ function Table(_ref7) {
 
 
   var synchronizeDataOnUpdateSuccess = function synchronizeDataOnUpdateSuccess(data) {
-    // rowIndex = data.id - 1, 
+    // rowIndex = data.id - 1,
     // columnId = data.field
     // value = data.value
     setSkipPageReset(true); // TODO: via context access parent state data var
@@ -7490,7 +7511,7 @@ function Table(_ref7) {
       rows = _useTable.rows,
       prepareRow = _useTable.prepareRow,
       setGlobalFilter = _useTable.setGlobalFilter;
-  /* 
+  /*
     Render the UI for your table
     - react-table doesn't have UI, it's headless. We just need to put the react-table props from the Hooks, and it will do its magic automatically
   */
@@ -7524,8 +7545,8 @@ function Table(_ref7) {
                   }
 
                   return customStyle;
-                } // {...column.getHeaderProps(column.getSortByToggleProps())} 
-                // {...column.getHeaderProps(getColumnStyle(column))} 
+                } // {...column.getHeaderProps(column.getSortByToggleProps())}
+                // {...column.getHeaderProps(getColumnStyle(column))}
 
 
                 var content = column.originalId == "Search" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
@@ -9170,11 +9191,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _controls_EditAttachedEntities__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../controls/EditAttachedEntities */ "./resources/js/components/controls/EditAttachedEntities.js");
 /* harmony import */ var _controls_Photo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../controls/Photo */ "./resources/js/components/controls/Photo.js");
-/* harmony import */ var _controls_Table__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../controls/Table */ "./resources/js/components/controls/Table.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _EditDojoCoordinates__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./EditDojoCoordinates */ "./resources/js/components/panes/EditDojoCoordinates.js");
+/* harmony import */ var _controls_Table__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../controls/Table */ "./resources/js/components/controls/Table.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -9196,12 +9218,13 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var EditDojo = function EditDojo(_ref) {
   var getUrl = _ref.getUrl,
       updateUrl = _ref.updateUrl,
       photoFileName = _ref.photoFileName;
 
-  var _useParams = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useParams)(),
+  var _useParams = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.useParams)(),
       id = _useParams.id;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
@@ -9219,9 +9242,9 @@ var EditDojo = function EditDojo(_ref) {
 
   if (isEdit && dojo.gallery) {
     var galleryUrl = "photo.php?galleryID=" + dojo.gallery['galleryID'];
-    garrerySnippet = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("ol", {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
+    garrerySnippet = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("ol", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("li", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("a", {
           href: galleryUrl,
           children: dojo.gallery['name']
         })
@@ -9229,53 +9252,53 @@ var EditDojo = function EditDojo(_ref) {
     });
   } else {
     if (isEdit) {
-      garrerySnippet = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
-        children: ["\u0424\u043E\u0442\u043E\u0433\u0430\u043B\u0435\u0440\u0435\u044F \u0435\u0449\u0435 \u043D\u0435 \u0432\u0432\u0435\u0434\u0435\u043D\u0430", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+      garrerySnippet = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("p", {
+        children: ["\u0424\u043E\u0442\u043E\u0433\u0430\u043B\u0435\u0440\u0435\u044F \u0435\u0449\u0435 \u043D\u0435 \u0432\u0432\u0435\u0434\u0435\u043D\u0430", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
           type: "button",
           value: "\u0412\u0432\u0435\u0441\u0442\u0438 \u0444\u043E\u0442\u043E\u0433\u0430\u043B\u0435\u0440\u0435\u044E",
           onclick: "location.href='new_a_gallery.php?id=<?= $athlet->id ?>'"
         })]
       });
     } else {
-      garrerySnippet = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+      garrerySnippet = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
         children: "\u0424\u043E\u0442\u043E\u0433\u0430\u043B\u0435\u0440\u0435\u044E \u0412\u0438 \u0437\u043C\u043E\u0436\u0435\u0442\u0435 \u0432\u0432\u0435\u0441\u0442\u0438 \u043F\u0456\u0441\u043B\u044F \u043F\u0435\u0440\u0448\u043E\u0433\u043E \u0437\u0431\u0435\u0440\u0435\u0436\u0435\u043D\u043D\u044F \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430"
       });
     }
   }
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h2", {
       children: isEdit ? dojo.name : "Новий доджо"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("form", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("form", {
       encType: "multipart/form-data",
       className: "row",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "col-sm-5 d-grid gap-3",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
             htmlFor: "lastName",
             className: "form-label",
             children: "\u041D\u0430\u0437\u0432\u0430"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableText, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_4__.EditableText, {
             field: "name",
             className: "form-control",
             id: id,
             initialValue: isEdit && dojo.name,
             inlineUpdateUrl: updateUrl
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableSwitch, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_4__.EditableSwitch, {
           field: "is_actual",
           className: "form-check-input",
           id: id,
           initialValue: isEdit && dojo.is_actual ? 1 : 0,
           inlineUpdateUrl: updateUrl,
           children: "\u0427\u0438 \u0430\u043A\u0442\u0443\u0430\u043B\u044C\u043D\u0438\u0439 \u0437\u0430\u043B (\u0447\u0438 \u043F\u0440\u043E\u0432\u043E\u0434\u044F\u0442\u044C\u0441\u044F \u0432 \u043D\u044C\u043E\u043C\u0443 \u0437\u0430\u043D\u044F\u0442\u0442\u044F?)"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
             htmlFor: "info",
             className: "form-label",
             children: "\u0406\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0456\u044F"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableTextarea, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_4__.EditableTextarea, {
             field: "info",
             className: "form-control",
             id: id,
@@ -9284,15 +9307,15 @@ var EditDojo = function EditDojo(_ref) {
             rows: "10"
           })]
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
         className: "mb-3 col-sm-1 mb-3"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "form-floating_ mb-3 col-sm-6",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
           htmlFor: "photo",
           className: "form-label",
           children: "\u0424\u043E\u0442\u043E"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Photo__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Photo__WEBPACK_IMPORTED_MODULE_2__["default"], {
           id: "photo",
           name: "photo",
           className: "form-control",
@@ -9300,33 +9323,33 @@ var EditDojo = function EditDojo(_ref) {
           alt: isEdit ? '' + dojo.name : "Фото доджо",
           editable: true
         }), "\u0411\u0443\u0434\u0435 \u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u043D\u043E \u0441\u0442\u0432\u043E\u0440\u0435\u043D\u043E preview \u0441 \u0448\u0438\u0440\u0438\u043D\u043E\u044E 300px"]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "col-md-12 mb-3",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
           style: {
             'backgroundColor': 'yellow'
           },
           children: "\u0406\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440\u0438"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_EditAttachedEntities__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_EditAttachedEntities__WEBPACK_IMPORTED_MODULE_1__["default"], {
           entityName: "dojo",
           entityId: id,
           entityNameToAttach: "athlete",
           attachedEntities: isEdit ? dojo.athletes : null,
           updateUrl: updateUrl
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
         className: "col-md-12 d-grid mb-3",
         style: {
           'backgroundColor': 'yellow'
         },
         children: "\u041B\u043E\u043A\u0430\u0446\u0456\u044F"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "col-md-2 mb-3",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
           htmlFor: "place",
           className: "form-label",
           children: "\u0420\u043E\u0437\u0442\u0430\u0448\u0443\u0432\u0430\u043D\u043D\u044F"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableSwitch, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_4__.EditableSwitch, {
           field: "place",
           className: "form-check-input",
           id: id,
@@ -9335,54 +9358,38 @@ var EditDojo = function EditDojo(_ref) {
           values: [1, 2],
           labels: ['Львів', 'Область']
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "col-md-10 mb-3",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
           htmlFor: "district",
           className: "form-label",
           children: "\u0420\u0430\u0439\u043E\u043D"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableText, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_4__.EditableText, {
           field: "district",
           className: "form-control",
           id: id,
           initialValue: isEdit && dojo.district,
           inlineUpdateUrl: updateUrl
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "col-md-12 d-grid gap-3 mb-3",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
             htmlFor: "address",
             className: "form-label",
             children: "\u0410\u0434\u0440\u0435\u0441\u0430 (\u0431\u0435\u0437 \u0437\u0430\u0437\u043D\u0430\u0447\u0435\u043D\u043D\u044F \u0423\u043A\u0440\u0430\u0457\u043D\u0438 \u0456 \u041B\u044C\u0432\u043E\u0432\u0430/\u041B\u044C\u0432\u0456\u0432\u0441\u044C\u043A\u043E\u0439 \u043E\u0431\u043B\u0430\u0441\u0442\u0456)"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableText, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_4__.EditableText, {
             field: "address",
             className: "form-control",
             id: id,
             initialValue: isEdit && dojo.address,
             inlineUpdateUrl: updateUrl
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
-            htmlFor: "coords",
-            className: "form-label",
-            children: "\u041A\u043E\u043E\u0440\u0434\u0438\u043D\u0430\u0442\u044B \u043D\u0430 \u0413\u0443\u0433\u043B-\u043C\u0430\u043F\u0456"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableText, {
-            field: "coords",
-            className: "form-control",
-            id: id,
-            initialValue: isEdit && dojo.coords,
-            inlineUpdateUrl: updateUrl
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableSwitch, {
-          field: "is_manual",
-          className: "form-check-input",
-          id: id,
-          initialValue: isEdit && dojo.is_manual,
-          inlineUpdateUrl: updateUrl,
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("b", {
-            children: "\u0412\u0440\u0443\u0447\u043D\u0443 \u0432\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D\u0456 \u043A\u043E\u043E\u0440\u0434\u0438\u043D\u0430\u0442\u0438?"
-          }), " \u0432 \u0446\u044C\u043E\u043C\u0443 \u0432\u0438\u043F\u0430\u0434\u043A\u0443 \u0432\u043E\u043D\u0438 \u043D\u0435 \u0431\u0443\u0434\u0443\u0442\u044C \u043F\u0435\u0440\u0435\u0440\u0430\u0445\u043E\u0432\u0443\u0432\u0430\u0442\u0438\u0441\u044F \u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u043D\u043E"]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_EditDojoCoordinates__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            dojo: dojo,
+            updateUrl: updateUrl
+          })
         })]
       })]
     })]
@@ -9390,6 +9397,129 @@ var EditDojo = function EditDojo(_ref) {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (EditDojo);
+
+/***/ }),
+
+/***/ "./resources/js/components/panes/EditDojoCoordinates.js":
+/*!**************************************************************!*\
+  !*** ./resources/js/components/panes/EditDojoCoordinates.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _controls_Table__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../controls/Table */ "./resources/js/components/controls/Table.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+ // TODO: bugfix
+
+
+
+
+
+var EditDojoCoordinates = function EditDojoCoordinates(_ref) {
+  var dojo = _ref.dojo,
+      updateUrl = _ref.updateUrl;
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+      _useState2 = _slicedToArray(_useState, 2),
+      automaticGeocode = _useState2[0],
+      setAutomaticGeocode = _useState2[1];
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(dojo),
+      _useState4 = _slicedToArray(_useState3, 2),
+      dojoModel = _useState4[0],
+      setDojoModel = _useState4[1];
+
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    setDojoModel(dojo);
+  });
+  var isEdit = typeof dojo != 'undefined';
+
+  var getAddress = function getAddress() {
+    return 'Україна, м. Львів, пр Чорновола, буд. 103, кв. 75';
+  };
+
+  var geocode = function geocode(isAutomatic) {
+    dojoModel.is_manual = !isAutomatic;
+    dojoModel.coords = automaticGeocode;
+    setDojoModel(_objectSpread({}, dojoModel));
+
+    if (isAutomatic && typeof getAddress == 'function') {
+      try {
+        var gc = new google.maps.Geocoder();
+        gc.geocode({
+          address: getAddress()
+        }, function (results, status) {
+          console.log(results);
+          var coords = results[0].geometry.location.lat() + ', ' + results[0].geometry.location.lng();
+          console.log(coords);
+          setAutomaticGeocode(coords);
+        });
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  }; // geocode callback
+
+
+  window.geocode = function () {
+    geocode(isEdit && !dojoModel.is_manual);
+  };
+
+  console.log(dojoModel);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+      htmlFor: "coords",
+      className: "form-label",
+      children: "\u041A\u043E\u043E\u0440\u0434\u0438\u043D\u0430\u0442\u044B \u043D\u0430 \u0413\u0443\u0433\u043B-\u043C\u0430\u043F\u0456"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_controls_Table__WEBPACK_IMPORTED_MODULE_1__.EditableSwitch, {
+      field: "is_manual",
+      className: "form-check-input",
+      id: isEdit && dojoModel.id,
+      initialValue: isEdit && dojoModel.is_manual,
+      values: [1, 0],
+      inlineUpdateUrl: updateUrl,
+      onChange: geocode,
+      children: ["\u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u043D\u043E \u0440\u043E\u0437\u0440\u0430\u0445\u043E\u0432\u0443\u0432\u0430\u0442\u0438 \u043A\u043E\u043E\u0440\u0434\u0438\u043D\u0430\u0442\u0438 ", isEdit && (dojoModel.is_manual || automaticGeocode == '') ? '' : '(' + automaticGeocode + ')']
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_1__.EditableText, {
+      field: "coords",
+      className: "form-control",
+      id: isEdit && dojoModel.id,
+      initialValue: isEdit && (dojoModel.is_manual ? dojoModel.coords : automaticGeocode),
+      inlineUpdateUrl: updateUrl,
+      disabled: isEdit && !dojoModel.is_manual,
+      onChange: function onChange(value) {
+        return dojoModel.coords = value;
+      } // updateOnStart={ isEdit && !dojoModel.is_manual && (dojoModel.coords != automaticGeocode) && (automaticGeocode != '') && ((dojoModel.coords = automaticGeocode && setDojoModel({ ...dojoModel })) ? true : true) }
+
+    })]
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (EditDojoCoordinates);
 
 /***/ }),
 
@@ -9806,7 +9936,8 @@ function useEditable(_ref) {
   var data = _ref.data,
       getNewValue = _ref.getNewValue,
       inlineUpdateUrl = _ref.inlineUpdateUrl,
-      onBeforeSuccess = _ref.onBeforeSuccess;
+      onBeforeSuccess = _ref.onBeforeSuccess,
+      updateOnStart = _ref.updateOnStart;
   onBeforeSuccess = typeof onBeforeSuccess == 'function' ? onBeforeSuccess : function () {};
   var noValue = typeof data.value == 'undefined';
 
@@ -9832,7 +9963,16 @@ function useEditable(_ref) {
 
   react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
     setValue(data.value);
-  }, [noValue ? null : data.value]);
+  }, [noValue ? null : data.value]); // if (typeof updateOnStart != 'undefined') {
+  //     console.log('updateOnStart', updateOnStart);
+  // }
+
+  if (updateOnStart == true) {
+    // console.log('updateOnStart is true calling onChange');
+    onChange({
+      forceSave: true
+    });
+  }
 
   var Editable = function Editable(_ref2) {
     var children = _ref2.children;
@@ -9937,7 +10077,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var STATUS_DURATION = 2000;
 /**
  * data: { value, ...otherFieldsThatWillBeSentWithRequest }
- * 
+ *
  * When used from Editable components data = { id, field, value }
  */
 
@@ -9971,10 +10111,12 @@ function useStatus(_ref) {
 
   var onChange = // useRef(
   function onChange(e) {
-    var newValue = isNewValue ? getNewValue(e) : null; // console.log(newValue);
+    // console.log('isNewValue', isNewValue);
+    var newValue = isNewValue ? getNewValue(e) : null; // console.log('newValue', newValue);
+    // console.log(newValue);
     // console.log(isNewValue, previousValue, newValue, isSetValue);
 
-    if (!isNewValue || isNewValue && previousValue != newValue) {
+    if (!isNewValue || isNewValue && previousValue != newValue || e.forceSave) {
       if (isSetValue) {
         // console.log('setting new val');
         setValue(newValue);

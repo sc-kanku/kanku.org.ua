@@ -9,7 +9,7 @@ export const EditableDegree = ({ initialValue, className, ...props }) => {
   initialValue = initialValue != null ? initialValue : '';
   className = typeof className == 'undefined' ? '' : className;
 
-  const [Editable, value, onChange] = useEditable({ 
+    const [Editable, value, onChange] = useEditable({
     ...props,
     data: {id: props.id, field: props.field, value: initialValue},
     getNewValue: (e) => e.target.value
@@ -18,9 +18,9 @@ export const EditableDegree = ({ initialValue, className, ...props }) => {
   return <>
       <Editable />
       <Degree id={props.field} name={props.field} className={className}
-        value={value} 
-        editable="true" 
-        onChange={onChange} 
+          value={value}
+          editable="true"
+          onChange={onChange}
       />
   </>
 };
@@ -29,7 +29,7 @@ export const EditablePostCategory = ( { initialValue, className, ...props } ) =>
   initialValue = initialValue != null ? initialValue : '';
   className = typeof className == 'undefined' ? '' : className;
 
-  const [Editable, value, onChange] = useEditable({ 
+    const [Editable, value, onChange] = useEditable({
     ...props,
     data: {id: props.id, field: props.field, value: initialValue},
     getNewValue: (e) => e.target.value
@@ -39,7 +39,7 @@ export const EditablePostCategory = ( { initialValue, className, ...props } ) =>
       <Editable />
       <PostCategory value={value} editable="true" onChange={onChange} />
   </>
-}; 
+};
 
 // Create an editable cell renderer
 export const EditableDate = ({ initialValue, className, ...props }) => {
@@ -47,7 +47,7 @@ export const EditableDate = ({ initialValue, className, ...props }) => {
   initialValue = initialValue != null ? initialValue : '';
   className = typeof className == 'undefined' ? '' : className;
 
-  const [Editable, value, onChange] = useEditable({ 
+    const [Editable, value, onChange] = useEditable({
     ...props,
     data: {id: props.id, field: props.field, value: initialValue},
     getNewValue: (e) => e.target.value
@@ -55,28 +55,40 @@ export const EditableDate = ({ initialValue, className, ...props }) => {
   // value={value}???
   return <>
     <Editable />
-    <input 
+      <input
       id={props.field} name={props.field} className={className}
-      type='date' 
-      defaultValue={initialValue} 
-      onChange={onChange} 
+          type='date'
+          defaultValue={initialValue}
+          onChange={onChange}
     />
   </>
 }
 
 // Create an editable cell renderer
 // TODO: debug and optimize it (rerenders to many times)
-export const EditableSwitch = ({ initialValue, className, children, values, labels, ...props }) => {
+export const EditableSwitch = ({ initialValue, className, children, values, labels, onChange, ...props }) => {
     // We need to keep and update the state of the cell normally
     initialValue = initialValue != null ? initialValue : "";
     className = typeof className == 'undefined' ? '' : className;
     children = typeof children == 'undefined' ? null : children;
     values = typeof values == 'undefined' ? [0, 1] : values;
 
-    const [Editable, value, onChange] = useEditable({ 
-        ...props, 
+    const [Editable, value, onEditableChange] = useEditable({
+        ...props,
         data: {id: props.id, field: props.field, value: initialValue},
         getNewValue : (e) => e.target.checked ? values[1] : values[0],
+        onBeforeSuccess: () => {
+            if (typeof onChange == 'function') {
+                // value is not yet switched so to take correct value lets take the opposite (values[0] instead of values[1]).
+                let isOn = value == values[0];
+
+                try {
+                    onChange(isOn);
+                } catch (e) {
+                    // console.log(e);
+                }
+            }
+        }
       });
 
     const defineLabel = (value) => {
@@ -88,7 +100,7 @@ export const EditableSwitch = ({ initialValue, className, children, values, labe
         } else if (value == values[1]) {
           defined = labels[1]
         }
-      } 
+      }
 
       return defined;
     }
@@ -102,7 +114,7 @@ export const EditableSwitch = ({ initialValue, className, children, values, labe
           id={ id } name={ props.field } className={ className }
           type='checkbox' role="switch"
           checked={ value == values[1] }
-          onChange={ onChange } 
+                onChange={ onEditableChange }
         />
         <label htmlFor={id} className="form-label">{ defineLabel(value) }</label>
       </div>
@@ -110,30 +122,44 @@ export const EditableSwitch = ({ initialValue, className, children, values, labe
 }
 
 // Create an editable cell renderer
-export const EditableText = ({ initialValue, type, className, disabled, ...props }) => {
+export const EditableText = ({ initialValue, type, className, disabled, onChange, ...props }) => {
     // We need to keep and update the state of the cell normally
     initialValue = initialValue != null ? initialValue : '';
     className = typeof className == 'undefined' ? '' : className;
     type = typeof type == 'undefined' ? 'text' : type;
     disabled = typeof disabled == 'undefined' ? false : disabled;
 
-    const [Editable, value, onChange, setValue] = useEditable( { 
-      ...props, 
+    // if (props.field == 'coords') {
+    //     console.log('disabled', disabled);
+    //     console.log('props', props);
+    //     console.log('initialValue', initialValue);
+    // }
+
+    const [Editable, value, onEditableChange, setValue] = useEditable({
+        ...props,
       data: {id: props.id, field: props.field, value: initialValue},
-      getNewValue : (e) => value
+      getNewValue : e => typeof value === 'undefined' ? initialValue : value
     });
 
-  const onTypingChange = e => setValue(e.target.value)
-  
+    const onTypingChange = e => {
+        setValue(e.target.value);
+
+        if (typeof onChange == 'funtion') {
+            onChange(e.target.value);
+        }
+
+    }
+
   return <>
     <Editable />
-    <input 
-      id={props.field} name={props.field} className={className}
-      type={type} 
-      defaultValue={initialValue} 
-      disabled={disabled} readOnly={disabled}
-      onChange={onTypingChange} 
-      onBlur={onChange} 
+      <input
+        id={props.field} name={props.field} className={className}
+        type={type}
+        defaultValue={initialValue}
+        disabled={disabled}
+        readOnly={disabled}
+        onChange={onTypingChange}
+        onBlur={ onEditableChange }
     />
   </>
 }
@@ -144,8 +170,8 @@ export const EditableTextarea = ({ initialValue, type, className, rows, ...props
   className = typeof className == 'undefined' ? '' : className;
   rows = typeof rows == 'undefined' ? '5' : rows;
 
-  const [Editable, value, onChange, setValue] = useEditable( { 
-    ...props, 
+    const [Editable, value, onChange, setValue] = useEditable({
+        ...props,
     data: {id: props.id, field: props.field, value: initialValue},
     getNewValue : (e) => value
   });
@@ -154,12 +180,12 @@ const onTypingChange = e => setValue(e.target.value)
 
 return <>
   <Editable />
-  <textarea 
+    <textarea
     id={props.field} name={props.field} className={className}
-    rows={rows} 
-    defaultValue={initialValue} 
-    onChange={onTypingChange} 
-    onBlur={onChange} 
+        rows={rows}
+        defaultValue={initialValue}
+        onChange={onTypingChange}
+        onBlur={onChange}
   ></textarea>
 </>
 }
@@ -169,7 +195,7 @@ export default function Table({ columns, data, inlineUpdateUrl }) {
 
   // data = { id, field, value }
   const synchronizeDataOnUpdateSuccess = (data) => {
-    // rowIndex = data.id - 1, 
+    // rowIndex = data.id - 1,
     // columnId = data.field
     // value = data.value
     setSkipPageReset(true);
@@ -212,15 +238,15 @@ const defaultColumn = {
       return (<EditableDegree {...attributes} />)
     } else if (info.column.id == "category") {
       return (<EditablePostCategory {...attributes} />)
-    } else if (info.column.id == "is_coach" 
-            || info.column.id == "is_best" 
+    } else if (info.column.id == "is_coach"
+        || info.column.id == "is_best"
             || info.column.id == "is_actual") {
       return (<EditableSwitch {...attributes} className="form-check-input" />)
     } else if (info.column.id == "dateAt") {
       return (<EditableDate {...attributes} />)
     } else {
       return <EditableText {...attributes} />
-    } 
+    }
   }
 }
 
@@ -245,7 +271,7 @@ const {
     useSortBy // This plugin Hook will help to sort our table columns
   );
 
-  /* 
+  /*
     Render the UI for your table
     - react-table doesn't have UI, it's headless. We just need to put the react-table props from the Hooks, and it will do its magic automatically
   */
@@ -259,7 +285,7 @@ const {
             {headerGroup.headers.map(column =>  {
                 function getColumnStyle(column) {
                     let customStyle = {};
-                    
+
                     if (column.id == 'phone' || column.id == 'phone2') {
                         customStyle = {
                             style: {minWidth: '12rem'}
@@ -273,16 +299,16 @@ const {
                     return customStyle;
                 }
 
-// {...column.getHeaderProps(column.getSortByToggleProps())} 
-// {...column.getHeaderProps(getColumnStyle(column))} 
+// {...column.getHeaderProps(column.getSortByToggleProps())}
+// {...column.getHeaderProps(getColumnStyle(column))}
 
-                let content = (column.originalId == "Search") 
-                    ? <> 
+                let content = (column.originalId == "Search")
+                    ? <>
                         <TableSearch setGlobalFilter={setGlobalFilter} /> {(rows.length != data.length) ? rows.length + ' / ' + data.length : data.length}
                       </>
                     : column.render("Header");
 
-                let sortingIcon = column.columns 
+                let sortingIcon = column.columns
                   ? ""
                   : <i className={column.isSorted
                       ? column.isSortedDesc
@@ -292,9 +318,9 @@ const {
                   }></i>;
 
                 return (
-                    <th 
-                      
-                      {...column.getHeaderProps(column.getSortByToggleProps())} 
+                    <th
+
+                        {...column.getHeaderProps(column.getSortByToggleProps())}
                       scope="col"
                     >{sortingIcon} {content}
                     </th>

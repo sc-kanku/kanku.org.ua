@@ -3,7 +3,7 @@ import useSave from '../utils/useSave';
 import useStatus from '../utils/useStatus';
 
 // data: { id, field, value }
-export default function useEditable({ data, getNewValue, inlineUpdateUrl, onBeforeSuccess }) {
+export default function useEditable({ data, getNewValue, inlineUpdateUrl, onBeforeSuccess, updateOnStart }) {
     onBeforeSuccess = typeof onBeforeSuccess == 'function' ? onBeforeSuccess : () => {};
     let noValue = typeof data.value == 'undefined';
 
@@ -14,7 +14,17 @@ export default function useEditable({ data, getNewValue, inlineUpdateUrl, onBefo
     // If the initialValue is changed external, sync it up with our state
     React.useEffect(() => {
         setValue(data.value)
-      }, [ noValue ? null : data.value ])
+    }, [ noValue ? null : data.value ])
+
+    // if (typeof updateOnStart != 'undefined') {
+    //     console.log('updateOnStart', updateOnStart);
+    // }
+
+    if (updateOnStart == true) {
+        // console.log('updateOnStart is true calling onChange');
+
+        onChange({forceSave: true});
+    }
 
     const Editable = ({ children }) => <>
         <Status />

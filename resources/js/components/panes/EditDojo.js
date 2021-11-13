@@ -2,6 +2,8 @@ import React, {useMemo, useState, useEffect} from 'react';
 import { useParams, Redirect} from 'react-router-dom';
 import EditAttachedEntities from '../controls/EditAttachedEntities';
 import Photo from '../controls/Photo';
+import EditDojoCoordinates from './EditDojoCoordinates';
+
 import { EditableText, EditableDate, EditableDegree, EditableSwitch, EditableTextarea } from '../controls/Table';
 
 const EditDojo = ({getUrl, updateUrl, photoFileName}) => {
@@ -17,14 +19,14 @@ const EditDojo = ({getUrl, updateUrl, photoFileName}) => {
     let isEdit = id != null;
 
     let garrerySnippet = "";
-    
+
     if (isEdit && dojo.gallery) {
         let galleryUrl = "photo.php?galleryID=" + dojo.gallery['galleryID'];
-        garrerySnippet = 
+        garrerySnippet =
                     <ol><li><a href={galleryUrl}>{dojo.gallery['name']}</a></li></ol>
     } else {
         if (isEdit) {
-            garrerySnippet = 
+            garrerySnippet =
             <p>
                 Фотогалерея еще не введена<br />
                 <input type="button" value="Ввести фотогалерею" onclick="location.href='new_a_gallery.php?id=<?= $athlet->id ?>'" />
@@ -44,26 +46,26 @@ const EditDojo = ({getUrl, updateUrl, photoFileName}) => {
                         <label htmlFor="lastName" className="form-label">Назва</label>
 
                         <EditableText field="name" className="form-control"
-                            id={id} 
-                            initialValue={isEdit && dojo.name} 
+                            id={id}
+                            initialValue={isEdit && dojo.name}
                             inlineUpdateUrl={updateUrl}
                         />
                     </div>
 
                     <EditableSwitch
                         field="is_actual" className="form-check-input"
-                        id={ id } 
-                        initialValue={(isEdit && dojo.is_actual) ? 1 : 0} 
+                        id={ id }
+                        initialValue={(isEdit && dojo.is_actual) ? 1 : 0}
                         inlineUpdateUrl={updateUrl}
                     >Чи актуальний зал (чи проводяться в ньому заняття?)
                     </EditableSwitch>
 
                     <div>
                         <label htmlFor="info" className="form-label">Інформація</label>
-                        
+
                         <EditableTextarea field="info" className="form-control"
-                            id={id} 
-                            initialValue={isEdit ? dojo.info : ''} 
+                            id={id}
+                            initialValue={isEdit ? dojo.info : ''}
                             inlineUpdateUrl={updateUrl}
                             rows='10'
                         />
@@ -75,7 +77,7 @@ const EditDojo = ({getUrl, updateUrl, photoFileName}) => {
                 {/* TODO */}
                 <div className="form-floating_ mb-3 col-sm-6">
                     <label htmlFor="photo" className="form-label">Фото</label>
-                    
+
                     <Photo id="photo" name="photo" className="form-control"
                         url={dojo && ("/images/dojos/" + dojo.id + "/photo.png")}
                         alt={isEdit ? ('' + dojo.name) : "Фото доджо"}
@@ -87,11 +89,11 @@ const EditDojo = ({getUrl, updateUrl, photoFileName}) => {
 
                 <div className="col-md-12 mb-3">
                     <p style={{'backgroundColor': 'yellow'}}>Інструктори</p>
-                    <EditAttachedEntities 
+                    <EditAttachedEntities
                         entityName='dojo'
-                        entityId={ id} 
+                        entityId={ id}
                         entityNameToAttach='athlete'
-                        attachedEntities={isEdit ? dojo.athletes : null} 
+                        attachedEntities={isEdit ? dojo.athletes : null}
                         updateUrl={updateUrl}
                     />
                 </div>
@@ -100,11 +102,11 @@ const EditDojo = ({getUrl, updateUrl, photoFileName}) => {
 
                 <div className="col-md-2 mb-3">
                     <label htmlFor="place" className="form-label">Розташування</label>
-                    
+
                     <EditableSwitch
                         field="place" className="form-check-input"
-                        id={ id } 
-                        initialValue={ isEdit ? dojo.place : 1 } 
+                        id={ id }
+                        initialValue={ isEdit ? dojo.place : 1 }
                         inlineUpdateUrl={updateUrl}
                         values = { [1, 2] }
                         labels = { ['Львів', 'Область']}
@@ -115,8 +117,8 @@ const EditDojo = ({getUrl, updateUrl, photoFileName}) => {
                     <label htmlFor="district" className="form-label">Район</label>
 
                     <EditableText field="district" className="form-control"
-                        id={id} 
-                        initialValue={isEdit && dojo.district} 
+                        id={id}
+                        initialValue={isEdit && dojo.district}
                         inlineUpdateUrl={updateUrl}
                     />
                 </div>
@@ -125,8 +127,8 @@ const EditDojo = ({getUrl, updateUrl, photoFileName}) => {
                     <label htmlFor="point" className="form-label">point</label>
 
                     <EditableText field="point" className="form-control"
-                        id={ id } 
-                        initialValue={isEdit && dojo.point} 
+                        id={ id }
+                        initialValue={isEdit && dojo.point}
                         inlineUpdateUrl={updateUrl}
                     />
                 </div> */}
@@ -136,31 +138,17 @@ const EditDojo = ({getUrl, updateUrl, photoFileName}) => {
                         <label htmlFor="address" className="form-label">Адреса (без зазначення України і Львова/Львівськой області)</label>
 
                         <EditableText field="address" className="form-control"
-                            id={ id } 
-                            initialValue={ isEdit && dojo.address } 
+                            id={ id }
+                            initialValue={ isEdit && dojo.address }
                             inlineUpdateUrl={ updateUrl }
                         />
                     </div>
 
                     <div>
-                        <label htmlFor="coords" className="form-label">Координаты на Гугл-мапі</label>
-
-                        <EditableText field="coords" className="form-control"
-                            id={ id } 
-                            initialValue={ isEdit && dojo.coords } 
-                            inlineUpdateUrl={ updateUrl }
-                        />
+                        <EditDojoCoordinates dojo={dojo} updateUrl={updateUrl} />
                     </div>
-
-                    <EditableSwitch
-                        field="is_manual" className="form-check-input"
-                        id={ id } 
-                        initialValue={ isEdit && dojo.is_manual } 
-                        inlineUpdateUrl={ updateUrl }
-                    ><b>Вручну встановлені координати?</b> в цьому випадку вони не будуть перераховуватися автоматично
-                    </EditableSwitch>
                 </div>
-                
+
                     {/*}
                     <tr>
                         <td>url</td>
@@ -168,7 +156,7 @@ const EditDojo = ({getUrl, updateUrl, photoFileName}) => {
                     </tr>
                     */}
 
-{/* 
+{/*
                     <tr>
                         <td>Фотогалерея</td>
                         <td>{garrerySnippet}</td>
@@ -181,7 +169,7 @@ const EditDojo = ({getUrl, updateUrl, photoFileName}) => {
                             <input type="button" name="save" value="зберегти" onClick={saveEntity} />
                         </td>
                     </tr> */}
-                    
+
             </form>
         </>
     )

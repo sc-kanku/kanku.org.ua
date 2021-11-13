@@ -4,7 +4,7 @@ const STATUS_DURATION = 2000;
 
 /**
  * data: { value, ...otherFieldsThatWillBeSentWithRequest }
- * 
+ *
  * When used from Editable components data = { id, field, value }
  */
 export default function useStatus({ data, save, setValue, getNewValue }) {
@@ -22,13 +22,17 @@ export default function useStatus({ data, save, setValue, getNewValue }) {
 
     const onChange = // useRef(
       e => {
-        let newValue = isNewValue ? getNewValue(e) : null; 
+        // console.log('isNewValue', isNewValue);
+
+        let newValue = isNewValue ? getNewValue(e) : null;
+
+        // console.log('newValue', newValue);
 
         // console.log(newValue);
 
         // console.log(isNewValue, previousValue, newValue, isSetValue);
 
-        if (!isNewValue || isNewValue && previousValue != newValue) {
+        if (!isNewValue || isNewValue && previousValue != newValue || e.forceSave) {
           if (isSetValue) {
             // console.log('setting new val');
             setValue(newValue);
@@ -65,7 +69,7 @@ export default function useStatus({ data, save, setValue, getNewValue }) {
     // ).current;
 
     let classes = 'position-absolute top-50 end-0 translate-middle_ border border-light rounded-circle';
-    
+
     let StatusMarkup = // useMemo(
       ({ children }) => (<>
         <div style={{position: "relative"}}>
@@ -75,6 +79,6 @@ export default function useStatus({ data, save, setValue, getNewValue }) {
         </div>
     </>)
     // , []);
-    
+
     return [StatusMarkup, onChange]
 }
