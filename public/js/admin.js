@@ -6415,20 +6415,20 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 // entityName, entityNameToAttach = { dojo | athlete }
 
 /**
- * Is Used to 
+ * Is Used to
  *  - edit attached to athlete dojos on Admin > Edit Athlete screen
  *  - edit attached to dojo athletes on Admin > Edit Dojo screen
- * 
- * entityName - Name of the 'main' entity 
- *      i.e. 'athlete' when used on Edit Athlete screen 
+ *
+ * entityName - Name of the 'main' entity
+ *      i.e. 'athlete' when used on Edit Athlete screen
  *      and 'dojo' when used on Edit Dojo screen
- * 
+ *
  * entityNameToAttach - Name of the entity that is attached
  *      i.e. 'athlete' when used on Edit Dojo screen (athletes are attached to the dojo that is currently being edited)
  *      and 'dojo' when used on Edit Dojo screen (dojos are attached to the athlete that is currently being edited)
- * 
- * @param {*} param0 
- * @returns 
+ *
+ * @param {*} param0
+ * @returns
  */
 
 
@@ -6442,7 +6442,9 @@ var EditAttachedEntities = function EditAttachedEntities(_ref) {
       entityId = _ref.entityId,
       entityNameToAttach = _ref.entityNameToAttach,
       attachedEntities = _ref.attachedEntities,
-      updateUrl = _ref.updateUrl;
+      updateUrl = _ref.updateUrl,
+      getId = _ref.getId,
+      _onBeforeSuccess = _ref.onBeforeSuccess;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(attachedEntities),
       _useState2 = _slicedToArray(_useState, 2),
@@ -6462,13 +6464,19 @@ var EditAttachedEntities = function EditAttachedEntities(_ref) {
   var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
       _useState8 = _slicedToArray(_useState7, 2),
       detachedEntityId = _useState8[0],
-      setDetachedEntityId = _useState8[1]; // TODO: refactor useEditable to be suitable one for both actions.    
+      setDetachedEntityId = _useState8[1];
 
+  entityId = entityId ? entityId : getId ? getId() : null; // TODO: refactor useEditable to be suitable one for both actions.
 
   var _useEditable = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_3__["default"])({
     inlineUpdateUrl: '/api/athlete/update/schedule',
     data: (_data = {}, _defineProperty(_data, entityName + 'Id', entityId), _defineProperty(_data, entityNameToAttach + 'Id', attachedEntityId), _defineProperty(_data, "schedule", ''), _data),
     onBeforeSuccess: function onBeforeSuccess(data) {
+      // console.log('onBeforeSuccess');
+      if (typeof _onBeforeSuccess == 'function') {
+        _onBeforeSuccess(data);
+      }
+
       var selectedEntityToAttach = allEntitiesToAttachFrom.filter(function (dojo) {
         return dojo.id == attachedEntityId;
       });
@@ -6513,7 +6521,7 @@ var EditAttachedEntities = function EditAttachedEntities(_ref) {
   var attachEntity = function attachEntity(entityId) {
     if (entityId == "-1") {// Виберіть зал
     } else if (entityId == "0") {// Новий зал
-      // TODO: 
+      // TODO:
     } else {
       setAttachedEntityId(entityId);
     }
@@ -6706,7 +6714,7 @@ function EditableTable(_ref) {
     // updateEditedItemUrl : prefixes.api + '/save',
     listEntityWebUrl: prefixes.web + '/list',
     editEntityWebUrl: prefixes.web + '/edit/:id',
-    newEntityWebUrl: prefixes.web + '/new'
+    newEntityWebUrl: prefixes.web + '/new/:p'
   }),
       _useState4 = _slicedToArray(_useState3, 2),
       urls = _useState4[0],
@@ -7025,7 +7033,7 @@ var EditableDegree = function EditableDegree(_ref) {
 
   var _useEditable = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_5__["default"])(_objectSpread(_objectSpread({}, props), {}, {
     data: {
-      id: props.id,
+      id: props.id ? props.id : props.getId ? props.getId : null,
       field: props.field,
       value: initialValue
     },
@@ -7059,7 +7067,7 @@ var EditablePostCategory = function EditablePostCategory(_ref2) {
 
   var _useEditable3 = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_5__["default"])(_objectSpread(_objectSpread({}, props), {}, {
     data: {
-      id: props.id,
+      id: props.id ? props.id : props.getId ? props.getId : null,
       field: props.field,
       value: initialValue
     },
@@ -7093,7 +7101,7 @@ var EditableDate = function EditableDate(_ref3) {
 
   var _useEditable5 = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_5__["default"])(_objectSpread(_objectSpread({}, props), {}, {
     data: {
-      id: props.id,
+      id: props.id ? props.id : props.getId ? props.getId : null,
       field: props.field,
       value: initialValue
     },
@@ -7137,14 +7145,18 @@ var EditableSwitch = function EditableSwitch(_ref4) {
 
   var _useEditable7 = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_5__["default"])(_objectSpread(_objectSpread({}, props), {}, {
     data: {
-      id: props.id,
+      id: props.id ? props.id : props.getId ? props.getId : null,
       field: props.field,
       value: initialValue
     },
     getNewValue: function getNewValue(e) {
       return e.target.checked ? values[1] : values[0];
     },
-    onBeforeSuccess: function onBeforeSuccess() {
+    onBeforeSuccess: function onBeforeSuccess(data) {
+      if (typeof props.onBeforeSuccess == 'function') {
+        props.onBeforeSuccess(data);
+      }
+
       if (typeof onChange == 'function') {
         // value is not yet switched so to take correct value lets take the opposite (values[0] instead of values[1]).
         var isOn = value == values[0];
@@ -7156,10 +7168,11 @@ var EditableSwitch = function EditableSwitch(_ref4) {
       }
     }
   })),
-      _useEditable8 = _slicedToArray(_useEditable7, 3),
+      _useEditable8 = _slicedToArray(_useEditable7, 4),
       Editable = _useEditable8[0],
       value = _useEditable8[1],
-      onEditableChange = _useEditable8[2];
+      onEditableChange = _useEditable8[2],
+      setValue = _useEditable8[3];
 
   var defineLabel = function defineLabel(value) {
     var defined = children;
@@ -7186,7 +7199,9 @@ var EditableSwitch = function EditableSwitch(_ref4) {
         type: "checkbox",
         role: "switch",
         checked: value == values[1],
-        onChange: onEditableChange
+        onChange: onEditableChange // onChange={ onTypingChange }
+        // onBlur={ onEditableChange }
+
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
         htmlFor: id,
         className: "form-label",
@@ -7205,7 +7220,11 @@ var EditableText = function EditableText(_ref5) {
       props = _objectWithoutProperties(_ref5, _excluded5);
 
   // We need to keep and update the state of the cell normally
-  initialValue = initialValue != null ? initialValue : '';
+  initialValue = initialValue != null ? initialValue : ''; // const [initialValueState, setInitialValueState] = useState(typeof initialValue === 'function'
+  //         ? initialValue()
+  //         : initialValue != null ? initialValue : null);
+  //         console.log('initialValueState', initialValueState);
+
   className = typeof className == 'undefined' ? '' : className;
   type = typeof type == 'undefined' ? 'text' : type;
   disabled = typeof disabled == 'undefined' ? false : disabled; // if (props.field == 'coords') {
@@ -7216,10 +7235,12 @@ var EditableText = function EditableText(_ref5) {
 
   var _useEditable9 = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_5__["default"])(_objectSpread(_objectSpread({}, props), {}, {
     data: {
-      id: props.id,
+      id: props.id ? props.id : props.getId ? props.getId : null,
       field: props.field,
-      value: initialValue
+      value: initialValue // value: initialValueState
+
     },
+    //   getNewValue : e => typeof value === 'undefined' ? initialValueState : value
     getNewValue: function getNewValue(e) {
       return typeof value === 'undefined' ? initialValue : value;
     }
@@ -7231,7 +7252,7 @@ var EditableText = function EditableText(_ref5) {
       setValue = _useEditable10[3];
 
   var onTypingChange = function onTypingChange(e) {
-    setValue(e.target.value);
+    setValue(e.target.value); // TODO: function!!! Recheck
 
     if (typeof onChange == 'funtion') {
       onChange(e.target.value);
@@ -7243,7 +7264,8 @@ var EditableText = function EditableText(_ref5) {
       id: props.field,
       name: props.field,
       className: className,
-      type: type,
+      type: type // defaultValue={initialValueState}
+      ,
       defaultValue: initialValue,
       disabled: disabled,
       readOnly: disabled,
@@ -7266,7 +7288,7 @@ var EditableTextarea = function EditableTextarea(_ref6) {
 
   var _useEditable11 = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_5__["default"])(_objectSpread(_objectSpread({}, props), {}, {
     data: {
-      id: props.id,
+      id: props.id ? props.id : props.getId ? props.getId : null,
       field: props.field,
       value: initialValue
     },
@@ -7510,7 +7532,7 @@ function TableSearch(_ref) {
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
-    "class": "table-filter-search",
+    className: "table-filter-search",
     value: filterInput,
     onChange: handleFilterChange,
     placeholder: "Пошук (по всім полям)",
@@ -7555,8 +7577,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ AddButton)
 /* harmony export */ });
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
 
 
 
@@ -7565,13 +7601,27 @@ function AddButton(_ref) {
   var hrefPrefix = _ref.hrefPrefix,
       entity = _ref.entity,
       children = _ref.children;
-  var href = hrefPrefix + "/new";
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
-      to: href,
+
+  var generateLink = function generateLink() {
+    return hrefPrefix + "/new/" + Math.round(Math.random() * 1000);
+  };
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(generateLink()),
+      _useState2 = _slicedToArray(_useState, 2),
+      linkWithPar = _useState2[0],
+      setLinkWithPar = _useState2[1];
+
+  var relink = function relink() {
+    return setLinkWithPar(generateLink());
+  };
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+      to: linkWithPar,
       type: "button",
       className: "btn btn-outline-success",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("i", {
+      onClick: relink,
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("i", {
         className: "fas fa-plus"
       }), " ", children, " ", entity]
     })
@@ -8497,12 +8547,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _controls_buttons_EditButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../controls/buttons/EditButton */ "./resources/js/components/controls/buttons/EditButton.js");
-/* harmony import */ var _controls_buttons_ListButton__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../controls/buttons/ListButton */ "./resources/js/components/controls/buttons/ListButton.js");
-/* harmony import */ var _controls_buttons_AddButton__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../controls/buttons/AddButton */ "./resources/js/components/controls/buttons/AddButton.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _controls_buttons_ListButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../controls/buttons/ListButton */ "./resources/js/components/controls/buttons/ListButton.js");
+/* harmony import */ var _controls_buttons_AddButton__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../controls/buttons/AddButton */ "./resources/js/components/controls/buttons/AddButton.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 
@@ -8513,8 +8561,24 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function Dashboard() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      className: "mt-2 alert alert-info border border-info",
+      children: ["\u041F\u0440\u0430\u0446\u044E\u0454 \u0434\u043E\u0434\u0430\u0432\u0430\u043D\u043D\u044F \u043D\u043E\u0432\u043E\u0433\u043E \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430 (\u0430\u043B\u0435 \u0437 ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
+        "data-bs-toggle": "collapse",
+        href: "#collapseExample2",
+        "aria-expanded": "false",
+        "aria-controls": "collapseExample2",
+        style: {
+          margin: '1em 0.3em 0 0'
+        },
+        children: "\u043D'\u044E\u0430\u043D\u0441\u0430\u043C\u0438"
+      }), ")", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        className: "collapse mt-2",
+        id: "collapseExample2",
+        children: "\u042F\u043A\u0449\u043E \u0432\u0438 \u0432\u0436\u0435 \u0437\u043D\u0430\u0445\u043E\u0434\u0438\u0442\u0435\u0441\u044C \u0432 \u0440\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u043D\u043D\u0456 \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430 \u0447\u0438 \u0432 \u043F\u0440\u043E\u0446\u0435\u0441\u0456 \u0441\u0442\u0432\u043E\u0440\u044E\u0432\u0430\u043D\u043D\u044F \u0456\u043D\u0448\u043E\u0433\u043E \u043D\u043E\u0432\u043E\u0433\u043E \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430, \u0442\u043E \u0441\u043F\u043E\u0447\u0430\u0442\u043A\u0443 \u0442\u0440\u0435\u0431\u0430 \u043F\u0435\u0440\u0435\u043A\u043B\u044E\u0447\u0438\u0442\u0438\u0441\u044C \u043D\u0430 \u044F\u043A\u0438\u0439\u0441\u044C \u0456\u043D\u0448\u0438\u0439 \u0435\u043A\u0440\u0430\u043D."
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
       className: "btn btn-outline-warning",
       "data-bs-toggle": "collapse",
       href: "#collapseExample",
@@ -8524,97 +8588,99 @@ function Dashboard() {
       style: {
         margin: '1em 0.3em 0 0'
       },
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
-        "class": "fas fa-info-circle"
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
+        className: "fas fa-info-circle"
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
       className: "btn-group",
       role: "group",
       style: {
         margin: '1em 0.3em 0 0'
       },
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_buttons_ListButton__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_controls_buttons_ListButton__WEBPACK_IMPORTED_MODULE_1__["default"], {
         hrefPrefix: "/admin/athlete",
         children: "C\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0438"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_buttons_AddButton__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_controls_buttons_AddButton__WEBPACK_IMPORTED_MODULE_2__["default"], {
         hrefPrefix: "/admin/athlete"
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
       className: "btn-group",
       role: "group",
       style: {
         margin: '1em 0.3em 0 0'
       },
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_buttons_ListButton__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_controls_buttons_ListButton__WEBPACK_IMPORTED_MODULE_1__["default"], {
         hrefPrefix: "/admin/dojo",
         children: "\u0417\u0430\u043B\u0438"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_buttons_AddButton__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_controls_buttons_AddButton__WEBPACK_IMPORTED_MODULE_2__["default"], {
         hrefPrefix: "/admin/dojo"
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
       className: "btn-group",
       role: "group",
       style: {
         margin: '1em 0.3em 0 0'
       },
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_buttons_ListButton__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_controls_buttons_ListButton__WEBPACK_IMPORTED_MODULE_1__["default"], {
         hrefPrefix: "/admin/post",
         children: "\u041F\u043E\u0441\u0442\u0438"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_buttons_AddButton__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_controls_buttons_AddButton__WEBPACK_IMPORTED_MODULE_2__["default"], {
         hrefPrefix: "/admin/post"
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
       to: "/admin/site/refresh",
       type: "button",
       className: "btn btn-outline-success",
       style: {
         margin: '1em 0.3em 0 0'
       },
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
         className: "fas fa-refresh"
       }), "\u041E\u043D\u043E\u0432\u0438\u0442\u0438 \u0441\u0430\u0439\u0442"]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
       className: "collapse mt-2 alert alert-warning border border-warning",
       id: "collapseExample",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("ul", {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("ul", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
           className: "alert-heading",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h5", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h5", {
             children: "\u0420\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u043D\u043D\u044F \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430 / \u0437\u0430\u043B\u0443 / \u043F\u043E\u0434\u0456\u0457 \u0432 \u0437\u0430\u0433\u0430\u043B\u044C\u043D\u043E\u043C\u0443 \u043F\u0440\u0430\u0446\u044E\u0454."
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("li", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("li", {
           className: "alert-heading",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h5", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h5", {
             children: "\u041D\u0430\u0440\u0430\u0437\u0456 \u043D\u0435 \u043F\u0440\u0430\u0446\u044E\u0454:"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("ol", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
-              children: "\u0414\u043E\u0434\u0430\u0432\u0430\u043D\u043D\u044F \u043D\u043E\u0432\u043E\u0433\u043E \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430 / \u0437\u0430\u043B\u0443 / \u043D\u043E\u0432\u0438\u043D\u0438"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("ol", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
+              children: "\u0414\u043E\u0434\u0430\u0432\u0430\u043D\u043D\u044F \u043D\u043E\u0432\u043E\u0433\u043E \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430 \u043F\u0440\u0430\u0446\u044E\u0454, \u0430\u043B\u0435 \u044F\u043A\u0449\u043E \u0432\u0438 \u0432\u0436\u0435 \u0437\u043D\u0430\u0445\u043E\u0434\u0438\u0442\u0435\u0441\u044C \u0432 \u0440\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u043D\u043D\u0456 \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430 \u0447\u0438 \u0432 \u043F\u0440\u043E\u0446\u0435\u0441\u0456 \u0441\u0442\u0432\u043E\u0440\u044E\u0432\u0430\u043D\u043D\u044F \u0456\u043D\u0448\u043E\u0433\u043E \u043D\u043E\u0432\u043E\u0433\u043E \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430, \u0442\u043E \u0441\u043F\u043E\u0447\u0430\u0442\u043A\u0443 \u0442\u0440\u0435\u0431\u0430 \u043F\u0435\u0440\u0435\u043A\u043B\u044E\u0447\u0438\u0442\u0438\u0441\u044C \u043D\u0430 \u044F\u043A\u0438\u0439\u0441\u044C \u0456\u043D\u0448\u0438\u0439 \u0435\u043A\u0440\u0430\u043D."
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
+              children: "\u0414\u043E\u0434\u0430\u0432\u0430\u043D\u043D\u044F \u043D\u043E\u0432\u043E\u0433\u043E \u0437\u0430\u043B\u0443 / \u043D\u043E\u0432\u0438\u043D\u0438"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
               children: "\u0420\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u043D\u043D\u044F \u0444\u043E\u0442\u043E"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
               children: "\u0412\u0430\u043B\u0456\u0434\u0430\u0446\u0456\u044F"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
               children: "\u0413\u0430\u043B\u0435\u0440\u0435\u0457 \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430 / \u0437\u0430\u043B\u0443 / \u043D\u043E\u0432\u0438\u043D\u0438 \u0432\u0456\u0434\u043A\u043B\u044E\u0447\u0435\u043D\u0456 \u043D\u0430\u0440\u0430\u0437\u0456"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
               children: "\u0412 \u0441\u0435\u043A\u0446\u0456\u0457 '\u0437\u0430\u043B\u0438 / \u0434\u043E\u0434\u0430\u0442\u0438 dojo' \u043F\u043E\u0442\u0440\u0456\u0431\u043D\u043E \u043F\u043E\u043A\u0430\u0437\u0443\u0432\u0430\u0442\u0438 \u043B\u0438\u0448\u0435 \u0442\u0456 \u0437\u0430\u043B\u0438 \u0432 \u044F\u043A\u0438\u0445 \u0434\u0430\u043D\u0438\u0439 \u0442\u0440\u0435\u0442\u0435\u0440 \u043D\u0435 \u0442\u0440\u0435\u043D\u0443\u0454 (\u0412 \u0441\u0435\u043A\u0446\u0456\u0457 '\u0456\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440\u0438 / \u0434\u043E\u0434\u0430\u0442\u0438 athlete' \u043F\u043E\u0442\u0440\u0456\u0431\u043D\u043E \u043F\u043E\u043A\u0430\u0437\u0443\u0432\u0430\u0442\u0438 \u043B\u0438\u0448\u0435 \u0442\u0456 athlete \u0432 \u044F\u043A\u0438\u0445 \u0434\u0430\u043D\u043E\u0433\u043E \u0434\u043E\u0434\u0436\u043E \u043D\u0435\u043C\u0430)"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
               children: "\u0420\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u043D\u043D\u044F \u0417\u0430\u043B\u0443 / \u0412\u0440\u0443\u0447\u043D\u0443 \u0432\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D\u0456 \u043A\u043E\u043E\u0440\u0434\u0438\u043D\u0430\u0442\u0438"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
               children: "\u0420\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u043D\u043D\u044F \u0420\u043E\u0437\u043A\u043B\u0430\u0434\u0443 / \u0427\u0430\u0441 - \u0437\u043B\u0456\u0442\u0430\u0454 \u0444\u043E\u043A\u0443\u0441 on typing"
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
             children: "\u042F\u043A\u0431\u0438 \u0449\u0435 \u0432\u0438\u043B\u0456\u0437\u043B\u043E \u0449\u043E\u0441\u044C \u0456\u043D\u0448\u0435 (\u0430\u0431\u043E \u043F\u0440\u043E\u0441\u0442\u043E \u043C\u0430\u0454\u0442\u0435 \u0445\u043E\u0440\u043E\u0448\u0456 \u0456\u0434\u0435\u0457), \u0442\u043E \u0434\u0430\u0439\u0442\u0435 \u0431\u0443\u0434\u044C \u043B\u0430\u0441\u043A\u0430 \u0437\u043D\u0430\u0442\u0438"
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("li", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("li", {
           className: "alert-heading",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h5", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h5", {
             children: "TODO"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("ol", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
-              children: "\u0414\u043E\u0434\u0430\u0432\u0430\u043D\u043D\u044F \u043D\u043E\u0432\u043E\u0433\u043E \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430 / \u0437\u0430\u043B\u0443 / \u043D\u043E\u0432\u0438\u043D\u0438"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("ol", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
+              children: "\u0414\u043E\u0434\u0430\u0432\u0430\u043D\u043D\u044F \u043D\u043E\u0432\u043E\u0433\u043E  \u0437\u0430\u043B\u0443 / \u043D\u043E\u0432\u0438\u043D\u0438"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
               children: "\u0420\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u043D\u043D\u044F \u0420\u043E\u0437\u043A\u043B\u0430\u0434\u0443 / \u0427\u0430\u0441 - \u041A\u0440\u043E\u043A 15 (\u0447\u0438 30) \u0445\u0432"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
               children: "\u0422\u0435\u043A\u0441\u0442\u043E\u0432\u0456 \u043F\u043E\u043B\u044F \u0441\u043A\u043E\u0440\u043E\u0447\u0435\u043D\u043E\u0433\u043E \u0432\u0430\u0440\u0456\u0430\u043D\u0442\u0443 \u043E\u043F\u0438\u0441\u0443 \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430 / \u0437\u0430\u043B\u0443 / \u043D\u043E\u0432\u0438\u043D\u0438 \u0433\u0435\u043D\u0435\u0440\u0443\u0432\u0430\u0442\u0438 \u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u043D\u043E"
             })]
           })]
@@ -8776,21 +8842,50 @@ var EditAthlete = function EditAthlete(_ref) {
   var _useParams = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useParams)(),
       id = _useParams.id;
 
+  var location = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useLocation)();
+
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
       _useState2 = _slicedToArray(_useState, 2),
       athlete = _useState2[0],
       setAthlete = _useState2[1];
 
+  var isNew = location.pathname.indexOf('new') !== -1;
+  var isEdit = !isNew;
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    fetch(getUrl + "/" + id).then(function (response) {
-      return response.json();
-    }).then(setAthlete);
-  }, []);
-  var isEdit = id != null; // TODO:
+    if (isEdit) {
+      fetch(getUrl + "/" + id).then(function (response) {
+        return response.json();
+      }).then(setAthlete);
+    } else if (isNew) {
+      console.log('setting up new athlete');
+      setAthlete({
+        is_coach: 1,
+        is_actual: 1,
+        is_best: 0,
+        show_in_blacks: 0,
+        firstName: '',
+        lastName: '',
+        patronymic: '',
+        degree: 1,
+        birthday: "2000-01-01",
+        brief: '',
+        briefBest: '',
+        full: '',
+        phone: '',
+        phone2: '',
+        email: '',
+        twitter: '',
+        facebook: '',
+        youtube: '',
+        instagram: '',
+        dojos: []
+      });
+    }
+  }, [location.key]); // TODO:
 
   var gallerySnippet = "";
 
-  if (isEdit && athlete.gallery) {
+  if (athlete.gallery) {
     var galleryUrl = "photo.php?galleryID=" + athlete.gallery['galleryID'];
     gallerySnippet = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("ol", {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
@@ -8816,6 +8911,20 @@ var EditAthlete = function EditAthlete(_ref) {
     }
   }
 
+  var saveCallback = function saveCallback(data) {
+    // console.log('data', data);
+    var response = data.response;
+
+    if (response && typeof response.id !== 'undefined') {
+      athlete.id = response.id;
+    } // console.log('athlete after callback', athlete);
+
+  };
+
+  var getId = function getId() {
+    return athlete.id;
+  };
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
       children: isEdit ? '' + athlete.lastName + ' ' + athlete.firstName + ' ' + athlete.patronymic : "Створити нового спортсмена"
@@ -8831,10 +8940,14 @@ var EditAthlete = function EditAthlete(_ref) {
             children: "\u041F\u0440\u0456\u0437\u0432\u0438\u0449\u0435"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableText, {
             field: "lastName",
-            className: "form-control",
-            id: isEdit && athlete.id,
-            initialValue: isEdit && athlete.lastName,
-            inlineUpdateUrl: updateUrl
+            className: "form-control" // id={athlete.id}
+            ,
+            getId: getId,
+            initialValue: function initialValue() {
+              return athlete.lastName;
+            },
+            inlineUpdateUrl: updateUrl,
+            onBeforeSuccess: saveCallback
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
@@ -8843,10 +8956,12 @@ var EditAthlete = function EditAthlete(_ref) {
             children: "\u0406\u043C'\u044F"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableText, {
             field: "firstName",
-            className: "form-control",
-            id: isEdit && athlete.id,
-            initialValue: isEdit && athlete.firstName,
-            inlineUpdateUrl: updateUrl
+            className: "form-control" // id={athlete.id}
+            ,
+            getId: getId,
+            initialValue: athlete.firstName,
+            inlineUpdateUrl: updateUrl,
+            onBeforeSuccess: saveCallback
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
@@ -8855,10 +8970,12 @@ var EditAthlete = function EditAthlete(_ref) {
             children: "\u041F\u043E \u0431\u0430\u0442\u044C\u043A\u043E\u0432\u0456"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableText, {
             field: "patronymic",
-            className: "form-control",
-            id: isEdit && athlete.id,
-            initialValue: isEdit && athlete.patronymic,
-            inlineUpdateUrl: updateUrl
+            className: "form-control" // id={athlete.id}
+            ,
+            getId: getId,
+            initialValue: athlete.patronymic,
+            inlineUpdateUrl: updateUrl,
+            onBeforeSuccess: saveCallback
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
@@ -8867,10 +8984,12 @@ var EditAthlete = function EditAthlete(_ref) {
             children: "\u0414\u0430\u0442\u0430 \u043D\u0430\u0440\u043E\u0434\u0436\u0435\u043D\u043D\u044F"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableDate, {
             field: "birthday",
-            className: "form-control",
-            id: isEdit && athlete.id,
-            initialValue: isEdit && athlete.birthday,
-            inlineUpdateUrl: updateUrl
+            className: "form-control" // id={athlete.id}
+            ,
+            getId: getId,
+            initialValue: athlete.birthday,
+            inlineUpdateUrl: updateUrl,
+            onBeforeSuccess: saveCallback
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
@@ -8879,10 +8998,12 @@ var EditAthlete = function EditAthlete(_ref) {
             children: "\u0421\u0442\u0443\u043F\u0456\u043D\u044C"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableDegree, {
             field: "degree",
-            className: "form-control",
-            id: isEdit && athlete.id,
-            initialValue: isEdit && athlete.degree,
-            inlineUpdateUrl: updateUrl
+            className: "form-control" // id={ athlete.id }
+            ,
+            getId: getId,
+            initialValue: athlete.degree,
+            inlineUpdateUrl: updateUrl,
+            onBeforeSuccess: saveCallback
           })]
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
@@ -8915,10 +9036,12 @@ var EditAthlete = function EditAthlete(_ref) {
             children: "\u0422\u0435\u043B\u0435\u0444\u043E\u043D"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableText, {
             field: "phone",
-            className: "form-control",
-            id: isEdit && athlete.id,
-            initialValue: isEdit && athlete.phone,
-            inlineUpdateUrl: updateUrl
+            className: "form-control" // id={ athlete.id }
+            ,
+            getId: getId,
+            initialValue: athlete.phone,
+            inlineUpdateUrl: updateUrl,
+            onBeforeSuccess: saveCallback
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
@@ -8927,27 +9050,35 @@ var EditAthlete = function EditAthlete(_ref) {
             children: "\u0414\u043E\u0434\u0430\u0442\u043A\u043E\u0432\u0438\u0439 \u0442\u0435\u043B\u0435\u0444\u043E\u043D"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableText, {
             field: "phone2",
-            className: "form-control",
-            id: isEdit && athlete.id,
-            initialValue: isEdit && athlete.phone2,
-            inlineUpdateUrl: updateUrl
+            className: "form-control" // id={ athlete.id }
+            ,
+            getId: getId,
+            initialValue: athlete.phone2,
+            inlineUpdateUrl: updateUrl,
+            onBeforeSuccess: saveCallback
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("label", {
             htmlFor: "email",
             className: "form-label",
-            children: ["E-mail ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+            children: ["E-mail", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("span", {
               className: "text-secondary",
-              children: "(\u043D\u0435 \u043C\u043E\u0436\u043D\u0430 \u0440\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u0442\u0438)"
+              children: [" (", isEdit && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
+                children: "\u043D\u0435 \u043C\u043E\u0436\u043D\u0430 \u0440\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u0442\u0438"
+              }), isNew && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
+                children: "\u0432\u0456\u043D \u0436\u0435 \u043B\u043E\u0433\u0456\u043D, \u0440\u0435\u0434\u0430\u0433\u0443\u0454\u0442\u044C\u0441\u044F \u043B\u0438\u0448\u0435 \u043F\u0440\u0438 \u0441\u0442\u0432\u043E\u0440\u0435\u043D\u043D\u0456 \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430, \u0434\u0443\u043C\u0430\u044E \u043C\u043E\u0436\u043D\u0430 \u0431\u0443\u0434\u0435 \u0443\u0432\u0456\u043C\u043A\u043D\u0443\u0442\u0438 \u0440\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u043D\u043D\u044F \u043D\u0430\u0437\u0430\u0432\u0436\u0434\u0438, \u043F\u043E\u0442\u0456\u043C, \u0434\u043E\u0434\u0430\u0432\u0448\u0438 \u0440\u044F\u0434 \u0437\u0430\u0441\u0442\u0435\u0440\u0435\u0436\u0435\u043D\u044C"
+              }), ")"]
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableText, {
             field: "email",
-            className: "form-control",
-            id: isEdit && athlete.id,
+            className: "form-control" // id={ athlete.id }
+            ,
+            getId: getId,
             type: "email",
-            disabled: true,
-            initialValue: isEdit && athlete.email,
-            inlineUpdateUrl: updateUrl
+            disabled: isEdit,
+            initialValue: athlete.email,
+            inlineUpdateUrl: updateUrl,
+            onBeforeSuccess: saveCallback
           })]
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
@@ -8961,17 +9092,21 @@ var EditAthlete = function EditAthlete(_ref) {
           children: "\u041A\u043B\u0443\u0431\u043D\u0430 \u0456\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0456\u044F"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableSwitch, {
           field: "is_actual",
-          className: "form-check-input",
-          id: isEdit ? athlete.id : 0,
-          initialValue: isEdit && athlete.is_actual ? 1 : 0,
+          className: "form-check-input" // id={ athlete.id }
+          ,
+          getId: getId,
+          initialValue: athlete.is_actual,
           inlineUpdateUrl: updateUrl,
+          onBeforeSuccess: saveCallback,
           children: "\u041D\u0430\u043B\u0435\u0436\u0438\u0442\u044C \u0434\u043E \u043D\u0430\u0448\u043E\u0433\u043E \u043A\u043B\u0443\u0431\u0443?"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableSwitch, {
           field: "show_in_blacks",
-          className: "form-check-input",
-          id: isEdit ? athlete.id : 0,
-          initialValue: isEdit && athlete.show_in_blacks ? 1 : 0,
+          className: "form-check-input" // id={ athlete.id }
+          ,
+          getId: getId,
+          initialValue: athlete.show_in_blacks,
           inlineUpdateUrl: updateUrl,
+          onBeforeSuccess: saveCallback,
           children: "\u041F\u043E\u043A\u0430\u0437\u0443\u0432\u0430\u0442\u0438 \u043D\u0430 \u0441\u0442\u043E\u0440\u0456\u043D\u0446\u0456 \u0447\u043E\u0440\u043D\u0438\u0445 \u043F\u043E\u044F\u0441\u0456\u0432 \u043D\u0430\u0448\u043E\u0433\u043E \u043A\u043B\u0443\u0431\u0443 (\u044F\u043A\u0449\u043E \u0434\u043E\u0441\u044F\u0433\u043D\u0443\u0442\u043E \u0432\u0456\u0434\u043F\u043E\u0432\u0456\u0434\u043D\u043E\u0433\u043E \u0441\u0442\u0443\u043F\u0435\u043D\u044E)?"
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
@@ -8988,18 +9123,22 @@ var EditAthlete = function EditAthlete(_ref) {
             children: "\u041F\u043E\u0432\u043D\u0430 \u0456\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0456\u044F \u0434\u043B\u044F \u0441\u0442\u043E\u0440\u0456\u043D\u043A\u0438 \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableTextarea, {
             field: "full",
-            className: "form-control",
-            id: isEdit && athlete.id,
-            initialValue: isEdit ? athlete.full : '',
+            className: "form-control" // id={ athlete.id }
+            ,
+            getId: getId,
+            initialValue: athlete.full,
             inlineUpdateUrl: updateUrl,
-            rows: "10"
+            rows: "10",
+            onBeforeSuccess: saveCallback
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableSwitch, {
           field: "is_coach",
-          className: "form-check-input",
-          id: id,
-          initialValue: isEdit && athlete.is_coach ? 1 : 0,
+          className: "form-check-input" // id={ athlete.id }
+          ,
+          getId: getId,
+          initialValue: athlete.is_coach,
           inlineUpdateUrl: updateUrl,
+          onBeforeSuccess: saveCallback,
           children: "\u0406\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440?"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           className: "mb-2",
@@ -9009,17 +9148,21 @@ var EditAthlete = function EditAthlete(_ref) {
             children: "\u041A\u043E\u0440\u043E\u0442\u043A\u0430 \u0456\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0456\u044F \u0434\u043B\u044F \u0441\u0442\u043E\u0440\u0456\u043D\u043A\u0438 \u0437\u0456 \u0441\u043F\u0438\u0441\u043A\u043E\u043C \u0432\u0441\u0456\u0445 \u0456\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440\u0456\u0432"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableTextarea, {
             field: "brief",
-            className: "form-control",
-            id: isEdit && athlete.id,
-            initialValue: isEdit ? athlete.brief : '',
-            inlineUpdateUrl: updateUrl
+            className: "form-control" // id={ athlete.id }
+            ,
+            getId: getId,
+            initialValue: athlete.brief,
+            inlineUpdateUrl: updateUrl,
+            onBeforeSuccess: saveCallback
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableSwitch, {
           field: "is_best",
-          className: "form-check-input",
-          id: isEdit ? athlete.id : 0,
-          initialValue: isEdit && athlete.is_best ? 1 : 0,
+          className: "form-check-input" // id={ athlete.id }
+          ,
+          getId: getId,
+          initialValue: athlete.is_best,
           inlineUpdateUrl: updateUrl,
+          onBeforeSuccess: saveCallback,
           children: "\u041F\u043E\u043A\u0430\u0437\u0443\u0432\u0430\u0442\u0438 \u0432 \u043A\u0440\u0430\u0449\u0438\u0445 \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430\u0445?"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           className: "mb-2",
@@ -9029,10 +9172,12 @@ var EditAthlete = function EditAthlete(_ref) {
             children: "\u041A\u043E\u0440\u043E\u0442\u043A\u0430 \u0456\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0456\u044F \u0434\u043B\u044F \u0441\u0442\u043E\u0440\u0456\u043D\u043A\u0438 \u043D\u0430\u0439\u043A\u0440\u0430\u0449\u0438\u0445 \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0456\u0432"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableTextarea, {
             field: "briefBest",
-            className: "form-control",
-            id: isEdit && athlete.id,
-            initialValue: isEdit ? athlete.briefBest : '',
-            inlineUpdateUrl: updateUrl
+            className: "form-control" // id={ athlete.id }
+            ,
+            getId: getId,
+            initialValue: athlete.briefBest,
+            inlineUpdateUrl: updateUrl,
+            onBeforeSuccess: saveCallback
           })]
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
@@ -9043,11 +9188,13 @@ var EditAthlete = function EditAthlete(_ref) {
           },
           children: "\u0417\u0430\u043B\u0438"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_EditAttachedEntities__WEBPACK_IMPORTED_MODULE_3__["default"], {
-          entityName: "athlete",
-          entityId: isEdit && athlete.id,
+          entityName: "athlete" // entityId={ athlete.id }
+          ,
+          getId: getId,
           entityNameToAttach: "dojo",
-          attachedEntities: isEdit ? athlete.dojos : null,
-          updateUrl: updateUrl
+          attachedEntities: athlete.dojos,
+          updateUrl: updateUrl,
+          onBeforeSuccess: saveCallback
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         className: "mb-3 col-md-12 d-grid gap-3",
@@ -9063,10 +9210,12 @@ var EditAthlete = function EditAthlete(_ref) {
             children: "Facebook"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableText, {
             field: "facebook",
-            className: "form-control",
-            id: isEdit && athlete.id,
-            initialValue: isEdit && athlete.facebook,
-            inlineUpdateUrl: updateUrl
+            className: "form-control" // id={ athlete.id }
+            ,
+            getId: getId,
+            initialValue: athlete.facebook,
+            inlineUpdateUrl: updateUrl,
+            onBeforeSuccess: saveCallback
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
@@ -9075,10 +9224,12 @@ var EditAthlete = function EditAthlete(_ref) {
             children: "Instagram"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableText, {
             field: "instagram",
-            className: "form-control",
-            id: isEdit && athlete.id,
-            initialValue: isEdit && athlete.instagram,
-            inlineUpdateUrl: updateUrl
+            className: "form-control" // id={ athlete.id }
+            ,
+            getId: getId,
+            initialValue: athlete.instagram,
+            inlineUpdateUrl: updateUrl,
+            onBeforeSuccess: saveCallback
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
@@ -9087,10 +9238,12 @@ var EditAthlete = function EditAthlete(_ref) {
             children: "Youtube"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableText, {
             field: "youtube",
-            className: "form-control",
-            id: isEdit && athlete.id,
-            initialValue: isEdit && athlete.youtube,
-            inlineUpdateUrl: updateUrl
+            className: "form-control" // id={ athlete.id }
+            ,
+            getId: getId,
+            initialValue: athlete.youtube,
+            inlineUpdateUrl: updateUrl,
+            onBeforeSuccess: saveCallback
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
@@ -9099,10 +9252,12 @@ var EditAthlete = function EditAthlete(_ref) {
             children: "Twitter"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableText, {
             field: "twitter",
-            className: "form-control",
-            id: isEdit && athlete.id,
-            initialValue: isEdit && athlete.twitter,
-            inlineUpdateUrl: updateUrl
+            className: "form-control" // id={ athlete.id }
+            ,
+            getId: getId,
+            initialValue: athlete.twitter,
+            inlineUpdateUrl: updateUrl,
+            onBeforeSuccess: saveCallback
           })]
         })]
       })]
@@ -9938,6 +10093,7 @@ function useSave(inlineUpdateUrl, onBeforeSuccess) {
       } else {
         // Success
         if (typeof onBeforeSuccess == 'function') {
+          data.response = response;
           onBeforeSuccess(data);
         } // synchronizeDataOnUpdateSuccess(index, id, value);
 
@@ -10040,7 +10196,14 @@ function useStatus(_ref) {
 
       if (isNewValue) {
         data.value = newValue;
-      }
+      } // console.log('typeof (data.id)', typeof (data.id))
+      // console.log('after typeof data', data)
+
+
+      if (typeof data.id === 'function') {
+        data.id = data.id();
+      } // console.log('after typeof data', data)
+
 
       save({
         data: data,

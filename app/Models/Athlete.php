@@ -175,4 +175,30 @@ class Athlete extends Authenticatable
 	    });
 	}
      */
+
+    public static function createNewDefault() {
+        return Athlete::create(array(
+            'is_coach' => 1,
+            'is_actual' => 1,
+            'is_best' => 0,
+            'show_in_blacks' => 0,
+            'firstName' => '',
+            'lastName' => '',
+            'patronymic' => '',
+            'page_dir' => '' . rand(10, 1000000),
+            'degree' => 1,
+            'birthday' => '2000-01-01',
+            'brief' => '',
+            'briefBest' => '',
+            'full' => '',
+            'phone' => '',
+            'phone2' => '',
+            'email' => '',
+            'password' => '',
+            'twitter' => '',
+            'facebook' => '',
+            'youtube' => '',
+            'instagram' => ''
+        ));
+    }
 }

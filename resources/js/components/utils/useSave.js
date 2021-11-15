@@ -6,7 +6,7 @@ export default function useSave(inlineUpdateUrl, onBeforeSuccess) {
         fetch(inlineUpdateUrl, {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify(data)  
+          body: JSON.stringify(data)
         })
         .then(response => response.json())
         .then(response => {
@@ -18,7 +18,8 @@ export default function useSave(inlineUpdateUrl, onBeforeSuccess) {
           } else {
             // Success
             if (typeof onBeforeSuccess == 'function') {
-              onBeforeSuccess(data);
+                data.response = response;
+                onBeforeSuccess(data);
             }
 
             // synchronizeDataOnUpdateSuccess(index, id, value);

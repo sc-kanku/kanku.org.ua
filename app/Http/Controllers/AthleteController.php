@@ -84,13 +84,24 @@ class AthleteController extends Controller
     public function apiUpdateAthlete(Request $request)
     {
         try {
-            // TODO: degeree is not saved in inline editing.
-            // DONE. Already saved on edit Athlethe page, check on Athletes list page.
-            $result = Athlete
-                ::where('id', $request->get('id'))
-                ->update([$request->get('field') => $request->get('value')]);
+            $id = ($request->get('id'));
 
-            $queryStatus = ["Successful" => $result];
+            if ($id == null) {
+                $athlete = Athlete::createNewDefault();
+
+                $athlete[$request->get('field')] = $request->get('value');
+                $athlete->save();
+
+                $queryStatus = ["Successful" => 'yes', "id" => $athlete->id];
+            } else {
+                // TODO: degeree is not saved in inline editing.
+                // DONE. Already saved on edit Athlethe page, check on Athletes list page.
+                $result = Athlete
+                    ::where('id', $request->get('id'))
+                    ->update([$request->get('field') => $request->get('value')]);
+
+                $queryStatus = ["Successful" => $result];
+            }
         } catch (Exception $e) {
             $queryStatus = ["Unsuccessful" => $e];
         }
@@ -102,18 +113,28 @@ class AthleteController extends Controller
     {
         try {
             $athleteId = $request->get('athleteId');
+
+            if ($athleteId == null) {
+                $athlete = Athlete::createNewDefault();
+                $athlete->save();
+            } else {
+                $athlete = Athlete::where('id', $athleteId)->first();
+            }
+
             $dojoId = $request->get('dojoId');
             $schedule = $request->get('schedule');
 
             // dd($athleteId, $dojoId, $schedule);
 
-            $result = Athlete
-                ::where('id', $athleteId)
-                ->first()
-                ->dojos()
+            $result = $athlete->dojos()
                 ->syncWithoutDetaching([$dojoId => ['schedule' => $schedule, 'schedule_notes' => '']]);
 
-            $queryStatus = ["Successful" => $result];
+            if ($athleteId == null) {
+                $queryStatus = ["Successful" => $result, "id" => $athlete->id];
+            } else {
+                $queryStatus = ["Successful" => $result];
+            }
+
         } catch (Exception $e) {
             $queryStatus = ["Unsuccessful" => $e];
         }

@@ -1,5 +1,5 @@
 import React, {useMemo, useState, useEffect} from 'react';
-import { useParams, Redirect} from 'react-router-dom';
+import { useParams, useLocation} from 'react-router-dom';
 import Photo from '../controls/Photo';
 import { EditableText, EditableDate, EditableDegree, EditableSwitch, EditableTextarea } from '../controls/Table';
 
@@ -7,20 +7,49 @@ import EditAttachedEntities from '../controls/EditAttachedEntities';
 
 const EditAthlete = ({getUrl, updateUrl}) => {
     const { id } = useParams();
+    const location = useLocation();
     const [athlete, setAthlete] = useState({});
 
-    useEffect(() => {
-        fetch( getUrl + "/" + id )
-            .then( response => response.json() )
-            .then( setAthlete)
-    }, []);
+    let isNew = location.pathname.indexOf('new') !== -1;
+    let isEdit = !isNew;
 
-    let isEdit = id != null;
+    useEffect(() => {
+        if (isEdit) {
+            fetch( getUrl + "/" + id )
+                .then( response => response.json() )
+                .then( setAthlete )
+        } else if (isNew) {
+            console.log('setting up new athlete');
+
+            setAthlete({
+                is_coach: 1,
+                is_actual: 1,
+                is_best: 0,
+                show_in_blacks: 0,
+                firstName:'',
+                lastName:'',
+                patronymic:'',
+                degree:1,
+                birthday:"2000-01-01",
+                brief:'',
+                briefBest:'',
+                full:'',
+                phone:'',
+                phone2:'',
+                email:'',
+                twitter:'',
+                facebook:'',
+                youtube:'',
+                instagram:'',
+                dojos: []
+            })
+        }
+    }, [location.key]);
 
     // TODO:
     let gallerySnippet = "";
 
-    if (isEdit && athlete.gallery) {
+    if (athlete.gallery) {
         let galleryUrl = "photo.php?galleryID=" + athlete.gallery['galleryID'];
         gallerySnippet =
                     <ol><li><a href={galleryUrl}>{athlete.gallery['name']}</a></li></ol>
@@ -36,6 +65,21 @@ const EditAthlete = ({getUrl, updateUrl}) => {
         }
     }
 
+    let saveCallback = (data) => {
+        // console.log('data', data);
+
+        let response = data.response;
+        if (response && typeof (response.id) !== 'undefined') {
+            athlete.id = response.id;
+        }
+
+        // console.log('athlete after callback', athlete);
+    }
+
+    let getId = () => {
+        return athlete.id;
+    }
+
     return (<>
             <h2>{isEdit ? ('' + athlete.lastName + ' ' + athlete.firstName + ' ' + athlete.patronymic ) : "Створити нового спортсмена"}</h2>
 
@@ -45,9 +89,11 @@ const EditAthlete = ({getUrl, updateUrl}) => {
                         <label htmlFor="lastName" className="form-label">Прізвище</label>
 
                         <EditableText field="lastName" className="form-control"
-                            id={isEdit && athlete.id}
-                            initialValue={isEdit && athlete.lastName}
+                            // id={athlete.id}
+                            getId={ getId }
+                            initialValue={() => athlete.lastName}
                             inlineUpdateUrl={updateUrl}
+                            onBeforeSuccess={saveCallback}
                         />
                     </div>
 
@@ -55,9 +101,11 @@ const EditAthlete = ({getUrl, updateUrl}) => {
                         <label htmlFor="firstName" className="form-label">Ім'я</label>
 
                         <EditableText field="firstName" className="form-control"
-                            id={isEdit && athlete.id}
-                            initialValue={isEdit && athlete.firstName}
+                            // id={athlete.id}
+                            getId={ getId }
+                            initialValue={athlete.firstName}
                             inlineUpdateUrl={updateUrl}
+                            onBeforeSuccess={saveCallback}
                         />
                     </div>
 
@@ -65,9 +113,11 @@ const EditAthlete = ({getUrl, updateUrl}) => {
                         <label htmlFor="patronymic" className="form-label">По батькові</label>
 
                         <EditableText field="patronymic" className="form-control"
-                            id={isEdit && athlete.id}
-                            initialValue={isEdit && athlete.patronymic}
+                            // id={athlete.id}
+                            getId={ getId }
+                            initialValue={athlete.patronymic}
                             inlineUpdateUrl={updateUrl}
+                            onBeforeSuccess={saveCallback}
                         />
                     </div>
 
@@ -75,9 +125,11 @@ const EditAthlete = ({getUrl, updateUrl}) => {
                         <label htmlFor="birthday" className="form-label">Дата народження</label>
 
                         <EditableDate field="birthday" className="form-control"
-                            id={isEdit && athlete.id}
-                            initialValue={isEdit && athlete.birthday}
+                            // id={athlete.id}
+                            getId={ getId }
+                            initialValue={athlete.birthday}
                             inlineUpdateUrl={updateUrl}
+                            onBeforeSuccess={saveCallback}
                         />
                     </div>
 
@@ -85,9 +137,11 @@ const EditAthlete = ({getUrl, updateUrl}) => {
                         <label htmlFor="degree" className="form-label">Ступінь</label>
 
                         <EditableDegree field="degree" className="form-control"
-                            id={isEdit && athlete.id}
-                            initialValue={isEdit && athlete.degree}
+                            // id={ athlete.id }
+                            getId={ getId }
+                            initialValue={ athlete.degree }
                             inlineUpdateUrl={updateUrl}
+                            onBeforeSuccess={saveCallback}
                         />
                     </div>
                 </div>
@@ -112,9 +166,11 @@ const EditAthlete = ({getUrl, updateUrl}) => {
                         <label htmlFor="phone" className="form-label">Телефон</label>
 
                         <EditableText field="phone" className="form-control"
-                            id={isEdit && athlete.id}
-                            initialValue={isEdit && athlete.phone}
+                            // id={ athlete.id }
+                            getId={ getId }
+                            initialValue={ athlete.phone }
                             inlineUpdateUrl={updateUrl}
+                            onBeforeSuccess={saveCallback}
                         />
                     </div>
 
@@ -122,20 +178,30 @@ const EditAthlete = ({getUrl, updateUrl}) => {
                         <label htmlFor="phone2" className="form-label">Додатковий телефон</label>
 
                         <EditableText field="phone2" className="form-control"
-                            id={isEdit && athlete.id}
-                            initialValue={isEdit && athlete.phone2}
+                            // id={ athlete.id }
+                            getId={ getId }
+                            initialValue={ athlete.phone2 }
                             inlineUpdateUrl={updateUrl}
+                            onBeforeSuccess={saveCallback}
                         />
                     </div>
 
                     <div>
-                        <label htmlFor="email" className="form-label">E-mail <span className='text-secondary' >(не можна редагувати)</span></label>
+                        <label htmlFor="email" className="form-label">E-mail
+                            <span className='text-secondary'> (
+                                { isEdit && <>не можна редагувати</> }
+                                { isNew && <>він же логін, редагується лише при створенні спортсмена,
+                                думаю можна буде увімкнути редагування назавжди, потім, додавши ряд застережень</>}
+                            )</span>
+                        </label>
 
                         <EditableText field="email" className="form-control"
-                            id={isEdit && athlete.id}
-                            type="email" disabled={true}
-                            initialValue={isEdit && athlete.email}
+                            // id={ athlete.id }
+                            getId={ getId }
+                            type="email" disabled={isEdit}
+                            initialValue={ athlete.email }
                             inlineUpdateUrl={updateUrl}
+                            onBeforeSuccess={saveCallback}
                         />
                     </div>
                 </div>
@@ -147,17 +213,21 @@ const EditAthlete = ({getUrl, updateUrl}) => {
 
                     <EditableSwitch
                         field="is_actual" className="form-check-input"
-                        id={isEdit ? athlete.id : 0}
-                        initialValue={(isEdit && athlete.is_actual) ? 1 : 0}
+                        // id={ athlete.id }
+                        getId={ getId }
+                        initialValue={ athlete.is_actual }
                         inlineUpdateUrl={updateUrl}
+                        onBeforeSuccess={saveCallback}
                     >Належить до нашого клубу?
                     </EditableSwitch>
 
                     <EditableSwitch
                         field="show_in_blacks" className="form-check-input"
-                        id={isEdit ? athlete.id : 0}
-                        initialValue={(isEdit && athlete.show_in_blacks) ? 1 : 0}
+                        // id={ athlete.id }
+                        getId={ getId }
+                        initialValue={ athlete.show_in_blacks }
                         inlineUpdateUrl={updateUrl}
+                        onBeforeSuccess={saveCallback}
                     >Показувати на сторінці чорних поясів нашого клубу (якщо досягнуто відповідного ступеню)?
                     </EditableSwitch>
                 </div>
@@ -169,18 +239,22 @@ const EditAthlete = ({getUrl, updateUrl}) => {
                         <label htmlFor="full" className="form-label">Повна інформація для сторінки спортсмена</label>
 
                         <EditableTextarea field="full" className="form-control"
-                            id={isEdit && athlete.id}
-                            initialValue={isEdit ? athlete.full : ''}
+                            // id={ athlete.id }
+                            getId={ getId }
+                            initialValue={ athlete.full }
                             inlineUpdateUrl={updateUrl}
                             rows='10'
+                            onBeforeSuccess={saveCallback}
                         />
                     </div>
 
                     <EditableSwitch
                         field="is_coach" className="form-check-input"
-                        id={ id }
-                        initialValue={(isEdit && athlete.is_coach) ? 1 : 0}
+                        // id={ athlete.id }
+                        getId={ getId }
+                        initialValue={ athlete.is_coach }
                         inlineUpdateUrl={updateUrl}
+                        onBeforeSuccess={saveCallback}
                     >Інструктор?
                     </EditableSwitch>
 
@@ -188,27 +262,34 @@ const EditAthlete = ({getUrl, updateUrl}) => {
                         <label htmlFor="brief" className="form-label">Коротка інформація для сторінки зі списком всіх інструкторів</label>
 
                         <EditableTextarea field="brief" className="form-control"
-                            id={isEdit && athlete.id}
-                            initialValue={isEdit ? athlete.brief : ''}
+                            // id={ athlete.id }
+                            getId={ getId }
+                            initialValue={ athlete.brief }
                             inlineUpdateUrl={updateUrl}
+                            onBeforeSuccess={saveCallback}
                         />
                     </div>
 
                     <EditableSwitch
                         field="is_best" className="form-check-input"
-                        id={isEdit ? athlete.id : 0}
-                        initialValue={(isEdit && athlete.is_best) ? 1 : 0}
-                        inlineUpdateUrl={updateUrl}
+                        // id={ athlete.id }
+                        getId={ getId }
+                        initialValue={ athlete.is_best }
+                        inlineUpdateUrl={ updateUrl }
+                        onBeforeSuccess={ saveCallback }
                     >Показувати в кращих спортсменах?
                     </EditableSwitch>
 
                     <div className="mb-2">
                         <label htmlFor="briefBest" className="form-label">Коротка інформація для сторінки найкращих спортсменів</label>
 
-                        <EditableTextarea field="briefBest" className="form-control"
-                            id={isEdit && athlete.id}
-                            initialValue={isEdit ? athlete.briefBest : ''}
-                            inlineUpdateUrl={updateUrl}
+                        <EditableTextarea
+                            field="briefBest" className="form-control"
+                            // id={ athlete.id }
+                            getId={ getId }
+                            initialValue={ athlete.briefBest }
+                            inlineUpdateUrl={ updateUrl }
+                            onBeforeSuccess={ saveCallback }
                         />
                     </div>
                 </div>
@@ -217,10 +298,12 @@ const EditAthlete = ({getUrl, updateUrl}) => {
                     <p style={{'backgroundColor': 'yellow'}}>Зали</p>
                     <EditAttachedEntities
                         entityName='athlete'
-                        entityId={isEdit && athlete.id}
+                        // entityId={ athlete.id }
+                        getId={ getId }
                         entityNameToAttach='dojo'
-                        attachedEntities={isEdit ? athlete.dojos : null}
+                        attachedEntities={ athlete.dojos }
                         updateUrl={updateUrl}
+                        onBeforeSuccess={saveCallback}
                     />
                 </div>
 
@@ -231,9 +314,11 @@ const EditAthlete = ({getUrl, updateUrl}) => {
                         <label htmlFor="facebook" className="form-label">Facebook</label>
 
                         <EditableText field="facebook" className="form-control"
-                            id={isEdit && athlete.id}
-                            initialValue={isEdit && athlete.facebook}
+                            // id={ athlete.id }
+                            getId={ getId }
+                            initialValue={ athlete.facebook }
                             inlineUpdateUrl={updateUrl}
+                            onBeforeSuccess={saveCallback}
                         />
                     </div>
 
@@ -241,9 +326,11 @@ const EditAthlete = ({getUrl, updateUrl}) => {
                         <label htmlFor="instagram" className="form-label">Instagram</label>
 
                         <EditableText field="instagram" className="form-control"
-                            id={isEdit && athlete.id}
-                            initialValue={isEdit && athlete.instagram}
+                            // id={ athlete.id }
+                            getId={ getId }
+                            initialValue={ athlete.instagram }
                             inlineUpdateUrl={updateUrl}
+                            onBeforeSuccess={saveCallback}
                         />
                     </div>
 
@@ -251,9 +338,11 @@ const EditAthlete = ({getUrl, updateUrl}) => {
                         <label htmlFor="youtube" className="form-label">Youtube</label>
 
                         <EditableText field="youtube" className="form-control"
-                            id={isEdit && athlete.id}
-                            initialValue={isEdit && athlete.youtube}
+                            // id={ athlete.id }
+                            getId={ getId }
+                            initialValue={ athlete.youtube }
                             inlineUpdateUrl={updateUrl}
+                            onBeforeSuccess={saveCallback}
                         />
                     </div>
 
@@ -261,9 +350,11 @@ const EditAthlete = ({getUrl, updateUrl}) => {
                         <label htmlFor="twitter" className="form-label">Twitter</label>
 
                         <EditableText field="twitter" className="form-control"
-                            id={isEdit && athlete.id}
-                            initialValue={isEdit && athlete.twitter}
+                            // id={ athlete.id }
+                            getId={ getId }
+                            initialValue={ athlete.twitter }
                             inlineUpdateUrl={updateUrl}
+                            onBeforeSuccess={saveCallback}
                         />
                     </div>
                 </div>

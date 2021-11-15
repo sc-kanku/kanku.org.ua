@@ -11,7 +11,11 @@ export const EditableDegree = ({ initialValue, className, ...props }) => {
 
     const [Editable, value, onChange] = useEditable({
     ...props,
-    data: {id: props.id, field: props.field, value: initialValue},
+    data: {
+        id: props.id ? props.id : props.getId ? props.getId : null,
+        field: props.field,
+        value: initialValue
+    },
     getNewValue: (e) => e.target.value
    });
 
@@ -31,7 +35,11 @@ export const EditablePostCategory = ( { initialValue, className, ...props } ) =>
 
     const [Editable, value, onChange] = useEditable({
     ...props,
-    data: {id: props.id, field: props.field, value: initialValue},
+    data: {
+        id: props.id ? props.id : props.getId ? props.getId : null,
+        field: props.field,
+        value: initialValue
+    },
     getNewValue: (e) => e.target.value
   });
 
@@ -49,7 +57,11 @@ export const EditableDate = ({ initialValue, className, ...props }) => {
 
     const [Editable, value, onChange] = useEditable({
     ...props,
-    data: {id: props.id, field: props.field, value: initialValue},
+    data: {
+        id: props.id ? props.id : props.getId ? props.getId : null,
+        field: props.field,
+        value: initialValue
+    },
     getNewValue: (e) => e.target.value
   });
   // value={value}???
@@ -73,11 +85,19 @@ export const EditableSwitch = ({ initialValue, className, children, values, labe
     children = typeof children == 'undefined' ? null : children;
     values = typeof values == 'undefined' ? [0, 1] : values;
 
-    const [Editable, value, onEditableChange] = useEditable({
+    const [Editable, value, onEditableChange, setValue] = useEditable({
         ...props,
-        data: {id: props.id, field: props.field, value: initialValue},
+        data: {
+            id: props.id ? props.id : props.getId ? props.getId : null,
+            field: props.field,
+            value: initialValue
+        },
         getNewValue : (e) => e.target.checked ? values[1] : values[0],
-        onBeforeSuccess: () => {
+        onBeforeSuccess: (data) => {
+            if (typeof (props.onBeforeSuccess) == 'function') {
+                props.onBeforeSuccess(data);
+            }
+
             if (typeof onChange == 'function') {
                 // value is not yet switched so to take correct value lets take the opposite (values[0] instead of values[1]).
                 let isOn = value == values[0];
@@ -111,10 +131,12 @@ export const EditableSwitch = ({ initialValue, className, children, values, labe
       <Editable />
       <div className="form-switch">
         <input
-          id={ id } name={ props.field } className={ className }
-          type='checkbox' role="switch"
-          checked={ value == values[1] }
-                onChange={ onEditableChange }
+            id={ id } name={ props.field } className={ className }
+            type='checkbox' role="switch"
+            checked={ value == values[1] }
+            onChange={ onEditableChange }
+            // onChange={ onTypingChange }
+            // onBlur={ onEditableChange }
         />
         <label htmlFor={id} className="form-label">{ defineLabel(value) }</label>
       </div>
@@ -125,6 +147,12 @@ export const EditableSwitch = ({ initialValue, className, children, values, labe
 export const EditableText = ({ initialValue, type, className, disabled, onChange, ...props }) => {
     // We need to keep and update the state of the cell normally
     initialValue = initialValue != null ? initialValue : '';
+
+    // const [initialValueState, setInitialValueState] = useState(typeof initialValue === 'function'
+    //         ? initialValue()
+    //         : initialValue != null ? initialValue : null);
+
+    //         console.log('initialValueState', initialValueState);
     className = typeof className == 'undefined' ? '' : className;
     type = typeof type == 'undefined' ? 'text' : type;
     disabled = typeof disabled == 'undefined' ? false : disabled;
@@ -137,17 +165,23 @@ export const EditableText = ({ initialValue, type, className, disabled, onChange
 
     const [Editable, value, onEditableChange, setValue] = useEditable({
         ...props,
-      data: {id: props.id, field: props.field, value: initialValue},
+        data: {
+            id: props.id ? props.id : props.getId ? props.getId : null,
+            field: props.field,
+            value: initialValue
+            // value: initialValueState
+        },
+    //   getNewValue : e => typeof value === 'undefined' ? initialValueState : value
       getNewValue : e => typeof value === 'undefined' ? initialValue : value
     });
 
     const onTypingChange = e => {
         setValue(e.target.value);
 
+        // TODO: function!!! Recheck
         if (typeof onChange == 'funtion') {
             onChange(e.target.value);
         }
-
     }
 
   return <>
@@ -155,6 +189,7 @@ export const EditableText = ({ initialValue, type, className, disabled, onChange
       <input
         id={props.field} name={props.field} className={className}
         type={type}
+        // defaultValue={initialValueState}
         defaultValue={initialValue}
         disabled={disabled}
         readOnly={disabled}
@@ -172,16 +207,20 @@ export const EditableTextarea = ({ initialValue, type, className, rows, ...props
 
     const [Editable, value, onChange, setValue] = useEditable({
         ...props,
-    data: {id: props.id, field: props.field, value: initialValue},
-    getNewValue : (e) => value
-  });
+        data: {
+            id: props.id ? props.id : props.getId ? props.getId : null,
+            field: props.field,
+            value: initialValue
+        },
+        getNewValue : (e) => value
+    });
 
 const onTypingChange = e => setValue(e.target.value)
 
 return <>
   <Editable />
     <textarea
-    id={props.field} name={props.field} className={className}
+        id={props.field} name={props.field} className={className}
         rows={rows}
         defaultValue={initialValue}
         onChange={onTypingChange}

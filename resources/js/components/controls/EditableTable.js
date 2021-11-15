@@ -23,7 +23,7 @@ export default function EditableTable ({
         // updateEditedItemUrl : prefixes.api + '/save',
         listEntityWebUrl : prefixes.web + '/list',
         editEntityWebUrl : prefixes.web + '/edit/:id',
-        newEntityWebUrl : prefixes.web + '/new',
+        newEntityWebUrl : prefixes.web + '/new/:p',
     })
 
     const [fullUrls, setFullUrls] = useState({

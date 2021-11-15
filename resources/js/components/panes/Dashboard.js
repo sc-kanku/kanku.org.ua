@@ -1,6 +1,5 @@
 import React, {useMemo, useState, useEffect} from 'react';
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
-import EditButton from '../controls/buttons/EditButton'
 import ListButton from '../controls/buttons/ListButton';
 import AddButton from '../controls/buttons/AddButton';
 
@@ -9,8 +8,17 @@ import AddButton from '../controls/buttons/AddButton';
 function Dashboard() {
   return (
         <>
+            <div className="mt-2 alert alert-info border border-info">
+                Працює додавання нового спортсмена
+                (але з <a data-bs-toggle="collapse" href="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2" style={{margin: '1em 0.3em 0 0'}}>н'юансами</a>)
+                <div className="collapse mt-2" id="collapseExample2">
+                Якщо ви вже знаходитесь в редагуванні спортсмена чи в процесі створювання іншого нового спортсмена, то спочатку треба переключитись на якийсь інший екран.
+                </div>
+
+            </div>
+
             <a className="btn btn-outline-warning" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" style={{margin: '1em 0.3em 0 0'}}>
-                <i class="fas fa-info-circle"></i>
+                <i className="fas fa-info-circle"></i>
             </a>
 
             <div className="btn-group" role="group" style={{margin: '1em 0.3em 0 0'}}>
@@ -39,7 +47,8 @@ function Dashboard() {
                     <li className="alert-heading">
                         <h5>Наразі не працює:</h5>
                         <ol>
-                            <li>Додавання нового спортсмена / залу / новини</li>
+                            <li>Додавання нового спортсмена працює, але якщо ви вже знаходитесь в редагуванні спортсмена чи в процесі створювання іншого нового спортсмена, то спочатку треба переключитись на якийсь інший екран.</li>
+                            <li>Додавання нового залу / новини</li>
                             <li>Редагування фото</li>
                             <li>Валідація</li>
                             <li>Галереї спортсмена / залу / новини відключені наразі</li>
@@ -53,7 +62,7 @@ function Dashboard() {
                 <li className="alert-heading">
                     <h5>TODO</h5>
                     <ol>
-                        <li>Додавання нового спортсмена / залу / новини</li>
+                        <li>Додавання нового  залу / новини</li>
                         <li>Редагування Розкладу / Час - Крок 15 (чи 30) хв</li>
                         <li>Текстові поля скороченого варіанту опису спортсмена / залу / новини генерувати автоматично</li>
                     </ol>

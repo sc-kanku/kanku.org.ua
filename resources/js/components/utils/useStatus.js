@@ -42,6 +42,13 @@ export default function useStatus({ data, save, setValue, getNewValue }) {
             data.value = newValue;
           }
 
+        // console.log('typeof (data.id)', typeof (data.id))
+        // console.log('after typeof data', data)
+        if (typeof (data.id) === 'function' ) {
+            data.id = data.id();
+        }
+        // console.log('after typeof data', data)
+
           save({
             data,
             onSuccess: () => {
