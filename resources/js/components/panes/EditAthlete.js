@@ -91,7 +91,8 @@ const EditAthlete = ({getUrl, updateUrl}) => {
                         <EditableText field="lastName" className="form-control"
                             // id={athlete.id}
                             getId={ getId }
-                            initialValue={() => athlete.lastName}
+                            // initialValue={() => athlete.lastName}
+                            initialValue={ athlete.lastName }
                             inlineUpdateUrl={updateUrl}
                             onBeforeSuccess={saveCallback}
                         />

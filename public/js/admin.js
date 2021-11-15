@@ -8942,10 +8942,9 @@ var EditAthlete = function EditAthlete(_ref) {
             field: "lastName",
             className: "form-control" // id={athlete.id}
             ,
-            getId: getId,
-            initialValue: function initialValue() {
-              return athlete.lastName;
-            },
+            getId: getId // initialValue={() => athlete.lastName}
+            ,
+            initialValue: athlete.lastName,
             inlineUpdateUrl: updateUrl,
             onBeforeSuccess: saveCallback
           })]
