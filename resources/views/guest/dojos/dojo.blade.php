@@ -6,15 +6,15 @@
     <div class="col-md-9">
 		<p>
 			<div>
-                @include('guest.dojos.dojoaddress', ['dojo' => $dojo, 'extendedInfo' => true])
+                @include('guest.dojos.dojo-address', ['dojo' => $dojo, 'extendedInfo' => true])
 				{{--  Utils::getShowOnMapHtml($row) --}}
 			</div>
-		
+
 		    <div class="district">
                 @if ($dojo->district) {
                     Район: {{ $dojo->district }}
                 @endif
-		    </div>		
+		    </div>
 		</p>
 
         <p>{!! $dojo->info !!}</p>
@@ -26,12 +26,12 @@
 
     <div class="col-md-3 col-instructor-pane">
         <h3>Iнструктор</h3>
-        @include('guest.instructors.template.fullnamelink', ['athlete' => $dojo->athletes->first() ])
-        @include('guest.instructors.template.instructorphoto', ['athlete' => $dojo->athletes->first()])
-        @include('guest.instructors.template.instructordegree', ['athlete' => $dojo->athletes->first()])
-        @include('guest.instructors.template.instructorsocials', ['athlete' => $dojo->athletes->first()])
-        @include('guest.instructors.template.instructorphone', ['phone' => $dojo->athletes->first()->phone, 'phone2' => $dojo->athletes->first()->phone2, 'inlinePhone' => false])
-        @include('guest.instructors.template.instructormoreabout', ['athlete' => $dojo->athletes->first()])
+        @include('guest.instructors.template.full-name-link', ['athlete' => $dojo->athletes->first() ])
+        @include('guest.instructors.template.instructor-photo', ['athlete' => $dojo->athletes->first()])
+        @include('guest.instructors.template.instructor-degree', ['athlete' => $dojo->athletes->first()])
+        @include('guest.instructors.template.instructor-socials', ['athlete' => $dojo->athletes->first()])
+        @include('guest.instructors.template.instructor-phone', ['phone' => $dojo->athletes->first()->phone, 'phone2' => $dojo->athletes->first()->phone2, 'inlinePhone' => false])
+        @include('guest.instructors.template.instructor-more-about', ['athlete' => $dojo->athletes->first()])
         @include('guest.instructors.template.joininstructor', ['athlete' => $dojo->athletes->first()])
     </div>
 </div>

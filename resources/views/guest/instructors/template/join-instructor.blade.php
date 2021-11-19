@@ -1,4 +1,4 @@
-@if ($athlete->is_coach)
+@if ($athlete && $athlete->is_coach)
 <a class="btn btn-success btn-join" href="#" role="button" data-bs-toggle="modal" data-bs-target="#modal-join-{{ $athlete->id }}">Записатись на тренування</a>
 
 <div class="modal fade" id="modal-join-{{ $athlete->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -11,10 +11,10 @@
             <div class="modal-body">
                 Щоб записатись на тренування до вибраного інструктора, будь ласка зателефонуйте по вказаному номері:
                 <div style="padding-top: 2rem">
-                    <h5>@include('guest.instructors.template.fullname', ['athlete' => $athlete ] )</h5>
+                    <h5>@include('guest.instructors.template.full-name', ['athlete' => $athlete ] )</h5>
                 </div>
 
-                @include('guest.instructors.template.instructorphone', ['phone' => $athlete->phone, 'phone2' => $athlete->phone2, 'inlinePhone' => false])
+                @include('guest.instructors.template.instructor-phone', ['phone' => $athlete->phone, 'phone2' => $athlete->phone2, 'inlinePhone' => false])
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-sm btn-outline-primary" data-bs-dismiss="modal">Ок</button>

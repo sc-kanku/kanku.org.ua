@@ -2,17 +2,17 @@
 
 @section('content')
 
-<h2>@include('guest.instructors.template.fullname', ['athlete' => $athlete])</h2>
+<h2>@include('guest.instructors.template.full-name', ['athlete' => $athlete])</h2>
 <div class="container"
 <div class="row">
     <div class="col-2" style="width:10%">
-        @include('guest.instructors.template.instructorphoto', ['athlete' => $athlete])
+        @include('guest.instructors.template.instructor-photo', ['athlete' => $athlete])
     </div>
     <div class="col-5" style="width:90%">
-        @include('guest.instructors.template.instructordegree', ['athlete' => $athlete])
-        @include('guest.instructors.template.instructorsocials', ['athlete' => $athlete])
-        @include('guest.instructors.template.instructorphone', ['phone' => $athlete->phone, 'phone2' => $athlete->phone2, 'inlinePhone' => false])
-        @include('guest.instructors.template.joininstructor', ['athlete' => $athlete])
+        @include('guest.instructors.template.instructor-degree', ['athlete' => $athlete])
+        @include('guest.instructors.template.instructor-socials', ['athlete' => $athlete])
+        @include('guest.instructors.template.instructor-phone', ['phone' => $athlete->phone, 'phone2' => $athlete->phone2, 'inlinePhone' => false])
+        @include('guest.instructors.template.join-instructor', ['athlete' => $athlete])
         <br /><br />
         <div class="card-text">
             {!! $athlete->full !!}

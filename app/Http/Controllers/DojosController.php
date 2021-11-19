@@ -36,7 +36,7 @@ class DojosController extends Controller
                 'dojo' => $dojo
             ]);
         } else {
-            return view('guest.dojos.dojoNotFound', [
+            return view('guest.dojos.dojo-not-found', [
                 'dojo' => $dojo
             ]);
         }
