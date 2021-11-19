@@ -32,7 +32,7 @@
         @include('guest.instructors.template.instructor-socials', ['athlete' => $dojo->athletes->first()])
         @include('guest.instructors.template.instructor-phone', ['phone' => $dojo->athletes->first()->phone, 'phone2' => $dojo->athletes->first()->phone2, 'inlinePhone' => false])
         @include('guest.instructors.template.instructor-more-about', ['athlete' => $dojo->athletes->first()])
-        @include('guest.instructors.template.joininstructor', ['athlete' => $dojo->athletes->first()])
+        @include('guest.instructors.template.join-instructor', ['athlete' => $dojo->athletes->first()])
     </div>
 </div>
 @endsection
