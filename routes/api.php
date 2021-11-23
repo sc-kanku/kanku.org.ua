@@ -19,25 +19,30 @@ use App\Http\Controllers\RefreshSiteController;
 |
 */
 
-
-Route::get('/athlete/list', [AthleteController::class, 'apiAthletes']);
-Route::post('/athlete/update', [AthleteController::class, 'apiUpdateAthlete']);
-Route::post('/athlete/update/schedule', [AthleteController::class, 'apiUpdateSchedule']);
+Route::group(['prefix' => 'athlete'], function () {
+    Route::get('list', [AthleteController::class, 'apiAthletes']);
+    Route::post('update', [AthleteController::class, 'apiUpdateAthlete']);
+    Route::post('update/schedule', [AthleteController::class, 'apiUpdateSchedule']);
 // TODO: add /athlete/dojo/schedule' for add dojo instead /athlete/update/schedule
-Route::post('/athlete/dojo/delete', [AthleteController::class, 'apiDojoDelete']);
+    Route::post('dojo/delete', [AthleteController::class, 'apiDojoDelete']);
 
-Route::get('/athlete/edit/{id}', [AthleteController::class, 'apiEditAthlete']);
-Route::post('/athlete/save/{id}', [AthleteController::class, 'apiSaveAthlete']);
+    Route::get('edit/{id}', [AthleteController::class, 'apiEditAthlete']);
+    Route::post('save/{id}', [AthleteController::class, 'apiSaveAthlete']);
+});
 
-Route::get('/dojo/list', [DojosController::class, 'apiDojos']);
-Route::post('/dojo/update', [DojosController::class, 'apiUpdateDojo']);
-Route::get('/dojo/edit/{id}', [DojosController::class, 'apiEditDojo']);
-Route::post('/dojo/save/{id}', [DojosController::class, 'apiSaveDojo']);
+Route::group(['prefix' => 'dojo'], function () {
+    Route::get('list', [DojosController::class, 'apiDojos']);
+    Route::post('update', [DojosController::class, 'apiUpdateDojo']);
+    Route::get('edit/{id}', [DojosController::class, 'apiEditDojo']);
+    Route::post('save/{id}', [DojosController::class, 'apiSaveDojo']);
+});
 
-Route::get('/post/list', [PostController::class, 'apiPosts']);
-Route::post('/post/update', [PostController::class, 'apiUpdatePost']);
-Route::get('/post/edit/{id}', [PostController::class, 'apiEditPost']);
-Route::post('/post/save/{id}', [PostController::class, 'apiSavePost']);
+Route::group(['prefix' => 'post'], function () {
+    Route::get('list', [PostController::class, 'apiPosts']);
+    Route::post('update', [PostController::class, 'apiUpdatePost']);
+    Route::get('edit/{id}', [PostController::class, 'apiEditPost']);
+    Route::post('save/{id}', [PostController::class, 'apiSavePost']);
+});
 
 Route::post('/site/refresh', [RefreshSiteController::class, 'refresh']);
 // ->middleware('auth')->name('admin.refresh');

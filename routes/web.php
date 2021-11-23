@@ -56,36 +56,46 @@ Route::view('/gallery/', 'raw-content.gallery.list')->middleware('cache.static.p
 
 
 // Articles
+Route::group(['prefix' => 'articles' ,'middleware' => 'cache.static.pages'], function () {
 
-Route::view('/articles/theory/style-history/', 'raw-content.articles.theory.style-history')->middleware('cache.static.pages');
-Route::view('/articles/theory/philosophy/', 'raw-content.articles.theory.philosophy')->middleware('cache.static.pages');
-Route::view('/articles/theory/masutatsu-oyama/', 'raw-content.articles.theory.masutatsu-oyama')->middleware('cache.static.pages');
-Route::view('/articles/theory/oyama-bio/', 'raw-content.articles.theory.oyama-bio')->middleware('cache.static.pages');
-Route::view('/articles/theory/dojo-kun/', 'raw-content.articles.theory.dojo-kun')->middleware('cache.static.pages');
-Route::view('/articles/theory/mottos/', 'raw-content.articles.theory.mottos')->middleware('cache.static.pages');
-Route::view('/articles/theory/shinkyokushinkai/', 'raw-content.articles.theory.shinkyokushinkai')->middleware('cache.static.pages');
-Route::view('/articles/theory/kyokushinkai-in-ukraine/', 'raw-content.articles.theory.kyokushinkai-in-ukraine')->middleware('cache.static.pages');
-Route::view('/articles/theory/kata-principles/', 'raw-content.articles.theory.kata-principles')->middleware('cache.static.pages');
-Route::view('/articles/theory/kata/', 'raw-content.articles.theory.kata')->middleware('cache.static.pages');
-Route::view('/articles/theory/kime-kiay/', 'raw-content.articles.theory.kime-kiay')->middleware('cache.static.pages');
-Route::view('/articles/theory/kyokushinkai-kanku/', 'raw-content.articles.theory.kyokushinkai-kanku')->middleware('cache.static.pages');
-Route::view('/articles/theory/tanden/', 'raw-content.articles.theory.tanden')->middleware('cache.static.pages');
-Route::view('/articles/theory/warm-up/', 'raw-content.articles.theory.warm-up')->middleware('cache.static.pages');
-Route::view('/articles/theory/skill-degrees/', 'raw-content.articles.theory.skill-degrees')->middleware('cache.static.pages');
-Route::view('/articles/theory/ethics/', 'raw-content.articles.theory.ethics')->middleware('cache.static.pages');
-Route::view('/articles/theory/dogi-obi/', 'raw-content.articles.theory.dogi-obi')->middleware('cache.static.pages');
-Route::view('/articles/theory/dictionary/', 'raw-content.articles.theory.dictionary')->middleware('cache.static.pages');
-Route::view('/articles/for-parents/why-karate/', 'raw-content.articles.for-parents.why-karate')->middleware('cache.static.pages');
-Route::view('/articles/for-parents/how-to-start/', 'raw-content.articles.for-parents.how-to-start')->middleware('cache.static.pages');
-Route::view('/articles/for-parents/teach-to-win/', 'raw-content.articles.for-parents.teach-to-win')->middleware('cache.static.pages');
-Route::view('/articles/for-parents/doesnt-work/', 'raw-content.articles.for-parents.doesnt-work')->middleware('cache.static.pages');
-Route::view('/articles/for-parents/advice/', 'raw-content.articles.for-parents.advice')->middleware('cache.static.pages');
-Route::view('/articles/for-parents/faq/', 'raw-content.articles.for-parents.faq')->middleware('cache.static.pages');
-Route::view('/articles/for-parents/review/', 'raw-content.articles.for-parents.review')->middleware('cache.static.pages');
+    Route::view('club/kanku-history', 'raw-content.articles.club.kanku-history');
+
+    Route::group(['prefix' => 'theory'], function () {
+        Route::view('style-history', 'raw-content.articles.theory.style-history');
+        Route::view('philosophy', 'raw-content.articles.theory.philosophy');
+        Route::view('masutatsu-oyama', 'raw-content.articles.theory.masutatsu-oyama');
+        Route::view('oyama-bio', 'raw-content.articles.theory.oyama-bio');
+        Route::view('dojo-kun', 'raw-content.articles.theory.dojo-kun');
+        Route::view('mottos', 'raw-content.articles.theory.mottos');
+        Route::view('shinkyokushinkai', 'raw-content.articles.theory.shinkyokushinkai');
+        Route::view('kyokushinkai-in-ukraine', 'raw-content.articles.theory.kyokushinkai-in-ukraine');
+        Route::view('kata-principles', 'raw-content.articles.theory.kata-principles');
+        Route::view('kata', 'raw-content.articles.theory.kata');
+        Route::view('kime-kiay', 'raw-content.articles.theory.kime-kiay');
+        Route::view('kyokushinkai-kanku', 'raw-content.articles.theory.kyokushinkai-kanku');
+        Route::view('tanden', 'raw-content.articles.theory.tanden');
+        Route::view('warm-up', 'raw-content.articles.theory.warm-up');
+        Route::view('skill-degrees', 'raw-content.articles.theory.skill-degrees');
+        Route::view('ethics', 'raw-content.articles.theory.ethics');
+        Route::view('dogi-obi', 'raw-content.articles.theory.dogi-obi');
+        Route::view('dictionary', 'raw-content.articles.theory.dictionary');
+    });
+
+    Route::group(['prefix' => 'for-parents'], function () {
+        Route::view('why-karate', 'raw-content.articles.for-parents.why-karate');
+        Route::view('how-to-start', 'raw-content.articles.for-parents.how-to-start');
+        Route::view('teach-to-win', 'raw-content.articles.for-parents.teach-to-win');
+        Route::view('doesnt-work', 'raw-content.articles.for-parents.doesnt-work');
+        Route::view('advice', 'raw-content.articles.for-parents.advice');
+        Route::view('faq', 'raw-content.articles.for-parents.faq');
+        Route::view('review', 'raw-content.articles.for-parents.review');
+    });
+});
+
 Route::view('/service/karate-for-kids/', 'raw-content.articles.for-parents.why-karate')->middleware('cache.static.pages');
 Route::view('/service/karate-for-adults/', 'raw-content.articles.service.karate-for-adults')->middleware('cache.static.pages');
 Route::view('/service/karate-for-girls/', 'raw-content.articles.service.karate-for-girls')->middleware('cache.static.pages');
-Route::view('/articles/club/kanku-history/', 'raw-content.articles.club.kanku-history')->middleware('cache.static.pages');
+
 
 
 // Admin
