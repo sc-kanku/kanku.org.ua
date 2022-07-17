@@ -54,4 +54,17 @@ class Post extends Model
             "preview" => $preview
         );
     }
+
+    public static function createNewDefault() {
+        return Post::create(array(
+            'category' => 0,
+            'dateAt' => '2022-02-23',
+            'keywords' => '',
+            'title' => '',
+            'brief' => '',
+            'full' => '',
+            'page_dir' => '' . rand(10, 1000000),
+            'nid' => 0
+        ));
+    }
 }

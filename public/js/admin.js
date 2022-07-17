@@ -9320,17 +9320,35 @@ var EditDojo = function EditDojo(_ref) {
   var _useParams = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.useParams)(),
       id = _useParams.id;
 
+  var location = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.useLocation)();
+
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
       _useState2 = _slicedToArray(_useState, 2),
       dojo = _useState2[0],
       setDojo = _useState2[1];
 
+  var isNew = location.pathname.indexOf('new') !== -1;
+  var isEdit = !isNew;
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    fetch(getUrl + "/" + id).then(function (response) {
-      return response.json();
-    }).then(setDojo);
-  }, [id]);
-  var isEdit = id != null;
+    if (isEdit) {
+      fetch(getUrl + "/" + id).then(function (response) {
+        return response.json();
+      }).then(setDojo);
+    } else if (isNew) {
+      // console.log('setting up new dojo');
+      setDojo({
+        name: '',
+        is_actual: 0,
+        info: '',
+        athletes: [],
+        place: 1,
+        district: '',
+        address: '',
+        coords: ''
+      });
+    }
+  }, [location.key]); // let isEdit = id != null;
+
   var garrerySnippet = "";
 
   if (isEdit && dojo.gallery) {
@@ -9359,9 +9377,23 @@ var EditDojo = function EditDojo(_ref) {
     }
   }
 
+  var saveCallback = function saveCallback(data) {
+    // console.log('data', data);
+    var response = data.response;
+
+    if (response && typeof response.id !== 'undefined') {
+      dojo.id = response.id;
+    } // console.log('athlete after callback', athlete);
+
+  };
+
+  var getId = function getId() {
+    return dojo.id;
+  };
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h2", {
-      children: isEdit ? dojo.name : "Новий доджо"
+      children: isEdit ? dojo.name : "Створити новий доджо"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("form", {
       encType: "multipart/form-data",
       className: "row",
@@ -9374,17 +9406,21 @@ var EditDojo = function EditDojo(_ref) {
             children: "\u041D\u0430\u0437\u0432\u0430"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_4__.EditableText, {
             field: "name",
-            className: "form-control",
-            id: id,
-            initialValue: isEdit && dojo.name,
-            inlineUpdateUrl: updateUrl
+            className: "form-control" // id={getId}
+            ,
+            getId: getId,
+            initialValue: dojo.name,
+            inlineUpdateUrl: updateUrl,
+            onBeforeSuccess: saveCallback
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_4__.EditableSwitch, {
           field: "is_actual",
-          className: "form-check-input",
-          id: id,
-          initialValue: isEdit && dojo.is_actual ? 1 : 0,
+          className: "form-check-input" // id = { getId }
+          ,
+          getId: getId,
+          initialValue: dojo.is_actual,
           inlineUpdateUrl: updateUrl,
+          onBeforeSuccess: saveCallback,
           children: "\u0427\u0438 \u0430\u043A\u0442\u0443\u0430\u043B\u044C\u043D\u0438\u0439 \u0437\u0430\u043B (\u0447\u0438 \u043F\u0440\u043E\u0432\u043E\u0434\u044F\u0442\u044C\u0441\u044F \u0432 \u043D\u044C\u043E\u043C\u0443 \u0437\u0430\u043D\u044F\u0442\u0442\u044F?)"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
@@ -9393,11 +9429,13 @@ var EditDojo = function EditDojo(_ref) {
             children: "\u0406\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0456\u044F"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_4__.EditableTextarea, {
             field: "info",
-            className: "form-control",
-            id: id,
-            initialValue: isEdit ? dojo.info : '',
+            className: "form-control" // id={getId}
+            ,
+            getId: getId,
+            initialValue: dojo.info,
             inlineUpdateUrl: updateUrl,
-            rows: "10"
+            rows: "10",
+            onBeforeSuccess: saveCallback
           })]
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
@@ -9424,11 +9462,13 @@ var EditDojo = function EditDojo(_ref) {
           },
           children: "\u0406\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440\u0438"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_EditAttachedEntities__WEBPACK_IMPORTED_MODULE_1__["default"], {
-          entityName: "dojo",
-          entityId: id,
+          entityName: "dojo" // entityId={ getId }
+          ,
+          getId: getId,
           entityNameToAttach: "athlete",
-          attachedEntities: isEdit ? dojo.athletes : null,
-          updateUrl: updateUrl
+          attachedEntities: dojo.athletes,
+          updateUrl: updateUrl,
+          onBeforeSuccess: saveCallback
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
         className: "col-md-12 d-grid mb-3",
@@ -9444,12 +9484,14 @@ var EditDojo = function EditDojo(_ref) {
           children: "\u0420\u043E\u0437\u0442\u0430\u0448\u0443\u0432\u0430\u043D\u043D\u044F"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_4__.EditableSwitch, {
           field: "place",
-          className: "form-check-input",
-          id: id,
-          initialValue: isEdit ? dojo.place : 1,
+          className: "form-check-input" // id={ getId }
+          ,
+          getId: getId,
+          initialValue: dojo.place,
           inlineUpdateUrl: updateUrl,
           values: [1, 2],
-          labels: ['Львів', 'Область']
+          labels: ['Львів', 'Область'],
+          onBeforeSuccess: saveCallback
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "col-md-10 mb-3",
@@ -9459,10 +9501,12 @@ var EditDojo = function EditDojo(_ref) {
           children: "\u0420\u0430\u0439\u043E\u043D"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_4__.EditableText, {
           field: "district",
-          className: "form-control",
-          id: id,
-          initialValue: isEdit && dojo.district,
-          inlineUpdateUrl: updateUrl
+          className: "form-control" // id={ getId }
+          ,
+          getId: getId,
+          initialValue: dojo.district,
+          inlineUpdateUrl: updateUrl,
+          onBeforeSuccess: saveCallback
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "col-md-12 d-grid gap-3 mb-3",
@@ -9473,10 +9517,12 @@ var EditDojo = function EditDojo(_ref) {
             children: "\u0410\u0434\u0440\u0435\u0441\u0430 (\u0431\u0435\u0437 \u0437\u0430\u0437\u043D\u0430\u0447\u0435\u043D\u043D\u044F \u0423\u043A\u0440\u0430\u0457\u043D\u0438 \u0456 \u041B\u044C\u0432\u043E\u0432\u0430/\u041B\u044C\u0432\u0456\u0432\u0441\u044C\u043A\u043E\u0439 \u043E\u0431\u043B\u0430\u0441\u0442\u0456)"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_4__.EditableText, {
             field: "address",
-            className: "form-control",
-            id: id,
-            initialValue: isEdit && dojo.address,
-            inlineUpdateUrl: updateUrl
+            className: "form-control" // id={ getId }
+            ,
+            getId: getId,
+            initialValue: dojo.address,
+            inlineUpdateUrl: updateUrl,
+            onBeforeSuccess: saveCallback
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_EditDojoCoordinates__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -9661,6 +9707,8 @@ var EditPost = function EditPost(_ref) {
   var _useParams = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useParams)(),
       id = _useParams.id;
 
+  var location = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useLocation)();
+
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
       _useState2 = _slicedToArray(_useState, 2),
       post = _useState2[0],
@@ -9672,21 +9720,32 @@ var EditPost = function EditPost(_ref) {
       return response.json();
     }).then(setPost);
   }, []);
-  var isEdit = id != null;
-  var editHeader = isEdit ? "Відредагувати " + post.title : "Додати новину";
+  var isNew = location.pathname.indexOf('new') !== -1;
+  var isEdit = !isNew; // let isEdit = id != null;
 
-  var editEntityHiddenInputId = isEdit && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
-    type: "hidden",
-    name: "id",
-    value: post.id
-  });
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (isEdit) {
+      fetch(getUrl + "/" + id).then(function (response) {
+        return response.json();
+      }).then(setPost);
+    } else if (isNew) {
+      // console.log('setting up new post');
+      setPost({
+        'category': 0,
+        'dateAt': '2022-02-23',
+        'keywords': '',
+        'title': '',
+        'brief': '',
+        'full': '',
+        'page_dir': '',
+        'nid': 0
+      });
+    }
+  }, [location.key]); // let editHeader = isEdit  ?  "Відредагувати " + post.title : "Створити новину";
+  // let editEntityHiddenInputId = isEdit && <input type="hidden" name="id" value={post.id} />
+  // let postCategory = isEdit && <PostCategory value={post.category} editable={true} />
+  // let photoUrl = post && ("/images/posts/" + post.id + "/photo.jpg");
 
-  var postCategory = isEdit && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_PostCategory__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    value: post.category,
-    editable: true
-  });
-
-  var photoUrl = post && "/images/posts/" + post.id + "/photo.jpg";
   var garrerySnippet = "";
 
   if (isEdit && post.gallery) {
@@ -9715,6 +9774,20 @@ var EditPost = function EditPost(_ref) {
     }
   }
 
+  var saveCallback = function saveCallback(data) {
+    // console.log('data', data);
+    var response = data.response;
+
+    if (response && typeof response.id !== 'undefined') {
+      post.id = response.id;
+    } // console.log('athlete after callback', athlete);
+
+  };
+
+  var getId = function getId() {
+    return post.id;
+  };
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
       children: isEdit ? post.title : "Новий пост"
@@ -9730,10 +9803,12 @@ var EditPost = function EditPost(_ref) {
             children: "\u0417\u0430\u0433\u043E\u043B\u043E\u0432\u043E\u043A"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableText, {
             field: "title",
-            className: "form-control",
-            id: id,
-            initialValue: isEdit && post.title,
-            inlineUpdateUrl: updateUrl
+            className: "form-control" // id={id}
+            ,
+            getId: getId,
+            initialValue: post.title,
+            inlineUpdateUrl: updateUrl,
+            onBeforeSuccess: saveCallback
           })]
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
@@ -9745,10 +9820,12 @@ var EditPost = function EditPost(_ref) {
             children: "\u041A\u0430\u0442\u0435\u0433\u043E\u0440\u0456\u044F"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditablePostCategory, {
             field: "category",
-            className: "form-control",
-            id: id,
-            initialValue: isEdit && post.category,
-            inlineUpdateUrl: updateUrl
+            className: "form-control" // id={id}
+            ,
+            getId: getId,
+            initialValue: post.category,
+            inlineUpdateUrl: updateUrl,
+            onBeforeSuccess: saveCallback
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
@@ -9757,10 +9834,12 @@ var EditPost = function EditPost(_ref) {
             children: "\u0414\u0430\u0442\u0430"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableDate, {
             field: "dateAt",
-            className: "form-control",
-            id: isEdit && post.id,
-            initialValue: isEdit && post.dateAt,
-            inlineUpdateUrl: updateUrl
+            className: "form-control" // id={isEdit && post.id}
+            ,
+            getId: getId,
+            initialValue: post.dateAt,
+            inlineUpdateUrl: updateUrl,
+            onBeforeSuccess: saveCallback
           })]
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
@@ -9790,10 +9869,12 @@ var EditPost = function EditPost(_ref) {
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableTextarea, {
             field: "full",
             className: "form-control",
-            id: isEdit && post.id,
-            initialValue: isEdit ? post.full : '',
+            getId: getId // id={isEdit && post.id}
+            ,
+            initialValue: post.full,
             inlineUpdateUrl: updateUrl,
-            rows: 10
+            rows: 10,
+            onBeforeSuccess: saveCallback
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
@@ -9803,9 +9884,11 @@ var EditPost = function EditPost(_ref) {
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableTextarea, {
             field: "brief",
             className: "form-control",
-            id: isEdit && post.id,
-            initialValue: isEdit ? post.brief : '',
-            inlineUpdateUrl: updateUrl
+            getId: getId // id={isEdit && post.id}
+            ,
+            initialValue: post.brief,
+            inlineUpdateUrl: updateUrl,
+            onBeforeSuccess: saveCallback
           })]
         })]
       })]

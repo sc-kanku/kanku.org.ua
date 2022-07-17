@@ -1,5 +1,5 @@
 import React, {useMemo, useState, useEffect} from 'react';
-import { useParams, Redirect} from 'react-router-dom';
+import { useParams, useLocation, Redirect} from 'react-router-dom';
 import EditAttachedEntities from '../controls/EditAttachedEntities';
 import Photo from '../controls/Photo';
 import EditDojoCoordinates from './EditDojoCoordinates';
@@ -8,15 +8,34 @@ import { EditableText, EditableDate, EditableDegree, EditableSwitch, EditableTex
 
 const EditDojo = ({getUrl, updateUrl, photoFileName}) => {
     let { id } = useParams();
+    const location = useLocation();
     const [dojo, setDojo] = useState({});
 
-    useEffect(() => {
-        fetch(getUrl + "/" + id)
-            .then( response => response.json() )
-            .then( setDojo )
-    }, [id]);
+    let isNew = location.pathname.indexOf('new') !== -1;
+    let isEdit = !isNew;
 
-    let isEdit = id != null;
+    useEffect(() => {
+        if (isEdit) {
+            fetch(getUrl + "/" + id)
+                .then( response => response.json() )
+                .then( setDojo )
+        } else if (isNew) {
+            // console.log('setting up new dojo');
+
+            setDojo({
+                name: '',
+                is_actual: 0,
+                info: '',
+                athletes: [],
+                place: 1,
+                district: '',
+                address: '',
+                coords: ''
+            })
+        }
+    }, [location.key]);
+
+    // let isEdit = id != null;
 
     let garrerySnippet = "";
 
@@ -36,9 +55,24 @@ const EditDojo = ({getUrl, updateUrl, photoFileName}) => {
         }
     }
 
+    let saveCallback = (data) => {
+        // console.log('data', data);
+
+        let response = data.response;
+        if (response && typeof (response.id) !== 'undefined') {
+            dojo.id = response.id;
+        }
+
+        // console.log('athlete after callback', athlete);
+    }
+
+    let getId = () => {
+        return dojo.id;
+    }
+
     return (
         <>
-            <h2>{ isEdit ? dojo.name : "Новий доджо" }</h2>
+            <h2>{ isEdit ? dojo.name : "Створити новий доджо" }</h2>
 
             <form encType="multipart/form-data" className="row">
                 <div className="col-sm-5 d-grid gap-3">
@@ -46,17 +80,21 @@ const EditDojo = ({getUrl, updateUrl, photoFileName}) => {
                         <label htmlFor="lastName" className="form-label">Назва</label>
 
                         <EditableText field="name" className="form-control"
-                            id={id}
-                            initialValue={isEdit && dojo.name}
+                            // id={getId}
+                            getId={getId}
+                            initialValue={dojo.name}
                             inlineUpdateUrl={updateUrl}
+                            onBeforeSuccess={saveCallback}
                         />
                     </div>
 
                     <EditableSwitch
                         field="is_actual" className="form-check-input"
-                        id={ id }
-                        initialValue={(isEdit && dojo.is_actual) ? 1 : 0}
-                        inlineUpdateUrl={updateUrl}
+                        // id = { getId }
+                        getId = { getId }
+                        initialValue = { dojo.is_actual }
+                        inlineUpdateUrl = { updateUrl }
+                        onBeforeSuccess={saveCallback}
                     >Чи актуальний зал (чи проводяться в ньому заняття?)
                     </EditableSwitch>
 
@@ -64,10 +102,12 @@ const EditDojo = ({getUrl, updateUrl, photoFileName}) => {
                         <label htmlFor="info" className="form-label">Інформація</label>
 
                         <EditableTextarea field="info" className="form-control"
-                            id={id}
-                            initialValue={isEdit ? dojo.info : ''}
+                            // id={getId}
+                            getId = { getId }
+                            initialValue={ dojo.info }
                             inlineUpdateUrl={updateUrl}
                             rows='10'
+                            onBeforeSuccess={saveCallback}
                         />
                     </div>
                 </div>
@@ -91,10 +131,12 @@ const EditDojo = ({getUrl, updateUrl, photoFileName}) => {
                     <p style={{'backgroundColor': 'yellow'}}>Інструктори</p>
                     <EditAttachedEntities
                         entityName='dojo'
-                        entityId={ id}
+                        // entityId={ getId }
+                        getId={ getId }
                         entityNameToAttach='athlete'
-                        attachedEntities={isEdit ? dojo.athletes : null}
+                        attachedEntities={ dojo.athletes }
                         updateUrl={updateUrl}
+                        onBeforeSuccess={saveCallback}
                     />
                 </div>
 
@@ -105,11 +147,13 @@ const EditDojo = ({getUrl, updateUrl, photoFileName}) => {
 
                     <EditableSwitch
                         field="place" className="form-check-input"
-                        id={ id }
-                        initialValue={ isEdit ? dojo.place : 1 }
+                        // id={ getId }
+                        getId={ getId }
+                        initialValue={ dojo.place }
                         inlineUpdateUrl={updateUrl}
                         values = { [1, 2] }
                         labels = { ['Львів', 'Область']}
+                        onBeforeSuccess={saveCallback}
                     />
                 </div>
 
@@ -117,9 +161,11 @@ const EditDojo = ({getUrl, updateUrl, photoFileName}) => {
                     <label htmlFor="district" className="form-label">Район</label>
 
                     <EditableText field="district" className="form-control"
-                        id={id}
-                        initialValue={isEdit && dojo.district}
+                        // id={ getId }
+                        getId={ getId }
+                        initialValue={ dojo.district }
                         inlineUpdateUrl={updateUrl}
+                        onBeforeSuccess={saveCallback}
                     />
                 </div>
 
@@ -138,9 +184,11 @@ const EditDojo = ({getUrl, updateUrl, photoFileName}) => {
                         <label htmlFor="address" className="form-label">Адреса (без зазначення України і Львова/Львівськой області)</label>
 
                         <EditableText field="address" className="form-control"
-                            id={ id }
-                            initialValue={ isEdit && dojo.address }
+                            // id={ getId }
+                            getId={ getId }
+                            initialValue={ dojo.address }
                             inlineUpdateUrl={ updateUrl }
+                            onBeforeSuccess={saveCallback}
                         />
                     </div>
 

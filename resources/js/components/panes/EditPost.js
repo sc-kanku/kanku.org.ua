@@ -1,5 +1,5 @@
 import React, {useMemo, useState, useEffect} from 'react';
-import { useParams, Redirect} from 'react-router-dom';
+import { useParams, useLocation, Redirect} from 'react-router-dom';
 
 import PostCategory from './../controls/PostCategory';
 import Photo from '../controls/Photo';
@@ -7,6 +7,7 @@ import { EditablePostCategory, EditableText, EditableDate, EditableDegree, Edita
 
 const EditPost = ({getUrl, updateUrl}) => {
     let { id } = useParams();
+    const location = useLocation();
     const [post, setPost] = useState({});
 
     // TODO: id dep?
@@ -16,13 +17,35 @@ const EditPost = ({getUrl, updateUrl}) => {
             .then(setPost)
     }, []);
 
-    let isEdit = id != null;
+    let isNew = location.pathname.indexOf('new') !== -1;
+    let isEdit = !isNew;
+    // let isEdit = id != null;
 
+    useEffect(() => {
+        if (isEdit) {
+            fetch(getUrl + "/" + id)
+                .then( response => response.json() )
+                .then( setPost )
+        } else if (isNew) {
+            // console.log('setting up new post');
 
-    let editHeader = isEdit  ?  "Відредагувати " + post.title : "Додати новину";
-    let editEntityHiddenInputId = isEdit && <input type="hidden" name="id" value={post.id} />
-    let postCategory = isEdit && <PostCategory value={post.category} editable={true} />
-    let photoUrl = post && ("/images/posts/" + post.id + "/photo.jpg");
+            setPost({
+                'category' : 0,
+                'dateAt' : '2022-02-23',
+                'keywords': '',
+                'title': '',
+                'brief': '',
+                'full': '',
+                'page_dir': '',
+                'nid': 0
+            })
+        }
+    }, [location.key]);
+
+    // let editHeader = isEdit  ?  "Відредагувати " + post.title : "Створити новину";
+    // let editEntityHiddenInputId = isEdit && <input type="hidden" name="id" value={post.id} />
+    // let postCategory = isEdit && <PostCategory value={post.category} editable={true} />
+    // let photoUrl = post && ("/images/posts/" + post.id + "/photo.jpg");
 
     let garrerySnippet = "";
 
@@ -42,6 +65,19 @@ const EditPost = ({getUrl, updateUrl}) => {
         }
     }
 
+    let saveCallback = (data) => {
+        // console.log('data', data);
+        let response = data.response;
+        if (response && typeof (response.id) !== 'undefined') {
+            post.id = response.id;
+        }
+        // console.log('athlete after callback', athlete);
+    }
+
+    let getId = () => {
+        return post.id;
+    }
+
     return (
         <>
             <h2>{ isEdit ? post.title : "Новий пост" }</h2>
@@ -52,9 +88,11 @@ const EditPost = ({getUrl, updateUrl}) => {
                         <label htmlFor="title" className="form-label">Заголовок</label>
 
                         <EditableText field="title" className="form-control"
-                            id={id}
-                            initialValue={isEdit && post.title}
+                            // id={id}
+                            getId={ getId }
+                            initialValue={ post.title }
                             inlineUpdateUrl={updateUrl}
+                            onBeforeSuccess={saveCallback}
                         />
                     </div>
                 </div>
@@ -64,9 +102,11 @@ const EditPost = ({getUrl, updateUrl}) => {
                         <label htmlFor="category" className="form-label">Категорія</label>
 
                         <EditablePostCategory field="category" className="form-control"
-                            id={id}
-                            initialValue={isEdit && post.category}
+                            // id={id}
+                            getId={ getId }
+                            initialValue={ post.category }
                             inlineUpdateUrl={updateUrl}
+                            onBeforeSuccess={saveCallback}
                         />
                     </div>
 
@@ -74,9 +114,11 @@ const EditPost = ({getUrl, updateUrl}) => {
                         <label htmlFor="birthday" className="form-label">Дата</label>
 
                         <EditableDate field="dateAt" className="form-control"
-                            id={isEdit && post.id}
-                            initialValue={isEdit && post.dateAt}
+                            // id={isEdit && post.id}
+                            getId={ getId }
+                            initialValue={ post.dateAt }
                             inlineUpdateUrl={updateUrl}
+                            onBeforeSuccess={saveCallback}
                         />
                     </div>
 {/* TODO: keywords*/}
@@ -111,10 +153,12 @@ const EditPost = ({getUrl, updateUrl}) => {
                         <label htmlFor="full" className="form-label">Повний текст новини</label>
 
                         <EditableTextarea field="full" className="form-control"
-                            id={isEdit && post.id}
-                            initialValue={isEdit ? post.full : ''}
+                            getId={ getId }
+                            // id={isEdit && post.id}
+                            initialValue={ post.full }
                             inlineUpdateUrl={updateUrl}
                             rows={10}
+                            onBeforeSuccess={saveCallback}
                         />
                     </div>
 
@@ -122,9 +166,11 @@ const EditPost = ({getUrl, updateUrl}) => {
                         <label htmlFor="brief" className="form-label">Короткий текст для сторінки списку новин</label>
 
                         <EditableTextarea field="brief" className="form-control"
-                            id={isEdit && post.id}
-                            initialValue={isEdit ? post.brief : ''}
+                            getId={ getId }
+                            // id={isEdit && post.id}
+                            initialValue={ post.brief }
                             inlineUpdateUrl={updateUrl}
+                            onBeforeSuccess={saveCallback}
                         />
                     </div>
                 </div>

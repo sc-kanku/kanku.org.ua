@@ -38,4 +38,19 @@ class Dojo extends Model
     {
         return $this->place == 2;
     }
+
+    public static function createNewDefault() {
+        return Dojo::create(array(
+            'url' => '' . rand(10, 1000000),
+            'place' => 0,
+            'name' => '',
+            'point' => '',
+            'district' => '',
+            'address' => '',
+            'coords' => '',
+            'is_manual' => 1,
+            'info' => '',
+            'is_actual' => 0
+        ));
+    }
 }

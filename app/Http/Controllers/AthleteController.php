@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers;
 use App\Models\Athlete;
 use Illuminate\Http\Request;
 use Exception;
@@ -90,15 +91,63 @@ class AthleteController extends Controller
                 $athlete = Athlete::createNewDefault();
 
                 $athlete[$request->get('field')] = $request->get('value');
+
+                if ($request->get('field') == "firstName" || $request->get('field') == "lastName" || $request->get('field') == "patronymic") {
+                    $athlete['page_dir'] = Helpers::transliterate($request->get('value'));
+                }
+
                 $athlete->save();
 
                 $queryStatus = ["Successful" => 'yes', "id" => $athlete->id];
             } else {
                 // TODO: degeree is not saved in inline editing.
                 // DONE. Already saved on edit Athlethe page, check on Athletes list page.
-                $result = Athlete
-                    ::where('id', $request->get('id'))
-                    ->update([$request->get('field') => $request->get('value')]);
+                $value = $request->get('value');
+                $field = $request->get('field');
+
+                if ($field == "firstName" || $field == "lastName" || $field == "patronymic") {
+                    $athlete = Athlete
+                        ::where('id', $request->get('id'))
+                        ->first();
+
+                    switch ($field) {
+                        case "firstName" :
+                            $pageDir = $athlete['lastName']
+                                . ( $value  ? ' ' . $value : '')
+                                . ( $athlete['patronymic']
+                                    ? ( ' ' . $athlete['patronymic'] )
+                                    : '');
+                            break;
+                        case "lastName" :
+                            $pageDir = $value
+                                . ( $athlete['firstName']
+                                    ? (' ' . $athlete['firstName'])
+                                    : '')
+                                . ($athlete['patronymic']
+                                    ? (' ' . $athlete['patronymic'])
+                                    : '');
+                            break;
+                        case "patronymic" :
+                            $pageDir = $athlete['lastName']
+                                . ($athlete['firstName']
+                                    ? (' ' . $athlete['firstName'])
+                                    : '')
+                                . ($value  ? ' ' . $value : '') ;
+                            break;
+                    }
+
+                    if ($pageDir) {
+                        $athlete['page_dir'] = Helpers::transliterate($pageDir);
+                    }
+
+                    $athlete[$field] = $value;
+
+                    $result = $athlete->save();
+                } else {
+                    $result = Athlete
+                        ::where('id', $request->get('id'))
+                        ->update([$value => $field]);
+                }
 
                 $queryStatus = ["Successful" => $result];
             }

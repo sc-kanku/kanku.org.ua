@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers;
 use App\Models\Dojo;
 use Illuminate\Http\Request;
 use Exception;
@@ -57,12 +58,35 @@ class DojosController extends Controller
     public function apiUpdateDojo(Request $request)
     {
         try {
-            // TODO: degeree is not saved in inline editing.
-            $result = Dojo
-                ::where('id', $request->get('id'))
-                ->update([$request->get('field') => $request->get('value')]);
+            $id = ($request->get('id'));
 
-            $queryStatus = ["Successful" => $result];
+            $pageDir = $request->get('field') == "name"
+                ? Helpers::transliterate($request->get('value'))
+                : '';
+
+            if ($id == null) {
+                $dojo = Dojo::createNewDefault();
+
+                $dojo[$request->get('field')] = $request->get('value');
+                $dojo['url'] = $pageDir;
+
+                $dojo->save();
+
+                $queryStatus = ["Successful" => 'yes', "id" => $dojo->id];
+            } else {
+                $updateDetails = [$request->get('field') => $request->get('value')];
+
+                if ($pageDir != '') {
+                    $updateDetails['url'] = $pageDir;
+                }
+
+                // TODO: degeree is not saved in inline editing.
+                $result = Dojo
+                    ::where('id', $request->get('id'))
+                    ->update($updateDetails);
+
+                $queryStatus = ["Successful" => $result];
+            }
         } catch (Exception $e) {
             $queryStatus = ["Unsuccessful" => $e];
         }
@@ -72,9 +96,9 @@ class DojosController extends Controller
 
     public function apiEditDojo($id)
     {
-        $athlete = Dojo::where('id', $id)->with('athletes')->get()->first();
+        $dojo = Dojo::where('id', $id)->with('athletes')->get()->first();
 
-        return $athlete;
+        return $dojo;
     }
 
     public function apiSaveDojo(Request $request, $id)

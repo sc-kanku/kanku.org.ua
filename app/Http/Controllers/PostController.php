@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Exception;
@@ -50,12 +51,34 @@ class PostController extends Controller
     public function apiUpdatePost(Request $request)
     {
         try {
-            // TODO: degeree is not saved in inline editing.
-            $result = Post
-                ::where('id', $request->get('id'))
-                ->update([$request->get('field') => $request->get('value')]);
+            $id = ($request->get('id'));
 
-            $queryStatus = ["Successful" => $result];
+            $pageDir = $request->get('field') == "title"
+                ? Helpers::transliterate($request->get('value'))
+                : '';
+
+            if ($id == null) {
+                $post = Post::createNewDefault();
+
+                $post[$request->get('field')] = $request->get('value');
+                $post['page_dir'] = $pageDir;
+
+                $post->save();
+
+                $queryStatus = ["Successful" => 'yes', "id" => $post->id];
+            } else {
+                $updateDetails = [$request->get('field') => $request->get('value')];
+
+                if ($pageDir != '') {
+                    $updateDetails['page_dir'] = $pageDir;
+                }
+
+                $result = Post
+                    ::where('id', $request->get('id'))
+                    ->update($updateDetails);
+
+                $queryStatus = ["Successful" => $result];
+            }
         } catch (Exception $e) {
             $queryStatus = ["Unsuccessful" => $e];
         }
@@ -78,4 +101,13 @@ class PostController extends Controller
 
         return $result;
     }
+
+    private function updateDirIfNeeded(Request $request, Post $post) {
+        if ($request->get('field') == "title") {
+            $post['page_dir'] = Helpers::transliterate($request->get('value'));
+        }
+
+        return $post;
+    }
+    // $this->page_dir = Utils::transliterate($title);
 }
