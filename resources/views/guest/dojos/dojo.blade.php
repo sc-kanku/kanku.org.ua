@@ -11,7 +11,7 @@
 			</div>
 
 		    <div class="district">
-                @if ($dojo->district) {
+                @if ($dojo->district)
                     Район: {{ $dojo->district }}
                 @endif
 		    </div>
