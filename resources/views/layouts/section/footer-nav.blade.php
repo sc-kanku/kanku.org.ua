@@ -16,7 +16,7 @@
                     <!--
 		  <li class="nav-item">
 			<a class="nav-link social-media facebook" title="Facebook" href="https://www.facebook.com/sc.kanku.lviv/"><img src="" alt="Facebook"/></a>
-				  
+
 			<a class="nav-link social-media instagram" title="Інстаграм" href="http://instagram.com/sc_kanku_lviv"><img src="pictures/socials/instagram.png_" alt="Інстаграм" /></a>
 		  </li>
 -->
@@ -91,7 +91,7 @@
                     $(this).addClass('active');
                     /*
                     				var parentNode = $(this).parent();
-                    
+
                     				// If Highlighted menu item is in submenu
                     				if (parentNode.hasClass('subnav')) {
                     					// Open parent menu so that highlightrd submenu item is visible
@@ -115,8 +115,7 @@
 
     <!--p class="float-right"><a href="#">Back to top</a></p-->
     <p>
-
-        2017-2021 &copy; Спортивний клуб кіокушинкай карате КАНКУ | <a href="/email/feedback/">Зворотній звязок</a>
+        2017-2022 &copy; Спортивний клуб кіокушинкай карате КАНКУ | <a href="/email/feedback/">Зворотній звязок</a>
         <!--
 	&middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a>
 	-->
