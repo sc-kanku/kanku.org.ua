@@ -6,73 +6,73 @@ import TableSearch from './TableSearch';
 import useEditable from '../utils/useEditable';
 
 export const EditableDegree = ({ initialValue, className, ...props }) => {
-  initialValue = initialValue != null ? initialValue : '';
-  className = typeof className == 'undefined' ? '' : className;
+    initialValue = initialValue != null ? initialValue : '';
+    className = typeof className == 'undefined' ? '' : className;
 
     const [Editable, value, onChange] = useEditable({
-    ...props,
-    data: {
-        id: props.id ? props.id : props.getId ? props.getId : null,
-        field: props.field,
-        value: initialValue
-    },
-    getNewValue: (e) => e.target.value
+        ...props,
+        data: {
+            id: props.id ? props.id : props.getId ? props.getId : null,
+            field: props.field,
+            value: initialValue
+        },
+        getNewValue: (e) => e.target.value
    });
 
-  return <>
-      <Editable />
-      <Degree id={props.field} name={props.field} className={className}
-          value={value}
-          editable="true"
-          onChange={onChange}
-      />
-  </>
+    return <>
+        <Editable />
+        <Degree id={props.field} name={props.field} className={className}
+            value={value}
+            editable="true"
+            onChange={onChange}
+        />
+    </>
 };
 
 export const EditablePostCategory = ( { initialValue, className, ...props } ) => {
-  initialValue = initialValue != null ? initialValue : '';
-  className = typeof className == 'undefined' ? '' : className;
+    initialValue = initialValue != null ? initialValue : '';
+    className = typeof className == 'undefined' ? '' : className;
 
     const [Editable, value, onChange] = useEditable({
-    ...props,
-    data: {
-        id: props.id ? props.id : props.getId ? props.getId : null,
-        field: props.field,
-        value: initialValue
-    },
-    getNewValue: (e) => e.target.value
-  });
+        ...props,
+        data: {
+            id: props.id ? props.id : props.getId ? props.getId : null,
+            field: props.field,
+            value: initialValue
+        },
+        getNewValue: (e) => e.target.value
+    });
 
-  return <>
-      <Editable />
-      <PostCategory value={value} editable="true" onChange={onChange} className={className} />
-  </>
+    return <>
+        <Editable />
+        <PostCategory value={value} editable="true" onChange={onChange} className={className} />
+    </>
 };
 
 // Create an editable cell renderer
 export const EditableDate = ({ initialValue, className, ...props }) => {
-  // We need to keep and update the state of the cell normally
-  initialValue = initialValue != null ? initialValue : '';
-  className = typeof className == 'undefined' ? '' : className;
+    // We need to keep and update the state of the cell normally
+    initialValue = initialValue != null ? initialValue : '';
+    className = typeof className == 'undefined' ? '' : className;
 
     const [Editable, value, onChange] = useEditable({
-    ...props,
-    data: {
-        id: props.id ? props.id : props.getId ? props.getId : null,
-        field: props.field,
-        value: initialValue
-    },
-    getNewValue: (e) => e.target.value
-  });
-  // value={value}???
-  return <>
-    <Editable />
-    <input
-        id={props.field} name={props.field} className={className}
-          type='date'
-          defaultValue={initialValue}
-          onChange={onChange}
-    />
+        ...props,
+        data: {
+            id: props.id ? props.id : props.getId ? props.getId : null,
+            field: props.field,
+            value: initialValue
+        },
+        getNewValue: (e) => e.target.value
+    });
+    // value={value}???
+    return <>
+        <Editable />
+        <input
+            id={props.field} name={props.field} className={className}
+            type='date'
+            defaultValue={initialValue}
+            onChange={onChange}
+        />
   </>
 }
 
@@ -109,37 +109,37 @@ export const EditableSwitch = ({ initialValue, className, children, values, labe
                 }
             }
         }
-      });
+    });
 
     const defineLabel = (value) => {
-      let defined = children;
+        let defined = children;
 
-      if (typeof labels != 'undefined') {
-        if (value == values[0]) {
-          defined = labels[ 0]
-        } else if (value == values[1]) {
-          defined = labels[1]
+        if (typeof labels != 'undefined') {
+            if (value == values[0]) {
+                defined = labels[ 0]
+            } else if (value == values[1]) {
+                defined = labels[1]
+            }
         }
-      }
 
-      return defined;
+        return defined;
     }
 
     let id = props.field + Math.round(Math.random() * 1000000);
 
     return <>
-      <Editable />
-      <div className="form-switch">
-        <input
-            id={ id } name={ props.field } className={ className }
-            type='checkbox' role="switch"
-            checked={ value == values[1] }
-            onChange={ onEditableChange }
-            // onChange={ onTypingChange }
-            // onBlur={ onEditableChange }
-        />
-        <label htmlFor={id} className="form-label">{ defineLabel(value) }</label>
-      </div>
+        <Editable />
+        <div className="form-switch">
+            <input
+                id={ id } name={ props.field } className={ className }
+                type='checkbox' role="switch"
+                checked={ value == values[1] }
+                onChange={ onEditableChange }
+                // onChange={ onTypingChange }
+                // onBlur={ onEditableChange }
+            />
+            <label htmlFor={id} className="form-label">{ defineLabel(value) }</label>
+        </div>
     </>
 }
 
@@ -184,26 +184,26 @@ export const EditableText = ({ initialValue, type, className, disabled, onChange
         }
     }
 
-  return <>
-    <Editable />
-      <input
-        id={props.field} name={props.field} className={className}
-        type={type}
-        // defaultValue={initialValueState}
-        defaultValue={initialValue}
-        disabled={disabled}
-        readOnly={disabled}
-        onChange={onTypingChange}
-        onBlur={ onEditableChange }
-    />
-  </>
+    return <>
+        <Editable />
+        <input
+            id={props.field} name={props.field} className={className}
+            type={type}
+            // defaultValue={initialValueState}
+            defaultValue={initialValue}
+            disabled={disabled}
+            readOnly={disabled}
+            onChange={onTypingChange}
+            onBlur={ onEditableChange }
+        />
+    </>
 }
 
-export const EditableTextarea = ({ initialValue, type, className, rows, ...props }) => {
-  // We need to keep and update the state of the cell normally
-  initialValue = initialValue != null ? initialValue : '';
-  className = typeof className == 'undefined' ? '' : className;
-  rows = typeof rows == 'undefined' ? '5' : rows;
+export const EditableTextarea = ({ initialValue, className, rows, ...props }) => {
+    // We need to keep and update the state of the cell normally
+    initialValue = initialValue != null ? initialValue : '';
+    className = typeof className == 'undefined' ? '' : className;
+    rows = typeof rows == 'undefined' ? '5' : rows;
 
     const [Editable, value, onChange, setValue] = useEditable({
         ...props,
@@ -215,78 +215,78 @@ export const EditableTextarea = ({ initialValue, type, className, rows, ...props
         getNewValue : (e) => value
     });
 
-const onTypingChange = e => setValue(e.target.value)
+    const onTypingChange = e => setValue(e.target.value)
 
-return <>
-  <Editable />
-    <textarea
-        id={props.field} name={props.field} className={className}
-        rows={rows}
-        defaultValue={initialValue}
-        onChange={onTypingChange}
-        onBlur={onChange}
-  ></textarea>
-</>
+    return <>
+        <Editable />
+        <textarea
+            id={props.field} name={props.field} className={className}
+            rows={rows}
+            defaultValue={initialValue}
+            onChange={onTypingChange}
+            onBlur={onChange}
+        ></textarea>
+    </>
 }
 
 export default function Table({ columns, data, inlineUpdateUrl }) {
-  const [skipPageReset, setSkipPageReset] = React.useState(false);
+    const [skipPageReset, setSkipPageReset] = React.useState(false);
 
-  // data = { id, field, value }
-  const synchronizeDataOnUpdateSuccess = (data) => {
-    // rowIndex = data.id - 1,
-    // columnId = data.field
-    // value = data.value
-    setSkipPageReset(true);
+    // data = { id, field, value }
+    const synchronizeDataOnUpdateSuccess = (data) => {
+        // rowIndex = data.id - 1,
+        // columnId = data.field
+        // value = data.value
+        setSkipPageReset(true);
 
-    // TODO: via context access parent state data var
-    /*
-    setTableData(old =>
-      old.map((row, index) => {
-        if (index === rowIndex) {
-          return {
-            ...old[rowIndex],
-            [columnId]: value,
-          }
-        }
+        // TODO: via context access parent state data var
+        /*
+        setTableData(old =>
+        old.map((row, index) => {
+            if (index === rowIndex) {
+            return {
+                ...old[rowIndex],
+                [columnId]: value,
+            }
+            }
 
-        return row
-      })
-    )*/
-  }
+            return row
+        })
+        )*/
+    }
 
-  // const [save] = useSave(inlineUpdateUrl, synchronizeDataOnUpdateSuccess);
+    // const [save] = useSave(inlineUpdateUrl, synchronizeDataOnUpdateSuccess);
 
-  React.useEffect(() => {
-    setSkipPageReset(false)
-  }, [data])
+    React.useEffect(() => {
+        setSkipPageReset(false)
+    }, [data])
 
 // Set our editable cell renderer as the default Cell renderer
-const defaultColumn = {
-  Cell: info => {
-    let attributes = {
-      id: info.row.values.id,
-      field: info.column.id,
-      initialValue: info.value,
-      onBeforeSuccess: synchronizeDataOnUpdateSuccess,
-      inlineUpdateUrl: inlineUpdateUrl
-//      save: info.save
-    }
+    const defaultColumn = {
+        Cell: info => {
+            let attributes = {
+                id: info.row.values.id,
+                field: info.column.id,
+                initialValue: info.value,
+                onBeforeSuccess: synchronizeDataOnUpdateSuccess,
+                inlineUpdateUrl: inlineUpdateUrl
+                //      save: info.save
+            }
 
-    if (info.column.id == "degree") {
-      return (<EditableDegree {...attributes} />)
-    } else if (info.column.id == "category") {
-      return (<EditablePostCategory {...attributes} />)
-    } else if (info.column.id == "is_coach"
-        || info.column.id == "is_best"
-            || info.column.id == "is_actual") {
-      return (<EditableSwitch {...attributes} className="form-check-input" />)
-    } else if (info.column.id == "dateAt") {
-      return (<EditableDate {...attributes} />)
-    } else {
-      return <EditableText {...attributes} />
+        if (info.column.id == "degree") {
+            return (<EditableDegree {...attributes} />)
+        } else if (info.column.id == "category") {
+            return (<EditablePostCategory {...attributes} />)
+        } else if (info.column.id == "is_coach"
+                || info.column.id == "is_best"
+                || info.column.id == "is_actual") {
+            return (<EditableSwitch {...attributes} className="form-check-input" />)
+        } else if (info.column.id == "dateAt") {
+            return (<EditableDate {...attributes} />)
+        } else {
+            return <EditableText {...attributes} />
+        }
     }
-  }
 }
 
 // Use the useTable Hook to send the columns and data to build the table
