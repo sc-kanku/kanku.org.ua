@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Helpers;
 
 /**
  * @property int $id
@@ -178,6 +179,7 @@ class Athlete extends Authenticatable
 
     public static function createNewDefault() {
         return Athlete::create(array(
+            'id' => null,
             'is_coach' => 1,
             'is_actual' => 1,
             'is_best' => 0,
@@ -201,4 +203,126 @@ class Athlete extends Authenticatable
             'instagram' => ''
         ));
     }
+
+    public function processPath($field, $value) {
+        $pageDir = '';
+
+        if ($this->id == null) {
+            if ($field == "firstName" || $field == "lastName" || $field == "patronymic") {
+                $pageDir = Helpers::transliterate($value);
+            }
+        } else {
+            switch ($field) {
+                case "firstName" :
+                    $pageDir = $this['lastName']
+                        . ( $value  ? ' ' . $value : '')
+                        . ( $this['patronymic']
+                            ? ( ' ' . $this['patronymic'] )
+                            : '');
+                    break;
+                case "lastName" :
+                    $pageDir = $value
+                        . ( $this['firstName']
+                            ? (' ' . $this['firstName'])
+                            : '')
+                        . ($this['patronymic']
+                            ? (' ' . $this['patronymic'])
+                            : '');
+                    break;
+                case "patronymic" :
+                    $pageDir = $this['lastName']
+                        . ($this['firstName']
+                            ? (' ' . $this['firstName'])
+                            : '')
+                        . ($value  ? ' ' . $value : '') ;
+                    break;
+            }
+        }
+
+        if ($pageDir) {
+            $this['page_dir'] = Helpers::transliterate($pageDir);
+        }
+    }
+
+    public static function processPhoto($id, $param, $value) {
+        $success = true;
+        $athlete = Athlete::createNewDefault();
+        $athlete->id = $id;
+
+        if ($param == 'photo') {
+            $athlete->deletePhotoFileIfExists();
+            $athlete->createPhotoDirIfNotExists();
+            $success = $athlete->putUploadedPhotoFileToPhotosDir($value);
+        }
+
+        return $success;
+    }
+
+    private function PHOTO_PATH(){
+        return dirname(__FILE__) . '/../../public/images/athletes/';
+    }
+
+    private function deletePhotoFileIfExists()
+	{
+        // $dir = dirname(__FILE__) . '/../../public/images/athletes/' . $this->id;
+        $dir = $this->PHOTO_PATH() . $this->id;
+
+		if (file_exists($dir) && $handle = opendir($dir)) {
+			while (false !== ($file = readdir($handle))) {
+				if (($file != ".") && ($file != "..")) {
+					if (is_file($dir . "/" . $file)) {
+						chmod($dir . "/" . $file, 0777);
+						unlink($dir . "/" . $file);
+					}
+				}
+			}
+
+			closedir($handle);
+		}
+	}
+
+    private function createPhotoDirIfNotExists()
+	{
+		$dir = $this->PHOTO_PATH();
+
+		if (!file_exists($dir)) {
+			mkdir($dir);
+		}
+
+        $dir .= '/' . $this->id;
+
+		if (!file_exists($dir)) {
+			mkdir($dir);
+		}
+	}
+
+    private function putUploadedPhotoFileToPhotosDir($photoBytes)
+	{
+        $photoSaved = false;
+		$dir = $this->PHOTO_PATH() . $this->id;;
+
+        preg_match("/^data:(.*,)?/", $photoBytes, $extensionPrefix);
+
+        if ($extensionPrefix != []) {
+            preg_match("/(png|jpeg|jpg|gif)/", $extensionPrefix[0], $fileExtension);
+
+            if ($fileExtension != null && $fileExtension != []) {
+                $fileExtension = $fileExtension[0];
+
+                $dir = $dir . '/photo.' . $fileExtension;
+                $photoFile = fopen($dir, "w");
+
+                $photoBytes = preg_replace("/^data:(.*,)?/", "", $photoBytes);
+                $photoBytes = utf8_encode($photoBytes);
+                $photoBytes = base64_decode($photoBytes);
+
+                fwrite($photoFile, $photoBytes);
+                fclose($photoFile);
+
+                $photoSaved = true;
+            }
+        }
+
+        return $photoSaved;
+	}
 }

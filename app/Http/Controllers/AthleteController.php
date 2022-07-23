@@ -85,71 +85,41 @@ class AthleteController extends Controller
     public function apiUpdateAthlete(Request $request)
     {
         try {
-            $id = ($request->get('id'));
+            $id = $request->get('id');
+            $field = $request->get('field');
+            $value = $request->get('value');
 
             if ($id == null) {
                 $athlete = Athlete::createNewDefault();
 
-                $athlete[$request->get('field')] = $request->get('value');
-
-                if ($request->get('field') == "firstName" || $request->get('field') == "lastName" || $request->get('field') == "patronymic") {
-                    $athlete['page_dir'] = Helpers::transliterate($request->get('value'));
+                if ($field !== 'photo') {
+                    $athlete->processPath($field, $value);
+                    $athlete[$field] = $value;
                 }
 
                 $athlete->save();
 
-                $queryStatus = ["Successful" => 'yes', "id" => $athlete->id];
+                $result = Athlete::processPhoto($athlete->id, $field, $value);
+
+                $queryStatus = ["Successful" => $result ? "yes" : "no", "id" => $athlete->id];
             } else {
                 // TODO: degeree is not saved in inline editing.
                 // DONE. Already saved on edit Athlethe page, check on Athletes list page.
-                $value = $request->get('value');
-                $field = $request->get('field');
 
                 if ($field == "firstName" || $field == "lastName" || $field == "patronymic") {
-                    $athlete = Athlete
-                        ::where('id', $request->get('id'))
-                        ->first();
-
-                    switch ($field) {
-                        case "firstName" :
-                            $pageDir = $athlete['lastName']
-                                . ( $value  ? ' ' . $value : '')
-                                . ( $athlete['patronymic']
-                                    ? ( ' ' . $athlete['patronymic'] )
-                                    : '');
-                            break;
-                        case "lastName" :
-                            $pageDir = $value
-                                . ( $athlete['firstName']
-                                    ? (' ' . $athlete['firstName'])
-                                    : '')
-                                . ($athlete['patronymic']
-                                    ? (' ' . $athlete['patronymic'])
-                                    : '');
-                            break;
-                        case "patronymic" :
-                            $pageDir = $athlete['lastName']
-                                . ($athlete['firstName']
-                                    ? (' ' . $athlete['firstName'])
-                                    : '')
-                                . ($value  ? ' ' . $value : '') ;
-                            break;
-                    }
-
-                    if ($pageDir) {
-                        $athlete['page_dir'] = Helpers::transliterate($pageDir);
-                    }
-
+                    $athlete = Athlete::where('id', $id)->first();
+                    $athlete->processPath($field, $value);
                     $athlete[$field] = $value;
-
                     $result = $athlete->save();
+                } else if ($field == "photo") {
+                    $result = Athlete::processPhoto($id, $field, $value);
                 } else {
                     $result = Athlete
                         ::where('id', $request->get('id'))
-                        ->update([$value => $field]);
+                        ->update([$field => $value]);
                 }
 
-                $queryStatus = ["Successful" => $result];
+                $queryStatus = ["Successful" => $result ? "yes" : "no"];
             }
         } catch (Exception $e) {
             $queryStatus = ["Unsuccessful" => $e];
@@ -190,7 +160,6 @@ class AthleteController extends Controller
 
         return $queryStatus;
     }
-
 
     public function apiDojoDelete(Request $request)
     {

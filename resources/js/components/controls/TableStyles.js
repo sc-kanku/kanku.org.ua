@@ -113,6 +113,9 @@ const TableStyles = styled.div`
     z-index: 1000;
     background-color: white;
     border: 1px solid;
+    margin-top: -0.25em;
+    padding-left: 1em;
+    padding-right: 1em;
 }
 
 .custom-file-upload:hover {

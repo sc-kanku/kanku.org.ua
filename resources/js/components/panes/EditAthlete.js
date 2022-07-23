@@ -41,7 +41,8 @@ const EditAthlete = ({getUrl, updateUrl}) => {
                 facebook:'',
                 youtube:'',
                 instagram:'',
-                dojos: []
+                dojos: [],
+                photo: ''
             })
         }
     }, [location.key]);
@@ -77,7 +78,7 @@ const EditAthlete = ({getUrl, updateUrl}) => {
     }
 
     let getId = () => {
-        return athlete.id;
+        return isNew ? null : athlete.id;
     }
 
     return (<>
@@ -153,10 +154,14 @@ const EditAthlete = ({getUrl, updateUrl}) => {
                 <div className="form-floating_ mb-3 col-sm-6">
                     <label htmlFor="photo" className="form-label">Фото</label>
 
-                    <Photo id="photo" name="photo" className="form-control"
-                        url={athlete && ("/images/athletes/" + athlete.id + "/photo.png")}
-                        alt={isEdit ? ('' + athlete.lastName + ' ' + athlete.firstName + ' ' + athlete.patronymic ) : "Фото спортсмена"}
-                        editable={true}
+                    <Photo field="photo" className="form-control"
+                            // id = {athlete.id}
+                            getId={ getId }
+                            // initialValue={"/images/athletes/" + athlete.id + "/photo.png"}
+                            // initialValue={"/images/athletes/" + getId() + "/photo.png"}
+                            initialValue={"/images/athletes/" + id + "/photo.png"}
+                            inlineUpdateUrl={updateUrl}
+                            onBeforeSuccess={saveCallback}
                     />
                 </div>
 
@@ -170,8 +175,8 @@ const EditAthlete = ({getUrl, updateUrl}) => {
                             // id={ athlete.id }
                             getId={ getId }
                             initialValue={ athlete.phone }
-                            inlineUpdateUrl={updateUrl}
-                            onBeforeSuccess={saveCallback}
+                            inlineUpdateUrl={ updateUrl }
+                            onBeforeSuccess={ saveCallback }
                         />
                     </div>
 

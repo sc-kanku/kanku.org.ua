@@ -140,11 +140,11 @@ const EditPost = ({getUrl, updateUrl}) => {
                 <div className="mb-3 col-sm-6">
                     <label htmlFor="photo" className="form-label">Фото</label>
 
-                    <Photo id="photo" name="photo" className="form-control"
+                    {/* <Photo id="photo" name="photo" className="form-control"
                         url={post && ("/images/dojos/" + post.id + "/photo.png")}
                         alt={isEdit ? ('' + post.title) : "Фото новини"}
                         editable={true}
-                    />
+                    /> */}
                     Буде автоматично створено preview с шириною 300px
                 </div>
 
