@@ -129,41 +129,7 @@ class Athlete extends Authenticatable
 
     public function getProfilePhotoLocation()
     {
-        // $id = $row['athletID'] ? $row['athletID'] : $row['id'];
-        $filename = null;
-
-        $instructorPhotoPath = '/images/athletes/' . $this->id;
-        $instructorPhotoFolder = dirname(__FILE__) . '/../../public' . $instructorPhotoPath;
-
-        $ext = Athlete::getPhotoExtension($instructorPhotoFolder, 'photo');
-
-        if ($ext != '') {
-            $filename = $instructorPhotoPath . '/photo.' . $ext;
-        }
-
-        return $filename;
-    }
-
-
-    // TODO: move to utils
-    private static function getPhotoExtension($path, $photoNamePrefix)
-    {
-        $photoExtension = '';
-
-        // dd($path);
-        if (file_exists($path)) {
-            $exts = array('jpg', 'gif', 'png');
-
-            foreach ($exts as $ext) {
-                if (file_exists($path . '/' . $photoNamePrefix . '.' . $ext)) {
-                    $photoExtension = $ext;
-
-                    break;
-                }
-            }
-        }
-
-        return $photoExtension;
+        return Helpers::getProfilePhotoLocation('athletes', $this->id);
     }
 
     /*
@@ -244,85 +210,21 @@ class Athlete extends Authenticatable
         }
     }
 
-    public static function processPhoto($id, $param, $value) {
+    public static function addPhoto($id, $field, $value, $dir) {
         $success = true;
-        $athlete = Athlete::createNewDefault();
-        $athlete->id = $id;
 
-        if ($param == 'photo') {
-            $athlete->deletePhotoFileIfExists();
-            $athlete->createPhotoDirIfNotExists();
-            $success = $athlete->putUploadedPhotoFileToPhotosDir($value);
+        if ($field == 'photo') {
+            $success = Helpers::addPhoto($dir, $id, $value);
         }
 
         return $success;
     }
 
-    private function PHOTO_PATH(){
+    public function getPhotosPath() {
         return dirname(__FILE__) . '/../../public/images/athletes/';
     }
 
-    private function deletePhotoFileIfExists()
-	{
-        // $dir = dirname(__FILE__) . '/../../public/images/athletes/' . $this->id;
-        $dir = $this->PHOTO_PATH() . $this->id;
-
-		if (file_exists($dir) && $handle = opendir($dir)) {
-			while (false !== ($file = readdir($handle))) {
-				if (($file != ".") && ($file != "..")) {
-					if (is_file($dir . "/" . $file)) {
-						chmod($dir . "/" . $file, 0777);
-						unlink($dir . "/" . $file);
-					}
-				}
-			}
-
-			closedir($handle);
-		}
-	}
-
-    private function createPhotoDirIfNotExists()
-	{
-		$dir = $this->PHOTO_PATH();
-
-		if (!file_exists($dir)) {
-			mkdir($dir);
-		}
-
-        $dir .= '/' . $this->id;
-
-		if (!file_exists($dir)) {
-			mkdir($dir);
-		}
-	}
-
-    private function putUploadedPhotoFileToPhotosDir($photoBytes)
-	{
-        $photoSaved = false;
-		$dir = $this->PHOTO_PATH() . $this->id;;
-
-        preg_match("/^data:(.*,)?/", $photoBytes, $extensionPrefix);
-
-        if ($extensionPrefix != []) {
-            preg_match("/(png|jpeg|jpg|gif)/", $extensionPrefix[0], $fileExtension);
-
-            if ($fileExtension != null && $fileExtension != []) {
-                $fileExtension = $fileExtension[0];
-
-                $dir = $dir . '/photo.' . $fileExtension;
-                $photoFile = fopen($dir, "w");
-
-                $photoBytes = preg_replace("/^data:(.*,)?/", "", $photoBytes);
-                $photoBytes = utf8_encode($photoBytes);
-                $photoBytes = base64_decode($photoBytes);
-
-                fwrite($photoFile, $photoBytes);
-                fclose($photoFile);
-
-                $photoSaved = true;
-            }
-        }
-
-        return $photoSaved;
-	}
+    public function getPhotoPath() {
+        return $this->getPhotosPath() . $this->id;
+    }
 }

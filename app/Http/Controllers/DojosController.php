@@ -59,33 +59,38 @@ class DojosController extends Controller
     {
         try {
             $id = ($request->get('id'));
-
-            $pageDir = $request->get('field') == "name"
-                ? Helpers::transliterate($request->get('value'))
-                : '';
+            $field = ($request->get('field'));
+            $value = ($request->get('value'));
 
             if ($id == null) {
                 $dojo = Dojo::createNewDefault();
 
-                $dojo[$request->get('field')] = $request->get('value');
-                $dojo['url'] = $pageDir;
-
-                $dojo->save();
-
-                $queryStatus = ["Successful" => 'yes', "id" => $dojo->id];
-            } else {
-                $updateDetails = [$request->get('field') => $request->get('value')];
-
-                if ($pageDir != '') {
-                    $updateDetails['url'] = $pageDir;
+                if ($field == 'photo') {
+                    Dojo::processPath($field, $value, $dojo);
+                    $dojo[$field] = $value;
                 }
 
-                // TODO: degeree is not saved in inline editing.
-                $result = Dojo
-                    ::where('id', $request->get('id'))
-                    ->update($updateDetails);
+                $result = $dojo->save();
 
-                $queryStatus = ["Successful" => $result];
+                if ($field == 'photo') {
+                    $result = Dojo::addPhoto($dojo->id, $field, $value, $dojo->getPhotosPath());
+                }
+
+                $queryStatus = ["Successful" => $result ? "yes" : "no", "id" => $dojo->id];
+            } else {
+                if ($field == 'photo') {
+                    $result = Dojo::addPhoto($id, $field, $value, Dojo::createNewDefault()->getPhotosPath());
+                } else {
+                    $dojoDetails = [$field => $value];
+                    Dojo::processPath($field, $value, $dojoDetails);
+
+                    // TODO: degeree is not saved in inline editing.
+                    $result = Dojo
+                        ::where('id', $id)
+                        ->update($dojoDetails);
+                }
+
+                $queryStatus = ["Successful" => $result ? "yes" : "no"];
             }
         } catch (Exception $e) {
             $queryStatus = ["Unsuccessful" => $e];

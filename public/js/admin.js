@@ -9595,6 +9595,16 @@ var EditDojo = function EditDojo(_ref) {
           htmlFor: "photo",
           className: "form-label",
           children: "\u0424\u043E\u0442\u043E"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Photo__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          field: "photo",
+          className: "form-control" // id = {athlete.id}
+          ,
+          getId: getId // initialValue={"/images/athletes/" + athlete.id + "/photo.png"}
+          // initialValue={"/images/athletes/" + getId() + "/photo.png"}
+          ,
+          initialValue: "/images/dojos/" + id + "/photo.jpg",
+          inlineUpdateUrl: updateUrl,
+          onBeforeSuccess: saveCallback
         }), "\u0411\u0443\u0434\u0435 \u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u043D\u043E \u0441\u0442\u0432\u043E\u0440\u0435\u043D\u043E preview \u0441 \u0448\u0438\u0440\u0438\u043D\u043E\u044E 300px"]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "col-md-12 mb-3",

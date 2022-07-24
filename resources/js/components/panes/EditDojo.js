@@ -124,6 +124,15 @@ const EditDojo = ({getUrl, updateUrl, photoFileName}) => {
                         editable={true}
                     />
                      */}
+                     <Photo field="photo" className="form-control"
+                            // id = {athlete.id}
+                            getId={ getId }
+                            // initialValue={"/images/athletes/" + athlete.id + "/photo.png"}
+                            // initialValue={"/images/athletes/" + getId() + "/photo.png"}
+                            initialValue={"/images/dojos/" + id + "/photo.jpg"}
+                            inlineUpdateUrl={updateUrl}
+                            onBeforeSuccess={saveCallback}
+                    />
                     Буде автоматично створено preview с шириною 300px
                 </div>
 

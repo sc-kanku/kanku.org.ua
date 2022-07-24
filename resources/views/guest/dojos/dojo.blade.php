@@ -17,7 +17,10 @@
 		    </div>
 		</p>
 
-        <p>{!! $dojo->info !!}</p>
+        <p>
+            {!! $dojo->info !!}
+            <img style="width: 100%; height: auto" class="pt-4" src="{{ $dojo ? $dojo->getProfilePhotoLocation() : ''}}" alt="{{ $dojo ? $dojo->name : '' }}" />
+        </p>
 
         <h3>Розклад тренувань</h3>
         <br />

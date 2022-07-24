@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -70,7 +71,7 @@ class Photo extends Model
     {
         $fileName = null;
 
-        $ext = Photo::getPhotoExtension($path, $fileNamePrefix);
+        $ext = Helpers::getPhotoExtension($path, $fileNamePrefix);
 
         if ($ext != '') {
             $fileName = $fileNamePrefix . '.' . $ext;
@@ -84,7 +85,7 @@ class Photo extends Model
     {
         $photoAndPreview = array('photo' => '', 'preview' => '');
 
-        $ext = Photo::getPhotoExtension($path, 'photo');
+        $ext = Helpers::getPhotoExtension($path, 'photo');
 
         if ($ext != '') {
             $photoAndPreview['photo'] = 'photo.' . $ext;
@@ -100,26 +101,6 @@ class Photo extends Model
 
     private function getExtension()
     {
-        return Photo::getPhotoExtension($this->getFsDir(), 'photo');
-    }
-
-    // TODO: move to approrriate place or repace with existing laravel helper function
-    private static function getPhotoExtension($path, $photoNamePrefix)
-    {
-        $photoExtension = '';
-
-        if (file_exists($path)) {
-            $exts = array('jpg', 'gif', 'png');
-
-            foreach ($exts as $ext) {
-                if (file_exists($path . '/' . $photoNamePrefix . '.' . $ext)) {
-                    $photoExtension = $ext;
-
-                    break;
-                }
-            }
-        }
-
-        return $photoExtension;
+        return Helpers::getPhotoExtension($this->getFsDir(), 'photo');
     }
 }

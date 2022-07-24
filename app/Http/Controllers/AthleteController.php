@@ -92,14 +92,16 @@ class AthleteController extends Controller
             if ($id == null) {
                 $athlete = Athlete::createNewDefault();
 
-                if ($field !== 'photo') {
-                    $athlete->processPath($field, $value);
+                if ($field != 'photo') {
                     $athlete[$field] = $value;
+                    $athlete->processPath($field, $value);
                 }
 
-                $athlete->save();
+                $result = $athlete->save();
 
-                $result = Athlete::processPhoto($athlete->id, $field, $value);
+                if ($field == 'photo') {
+                    $result = Athlete::addPhoto($athlete->id, $field, $value, $athlete->getPhotosPath());
+                }
 
                 $queryStatus = ["Successful" => $result ? "yes" : "no", "id" => $athlete->id];
             } else {
@@ -112,7 +114,10 @@ class AthleteController extends Controller
                     $athlete[$field] = $value;
                     $result = $athlete->save();
                 } else if ($field == "photo") {
-                    $result = Athlete::processPhoto($id, $field, $value);
+                    $result = Athlete::addPhoto(
+                        $id, $field, $value,
+                        Athlete::createNewDefault()->getPhotosPath()
+                    );
                 } else {
                     $result = Athlete
                         ::where('id', $request->get('id'))

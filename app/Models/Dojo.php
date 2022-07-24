@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -41,6 +42,7 @@ class Dojo extends Model
 
     public static function createNewDefault() {
         return Dojo::create(array(
+            'id' => null,
             'url' => '' . rand(10, 1000000),
             'place' => 0,
             'name' => '',
@@ -53,4 +55,36 @@ class Dojo extends Model
             'is_actual' => 0
         ));
     }
+
+    public static function processPath($field, $value, $dojo) {
+        if ($field == "name") {
+            $dojo['url'] = Helpers::transliterate($value);
+        }
+
+        return $dojo;
+    }
+
+    public static function addPhoto($id, $field, $value, $dir) {
+        $success = true;
+
+        if ($field == 'photo') {
+            $success = Helpers::addPhoto($dir, $id, $value);
+        }
+
+        return $success;
+    }
+
+    public function getPhotosPath() {
+        return dirname(__FILE__) . '/../../public/images/dojos/';
+    }
+
+    public function getPhotoPath() {
+        return $this->getPhotosPath() . $this->id;
+    }
+
+    public function getProfilePhotoLocation()
+    {
+        return Helpers::getProfilePhotoLocation('dojos', $this->id);
+    }
+
 }
