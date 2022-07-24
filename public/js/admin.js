@@ -6925,12 +6925,13 @@ var Photo = function Photo(_ref) {
   var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
       _useState4 = _slicedToArray(_useState3, 2),
       photoBytes = _useState4[0],
-      setPhotoBytes = _useState4[1];
+      setPhotoBytes = _useState4[1]; // const [photoName, setPhotoName] = useState('');
 
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(''),
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(['png', 'jpeg', 'jpg', 'gif', 'svg']),
       _useState6 = _slicedToArray(_useState5, 2),
-      photoName = _useState6[0],
-      setPhotoName = _useState6[1];
+      extensions = _useState6[0],
+      setExtensions = _useState6[1];
 
   function onPhotoChange(_x) {
     return _onPhotoChange.apply(this, arguments);
@@ -6943,11 +6944,11 @@ var Photo = function Photo(_ref) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              FILE_MAX_SIZE = 100000;
+              FILE_MAX_SIZE = 1000000;
               file = evnt.target.files[0];
 
               if (!(file.size < FILE_MAX_SIZE)) {
-                _context.next = 11;
+                _context.next = 10;
                 break;
               }
 
@@ -6958,15 +6959,15 @@ var Photo = function Photo(_ref) {
               imgBytes = _context.sent;
               setPhotoBytes(imgBytes); ////.replace(/^data:(.*,)?/, '');
               // console.log("imgBytes", imgBytes)
+              // setPhotoName(file['name']);
 
-              setPhotoName(file['name']);
               return _context.abrupt("return", true);
 
-            case 11:
+            case 10:
               alert("Завеликий, має бути до 100kb");
               return _context.abrupt("return", false);
 
-            case 13:
+            case 12:
             case "end":
               return _context.stop();
           }
@@ -7010,19 +7011,54 @@ var Photo = function Photo(_ref) {
       onChange = _useEditable2[2],
       setValue = _useEditable2[3];
 
+  var defineExtension = function defineExtension(str) {
+    return str.substring(str.lastIndexOf('.') + 1, str.length);
+  };
+
+  var defineBase = function defineBase(str) {
+    return str.substring(0, str.lastIndexOf('.'));
+  };
+
+  var adjustExtension = function adjustExtension(e) {
+    var ext = defineExtension(e.target.src);
+    var base = defineBase(e.target.src);
+    var filtered = extensions.filter(function (el) {
+      return el != ext;
+    });
+    setExtensions(filtered);
+    setUrl(filtered.length > 0 ? base + '.' + filtered[0] : null);
+  };
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(Editable, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
-      children: [!photoBytes && url && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
-        src: url,
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(Editable, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
         style: {
-          width: '180px'
-        }
-      }), photoBytes && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
-        src: photoBytes,
-        style: {
-          width: '180px'
-        }
-      })]
+          borderWidth: '1px',
+          borderColor: '#aaa',
+          borderStyle: 'solid',
+          width: '14em',
+          height: '14em',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          color: '#aaa' // display: 'inline-block'
+
+        },
+        children: [!photoBytes && !url && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+          children: "No Picture"
+        }), !photoBytes && url && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+          src: url,
+          style: {
+            height: '100%'
+          },
+          onError: adjustExtension
+        }), photoBytes && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+          src: photoBytes,
+          style: {
+            height: '100%'
+          }
+        })]
+      })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
       className: "mt-3",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
@@ -10002,6 +10038,16 @@ var EditPost = function EditPost(_ref) {
           htmlFor: "photo",
           className: "form-label",
           children: "\u0424\u043E\u0442\u043E"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Photo__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          field: "photo",
+          className: "form-control" // id = {athlete.id}
+          ,
+          getId: getId // initialValue={"/images/athletes/" + athlete.id + "/photo.png"}
+          // initialValue={"/images/athletes/" + getId() + "/photo.png"}
+          ,
+          initialValue: "/images/posts/" + id + "/photo.jpg",
+          inlineUpdateUrl: updateUrl,
+          onBeforeSuccess: saveCallback
         }), "\u0411\u0443\u0434\u0435 \u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u043D\u043E \u0441\u0442\u0432\u043E\u0440\u0435\u043D\u043E preview \u0441 \u0448\u0438\u0440\u0438\u043D\u043E\u044E 300px"]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         className: "mb-3 col-sm-12 gap-3",

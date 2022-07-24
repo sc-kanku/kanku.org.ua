@@ -118,12 +118,6 @@ const EditDojo = ({getUrl, updateUrl, photoFileName}) => {
                 <div className="form-floating_ mb-3 col-sm-6">
                     <label htmlFor="photo" className="form-label">Фото</label>
 
-                    {/* <Photo id="photo" name="photo" className="form-control"
-                        url={dojo && ("/images/dojos/" + dojo.id + "/photo.png")}
-                        alt={isEdit ? ('' + dojo.name) : "Фото доджо"}
-                        editable={true}
-                    />
-                     */}
                      <Photo field="photo" className="form-control"
                             // id = {athlete.id}
                             getId={ getId }

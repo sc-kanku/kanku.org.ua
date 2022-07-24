@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -34,7 +35,7 @@ class Post extends Model
         $dir = dirname(__FILE__) . '/../../public/images/posts/' . $this->id;
 
         if (file_exists($dir)) {
-            $exts = array('jpg', 'gif', 'png');
+            $exts = array('jpeg','jpg', 'gif', 'png');
 
             foreach ($exts as $ext) {
                 if (file_exists($dir . '/photo.' . $ext)) {
@@ -66,5 +67,36 @@ class Post extends Model
             'page_dir' => '' . rand(10, 1000000),
             'nid' => 0
         ));
+    }
+
+    public static function processPath($field, $value, $post) {
+        if ($field == "title") {
+            $post['page_dir'] = Helpers::transliterate($value);
+        }
+
+        return $post;
+    }
+
+    public static function addPhoto($id, $field, $value, $dir) {
+        $success = true;
+
+        if ($field == 'photo') {
+            $success = Helpers::addPhoto($dir, $id, $value);
+        }
+
+        return $success;
+    }
+
+    public function getPhotosPath() {
+        return dirname(__FILE__) . '/../../public/images/posts';
+    }
+
+    public function getPhotoPath() {
+        return $this->getPhotosPath() . '/' . $this->id;
+    }
+
+    public function getProfilePhotoLocation()
+    {
+        return Helpers::getProfilePhotoLocation('posts', $this->id);
     }
 }

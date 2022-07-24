@@ -221,10 +221,10 @@ class Athlete extends Authenticatable
     }
 
     public function getPhotosPath() {
-        return dirname(__FILE__) . '/../../public/images/athletes/';
+        return dirname(__FILE__) . '/../../public/images/athletes';
     }
 
     public function getPhotoPath() {
-        return $this->getPhotosPath() . $this->id;
+        return $this->getPhotosPath() . '/' . $this->id;
     }
 }

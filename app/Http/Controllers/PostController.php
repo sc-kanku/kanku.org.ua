@@ -52,32 +52,38 @@ class PostController extends Controller
     {
         try {
             $id = ($request->get('id'));
-
-            $pageDir = $request->get('field') == "title"
-                ? Helpers::transliterate($request->get('value'))
-                : '';
+            $field = $request->get('field');
+            $value = $request->get('value');
 
             if ($id == null) {
                 $post = Post::createNewDefault();
 
-                $post[$request->get('field')] = $request->get('value');
-                $post['page_dir'] = $pageDir;
-
-                $post->save();
-
-                $queryStatus = ["Successful" => 'yes', "id" => $post->id];
-            } else {
-                $updateDetails = [$request->get('field') => $request->get('value')];
-
-                if ($pageDir != '') {
-                    $updateDetails['page_dir'] = $pageDir;
+                if ($field != 'photo') {
+                    Post::processPath($field, $value, $post);
+                    $post[$field] = $value;
                 }
 
-                $result = Post
-                    ::where('id', $request->get('id'))
-                    ->update($updateDetails);
+                $result = $post->save();
 
-                $queryStatus = ["Successful" => $result];
+                if ($field == 'photo') {
+                    $result = Post::addPhoto($post->id, $field, $value, $post->getPhotosPath());
+                }
+
+                $queryStatus = ["Successful" => $result ? "yes" : "no", "id" => $post->id];
+            } else {
+                if ($field == 'photo') {
+                    $result = Post::addPhoto($id, $field, $value, Post::createNewDefault()->getPhotosPath());
+                } else {
+                    $postDetails = [$field => $value];
+                    Post::processPath($field, $value, $postDetails);
+
+                    $result = Post
+                        ::where('id', $id)
+                        ->update($postDetails);
+
+                }
+
+                $queryStatus = ["Successful" => $result ? "yes" : "no"];
             }
         } catch (Exception $e) {
             $queryStatus = ["Unsuccessful" => $e];

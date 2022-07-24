@@ -75,16 +75,15 @@ class Dojo extends Model
     }
 
     public function getPhotosPath() {
-        return dirname(__FILE__) . '/../../public/images/dojos/';
+        return dirname(__FILE__) . '/../../public/images/dojos';
     }
 
     public function getPhotoPath() {
-        return $this->getPhotosPath() . $this->id;
+        return $this->getPhotosPath() . '/' . $this->id;
     }
 
     public function getProfilePhotoLocation()
     {
         return Helpers::getProfilePhotoLocation('dojos', $this->id);
     }
-
 }

@@ -140,11 +140,15 @@ const EditPost = ({getUrl, updateUrl}) => {
                 <div className="mb-3 col-sm-6">
                     <label htmlFor="photo" className="form-label">Фото</label>
 
-                    {/* <Photo id="photo" name="photo" className="form-control"
-                        url={post && ("/images/dojos/" + post.id + "/photo.png")}
-                        alt={isEdit ? ('' + post.title) : "Фото новини"}
-                        editable={true}
-                    /> */}
+                    <Photo field="photo" className="form-control"
+                            // id = {athlete.id}
+                            getId={ getId }
+                            // initialValue={"/images/athletes/" + athlete.id + "/photo.png"}
+                            // initialValue={"/images/athletes/" + getId() + "/photo.png"}
+                            initialValue={"/images/posts/" + id + "/photo.jpg"}
+                            inlineUpdateUrl={updateUrl}
+                            onBeforeSuccess={saveCallback}
+                    />
                     Буде автоматично створено preview с шириною 300px
                 </div>
 

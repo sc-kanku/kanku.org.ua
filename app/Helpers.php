@@ -33,6 +33,7 @@ class Helpers
             self::createPhotoDirIfNotExists($path, $id);
             self::putUploadedPhotoFileToPhotosDir($path, $id, $value);
         } catch (Exception $e) {
+            // dump($e);
             $success = false;
         }
 
@@ -75,6 +76,14 @@ class Helpers
     private static function putUploadedPhotoFileToPhotosDir($path, $id, $photoBytes)
 	{
         $photoSaved = false;
+
+        $PHOTO_FILE_PREFIX = 'photo';
+        $MIDDLE_FILE_PREFIX = 'middle';
+        $PREVIEW_FILE_PREFIX = 'preview';
+
+        $MIDDLE_WIDTH = 745;
+        $PREVIEW_WIDTH = 250;
+
 		$dir = $path . '/' . $id;
 
         preg_match("/^data:(.*,)?/", $photoBytes, $extensionPrefix);
@@ -85,8 +94,8 @@ class Helpers
             if ($fileExtension != null && $fileExtension != []) {
                 $fileExtension = $fileExtension[0];
 
-                $dir = $dir . '/photo.' . $fileExtension;
-                $photoFile = fopen($dir, "w");
+                $originalFullName = $dir . '/' . $PHOTO_FILE_PREFIX . '.' . $fileExtension;
+                $photoFile = fopen($originalFullName, "w");
 
                 $photoBytes = preg_replace("/^data:(.*,)?/", "", $photoBytes);
                 $photoBytes = utf8_encode($photoBytes);
@@ -96,6 +105,12 @@ class Helpers
                 fclose($photoFile);
 
                 $photoSaved = true;
+
+		        $middleFullName = $dir . '/' . $MIDDLE_FILE_PREFIX . '.' . $fileExtension ;
+		        $previewFullName = $dir . '/' . $PREVIEW_FILE_PREFIX . '.' . $fileExtension;
+
+                $photoSaved &= self::resizeImage($originalFullName, $previewFullName, $PREVIEW_WIDTH);
+		        $photoSaved &= self::resizeImage($originalFullName, $middleFullName, $MIDDLE_WIDTH);
             }
         }
 
@@ -106,9 +121,8 @@ class Helpers
     {
         $photoExtension = '';
 
-        // dd($path);
         if (file_exists($path)) {
-            $exts = array('jpg', 'gif', 'png');
+            $exts = array('jpeg', 'jpg', 'gif', 'png');
 
             foreach ($exts as $ext) {
                 if (file_exists($path . '/' . $photoNamePrefix . '.' . $ext)) {
@@ -141,4 +155,60 @@ class Helpers
 
         return $filename;
     }
+
+    private static function resizeImage($originalPath, $targetPath, $targetWidth)
+	{
+        $success = true;
+
+		if (!function_exists("imagecopyresampled")) {
+			return false;//"GD2 is not loaded";
+		}
+
+		$info = getimagesize($originalPath);
+
+		if ($info === false) {
+			return false;//"$originalPath is not image";
+		}
+
+		if ($info[2] == IMAGETYPE_GIF) {
+			$originalImage = imagecreatefromgif($originalPath);
+		} elseif ($info[2] == IMAGETYPE_JPEG) {
+			$originalImage = imagecreatefromjpeg($originalPath);
+		} elseif ($info[2] == IMAGETYPE_PNG) {
+			$originalImage = imagecreatefrompng($originalPath);
+		} else {
+            return false;
+			// return "Формат исходного файла не поддерживается";
+		}
+
+		$width = $info[0];
+		$height = $info[1];
+
+		if ($targetWidth > $width) {
+            $targetWidth = $width;
+        }
+
+		$targetHeight = ceil($height * $targetWidth / $width);
+
+		if (($targetWidth == $width) && ($targetHeight == $height) && ($originalPath == $targetPath)) {
+			return true;
+		}
+
+		$targetImage = imagecreatetruecolor($targetWidth, $targetHeight);
+		imagecopyresampled($targetImage, $originalImage, 0, 0, 0, 0, $targetWidth, $targetHeight, $width, $height);
+
+		if ($info[2] == IMAGETYPE_GIF) {
+			imagegif($targetImage, $targetPath);
+		} elseif ($info[2] == IMAGETYPE_JPEG) {
+			imagejpeg($targetImage, $targetPath);
+		} elseif ($info[2] == IMAGETYPE_PNG) {
+			imagepng($targetImage, $targetPath);
+		}
+
+		if (!file_exists($targetPath)) {
+			return false; //"Превью не сохранилось";
+		}
+
+        return $success;
+	}
 }

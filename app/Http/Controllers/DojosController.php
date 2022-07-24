@@ -65,7 +65,7 @@ class DojosController extends Controller
             if ($id == null) {
                 $dojo = Dojo::createNewDefault();
 
-                if ($field == 'photo') {
+                if ($field != 'photo') {
                     Dojo::processPath($field, $value, $dojo);
                     $dojo[$field] = $value;
                 }

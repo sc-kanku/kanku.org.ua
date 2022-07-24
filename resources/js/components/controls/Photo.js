@@ -7,10 +7,11 @@ const Photo = ({initialValue, className,  ...props }) => {
     let imgBytes = null;
     const [url, setUrl] = useState(initialValue);
     const [photoBytes, setPhotoBytes] = useState(null);
-    const [photoName, setPhotoName] = useState('');
+    // const [photoName, setPhotoName] = useState('');
+    const [extensions, setExtensions] = useState(['png', 'jpeg', 'jpg', 'gif', 'svg']);
 
     async function onPhotoChange(evnt) {
-        const FILE_MAX_SIZE = 100000;
+        const FILE_MAX_SIZE = 1000000;
         let file = evnt.target.files[0];
 
         if (file.size < FILE_MAX_SIZE) {
@@ -18,7 +19,7 @@ const Photo = ({initialValue, className,  ...props }) => {
 
             setPhotoBytes(imgBytes); ////.replace(/^data:(.*,)?/, '');
             // console.log("imgBytes", imgBytes)
-            setPhotoName(file['name']);
+            // setPhotoName(file['name']);
 
             return true;
         } else {
@@ -53,11 +54,44 @@ const Photo = ({initialValue, className,  ...props }) => {
         onBeforeSave: onPhotoChange
     });
 
+    const defineExtension = (str) => {
+        return str.substring(str.lastIndexOf('.') + 1, str.length);
+    }
+
+    const defineBase = (str) => {
+        return str.substring(0, str.lastIndexOf('.'));
+    }
+
+    const adjustExtension = (e) => {
+        let ext = defineExtension(e.target.src);
+        let base = defineBase(e.target.src);
+        let filtered = extensions.filter(el => el != ext);
+
+        setExtensions(filtered);
+        setUrl(filtered.length > 0 ? (base + '.' + filtered[0]) : null);
+    }
+
     return (<>
         <Editable />
         <p>
-            {!photoBytes && url && <img src={url} style={{width:'180px'}} />}
-            {photoBytes && <img src={photoBytes} style={{width:'180px'}} />}
+            <span style={{
+                borderWidth: '1px',
+                borderColor: '#aaa',
+                borderStyle:  'solid',
+                width: '14em',
+                height: '14em',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#aaa',
+                // display: 'inline-block'
+            }}>
+
+            {!photoBytes && !url && <span>No Picture</span>}
+            {!photoBytes && url && <img src={url} style={{height:'100%'}} onError={adjustExtension} />}
+            {photoBytes && <img src={photoBytes} style={{height:'100%'}} />}
+
+            </span>
         </p>
 
         <div className="mt-3">
