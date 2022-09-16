@@ -1,6 +1,7 @@
-import React, {useMemo, useState, useEffect} from 'react';
+import React, {useMemo, useState, useEffect, useRef} from 'react';
 import { useParams, useLocation} from 'react-router-dom';
 import Photo from '../controls/Photo';
+import Gallery from '../controls/Gallery';
 import { EditableText, EditableDate, EditableDegree, EditableSwitch, EditableTextarea } from '../controls/Table';
 
 import EditAttachedEntities from '../controls/EditAttachedEntities';
@@ -10,6 +11,8 @@ const EditAthlete = ({getUrl, updateUrl}) => {
     const location = useLocation();
     const [athlete, setAthlete] = useState({});
 
+    const athleteReference = useRef('');
+
     let isNew = location.pathname.indexOf('new') !== -1;
     let isEdit = !isNew;
 
@@ -17,7 +20,10 @@ const EditAthlete = ({getUrl, updateUrl}) => {
         if (isEdit) {
             fetch( getUrl + "/" + id )
                 .then( response => response.json() )
-                .then( setAthlete )
+                .then( (ath) => {
+                    setAthlete(ath);
+                    athleteReference.current = ath;
+                } )
         } else if (isNew) {
             console.log('setting up new athlete');
 
@@ -42,29 +48,11 @@ const EditAthlete = ({getUrl, updateUrl}) => {
                 youtube:'',
                 instagram:'',
                 dojos: [],
-                photo: ''
+                photo: '',
+                gallery: null
             })
         }
     }, [location.key]);
-
-    // TODO:
-    let gallerySnippet = "";
-
-    if (athlete.gallery) {
-        let galleryUrl = "photo.php?galleryID=" + athlete.gallery['galleryID'];
-        gallerySnippet =
-                    <ol><li><a href={galleryUrl}>{athlete.gallery['name']}</a></li></ol>
-    } else {
-        if (isEdit) {
-            gallerySnippet =
-            <p>
-                Фотогалерея еще не введена<br />
-                <input type="button" value="Ввести фотогалерею" onclick="location.href='new_a_gallery.php?id=<?= $athlet->id ?>'" />
-            </p>
-        } else {
-            gallerySnippet = <p>Фотогалерею Ви зможете ввести після першого збереження спортсмена</p>
-        }
-    }
 
     let saveCallback = (data) => {
         // console.log('data', data);
@@ -359,6 +347,20 @@ const EditAthlete = ({getUrl, updateUrl}) => {
                             // id={ athlete.id }
                             getId={ getId }
                             initialValue={ athlete.twitter }
+                            inlineUpdateUrl={updateUrl}
+                            onBeforeSuccess={saveCallback}
+                        />
+                    </div>
+                </div>
+
+                <div className="mb-3 col-md-12 d-grid gap-3">
+                    {athlete.gallery && athlete.gallery.photos && <p style={{'backgroundColor': 'yellow'}}>Галерея: {athlete.gallery.photos.length}</p>}
+
+                    <div>
+                        <Gallery field="gallery" className="form-control"
+                            // id={ athlete.id }
+                            getId={ getId }
+                            initialValue={ athleteReference.current.gallery }
                             inlineUpdateUrl={updateUrl}
                             onBeforeSuccess={saveCallback}
                         />

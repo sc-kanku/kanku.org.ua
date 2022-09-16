@@ -72,9 +72,21 @@ class Athlete extends Authenticatable
         return $this->belongsToMany(Gallery::class)->withPivot('is_titles');
     }
 
-    public function photos()
+    public function getGallery()
     {
-        return $this->gallery()->photos();
+        return $this->galleries()->first();
+    }
+
+    public function getPhotos()
+    {
+        $photos = null;
+        $gallery = $this->getGallery();
+
+        if ($gallery) {
+            $photos = $gallery->getPhotos();
+        }
+
+        return $photos;
     }
 
     public function roles()

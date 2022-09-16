@@ -190,7 +190,13 @@ class AthleteController extends Controller
 
     public function apiEditAthlete($id)
     {
-        $athlete = Athlete::where('id', $id)->with('dojos')->get()->first();
+        $athlete = Athlete::where('id', $id)->with('dojos')->with('galleries')->get()->first();
+
+        $athlete->gallery = $athlete->getGallery();
+
+        if ($athlete->gallery) {
+            $athlete->gallery->photos = $athlete->getPhotos();
+        }
 
         return $athlete;
     }

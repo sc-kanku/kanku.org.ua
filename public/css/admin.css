@@ -12136,7 +12136,7 @@ table {
 	td {
 		border: 1px solid #777777;
 		padding-left: 1rem;
-		padding-right: 1rem;	 
+		padding-right: 1rem;
 	}*/
 td:first-child {
     width: 30%;
@@ -12165,7 +12165,7 @@ form td {
     border: 1px solid gray;
 }
 
-.gallery div {
+.gallery > div {
     display: inline-block;
     width: 220px;
     height: 170px;
@@ -12177,7 +12177,7 @@ form td {
     font-size: 0.8rem;
 }
 
-.gallery.titles div {
+.gallery.titles > div {
     height: 210px;
     overflow: hidden;
 }

@@ -27,7 +27,7 @@
             <br />
         @endforeach
 
-        @include('guest.photos.gallery', ['gallery' => $athlete->galleries()->first()])
+        @include('guest.photos.gallery', ['gallery' => $athlete->getGallery()])
     </div>
 </div>
 </div>

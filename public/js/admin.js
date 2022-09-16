@@ -6857,6 +6857,297 @@ var EntitySelector = function EntitySelector(_ref) {
 
 /***/ }),
 
+/***/ "./resources/js/components/controls/Gallery.js":
+/*!*****************************************************!*\
+  !*** ./resources/js/components/controls/Gallery.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _controls_GalleryPhoto__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../controls/GalleryPhoto */ "./resources/js/components/controls/GalleryPhoto.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+var _excluded = ["initialValue", "className"];
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+
+
+
+
+
+
+var Gallery = function Gallery(_ref) {
+  var initialValue = _ref.initialValue,
+      className = _ref.className,
+      props = _objectWithoutProperties(_ref, _excluded);
+
+  var gallery = initialValue;
+  var gallerySnippet = null;
+  var photoHtmlItems = null;
+
+  if (gallery && gallery.photos && gallery.photos.length > 0) {
+    var isPreviousPhoto = false;
+    var clazz = gallery.is_titles ? "gallery titles" : "gallery";
+    var rr = gallery.photos.reduce(function (q, w) {
+      return 1;
+    }, 2);
+    photoHtmlItems = gallery.photos.reduce(function (reduced, photo) {
+      if (photo.item_type == 1) {
+        reduced[reduced.length] = {}; // <div class={clazz}>
+
+        reduced[reduced.length - 1].photo = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_controls_GalleryPhoto__WEBPACK_IMPORTED_MODULE_1__["default"], {
+            field: "photo",
+            className: "form-control__" // id = {athlete.id}
+            ,
+            getId: gallery.pivot.athlete_id // initialValue={"/images/athletes/" + athlete.id + "/photo.png"}
+            // initialValue={"/images/athletes/" + getId() + "/photo.png"}
+            ,
+            initialValue: "/images/galleries/gallery" + gallery.id + "/" + photo.id + "/preview.jpg" // images/galleries/gallery3/757/
+            // inlineUpdateUrl={updateUrl}
+            // onBeforeSuccess={saveCallback}
+            ,
+            mode: "gallery"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+            children: photo.title
+          })]
+        }); // </div>
+      } else if (photo.item_type == 2) {
+        reduced[reduced.length - 1].description = photo.title;
+      }
+
+      return reduced;
+    }, []);
+    console.log("photoHtmlItems 1:", photoHtmlItems);
+    photoHtmlItems = photoHtmlItems.map(function (photo) {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        children: photo.photo
+      });
+    });
+    console.log("photoHtmlItems 2:", photoHtmlItems);
+  } // let galleryUrl = "photo.php?galleryID=" + athlete.gallery['galleryID'];
+  // gallerySnippet =
+  //             <ol><li><a href={galleryUrl}>{athlete.gallery['name']}</a></li></ol>
+  // } else {
+  // if (isEdit) {
+  //     gallerySnippet =
+  //     <p>
+  //         Фотогалерея еще не введена<br />
+  //         <input type="button" value="Ввести фотогалерею" onclick="location.href='new_a_gallery.php?id=<?= $athlet->id ?>'" />
+  //     </p>
+  // } else {
+  //     gallerySnippet = <p>Фотогалерею Ви зможете ввести після першого збереження спортсмена</p>
+  // }
+  // gallerySnippet += <>sdflskdflskjd</>
+
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+    "class": "gallery titles",
+    children: photoHtmlItems
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Gallery);
+
+/***/ }),
+
+/***/ "./resources/js/components/controls/GalleryPhoto.js":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/controls/GalleryPhoto.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _utils_useEditable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/useEditable */ "./resources/js/components/utils/useEditable.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+var _excluded = ["initialValue", "className"];
+
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+
+
+
+
+
+
+var GalleryPhoto = function GalleryPhoto(_ref) {
+  var initialValue = _ref.initialValue,
+      className = _ref.className,
+      props = _objectWithoutProperties(_ref, _excluded);
+
+  initialValue = initialValue != null ? initialValue : '';
+  className = typeof className == 'undefined' ? '' : className;
+  var imgBytes = null;
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(initialValue),
+      _useState2 = _slicedToArray(_useState, 2),
+      url = _useState2[0],
+      setUrl = _useState2[1];
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
+      _useState4 = _slicedToArray(_useState3, 2),
+      photoBytes = _useState4[0],
+      setPhotoBytes = _useState4[1]; // const [photoName, setPhotoName] = useState('');
+
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(['png', 'jpeg', 'jpg', 'gif', 'svg']),
+      _useState6 = _slicedToArray(_useState5, 2),
+      extensions = _useState6[0],
+      setExtensions = _useState6[1];
+
+  function onPhotoChange(_x) {
+    return _onPhotoChange.apply(this, arguments);
+  }
+
+  function _onPhotoChange() {
+    _onPhotoChange = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(evnt) {
+      var FILE_MAX_SIZE, file;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              FILE_MAX_SIZE = 1000000;
+              file = evnt.target.files[0];
+
+              if (!(file.size < FILE_MAX_SIZE)) {
+                _context.next = 10;
+                break;
+              }
+
+              _context.next = 5;
+              return getBase64(file);
+
+            case 5:
+              imgBytes = _context.sent;
+              setPhotoBytes(imgBytes); ////.replace(/^data:(.*,)?/, '');
+              // console.log("imgBytes", imgBytes)
+              // setPhotoName(file['name']);
+
+              return _context.abrupt("return", true);
+
+            case 10:
+              alert("Завеликий, має бути до 100kb");
+              return _context.abrupt("return", false);
+
+            case 12:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+    return _onPhotoChange.apply(this, arguments);
+  }
+
+  function getBase64(file) {
+    return new Promise(function (resolve, reject) {
+      var reader = new FileReader();
+      reader.readAsDataURL(file);
+
+      reader.onload = function () {
+        return resolve(reader.result);
+      };
+
+      reader.onerror = function (error) {
+        return reject(error);
+      };
+    });
+  }
+
+  var _useEditable = (0,_utils_useEditable__WEBPACK_IMPORTED_MODULE_2__["default"])(_objectSpread(_objectSpread({}, props), {}, {
+    data: {
+      id: props.id ? props.id : props.getId ? props.getId : null,
+      field: props.field,
+      value: ''
+    },
+    // getNewValue : (e) => e.target.files[0]['name'],
+    getNewValue: function getNewValue(e) {
+      // why photoBytes is always null here??? Used imgBytes as a workaround.
+      return photoBytes || imgBytes || ''; ///.replace(/^data:(.*,)?/, '');
+    },
+    onBeforeSave: onPhotoChange
+  })),
+      _useEditable2 = _slicedToArray(_useEditable, 4),
+      Editable = _useEditable2[0],
+      value = _useEditable2[1],
+      onChange = _useEditable2[2],
+      setValue = _useEditable2[3];
+
+  var defineExtension = function defineExtension(str) {
+    return str.substring(str.lastIndexOf('.') + 1, str.length);
+  };
+
+  var defineBase = function defineBase(str) {
+    return str.substring(0, str.lastIndexOf('.'));
+  };
+
+  var adjustExtension = function adjustExtension(e) {
+    var ext = defineExtension(e.target.src);
+    var base = defineBase(e.target.src);
+    var filtered = extensions.filter(function (el) {
+      return el != ext;
+    });
+    setExtensions(filtered);
+    setUrl(filtered.length > 0 ? base + '.' + filtered[0] : null);
+  };
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(Editable, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("a", {
+      children: [!photoBytes && !url && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+        children: "No Picture"
+      }), !photoBytes && url && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+        src: url,
+        onError: adjustExtension
+      }), photoBytes && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+        src: photoBytes
+      })]
+    })]
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (GalleryPhoto);
+
+/***/ }),
+
 /***/ "./resources/js/components/controls/Photo.js":
 /*!***************************************************!*\
   !*** ./resources/js/components/controls/Photo.js ***!
@@ -8994,11 +9285,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _controls_Photo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../controls/Photo */ "./resources/js/components/controls/Photo.js");
-/* harmony import */ var _controls_Table__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../controls/Table */ "./resources/js/components/controls/Table.js");
-/* harmony import */ var _controls_EditAttachedEntities__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../controls/EditAttachedEntities */ "./resources/js/components/controls/EditAttachedEntities.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _controls_Gallery__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../controls/Gallery */ "./resources/js/components/controls/Gallery.js");
+/* harmony import */ var _controls_Table__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../controls/Table */ "./resources/js/components/controls/Table.js");
+/* harmony import */ var _controls_EditAttachedEntities__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../controls/EditAttachedEntities */ "./resources/js/components/controls/EditAttachedEntities.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -9020,27 +9312,32 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var EditAthlete = function EditAthlete(_ref) {
   var getUrl = _ref.getUrl,
       updateUrl = _ref.updateUrl;
 
-  var _useParams = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useParams)(),
+  var _useParams = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.useParams)(),
       id = _useParams.id;
 
-  var location = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useLocation)();
+  var location = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.useLocation)();
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
       _useState2 = _slicedToArray(_useState, 2),
       athlete = _useState2[0],
       setAthlete = _useState2[1];
 
+  var athleteReference = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)('');
   var isNew = location.pathname.indexOf('new') !== -1;
   var isEdit = !isNew;
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (isEdit) {
       fetch(getUrl + "/" + id).then(function (response) {
         return response.json();
-      }).then(setAthlete);
+      }).then(function (ath) {
+        setAthlete(ath);
+        athleteReference.current = ath;
+      });
     } else if (isNew) {
       console.log('setting up new athlete');
       setAthlete({
@@ -9064,38 +9361,11 @@ var EditAthlete = function EditAthlete(_ref) {
         youtube: '',
         instagram: '',
         dojos: [],
-        photo: ''
+        photo: '',
+        gallery: null
       });
     }
-  }, [location.key]); // TODO:
-
-  var gallerySnippet = "";
-
-  if (athlete.gallery) {
-    var galleryUrl = "photo.php?galleryID=" + athlete.gallery['galleryID'];
-    gallerySnippet = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("ol", {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
-          href: galleryUrl,
-          children: athlete.gallery['name']
-        })
-      })
-    });
-  } else {
-    if (isEdit) {
-      gallerySnippet = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
-        children: ["\u0424\u043E\u0442\u043E\u0433\u0430\u043B\u0435\u0440\u0435\u044F \u0435\u0449\u0435 \u043D\u0435 \u0432\u0432\u0435\u0434\u0435\u043D\u0430", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
-          type: "button",
-          value: "\u0412\u0432\u0435\u0441\u0442\u0438 \u0444\u043E\u0442\u043E\u0433\u0430\u043B\u0435\u0440\u0435\u044E",
-          onclick: "location.href='new_a_gallery.php?id=<?= $athlet->id ?>'"
-        })]
-      });
-    } else {
-      gallerySnippet = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
-        children: "\u0424\u043E\u0442\u043E\u0433\u0430\u043B\u0435\u0440\u0435\u044E \u0412\u0438 \u0437\u043C\u043E\u0436\u0435\u0442\u0435 \u0432\u0432\u0435\u0441\u0442\u0438 \u043F\u0456\u0441\u043B\u044F \u043F\u0435\u0440\u0448\u043E\u0433\u043E \u0437\u0431\u0435\u0440\u0435\u0436\u0435\u043D\u043D\u044F \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430"
-      });
-    }
-  }
+  }, [location.key]);
 
   var saveCallback = function saveCallback(data) {
     // console.log('data', data);
@@ -9111,20 +9381,20 @@ var EditAthlete = function EditAthlete(_ref) {
     return isNew ? null : athlete.id;
   };
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h2", {
       children: isEdit ? '' + athlete.lastName + ' ' + athlete.firstName + ' ' + athlete.patronymic : "Створити нового спортсмена"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("form", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("form", {
       className: "row",
       encType: "multipart/form-data",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "col-sm-5 d-grid gap-3",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
             htmlFor: "lastName",
             className: "form-label",
             children: "\u041F\u0440\u0456\u0437\u0432\u0438\u0449\u0435"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableText, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableText, {
             field: "lastName",
             className: "form-control" // id={athlete.id}
             ,
@@ -9134,12 +9404,12 @@ var EditAthlete = function EditAthlete(_ref) {
             inlineUpdateUrl: updateUrl,
             onBeforeSuccess: saveCallback
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
             htmlFor: "firstName",
             className: "form-label",
             children: "\u0406\u043C'\u044F"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableText, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableText, {
             field: "firstName",
             className: "form-control" // id={athlete.id}
             ,
@@ -9148,12 +9418,12 @@ var EditAthlete = function EditAthlete(_ref) {
             inlineUpdateUrl: updateUrl,
             onBeforeSuccess: saveCallback
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
             htmlFor: "patronymic",
             className: "form-label",
             children: "\u041F\u043E \u0431\u0430\u0442\u044C\u043A\u043E\u0432\u0456"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableText, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableText, {
             field: "patronymic",
             className: "form-control" // id={athlete.id}
             ,
@@ -9162,12 +9432,12 @@ var EditAthlete = function EditAthlete(_ref) {
             inlineUpdateUrl: updateUrl,
             onBeforeSuccess: saveCallback
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
             htmlFor: "birthday",
             className: "form-label",
             children: "\u0414\u0430\u0442\u0430 \u043D\u0430\u0440\u043E\u0434\u0436\u0435\u043D\u043D\u044F"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableDate, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableDate, {
             field: "birthday",
             className: "form-control" // id={athlete.id}
             ,
@@ -9176,12 +9446,12 @@ var EditAthlete = function EditAthlete(_ref) {
             inlineUpdateUrl: updateUrl,
             onBeforeSuccess: saveCallback
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
             htmlFor: "degree",
             className: "form-label",
             children: "\u0421\u0442\u0443\u043F\u0456\u043D\u044C"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableDegree, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableDegree, {
             field: "degree",
             className: "form-control" // id={ athlete.id }
             ,
@@ -9191,15 +9461,15 @@ var EditAthlete = function EditAthlete(_ref) {
             onBeforeSuccess: saveCallback
           })]
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
         className: "mb-3 col-sm-1 mb-3"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "form-floating_ mb-3 col-sm-6",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
           htmlFor: "photo",
           className: "form-label",
           children: "\u0424\u043E\u0442\u043E"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Photo__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Photo__WEBPACK_IMPORTED_MODULE_1__["default"], {
           field: "photo",
           className: "form-control" // id = {athlete.id}
           ,
@@ -9210,19 +9480,19 @@ var EditAthlete = function EditAthlete(_ref) {
           inlineUpdateUrl: updateUrl,
           onBeforeSuccess: saveCallback
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "col-md-5 d-grid gap-3 mb-3",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
           style: {
             'backgroundColor': 'yellow'
           },
           children: "\u041A\u043E\u043D\u0442\u0430\u043A\u0442\u043D\u0430 \u0456\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0456\u044F"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
             htmlFor: "phone",
             className: "form-label",
             children: "\u0422\u0435\u043B\u0435\u0444\u043E\u043D"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableText, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableText, {
             field: "phone",
             className: "form-control" // id={ athlete.id }
             ,
@@ -9231,12 +9501,12 @@ var EditAthlete = function EditAthlete(_ref) {
             inlineUpdateUrl: updateUrl,
             onBeforeSuccess: saveCallback
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
             htmlFor: "phone2",
             className: "form-label",
             children: "\u0414\u043E\u0434\u0430\u0442\u043A\u043E\u0432\u0438\u0439 \u0442\u0435\u043B\u0435\u0444\u043E\u043D"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableText, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableText, {
             field: "phone2",
             className: "form-control" // id={ athlete.id }
             ,
@@ -9245,19 +9515,19 @@ var EditAthlete = function EditAthlete(_ref) {
             inlineUpdateUrl: updateUrl,
             onBeforeSuccess: saveCallback
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("label", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("label", {
             htmlFor: "email",
             className: "form-label",
-            children: ["E-mail", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("span", {
+            children: ["E-mail", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("span", {
               className: "text-secondary",
-              children: [" (", isEdit && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
+              children: [" (", isEdit && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
                 children: "\u043D\u0435 \u043C\u043E\u0436\u043D\u0430 \u0440\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u0442\u0438"
-              }), isNew && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
+              }), isNew && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
                 children: "\u0432\u0456\u043D \u0436\u0435 \u043B\u043E\u0433\u0456\u043D, \u0440\u0435\u0434\u0430\u0433\u0443\u0454\u0442\u044C\u0441\u044F \u043B\u0438\u0448\u0435 \u043F\u0440\u0438 \u0441\u0442\u0432\u043E\u0440\u0435\u043D\u043D\u0456 \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430, \u0434\u0443\u043C\u0430\u044E \u043C\u043E\u0436\u043D\u0430 \u0431\u0443\u0434\u0435 \u0443\u0432\u0456\u043C\u043A\u043D\u0443\u0442\u0438 \u0440\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u043D\u043D\u044F \u043D\u0430\u0437\u0430\u0432\u0436\u0434\u0438, \u043F\u043E\u0442\u0456\u043C, \u0434\u043E\u0434\u0430\u0432\u0448\u0438 \u0440\u044F\u0434 \u0437\u0430\u0441\u0442\u0435\u0440\u0435\u0436\u0435\u043D\u044C"
               }), ")"]
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableText, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableText, {
             field: "email",
             className: "form-control" // id={ athlete.id }
             ,
@@ -9269,16 +9539,16 @@ var EditAthlete = function EditAthlete(_ref) {
             onBeforeSuccess: saveCallback
           })]
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
         className: "col-md-1"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "col-md-6 mb-3",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
           style: {
             'backgroundColor': 'yellow'
           },
           children: "\u041A\u043B\u0443\u0431\u043D\u0430 \u0456\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0456\u044F"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableSwitch, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableSwitch, {
           field: "is_actual",
           className: "form-check-input" // id={ athlete.id }
           ,
@@ -9287,7 +9557,7 @@ var EditAthlete = function EditAthlete(_ref) {
           inlineUpdateUrl: updateUrl,
           onBeforeSuccess: saveCallback,
           children: "\u041D\u0430\u043B\u0435\u0436\u0438\u0442\u044C \u0434\u043E \u043D\u0430\u0448\u043E\u0433\u043E \u043A\u043B\u0443\u0431\u0443?"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableSwitch, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableSwitch, {
           field: "show_in_blacks",
           className: "form-check-input" // id={ athlete.id }
           ,
@@ -9297,19 +9567,19 @@ var EditAthlete = function EditAthlete(_ref) {
           onBeforeSuccess: saveCallback,
           children: "\u041F\u043E\u043A\u0430\u0437\u0443\u0432\u0430\u0442\u0438 \u043D\u0430 \u0441\u0442\u043E\u0440\u0456\u043D\u0446\u0456 \u0447\u043E\u0440\u043D\u0438\u0445 \u043F\u043E\u044F\u0441\u0456\u0432 \u043D\u0430\u0448\u043E\u0433\u043E \u043A\u043B\u0443\u0431\u0443 (\u044F\u043A\u0449\u043E \u0434\u043E\u0441\u044F\u0433\u043D\u0443\u0442\u043E \u0432\u0456\u0434\u043F\u043E\u0432\u0456\u0434\u043D\u043E\u0433\u043E \u0441\u0442\u0443\u043F\u0435\u043D\u044E)?"
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "mb-3 col-md-12 d-grid gap-3",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
           style: {
             'backgroundColor': 'yellow'
           },
           children: "\u041F\u0440\u043E \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
             htmlFor: "full",
             className: "form-label",
             children: "\u041F\u043E\u0432\u043D\u0430 \u0456\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0456\u044F \u0434\u043B\u044F \u0441\u0442\u043E\u0440\u0456\u043D\u043A\u0438 \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableTextarea, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableTextarea, {
             field: "full",
             className: "form-control" // id={ athlete.id }
             ,
@@ -9319,7 +9589,7 @@ var EditAthlete = function EditAthlete(_ref) {
             rows: "10",
             onBeforeSuccess: saveCallback
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableSwitch, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableSwitch, {
           field: "is_coach",
           className: "form-check-input" // id={ athlete.id }
           ,
@@ -9328,13 +9598,13 @@ var EditAthlete = function EditAthlete(_ref) {
           inlineUpdateUrl: updateUrl,
           onBeforeSuccess: saveCallback,
           children: "\u0406\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440?"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
           className: "mb-2",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
             htmlFor: "brief",
             className: "form-label",
             children: "\u041A\u043E\u0440\u043E\u0442\u043A\u0430 \u0456\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0456\u044F \u0434\u043B\u044F \u0441\u0442\u043E\u0440\u0456\u043D\u043A\u0438 \u0437\u0456 \u0441\u043F\u0438\u0441\u043A\u043E\u043C \u0432\u0441\u0456\u0445 \u0456\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440\u0456\u0432"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableTextarea, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableTextarea, {
             field: "brief",
             className: "form-control" // id={ athlete.id }
             ,
@@ -9343,7 +9613,7 @@ var EditAthlete = function EditAthlete(_ref) {
             inlineUpdateUrl: updateUrl,
             onBeforeSuccess: saveCallback
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableSwitch, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableSwitch, {
           field: "is_best",
           className: "form-check-input" // id={ athlete.id }
           ,
@@ -9352,13 +9622,13 @@ var EditAthlete = function EditAthlete(_ref) {
           inlineUpdateUrl: updateUrl,
           onBeforeSuccess: saveCallback,
           children: "\u041F\u043E\u043A\u0430\u0437\u0443\u0432\u0430\u0442\u0438 \u0432 \u043A\u0440\u0430\u0449\u0438\u0445 \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0430\u0445?"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
           className: "mb-2",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
             htmlFor: "briefBest",
             className: "form-label",
             children: "\u041A\u043E\u0440\u043E\u0442\u043A\u0430 \u0456\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0456\u044F \u0434\u043B\u044F \u0441\u0442\u043E\u0440\u0456\u043D\u043A\u0438 \u043D\u0430\u0439\u043A\u0440\u0430\u0449\u0438\u0445 \u0441\u043F\u043E\u0440\u0442\u0441\u043C\u0435\u043D\u0456\u0432"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableTextarea, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableTextarea, {
             field: "briefBest",
             className: "form-control" // id={ athlete.id }
             ,
@@ -9368,14 +9638,14 @@ var EditAthlete = function EditAthlete(_ref) {
             onBeforeSuccess: saveCallback
           })]
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "mb-3 col-md-12",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
           style: {
             'backgroundColor': 'yellow'
           },
           children: "\u0417\u0430\u043B\u0438"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_EditAttachedEntities__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_EditAttachedEntities__WEBPACK_IMPORTED_MODULE_4__["default"], {
           entityName: "athlete" // entityId={ athlete.id }
           ,
           getId: getId,
@@ -9384,19 +9654,19 @@ var EditAthlete = function EditAthlete(_ref) {
           updateUrl: updateUrl,
           onBeforeSuccess: saveCallback
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "mb-3 col-md-12 d-grid gap-3",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
           style: {
             'backgroundColor': 'yellow'
           },
           children: "\u0421\u043E\u0446\u0456\u0430\u043B\u044C\u043D\u0456 \u043C\u0435\u0440\u0435\u0436\u0456"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
             htmlFor: "facebook",
             className: "form-label",
             children: "Facebook"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableText, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableText, {
             field: "facebook",
             className: "form-control" // id={ athlete.id }
             ,
@@ -9405,12 +9675,12 @@ var EditAthlete = function EditAthlete(_ref) {
             inlineUpdateUrl: updateUrl,
             onBeforeSuccess: saveCallback
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
             htmlFor: "instagram",
             className: "form-label",
             children: "Instagram"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableText, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableText, {
             field: "instagram",
             className: "form-control" // id={ athlete.id }
             ,
@@ -9419,12 +9689,12 @@ var EditAthlete = function EditAthlete(_ref) {
             inlineUpdateUrl: updateUrl,
             onBeforeSuccess: saveCallback
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
             htmlFor: "youtube",
             className: "form-label",
             children: "Youtube"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableText, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableText, {
             field: "youtube",
             className: "form-control" // id={ athlete.id }
             ,
@@ -9433,12 +9703,12 @@ var EditAthlete = function EditAthlete(_ref) {
             inlineUpdateUrl: updateUrl,
             onBeforeSuccess: saveCallback
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
             htmlFor: "twitter",
             className: "form-label",
             children: "Twitter"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_2__.EditableText, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Table__WEBPACK_IMPORTED_MODULE_3__.EditableText, {
             field: "twitter",
             className: "form-control" // id={ athlete.id }
             ,
@@ -9447,6 +9717,24 @@ var EditAthlete = function EditAthlete(_ref) {
             inlineUpdateUrl: updateUrl,
             onBeforeSuccess: saveCallback
           })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+        className: "mb-3 col-md-12 d-grid gap-3",
+        children: [athlete.gallery && athlete.gallery.photos && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("p", {
+          style: {
+            'backgroundColor': 'yellow'
+          },
+          children: ["\u0413\u0430\u043B\u0435\u0440\u0435\u044F: ", athlete.gallery.photos.length]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_Gallery__WEBPACK_IMPORTED_MODULE_2__["default"], {
+            field: "gallery",
+            className: "form-control" // id={ athlete.id }
+            ,
+            getId: getId,
+            initialValue: athleteReference.current.gallery,
+            inlineUpdateUrl: updateUrl,
+            onBeforeSuccess: saveCallback
+          })
         })]
       })]
     })]

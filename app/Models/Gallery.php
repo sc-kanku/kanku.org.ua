@@ -22,7 +22,14 @@ class Gallery extends Model
 
     public function photos()
     {
+        //// return $this->belongsToMany(Photo::class, 'photos', 'id', 'gallery_id')->withPivot('id');
         return $this->hasMany(Photo::class);
+        // return Photo::where('gallery_id', $this->id)->get();
+    }
+
+    public function getPhotos()
+    {
+        return Photo::where('gallery_id', $this->id)->get();
     }
 
     public function athletes()

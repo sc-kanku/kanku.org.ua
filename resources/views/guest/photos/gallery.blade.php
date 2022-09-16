@@ -1,4 +1,4 @@
-@if ($gallery != null && $gallery->photos->count() > 0)
+@if ($gallery != null && $gallery->photos()->count() > 0)
     @if ($isPreviousPhoto = false)@endif
 
     @foreach ($gallery->photos as $photo)
@@ -17,7 +17,7 @@
         @if ($isPreviousPhoto = $photo->isPhoto())@endif
     @endforeach
 
-    @if (($gallery->photos->count() > 0) && $isPreviousPhoto)   
+    @if (($gallery->photos->count() > 0) && $isPreviousPhoto)
         </div>
     @endif
 @endif
