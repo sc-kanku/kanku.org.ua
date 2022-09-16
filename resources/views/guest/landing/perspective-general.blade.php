@@ -1,6 +1,6 @@
 <!-- Three columns of text below the carousel -->
 <header class="row service-perspective">
-    <section class="col-sm-4">
+    <section class="col-sm-4" style="text-align: center;">
         <header>
             <img class="rounded-circle_" src="/images/services/kids.gif" alt="Силуети двох дітей з надувною кулькою." width="140" height="140">
 
@@ -15,7 +15,7 @@
         </footer>
     </section><!-- /.col-lg-4 -->
 
-    <section class="col-sm-4">
+    <section class="col-sm-4" style="text-align: center;">
         <header>
             <img class="rounded-circle" src="/images/services/adults.gif" alt="Силует дорослої людини" width="140" height="140">
             <h2>Дорослим</h2>
@@ -33,7 +33,7 @@
         </footer>
     </section><!-- /.col-lg-4 -->
 
-    <section class="col-sm-4">
+    <section class="col-sm-4" style="text-align: center;">
         <header><img class="rounded-circle" src="/images/services/girls.gif" alt="Силует дівчини." width="140" height="140">
 
             <h2>І дівчатам!</h2>

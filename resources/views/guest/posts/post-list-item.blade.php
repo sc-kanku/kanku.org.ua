@@ -1,12 +1,12 @@
 <div class="row">
     <div class="col">
         @if ($post->getPhotoAndPreviewFileNames()['photo'] != '')
-            <a href='{{ url('/images/posts', ['post_id' => $post->page_dir, 'fileName' => $post->getPhotoAndPreviewFileNames()["photo"]]) }}'>
+            <a href='{{ url('/images/posts', ['post_id' => $post->id, 'fileName' => $post->getPhotoAndPreviewFileNames()["photo"]]) }}'>
 
 
         @endif
 
-        @if ($post->getPhotoAndPreviewFileNames()['preview'] != '') 
+        @if ($post->getPhotoAndPreviewFileNames()['preview'] != '')
             <img class="mainphoto" src="/images/posts/{{ $post->id }}/{{ $post->getPhotoAndPreviewFileNames()['preview'] }}" alt="{{$post->title}}" />
         @endif
 
