@@ -3,8 +3,10 @@ ErrorDocument 404 /content-static/missing.php
 DirectoryIndex index.html index.php photo.jpg
 Options -indexes
 RewriteEngine On
-RewriteCond %{HTTP_HOST} kanku\.in\.ua
-RewriteRule ^(.*)$ http://kanku.org.ua/$1 [R=301]
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L]
+#RewriteCond %{HTTP_HOST} kanku\.in\.ua
+#RewriteRule ^(.*)$ http://kanku.org.ua/$1 [R=301]
 
 
 #RewriteCond %{REQUEST_URI} !^/public
@@ -16,8 +18,8 @@ RewriteRule ^(.*)$ http://kanku.org.ua/$1 [R=301]
 
 #RewriteBase /
 #RewriteCond %{REQUEST_FILENAME} !-d
-#RewriteCond %{REQUEST_FILENAME} !-f     
-#RewriteRule ^(.*)$ public/$1           
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteRule ^(.*)$ public/$1
 
 # Redirect Trailing Slashes If Not A Folder...
 RewriteCond %{REQUEST_FILENAME} !-d
@@ -83,7 +85,7 @@ RewriteRule node/23/?$ /philosophy/ [R=301,L]
 RewriteRule node/79/?$ /naikrashi-sportsmeni/ [R=301,L]
 RewriteRule node/29/?$ /info/ [R=301,L]
 RewriteRule spisok/?$ /spisok-zaliv/ [R=301,L]
-RewriteRule Мутин /president-clubu/index.html 
+RewriteRule Мутин /president-clubu/index.html
 RewriteRule мутин /president-clubu/index.html
 RewriteRule Мутін /president-clubu/index.html
 RewriteRule мутін /president-clubu/index.html
