@@ -13,7 +13,7 @@ class PostController extends Controller
     {
 
         $posts = Post
-            ::orderByDesc("id")
+            ::orderByDesc("dateAt")
             ->paginate(10);
         /*
         $regionDojos = Dojo
