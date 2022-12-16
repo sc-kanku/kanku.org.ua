@@ -4,7 +4,7 @@ DirectoryIndex index.html index.php photo.jpg
 Options -indexes
 RewriteEngine On
 RewriteCond %{HTTPS} off
-RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L]
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 #RewriteCond %{HTTP_HOST} kanku\.in\.ua
 #RewriteRule ^(.*)$ http://kanku.org.ua/$1 [R=301]
 
@@ -48,6 +48,7 @@ RewriteRule . public/page-cache%{REQUEST_URI}.json [L]
 RewriteCond %{DOCUMENT_ROOT}/public/page-cache%{REQUEST_URI}.xml -f
 RewriteRule . public/page-cache%{REQUEST_URI}.xml [L]
 RewriteCond %{REQUEST_URI} !^/public/
+RewriteCond %{REQUEST_FILENAME} !/(sitemap.xml)/
 RewriteRule ^(.*)$ /public/$1 [L]
 
 
@@ -156,7 +157,7 @@ RewriteRule poradi-batkam/? /articles/for-parents/advice/ [R=301,L]
 
 RewriteRule gymnasiums/shkola-1-santa-barbara/? /dojos/school-1/ [R=301,L]
 RewriteRule gymnasiums/shkola-37/? /dojos/school-37/ [R=301,L]
-RewriteRule gymnasiums/molodsha-shkola-svitanok/? /dojos/svitanok/ [R=301,L]
+RewriteRule gymnasiums/molodsha-shkola-svitanok/? /dojos/lzsh-svitanok-2-korpus/ [R=301,L]
 RewriteRule gymnasiums/shkola-20/? /dojos/school-20/ [R=301,L]
 RewriteRule gymnasiums/shkola-77/? /dojos/school-77/ [R=301,L]
 RewriteRule gymnasiums/shkola-28/? /dojos/school-28/ [R=301,L]
