@@ -21,12 +21,12 @@
                     <i class="fab fa-facebook-f"></i>
                 </a>
 
-                <a class="nav-link btn-xsm" target="_blank" href="http://instagram.com/sc_kanku_lviv/" aria-label="instagram">
+                <a class="nav-link btn-xsm" target="_blank" href="https://instagram.com/sc_kanku_lviv/" aria-label="instagram">
                     <i class="fab fa-instagram"></i>
                 </a>
             </span>
 
-            
+
             <ul class="navbar-nav navbar-nav justify-content-end">
                 @if(auth()->user() && false)
                 <li class="nav-item dropdown" id="logged-in-nav-support">
@@ -194,7 +194,7 @@
                 $(this).addClass('active');
                 /*
                 				var parentNode = $(this).parent();
-                
+
                 				// If Highlighted menu item is in submenu
                 				if (parentNode.hasClass('subnav')) {
                 					// Open parent menu so that highlightrd submenu item is visible

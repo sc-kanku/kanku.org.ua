@@ -68,7 +68,7 @@
                 </nav>
                 <nav>
                     <a class="fa fa-facebook" title="Facebook" href="https://www.facebook.com/sc.kanku.lviv/"></a>
-                    <a class="fa fa-instagram" title="Інстаграм" href="http://instagram.com/sc_kanku_lviv/"></a>
+                    <a class="fa fa-instagram" title="Інстаграм" href="https://instagram.com/sc_kanku_lviv/"></a>
                     <a class="fa fa-youtube" title="YouTube" href="https://www.youtube.com/channel/UCxQ6FOm_L1V0MaBXxrYUECQ"></a>
                 </nav>
             </div>

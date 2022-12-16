@@ -1,1 +1,1 @@
-[kanku.org.ua](http://kanku.org.ua) site source code
+[kanku.org.ua](https://kanku.org.ua) site source code

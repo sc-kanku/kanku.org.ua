@@ -27,7 +27,7 @@
     {
         "@context": "http://schema.org",
         "@type": "Organization",
-        "url": "http://kanku.org.ua",
-        "logo": "http://kanku.org.ua/images/kanku-logo.png"
+        "url": "https://kanku.org.ua",
+        "logo": "https://kanku.org.ua/images/kanku-logo.png"
     }
 </script>
