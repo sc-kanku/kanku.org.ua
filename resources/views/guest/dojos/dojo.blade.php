@@ -19,7 +19,8 @@
 
         <p>
             {!! $dojo->info !!}
-            <img style="width: 100%; height: auto" class="pt-4" src="{{ $dojo ? $dojo->getProfilePhotoLocation() : ''}}" alt="{{ $dojo ? $dojo->name : '' }}" />
+            {{-- alt="{{ $dojo ? $dojo->name : '' }}" --}}
+            <img style="width: 100%; height: auto" class="pt-4" src="{{ $dojo ? $dojo->getProfilePhotoLocation() : ''}}"  />
         </p>
 
         <h3>Розклад тренувань</h3>
